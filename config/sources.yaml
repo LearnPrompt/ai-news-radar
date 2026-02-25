@@ -1,0 +1,394 @@
+# AI News Radar - Sources Configuration
+#
+# This file controls which information sources are enabled and how they are configured.
+#
+# Structure:
+#   sources:
+#     - id: Unique identifier for the source
+#       name: Display name
+#       enabled: true/false to enable/disable
+#       priority: Higher priority sources are fetched first
+#       auth: Authentication configuration (if required)
+#       filters: Keywords for filtering items
+#
+# Authentication:
+#   Set credentials in environment variables or in this file.
+#   Recommended: Use environment variables for security.
+#
+# Environment Variables for Auth:
+#   REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET
+#   PRODUCT_HUNT_API_KEY
+#   GITHUB_TOKEN
+#   OPENAI_API_KEY (for AI features)
+
+sources:
+  # ========================================================================
+  # Core Sources (Original 10)
+  # ========================================================================
+  - id: techurls
+    name: TechURLs
+    enabled: true
+    priority: 10
+    type: web
+    url: https://techurls.com/
+    category: tech
+    description: Technology news aggregation site
+    tags: [aggregator, tech]
+
+  - id: buzzing
+    name: Buzzing
+    enabled: true
+    priority: 10
+    type: api
+    url: https://www.buzzing.cc/feed.json
+    category: general
+    description: News aggregation platform
+    tags: [aggregator, news]
+
+  - id: iris
+    name: Info Flow
+    enabled: true
+    priority: 10
+    type: rss
+    url: https://iris.findtruman.io/web/info_flow
+    category: general
+    description: Multiple RSS feeds aggregator
+    tags: [aggregator, rss]
+
+  - id: bestblogs
+    name: BestBlogs
+    enabled: true
+    priority: 10
+    type: api
+    url: https://www.bestblogs.dev/en/newsletter
+    category: tech
+    description: Weekly newsletter compilation
+    tags: [newsletter, weekly]
+
+  - id: tophub
+    name: TopHub
+    enabled: true
+    priority: 10
+    type: web
+    url: https://tophub.today/
+    category: general
+    description: Hot topics platform with AI/tech filtering
+    tags: [aggregator, hot]
+
+  - id: zeli
+    name: Zeli
+    enabled: true
+    priority: 10
+    type: api
+    url: https://zeli.app/
+    category: tech
+    description: Hacker News 24h hot posts
+    tags: [hackernews, daily]
+
+  - id: aihubtoday
+    name: AI HubToday
+    enabled: true
+    priority: 10
+    type: web
+    url: https://ai.hubtoday.app/
+    category: ai
+    description: Daily AI digest
+    tags: [ai, daily]
+
+  - id: aibase
+    name: AIbase
+    enabled: true
+    priority: 10
+    type: web
+    url: https://www.aibase.com/zh/news
+    category: ai
+    description: AI news in Chinese
+    tags: [ai, chinese]
+
+  - id: aihot
+    name: AI今日热榜
+    enabled: true
+    priority: 10
+    type: web
+    url: https://aihot.today/
+    category: ai
+    description: AI hot ranking in Chinese
+    tags: [ai, chinese, hot]
+
+  - id: newsnow
+    name: NewsNow
+    enabled: true
+    priority: 10
+    type: api
+    url: https://newsnow.busiyi.world/
+    category: general
+    description: Multi-source news feed
+    tags: [aggregator, news]
+
+  # ========================================================================
+  # New High-Value Sources (Free, No Auth Required)
+  # ========================================================================
+  - id: hacker_news
+    name: Hacker News (Official)
+    enabled: true
+    priority: 15
+    type: api
+    url: https://hacker-news.firebaseio.com/v0/
+    category: tech
+    description: Official Hacker News API for top stories
+    tags: [hackernews, tech, discussion]
+    auth:
+      required: false
+    filters:
+      min_score: 10
+      max_items: 30
+
+  - id: arxiv_ai
+    name: Arxiv AI/ML Papers
+    enabled: true
+    priority: 15
+    type: api
+    url: https://arxiv.org/
+    category: research
+    description: Latest AI/ML research papers from Arxiv
+    tags: [research, papers, ai]
+    auth:
+      required: false
+    filters:
+      categories: [cs.AI, cs.CL, cs.CV, cs.LG, cs.NE, stat.ML]
+      max_items: 50
+
+  - id: papers_with_code
+    name: Papers With Code
+    enabled: true
+    priority: 15
+    type: web
+    url: https://paperswithcode.com/trending
+    category: research
+    description: ML papers with implementation code
+    tags: [research, code, ai]
+    auth:
+      required: false
+    filters:
+      min_stars: 10
+      max_items: 20
+
+  - id: lobsters
+    name: Lobsters
+    enabled: true
+    priority: 12
+    type: rss
+    url: https://lobste.rs/rss
+    category: tech
+    description: Tech-focused link aggregation community
+    tags: [tech, discussion]
+    auth:
+      required: false
+    filters:
+      max_items: 25
+
+  - id: dev_ai
+    name: Dev.to (AI Tag)
+    enabled: true
+    priority: 12
+    type: api
+    url: https://dev.to/api/articles
+    category: ai
+    description: AI tagged articles on Dev.to
+    tags: [ai, articles, developer]
+    auth:
+      required: false
+    filters:
+      tag: artificialintelligence
+      min_reactions: 5
+      max_items: 30
+
+  - id: medium_ai
+    name: Medium (AI Publications)
+    enabled: true
+    priority: 12
+    type: rss
+    url: https://medium.com/
+    category: ai
+    description: AI/ML publications on Medium
+    tags: [ai, articles, blog]
+    auth:
+      required: false
+    filters:
+      publications:
+        - Towards Data Science
+        - The Startup
+      max_items: 10
+
+  - id: indiehackers
+    name: Indie Hackers
+    enabled: true
+    priority: 11
+    type: rss
+    url: https://www.indiehackers.com/feed
+    category: ai
+    description: AI startups and indie hacker stories
+    tags: [ai, startup, business]
+    auth:
+      required: false
+    filters:
+      max_items: 20
+
+  # ========================================================================
+  # New High-Value Sources (Requires Authentication)
+  # ========================================================================
+  - id: reddit_ai
+    name: Reddit (AI Subreddits)
+    enabled: false
+    priority: 18
+    type: api
+    url: https://www.reddit.com/
+    category: ai
+    description: AI/ML subreddits: r/artificial, r/MachineLearning, r/LocalLLaMA
+    tags: [ai, community, discussion]
+    auth:
+      required: true
+      type: oauth
+      env_vars:
+        - REDDIT_CLIENT_ID
+        - REDDIT_CLIENT_SECRET
+    filters:
+      subreddits:
+        - artificial
+        - MachineLearning
+        - LocalLLaMA
+        - ChatGPT
+      min_score: 10
+      max_items: 20
+
+  - id: product_hunt
+    name: Product Hunt
+    enabled: false
+    priority: 18
+    type: api
+    url: https://api.producthunt.com/v2/
+    category: ai
+    description: Daily product launches, especially AI tools
+    tags: [ai, tools, launches]
+    auth:
+      required: true
+      type: api_key
+      env_vars:
+        - PRODUCT_HUNT_API_KEY
+    filters:
+      min_votes: 5
+      max_items: 20
+
+  - id: github_trending
+    name: GitHub Trending
+    enabled: false
+    priority: 18
+    type: api
+    url: https://api.github.com/graphql
+    category: tech
+    description: Trending repositories, filtered for AI/ML
+    tags: [code, ai, open-source]
+    auth:
+      required: true
+      type: api_key
+      env_vars:
+        - GITHUB_TOKEN
+    filters:
+      min_stars: 500
+      max_items: 20
+
+# ========================================================================
+# Global Settings
+# ========================================================================
+settings:
+  # Update interval in minutes
+  update_interval: 30
+
+  # Time window for "latest" view in hours
+  window_hours: 24
+
+  # Archive retention in days
+  archive_days: 45
+
+  # Maximum new EN->ZH translations per run
+  translate_max_new: 80
+
+  # Maximum number of items per source
+  max_items_per_source: 100
+
+  # Parallel fetch settings
+  parallel_fetches: 10
+  fetch_timeout: 30
+
+  # AI filtering settings
+  ai_keywords:
+    - aigc
+    - llm
+    - gpt
+    - claude
+    - gemini
+    - deepseek
+    - openai
+    - anthropic
+    - hugging face
+    - transformer
+    - prompt
+    - diffusion
+    - agent
+    - 多模态
+    - 大模型
+    - 模型
+    - 人工智能
+    - 机器学习
+    - 深度学习
+    - 智能体
+    - 算力
+    - 推理
+    - 微调
+
+  tech_keywords:
+    - robot
+    - robotics
+    - embodied
+    - autonomous
+    - vision
+    - chip
+    - semiconductor
+    - cuda
+    - npu
+    - gpu
+    - cloud
+    - developer
+    - 开源
+    - 技术
+    - 编程
+    - 软件
+    - 芯片
+    - 机器人
+    - 具身
+
+  # Blocked keywords (noise)
+  block_keywords:
+    - 娱乐
+    - 明星
+    - 八卦
+    - 足球
+    - 篮球
+    - 彩票
+    - 情感
+    - 旅游
+    - 美食
+
+  # Commerce/ads keywords
+  commerce_keywords:
+    - 淘宝
+    - 天猫
+    - 京东
+    - 拼多多
+    - 券后
+    - 热销总榜
+    - 促销
+    - 优惠
+    - 补贴
+    - 下单
+    - 首发价
