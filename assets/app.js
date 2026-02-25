@@ -13,6 +13,9 @@ const state = {
   waytoagiMode: "today",
   waytoagiData: null,
   generatedAt: null,
+  sourcesStatus: null,
+  sourcesStatusExpanded: true,
+  sourcesFilter: "all", // all, enabled, disabled, error
 };
 
 const statsEl = document.getElementById("stats");
@@ -29,6 +32,12 @@ const modeHintEl = document.getElementById("modeHint");
 const allDedupeWrapEl = document.getElementById("allDedupeWrap");
 const allDedupeToggleEl = document.getElementById("allDedupeToggle");
 const allDedupeLabelEl = document.getElementById("allDedupeLabel");
+
+const sourcesStatusWrapEl = document.getElementById("sourcesStatusWrap");
+const sourcesToggleBtnEl = document.getElementById("sourcesToggleBtn");
+const sourcesStatsEl = document.getElementById("sourcesStats");
+const sourcesListEl = document.getElementById("sourcesList");
+const sourceStatusTpl = document.getElementById("sourceStatusTpl");
 
 const waytoagiUpdatedAtEl = document.getElementById("waytoagiUpdatedAt");
 const waytoagiMetaEl = document.getElementById("waytoagiMeta");
@@ -60,6 +69,12 @@ function fmtDate(iso) {
     month: "2-digit",
     day: "2-digit",
   }).format(d);
+}
+
+function fmtDuration(ms) {
+  if (!ms) return "0ms";
+  if (ms < 1000) return `${ms}ms`;
+  return `${(ms / 1000).toFixed(1)}s`;
 }
 
 function setStats(payload) {
@@ -298,6 +313,193 @@ function renderList() {
   renderGroupedBySiteAndSource(filtered);
 }
 
+// ============================================================================
+// Sources Status
+// ============================================================================
+
+async function loadSourcesStatus() {
+  try {
+    const res = await fetch(`./data/sources-status.json?t=${Date.now()}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+function renderSourcesStats(status) {
+  if (!status) {
+    sourcesStatsEl.innerHTML = '<div class="sources-stats-empty">加载中...</div>';
+    return;
+  }
+
+  const total = status.total_sources || status.sources?.length || 0;
+  const enabled = status.enabled_sources || status.sources?.filter(s => s.enabled).length || 0;
+  const disabled = status.disabled_sources || status.sources?.filter(s => !s.enabled).length || 0;
+  const success = status.sources?.filter(s => s.status === "success").length || 0;
+  const error = status.sources?.filter(s => s.status === "error").length || 0;
+  const totalItems = status.sources?.reduce((sum, s) => sum + (s.item_count || 0), 0) || 0;
+
+  sourcesStatsEl.innerHTML = `
+    <div class="sources-stat-item">
+      <span class="sources-stat-label">总源数</span>
+      <span class="sources-stat-value">${total}</span>
+    </div>
+    <div class="sources-stat-item">
+      <span class="sources-stat-label">已启用</span>
+      <span class="sources-stat-value success">${enabled}</span>
+    </div>
+    <div class="sources-stat-item">
+      <span class="sources-stat-label">正常</span>
+      <span class="sources-stat-value success">${success}</span>
+    </div>
+    <div class="sources-stat-item">
+      <span class="sources-stat-label">异常</span>
+      <span class="sources-stat-value ${error > 0 ? 'error' : ''}">${error}</span>
+    </div>
+    <div class="sources-stat-item">
+      <span class="sources-stat-label">总条目</span>
+      <span class="sources-stat-value">${fmtNumber(totalItems)}</span>
+    </div>
+  `;
+}
+
+function renderSourceStatusItem(source) {
+  const node = sourceStatusTpl.content.firstElementChild.cloneNode(true);
+
+  // Status indicator
+  const indicator = node.querySelector(".source-status-indicator");
+  indicator.className = `source-status-indicator status-${source.status}`;
+
+  // Name and category
+  node.querySelector(".source-status-name").textContent = source.name;
+  const categoryEl = node.querySelector(".source-status-category");
+  categoryEl.textContent = source.category || "general";
+
+  // Auth badge
+  if (source.auth_required) {
+    const authEl = node.querySelector(".source-status-auth");
+    authEl.style.display = "";
+    if (source.status === "disabled" && source.missing_creds?.length) {
+      authEl.title = `需要授权，缺少: ${source.missing_creds.join(", ")}`;
+      authEl.className = "source-status-auth warning";
+    } else {
+      authEl.title = "需要授权";
+    }
+  }
+
+  // Stats
+  node.querySelector(".source-stat[data-stat='items']").textContent = `${fmtNumber(source.item_count)} 条`;
+  node.querySelector(".source-stat[data-stat='time']").textContent = fmtDuration(source.fetch_time_ms);
+
+  // Tags
+  const metaEl = node.querySelector(".source-status-meta");
+  if (source.tags?.length) {
+    metaEl.innerHTML = source.tags.slice(0, 3).map(t => `<span class="source-tag">${t}</span>`).join("");
+  }
+
+  // Error message
+  if (source.status === "error" && source.error) {
+    const errorEl = node.querySelector(".source-status-error");
+    errorEl.style.display = "";
+    errorEl.textContent = source.error;
+  } else if (source.status === "disabled" && !source.enabled) {
+    const errorEl = node.querySelector(".source-status-error");
+    errorEl.style.display = "";
+    errorEl.className = "source-status-error info";
+    errorEl.textContent = "已禁用";
+  }
+
+  // URL
+  const urlEl = node.querySelector(".source-status-url");
+  urlEl.href = source.url;
+  urlEl.textContent = source.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  // Updated time
+  const updatedEl = node.querySelector(".source-status-updated");
+  if (source.last_fetch) {
+    updatedEl.textContent = fmtTime(source.last_fetch);
+  } else {
+    updatedEl.textContent = "未获取";
+  }
+
+  return node;
+}
+
+function renderSourcesList(status, filter = "all") {
+  if (!status || !status.sources) {
+    sourcesListEl.innerHTML = '<div class="sources-list-empty">加载中...</div>';
+    return;
+  }
+
+  let sources = [...status.sources];
+
+  // Apply filter
+  if (filter === "enabled") {
+    sources = sources.filter(s => s.enabled);
+  } else if (filter === "disabled") {
+    sources = sources.filter(s => !s.enabled);
+  } else if (filter === "error") {
+    sources = sources.filter(s => s.status === "error");
+  }
+
+  // Sort: enabled first, then by status, then by name
+  sources.sort((a, b) => {
+    if (a.enabled !== b.enabled) return b.enabled - a.enabled;
+    const statusOrder = { success: 0, partial: 1, error: 2, disabled: 3 };
+    const sa = statusOrder[a.status] ?? 4;
+    const sb = statusOrder[b.status] ?? 4;
+    if (sa !== sb) return sa - sb;
+    return a.name.localeCompare(b.name, "zh-CN");
+  });
+
+  sourcesListEl.innerHTML = "";
+  const frag = document.createDocumentFragment();
+
+  sources.forEach(source => {
+    frag.appendChild(renderSourceStatusItem(source));
+  });
+
+  sourcesListEl.appendChild(frag);
+
+  if (sources.length === 0) {
+    sourcesListEl.innerHTML = '<div class="sources-list-empty">没有匹配的信息源</div>';
+  }
+}
+
+function renderSourcesStatus(status) {
+  state.sourcesStatus = status;
+  renderSourcesStats(status);
+  renderSourcesList(status, state.sourcesFilter);
+
+  // Update toggle button icon
+  if (sourcesToggleBtnEl) {
+    sourcesToggleBtnEl.querySelector(".icon").textContent = state.sourcesStatusExpanded ? "▾" : "▴";
+  }
+
+  // Show/hide content
+  if (sourcesStatusWrapEl) {
+    const content = sourcesStatusWrapEl.querySelector(".sources-status-content");
+    if (content) {
+      content.style.display = state.sourcesStatusExpanded ? "block" : "none";
+    }
+  }
+}
+
+function toggleSourcesStatus() {
+  state.sourcesStatusExpanded = !state.sourcesStatusExpanded;
+  if (state.sourcesStatus) {
+    renderSourcesStatus(state.sourcesStatus);
+  }
+}
+
+function setSourcesFilter(filter) {
+  state.sourcesFilter = filter;
+  if (state.sourcesStatus) {
+    renderSourcesList(state.sourcesStatus, filter);
+  }
+}
+
 function waytoagiViews(waytoagi) {
   const updates7d = Array.isArray(waytoagi?.updates_7d) ? waytoagi.updates_7d : [];
   const latestDate = waytoagi?.latest_date || (updates7d.length ? updates7d[0].date : null);
@@ -367,7 +569,11 @@ async function loadWaytoagiData() {
 }
 
 async function init() {
-  const [newsResult, waytoagiResult] = await Promise.allSettled([loadNewsData(), loadWaytoagiData()]);
+  const [newsResult, waytoagiResult, sourcesStatusResult] = await Promise.allSettled([
+    loadNewsData(),
+    loadWaytoagiData(),
+    loadSourcesStatus(),
+  ]);
 
   if (newsResult.status === "fulfilled") {
     const payload = newsResult.value;
@@ -396,6 +602,12 @@ async function init() {
   } else {
     waytoagiUpdatedAtEl.textContent = "加载失败";
     waytoagiListEl.innerHTML = `<div class="waytoagi-error">${waytoagiResult.reason.message}</div>`;
+  }
+
+  if (sourcesStatusResult.status === "fulfilled") {
+    renderSourcesStatus(sourcesStatusResult.value);
+  } else {
+    renderSourcesStatus(null);
   }
 }
 
@@ -445,6 +657,11 @@ if (waytoagi7dBtnEl) {
     state.waytoagiMode = "7d";
     if (state.waytoagiData) renderWaytoagi(state.waytoagiData);
   });
+}
+
+// Sources status toggle
+if (sourcesToggleBtnEl) {
+  sourcesToggleBtnEl.addEventListener("click", toggleSourcesStatus);
 }
 
 init();

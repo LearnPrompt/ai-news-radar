@@ -527,6 +527,244 @@ select {
   font-size: 13px;
 }
 
+/* Sources Status Panel */
+.sources-status-wrap {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+}
+
+.sources-status-head {
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.sources-status-head h2 {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 20px;
+}
+
+.sources-toggle-btn {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.sources-toggle-btn:hover {
+  background: rgba(217, 72, 37, 0.12);
+}
+
+.sources-toggle-btn .icon {
+  display: block;
+}
+
+.sources-status-content {
+  padding: 16px 18px;
+}
+
+.sources-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.sources-stat-item {
+  flex: 1;
+  min-width: 100px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.sources-stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.sources-stat-value {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sources-stat-value.success {
+  color: #5a7a5a;
+}
+
+.sources-stat-value.error {
+  color: #c25a5a;
+}
+
+.sources-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.sources-list-empty,
+.sources-stats-empty {
+  grid-column: 1 / -1;
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+}
+
+.source-status-item {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  padding: 12px 14px;
+  animation: fade-up 300ms ease;
+}
+
+.source-status-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.source-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.source-status-indicator.status-success {
+  background: #5a7a5a;
+  box-shadow: 0 0 0 3px rgba(90, 122, 90, 0.25);
+}
+
+.source-status-indicator.status-error {
+  background: #c25a5a;
+  box-shadow: 0 0 0 3px rgba(194, 90, 90, 0.25);
+}
+
+.source-status-indicator.status-partial {
+  background: #c29f5a;
+  box-shadow: 0 0 0 3px rgba(194, 159, 90, 0.25);
+}
+
+.source-status-indicator.status-disabled {
+  background: var(--muted);
+  opacity: 0.4;
+}
+
+.source-status-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.source-status-category {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(24, 19, 16, 0.06);
+}
+
+.source-status-auth {
+  margin-left: auto;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.source-status-auth.warning {
+  color: #c29f5a;
+  opacity: 1;
+}
+
+.source-status-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.source-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.source-stat {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.source-status-meta {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.source-tag {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(24, 19, 16, 0.06);
+}
+
+.source-status-error {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: rgba(194, 90, 90, 0.1);
+  color: #c25a5a;
+}
+
+.source-status-error.info {
+  background: rgba(24, 19, 16, 0.06);
+  color: var(--muted);
+}
+
+.source-status-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(22, 16, 13, 0.08);
+}
+
+.source-status-url {
+  color: var(--accent-2);
+  text-decoration: none;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.source-status-url:hover {
+  text-decoration: underline;
+}
+
+.source-status-updated {
+  color: var(--muted);
+  margin-left: auto;
+}
+
 @media (max-width: 760px) {
   .shell {
     padding: 18px 12px 36px;

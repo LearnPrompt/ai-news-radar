@@ -26,7 +26,7 @@
           </div>
         </div>
         <p class="hero-sub">
-          聚合 10 个站点并附带 WaytoAGI 近 7 日更新，先全量采集，再筛选 AI/科技强相关话题。
+          聚合 17+ 个信息源并附带 WaytoAGI 近 7 日更新，先全量采集，再筛选 AI/科技强相关话题。
         </p>
 
         <section class="stats" id="stats"></section>
@@ -67,6 +67,21 @@
 
       <section class="site-pills" id="sitePills"></section>
 
+      <section class="sources-status-wrap" id="sourcesStatusWrap">
+        <div class="sources-status-head">
+          <h2>信息源状态</h2>
+          <div class="sources-status-tools">
+            <button id="sourcesToggleBtn" class="sources-toggle-btn" type="button">
+              <span class="icon">▾</span>
+            </button>
+          </div>
+        </div>
+        <div id="sourcesStatusContent" class="sources-status-content">
+          <div id="sourcesStats" class="sources-stats"></div>
+          <div id="sourcesList" class="sources-list"></div>
+        </div>
+      </section>
+
       <section class="list-wrap">
         <div class="list-head">
           <h2>最近 24 小时更新</h2>
@@ -85,6 +100,29 @@
         </div>
         <a class="title" target="_blank" rel="noopener noreferrer"></a>
       </article>
+    </template>
+
+    <template id="sourceStatusTpl">
+      <div class="source-status-item">
+        <div class="source-status-header">
+          <div class="source-status-indicator"></div>
+          <span class="source-status-name"></span>
+          <span class="source-status-category"></span>
+          <span class="source-status-auth" style="display: none">🔐</span>
+        </div>
+        <div class="source-status-info">
+          <div class="source-stats">
+            <span class="source-stat" data-stat="items">0 条</span>
+            <span class="source-stat" data-stat="time">0ms</span>
+          </div>
+          <div class="source-status-meta"></div>
+        </div>
+        <div class="source-status-error" style="display: none"></div>
+        <div class="source-status-footer">
+          <a class="source-status-url" target="_blank" rel="noopener noreferrer"></a>
+          <span class="source-status-updated"></span>
+        </div>
+      </div>
     </template>
 
     <script src="./assets/app.js" defer></script>
