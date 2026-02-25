@@ -3,3 +3,13 @@ beautifulsoup4==4.12.3
 feedparser==6.0.11
 python-dateutil==2.9.0.post0
 pyyaml==6.0.2
+
+# Optional database connectors for storage layer
+# Uncomment the ones you need based on your DB_TYPE environment variable
+# mysql-connector-python==8.2.0  # For MySQL support
+# psycopg2-binary==2.9.9  # For PostgreSQL support
+
+# Testing dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.1

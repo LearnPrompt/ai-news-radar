@@ -1,9 +1,14 @@
 name: Update AI News Snapshot
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Manual trigger
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: '0 */2 * * *'  # Every 2 hours (recommended)
+
+# Concurrency control: prevent multiple workflow runs from executing simultaneously
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true  # Cancel previous runs
 
 permissions:
   contents: write
@@ -11,21 +16,34 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Add timeout limit
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Add dependency caching
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: 'pip'  # Built-in pip caching
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Prepare OPML (optional)
+      # OPML configuration (optional)
+      - name: Prepare OPML
         env:
           FOLLOW_OPML_B64: ${{ secrets.FOLLOW_OPML_B64 }}
         run: |
@@ -37,22 +55,84 @@ jobs:
             echo "No FOLLOW_OPML_B64 secret provided; RSS OPML is optional"
           fi
 
+      # Data update
       - name: Update data
+        id: update
         run: |
           if [ -f feeds/follow.opml ]; then
             python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml feeds/follow.opml
           else
             python scripts/update_news.py --output-dir data --window-hours 24
           fi
+          # Save stats for notifications
+          echo "stats=$(cat data/source-status.json)" >> $GITHUB_OUTPUT
 
-      - name: Commit and push changes
+      # Check for changes (avoid unnecessary commits)
+      - name: Check for changes
+        id: check_changes
         run: |
-          if git diff --quiet; then
-            echo "No changes to commit"
-            exit 0
+          if git diff --quiet -- data/; then
+            echo "no_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "no_changes=false" >> $GITHUB_OUTPUT
           fi
+
+      # Only commit when there are changes
+      - name: Commit and push
+        if: steps.check_changes.outputs.no_changes == 'false'
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/latest-24h.json data/archive.json data/source-status.json data/waytoagi-7d.json data/title-zh-cache.json
+          git add data/
           git commit -m "chore: update ai news snapshot"
           git push
+
+      # Telegram notification on success
+      - name: Send Telegram Notification on Success
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            ✅ AI News Radar Update Successful
+
+            **Repository:** ${{ github.repository }}
+            **Workflow:** ${{ github.workflow }}
+            **Commit:** ${{ github.sha }}
+
+            *Items Collected:* ${{ fromJson(steps.update.outputs.stats).items_in_24h }}
+            *Successful Sources:* ${{ fromJson(steps.update.outputs.stats).successful_sites }}/${{ fromJson(steps.update.outputs.stats).fetched_raw_items }}
+
+      # Telegram notification on failure
+      - name: Send Telegram Notification on Failure
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            ❌ AI News Radar Update Failed
+
+            **Repository:** ${{ github.repository }}
+            **Workflow:** ${{ github.workflow }}
+            **Commit:** ${{ github.sha }}
+
+            *Please check the logs for details*
+
+      # Source status report (always send)
+      - name: Send Source Status Report
+        if: always()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            📊 AI News Radar Source Status
+
+            **Successful:** ${{ fromJson(steps.update.outputs.stats).successful_sites }} sites
+
+            *Items in 24h:* ${{ fromJson(steps.update.outputs.stats).items_in_24h }}

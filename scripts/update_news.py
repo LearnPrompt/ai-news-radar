@@ -7,6 +7,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
+import logging
 import random
 import re
 import time
@@ -18,6 +19,12 @@ from typing import Any
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 from zoneinfo import ZoneInfo
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
@@ -28,6 +35,29 @@ try:
     import feedparser
 except ModuleNotFoundError:
     feedparser = None
+
+# Import storage layer
+import sys
+from pathlib import Path as P
+# Add src to path for imports
+src_path = P(__file__).parent.parent / "src"
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
+
+try:
+    from storage import (
+        NewsItem,
+        StatusRecord,
+        SnapshotMetadata,
+        create_storage,
+        InitializationError,
+        ConnectionError,
+        StorageError,
+    )
+    STORAGE_AVAILABLE = True
+except ImportError:
+    STORAGE_AVAILABLE = False
+    StorageError = Exception
 
 UTC = timezone.utc
 BROWSER_UA = (
@@ -1709,6 +1739,66 @@ def load_archive(path: Path) -> dict[str, dict[str, Any]]:
     return out
 
 
+# Storage layer helper functions
+def dict_to_news_item(record: dict[str, Any]) -> NewsItem:
+    """Convert a dictionary record to a NewsItem."""
+    return NewsItem(
+        id=record["id"],
+        site_id=record["site_id"],
+        site_name=record["site_name"],
+        source=record["source"],
+        title=record["title"],
+        url=record["url"],
+        published_at=record.get("published_at"),
+        first_seen_at=record["first_seen_at"],
+        last_seen_at=record["last_seen_at"],
+        meta=record.get("meta", {}),
+        title_zh=record.get("title_zh"),
+        summary=record.get("summary"),
+        categories=record.get("categories"),
+    )
+
+
+def news_item_to_dict(item: NewsItem) -> dict[str, Any]:
+    """Convert a NewsItem to a dictionary."""
+    return item.to_dict()
+
+
+def dict_to_status_record(record: dict[str, Any], now: datetime) -> StatusRecord:
+    """Convert a dictionary status record to a StatusRecord."""
+    return StatusRecord(
+        site_id=record["site_id"],
+        site_name=record["site_name"],
+        ok=record.get("ok", True),
+        item_count=record.get("item_count", 0),
+        last_check_at=iso(now),
+        error_message=record.get("error"),
+        response_time_ms=record.get("duration_ms"),
+        metadata={k: v for k, v in record.items() if k not in {"site_id", "site_name", "ok", "item_count", "error", "duration_ms"}},
+    )
+
+
+def initialize_storage() -> Any:
+    """Initialize and return the storage backend.
+
+    Returns:
+        Storage backend instance or None if storage is not available
+    """
+    if not STORAGE_AVAILABLE:
+        return None
+
+    try:
+        storage = create_storage(enable_fallback=True)
+        logging.info(f"Storage initialized: {type(storage).__name__}")
+        return storage
+    except (ConnectionError, InitializationError) as e:
+        logging.warning(f"Storage initialization failed, using file fallback: {e}")
+        return None
+    except Exception as e:
+        logging.warning(f"Unexpected error initializing storage: {e}")
+        return None
+
+
 def event_time(record: dict[str, Any]) -> datetime | None:
     # RSS sources must rely on the source's publish time only.
     # first_seen_at is fetch time and would falsely mark historical items as "24h".
@@ -2031,6 +2121,7 @@ def main() -> int:
     parser.add_argument("--translate-max-new", type=int, default=80, help="Max new EN->ZH title translations per run")
     parser.add_argument("--rss-opml", default="", help="Optional OPML file path to include RSS sources")
     parser.add_argument("--rss-max-feeds", type=int, default=0, help="Optional max OPML RSS feeds to fetch (0 means all)")
+    parser.add_argument("--no-storage", action="store_true", help="Disable storage layer, use file I/O only")
     args = parser.parse_args()
 
     now = utc_now()
@@ -2043,7 +2134,24 @@ def main() -> int:
     waytoagi_path = output_dir / "waytoagi-7d.json"
     title_cache_path = output_dir / "title-zh-cache.json"
 
-    archive = load_archive(archive_path)
+    # Initialize storage layer
+    storage = None
+    if not args.no_storage:
+        try:
+            storage = initialize_storage()
+            if storage:
+                logging.info(f"Using storage backend: {type(storage).__name__}")
+            else:
+                logging.warning("Storage not available, using file I/O")
+        except Exception as e:
+            logging.warning(f"Storage initialization error: {e}, using file I/O")
+
+    # Load archive
+    if storage:
+        archive_dicts = {k: v.to_dict() for k, v in storage.load_archive().items()}
+    else:
+        archive = load_archive(archive_path)
+        archive_dicts = archive
 
     session = create_session()
     raw_items, statuses = collect_all(session, now)
@@ -2087,9 +2195,9 @@ def main() -> int:
         item_id = make_item_id(raw.site_id, raw.source, title, url)
         seen_this_run.add(item_id)
 
-        existing = archive.get(item_id)
+        existing = archive_dicts.get(item_id)
         if existing is None:
-            archive[item_id] = {
+            archive_dicts[item_id] = {
                 "id": item_id,
                 "site_id": raw.site_id,
                 "site_name": raw.site_name,
@@ -2115,7 +2223,7 @@ def main() -> int:
     # Prune old archive
     keep_after = now - timedelta(days=args.archive_days)
     pruned: dict[str, dict[str, Any]] = {}
-    for item_id, record in archive.items():
+    for item_id, record in archive_dicts.items():
         ts = (
             parse_iso(record.get("last_seen_at"))
             or parse_iso(record.get("published_at"))
@@ -2124,12 +2232,18 @@ def main() -> int:
         )
         if ts >= keep_after:
             pruned[item_id] = record
-    archive = pruned
+    archive_dicts = pruned
+
+    # Load title cache
+    if storage:
+        title_cache = storage.load_title_cache()
+    else:
+        title_cache = load_title_zh_cache(title_cache_path)
 
     # 24h view
     window_start = now - timedelta(hours=args.window_hours)
     latest_items_all: list[dict[str, Any]] = []
-    for record in archive.values():
+    for record in archive_dicts.values():
         ts = event_time(record)
         if not ts:
             continue
@@ -2151,7 +2265,6 @@ def main() -> int:
 
     latest_items_all.sort(key=lambda x: event_time(x) or datetime.min.replace(tzinfo=UTC), reverse=True)
     latest_items = [record for record in latest_items_all if is_ai_related_record(record)]
-    title_cache = load_title_zh_cache(title_cache_path)
     latest_items, latest_items_all, title_cache = add_bilingual_fields(
         latest_items,
         latest_items_all,
@@ -2277,17 +2390,70 @@ def main() -> int:
             "error": str(exc),
         }
 
-    latest_path.write_text(json.dumps(latest_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    archive_path.write_text(json.dumps(archive_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    status_path.write_text(json.dumps(status_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    waytoagi_path.write_text(json.dumps(waytoagi_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    title_cache_path.write_text(json.dumps(title_cache, ensure_ascii=False, indent=2), encoding="utf-8")
+    # Save using storage layer or fall back to file I/O
+    if storage:
+        try:
+            # Save archive items
+            archive_items = [dict_to_news_item(r) for r in archive_dicts.values()]
+            storage.save_archive_items(archive_items)
 
-    print(f"Wrote: {latest_path} ({len(latest_items)} items)")
-    print(f"Wrote: {archive_path} ({len(archive)} items)")
-    print(f"Wrote: {status_path}")
-    print(f"Wrote: {waytoagi_path} ({waytoagi_payload.get('count_7d', 0)} items)")
-    print(f"Wrote: {title_cache_path} ({len(title_cache)} entries)")
+            # Save latest snapshot
+            metadata = SnapshotMetadata(
+                generated_at=iso(now),
+                window_hours=args.window_hours,
+                total_items=len(latest_items_ai_dedup),
+                total_items_raw=len(latest_items),
+                site_count=len(site_stat),
+                source_count=len({f"{i['site_id']}::{i['source']}" for i in latest_items_ai_dedup}),
+                topic_filter="ai_tech_robotics",
+                archive_total=len(archive_dicts),
+            )
+            storage.save_snapshot(
+                "latest",
+                metadata,
+                [dict_to_news_item(r) for r in latest_items_ai_dedup],
+                items_ai=[dict_to_news_item(r) for r in latest_items_ai_dedup],
+                items_all_raw=[dict_to_news_item(r) for r in latest_items_all],
+                items_all=[dict_to_news_item(r) for r in latest_items_all_dedup],
+                site_stats=list(site_stat.values()),
+            )
+
+            # Save status records
+            status_records = [dict_to_status_record(s, now) for s in statuses]
+            storage.save_status_records(status_records)
+
+            # Save WaytoAGI data
+            storage.save_waytoagi_data(waytoagi_payload)
+
+            # Save title cache
+            storage.save_title_cache(title_cache)
+
+            print(f"Saved to storage: {len(latest_items_ai_dedup)} items")
+            print(f"Storage backend: {type(storage).__name__}")
+        except Exception as e:
+            logging.error(f"Storage save failed, falling back to file I/O: {e}")
+            storage = None
+
+    # Fall back to file I/O if storage is not available or failed
+    if not storage:
+        latest_path.write_text(json.dumps(latest_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        archive_path.write_text(json.dumps(archive_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        status_path.write_text(json.dumps(status_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        waytoagi_path.write_text(json.dumps(waytoagi_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        title_cache_path.write_text(json.dumps(title_cache, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        print(f"Wrote: {latest_path} ({len(latest_items)} items)")
+        print(f"Wrote: {archive_path} ({len(archive_dicts)} items)")
+        print(f"Wrote: {status_path}")
+        print(f"Wrote: {waytoagi_path} ({waytoagi_payload.get('count_7d', 0)} items)")
+        print(f"Wrote: {title_cache_path} ({len(title_cache)} entries)")
+
+    # Close storage connection
+    if storage:
+        try:
+            storage.close()
+        except Exception as e:
+            logging.error(f"Error closing storage: {e}")
 
     return 0
 
