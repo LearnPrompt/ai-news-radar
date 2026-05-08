@@ -1,6 +1,6 @@
 ---
 name: ai-news-radar
-description: "Use when working on AI News Radar or Scout Skill: finding high-signal AI/tech sources, adding RSS/OPML/GitHub feeds, checking source health, updating the web UI, GitHub Actions, or GitHub Pages deployment."
+description: "Use when working on AI News Radar, 24 小时 AI 更新雷达, AI 更新雷达, 伯乐Skill, or Scout Skill: finding high-signal AI/tech sources, adding RSS/OPML/GitHub feeds, checking source health, updating the web UI, GitHub Actions, or GitHub Pages deployment."
 ---
 
 # AI News Radar
