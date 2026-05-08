@@ -1,6 +1,6 @@
 ---
 name: ai-news-radar
-description: "Use when working on the LearnPrompt AI News Radar / AI Signal Board repo: evaluating AI news sources, RSS/OPML/GitHub feed/X/newsletter coverage, changing source strategy or UI defaults, configuring Actions secrets, deploying Pages, or packaging/forking the project as a Codex/Claude skill."
+description: "Use when working on AI News Radar or Scout Skill: finding high-signal AI/tech sources, adding RSS/OPML/GitHub feeds, checking source health, updating the web UI, GitHub Actions, or GitHub Pages deployment."
 ---
 
 # AI News Radar
@@ -9,7 +9,7 @@ description: "Use when working on the LearnPrompt AI News Radar / AI Signal Boar
 
 When this skill triggers inside the repo, read these files first:
 
-- `skills/ai-news-radar/README.md` for the public-facing 懂王.skill positioning,
+- `skills/ai-news-radar/README.md` for the public-facing 伯乐Skill / Scout Skill positioning,
   source-intake prompt, and install-after-first-message guidance.
 - `README.md` for project usage and current commands.
 - `docs/GPT_HANDOFF.md` before release-readiness checks or handing the project
@@ -52,10 +52,7 @@ Avoid adding many reader-facing choices. Prefer better defaults, source quality,
 and clearer status output.
 
 The v2 packaging goal is a forkable public site plus a reusable agent Skill.
-The public-facing Skill name is **懂王.skill**: it should feel social and
-memorable, but stay honest about scope. Do not imply it knows everything; frame
-it as the skill that understands how to turn noisy sources into a readable AI
-daily radar.
+The public-facing Skill name is **伯乐Skill** in Chinese and **Scout Skill** in English. It should feel concrete and easy to use: a scout that helps choose high-signal sources worth tracking, instead of implying that the system knows everything or blindly adding every noisy feed.
 Ordinary users should be able to browse the hosted page. Maintainers should be
 able to add their own sources with OPML, public generated feeds, or secret-backed
 optional adapters without changing the public default.
@@ -88,7 +85,7 @@ When the user has installed or forked the project but does not know how to start
 ask them for a source list first. A good kickoff prompt is:
 
 ```text
-请使用懂王Skill，先问我要信息源清单，然后帮我判断每个源该用RSS、OPML、公开feed、静态页面、Jina兜底、AgentMail邮箱还是跳过。目标是部署一个不需要服务器、能用GitHub Actions自动更新的AI日报网站。不要把任何API Key、cookies、token、真实OPML、邮箱正文或私有邮件内容写入仓库。
+请使用伯乐Skill，先问我要信息源清单，然后帮我判断每个信源该用 RSS、OPML、公开 feed、静态页面、Jina 兜底、AgentMail 邮箱还是跳过。目标是部署一个不需要服务器、能用 GitHub Actions 自动更新的 AI 日报网站。不要把任何 API Key、cookies、token、真实 OPML、邮箱正文或私有邮件内容写入仓库。
 ```
 
 Use OPML for private customization:
@@ -154,9 +151,10 @@ Run the fastest relevant checks:
 
 ```bash
 python -m py_compile scripts/update_news.py
-pytest -q
+python -m pytest -q
 node --check assets/app.js
 git diff --check
+python "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" skills/ai-news-radar
 ```
 
 For AgentMail changes, also verify default-off safety:

@@ -2,7 +2,7 @@
 
 ## Scope
 
-This repo powers the public AI Signal Board / AI News Radar static site.
+This repo powers the public AI News Radar static site and Scout Skill source workflow.
 Use it for high-signal AI/tech news aggregation, OPML-based custom feeds,
 GitHub Actions refresh jobs, and GitHub Pages publishing.
 
@@ -13,7 +13,7 @@ GitHub Actions refresh jobs, and GitHub Pages publishing.
 - Do not commit private feeds, secrets, tokens, cookies, or `.env` values.
 - Do not commit `feeds/follow.opml`; use `feeds/follow.example.opml` as the public template.
 - Prefer stable public RSS/Atom/OPML sources before adding custom scrapers.
-- Keep the reader-facing product simple: default to a curated Signal view, hide noisy or advanced source details behind existing filters/docs.
+- Keep the reader-facing product simple: default to a curated AI-focused view, hide noisy or advanced source details behind existing filters/docs.
 
 ## Source Strategy
 
@@ -34,9 +34,9 @@ and fragile bridges unless the user explicitly accepts the maintenance cost.
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 python -m py_compile scripts/update_news.py
-pytest -q
+python -m pytest -q
 python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml feeds/follow.opml
 python -m http.server 8080
 ```

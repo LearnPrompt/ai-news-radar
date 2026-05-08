@@ -22,7 +22,7 @@ python -m http.server 8080
 
 ## What This Project Is
 
-AI News Radar / AI Signal Board is a static AI news signal page:
+AI News Radar is a static 24h AI/tech news radar:
 
 - ordinary readers open the hosted page and read 24h AI updates
 - maintainers can fork it and add private OPML/RSS via GitHub Secrets

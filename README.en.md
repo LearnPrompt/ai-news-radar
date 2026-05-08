@@ -2,17 +2,17 @@
 
 # AI News Radar
 
-## Source-Savvy Agent Skill
+## Scout Skill
 
-**A serverless AI news signal board that knows how to handle your sources.**
+**A 24h AI/tech news radar with Scout Skill for finding high-signal AI sources.**
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green?style=flat-square)](https://learnprompt.github.io/ai-news-radar/)
 [![Actions](https://img.shields.io/github/actions/workflow/status/LearnPrompt/ai-news-radar/update-news.yml?branch=master&label=update&style=flat-square)](https://github.com/LearnPrompt/ai-news-radar/actions/workflows/update-news.yml)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 
-Read the signal. Let the agent decide how each source should enter the radar.
+Read the updates. Let Scout Skill decide which AI sources are worth tracking.
 
-[Live site](https://learnprompt.github.io/ai-news-radar/) · [中文](README.md) · [Agent Skill](skills/ai-news-radar/SKILL.md) · [Source strategy](docs/SOURCE_COVERAGE.md)
+[Live site](https://learnprompt.github.io/ai-news-radar/) · [中文](README.md) · [Scout Skill](skills/ai-news-radar/SKILL.md) · [Source strategy](docs/SOURCE_COVERAGE.md)
 
 </div>
 
@@ -20,11 +20,11 @@ Read the signal. Let the agent decide how each source should enter the radar.
 
 ## What is this?
 
-AI News Radar is an auto-updating AI news signal board.
+AI News Radar is an auto-updating 24h AI/tech news radar.
 
 Readers open the hosted page and scan the last 24 hours of AI, model, developer-tool, and tech-ecosystem updates. Maintainers can fork the repo and add their own OPML/RSS files, public feeds, static pages, or optional AgentMail inbox metadata. Codex, Claude Code, and other coding agents can use the in-repo skill to keep source intake, source strategy, and Pages deployment maintainable.
 
-The Chinese-facing package name is **懂王.skill**. It is a memorable name for the source-intake agent, not a claim that the system knows everything. Its job is narrow: turn messy sources into a readable AI daily radar.
+The Chinese-facing skill name is **伯乐Skill**. In this project, it means **Scout Skill**: an agent workflow that helps AI News Radar find high-signal sources worth tracking, instead of blindly adding every noisy feed.
 
 > This public repo does not include private RSS subscription files, API keys, cookies, email bodies, or credentials.
 
@@ -34,7 +34,7 @@ Good updates are scattered. Bad signals are endless.
 
 Official blogs publish some updates. GitHub changelogs publish others. Builders share early signals on X. Aggregator sites re-post the same story again and again. The real work is no longer opening one more website. The real work is deciding which sources are worth tracking, which ones are stable, which ones are duplicates, and which ones should stay private.
 
-AI News Radar handles that first layer.
+Scout Skill handles that first layer.
 
 It classifies sources, fetches public data, normalizes items, deduplicates repeated stories, filters for AI-relevant signals, tracks source health, and publishes a static web UI. The default layer stays simple for ordinary readers. The advanced layer is for maintainers and agents who want OPML, custom feeds, GitHub Actions secrets, and optional private integrations.
 
@@ -98,7 +98,7 @@ Projects such as Horizon show a broader version of the AI news pipeline: multi-s
 
 AI News Radar can learn from that product language, but its current scope is intentionally narrower.
 
-This repo is a **serverless signal board plus source-intake agent skill**. It focuses on 24h signals, source health, public defaults, forkability, and safe private extensions. It does not currently promise full LLM-generated long summaries, comment-thread summarization, mailing-list delivery, webhook delivery, or MCP tooling.
+This repo is a **serverless news radar plus Scout Skill**. It focuses on 24h signals, source health, public defaults, forkability, and safe private extensions. It does not currently promise full LLM-generated long summaries, comment-thread summarization, mailing-list delivery, webhook delivery, or MCP tooling.
 
 Those can be future modules, but they should not be documented as shipped features until implemented.
 
@@ -137,7 +137,7 @@ python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml fee
 If you want Codex or Claude Code to help you build your own radar, start with:
 
 ```text
-Use the AI News Radar skill. Ask me for my source list first, then classify each source as RSS, OPML, public feed, static page, Jina fallback, AgentMail private inbox, or skipped. The goal is a serverless AI daily radar that updates with GitHub Actions and deploys to GitHub Pages. Do not commit API keys, cookies, tokens, private OPML files, email addresses, email bodies, or credentials.
+Use Scout Skill for AI News Radar. Ask me for my source list first, then decide whether each source should use RSS, OPML, public feeds, static pages, Jina fallback, AgentMail, or be skipped. Do not commit API keys, cookies, tokens, private OPML files, email addresses, email bodies, or credentials.
 ```
 
 The in-repo skill lives at:
@@ -186,15 +186,14 @@ By default, the core pipeline requires no API keys.
 ## Validation
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+
 python -m py_compile scripts/update_news.py
-pytest -q
+python -m pytest -q
 node --check assets/app.js
 git diff --check
-```
-
-If the skill changes:
-
-```bash
 python "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" skills/ai-news-radar
 ```
 

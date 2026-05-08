@@ -11,7 +11,7 @@ values. Keep the public repo usable without secrets.
 
 The product direction is a two-layer AI news tool:
 
-- Default layer: curated AI Signal view for ordinary AI enthusiasts.
+- Default layer: curated AI-focused view for ordinary AI enthusiasts.
 - Advanced layer: custom OPML/source configuration and source health details for maintainers.
 
 When adding sources, prefer official RSS/Atom feeds or OPML first. Add custom
