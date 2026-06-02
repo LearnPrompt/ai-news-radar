@@ -17,6 +17,7 @@ const state = {
   waytoagiData: null,
   sourceStatus: null,
   generatedAt: null,
+  dailyBrief: null,
 };
 
 const statsEl = document.getElementById("stats");
@@ -43,6 +44,10 @@ const waytoagiListEl = document.getElementById("waytoagiList");
 const waytoagiTodayBtnEl = document.getElementById("waytoagiTodayBtn");
 const waytoagi7dBtnEl = document.getElementById("waytoagi7dBtn");
 const coverageStripEl = document.getElementById("coverageStrip");
+const dailyBriefEl = document.getElementById("dailyBrief");
+const briefMetaEl = document.getElementById("briefMeta");
+const storyListEl = document.getElementById("storyList");
+const briefFallbackEl = document.getElementById("briefFallback");
 
 const SOURCE_KINDS = {
   official_ai: { label: "官方一手源", tone: "official", rank: 0 },
@@ -597,7 +602,95 @@ function renderSourceHealth(errorMessage = "") {
     ok.textContent = "源状态正常";
     sourceHealthEl.appendChild(ok);
   }
+
+  const enrichedSites = sites.filter((s) => s.items_24h != null || s.ai_relevance_rate != null || s.trust_score != null);
+  if (enrichedSites.length) {
+    const enrichedGrid = document.createElement("div");
+    enrichedGrid.className = "health-grid";
+    enrichedSites.slice(0, 8).forEach((s) => {
+      const parts = [];
+      if (s.items_24h != null) parts.push(`${fmtNumber(s.items_24h)}条/天`);
+      if (s.ai_relevance_rate != null) parts.push(`AI占比${Math.round(s.ai_relevance_rate * 100)}%`);
+      if (s.trust_score != null) parts.push(`信任${Math.round(s.trust_score * 100)}`);
+      const tone = s.health_status === "ok" ? "ok" : s.health_status === "warn" ? "warn" : s.health_status === "bad" ? "bad" : "";
+      enrichedGrid.appendChild(renderMetric(s.site_name || s.site_id, parts.join(" · ") || "—", tone));
+    });
+    sourceHealthEl.appendChild(enrichedGrid);
+  }
+
   renderAdvancedSummary();
+}
+
+function renderDailyBrief(items, isFallback) {
+  if (!dailyBriefEl) return;
+  dailyBriefEl.style.display = "";
+
+  if (isFallback) {
+    briefFallbackEl.textContent = "daily-brief.json 未生成，以下为 AI精选回退";
+    briefFallbackEl.style.display = "";
+  }
+
+  storyListEl.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  items.slice(0, 12).forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "story-card";
+
+    const metaRow = document.createElement("div");
+    metaRow.className = "story-meta-row";
+
+    if (item.importance_label || isFallback) {
+      const label = document.createElement("span");
+      label.className = "importance-label";
+      label.textContent = isFallback ? "AI精选回退" : item.importance_label;
+      metaRow.appendChild(label);
+    }
+
+    if (!isFallback && item.duplicate_count > 1) {
+      const cnt = document.createElement("span");
+      cnt.className = "story-source-count";
+      cnt.textContent = `${item.duplicate_count} 个来源`;
+      metaRow.appendChild(cnt);
+    }
+
+    const timeEl = document.createElement("time");
+    timeEl.className = "story-time";
+    const primary = item.primary_item || item;
+    timeEl.textContent = fmtTime(item.earliest_at || primary.published_at || primary.first_seen_at);
+    metaRow.appendChild(timeEl);
+
+    card.appendChild(metaRow);
+
+    const titleEl = document.createElement("a");
+    titleEl.className = "title";
+    titleEl.target = "_blank";
+    titleEl.rel = "noopener noreferrer";
+    titleEl.href = primary.url || "#";
+
+    const zh = (primary.title_zh || "").trim();
+    const en = (primary.title_en || "").trim();
+    const raw = (primary.title || "").trim();
+    if (zh && en && zh !== en) {
+      const span1 = document.createElement("span");
+      span1.textContent = zh;
+      const span2 = document.createElement("span");
+      span2.className = "title-sub";
+      span2.textContent = en;
+      titleEl.append(span1, span2);
+    } else {
+      titleEl.textContent = zh || en || raw;
+    }
+
+    card.appendChild(titleEl);
+    frag.appendChild(card);
+  });
+  storyListEl.appendChild(frag);
+}
+
+async function loadDailyBriefData() {
+  const res = await fetch(`./data/daily-brief.json?t=${Date.now()}`);
+  if (!res.ok) throw new Error(`加载 daily-brief.json 失败: ${res.status}`);
+  return res.json();
 }
 
 async function loadNewsData() {
@@ -642,10 +735,11 @@ async function loadSourceStatusData() {
 }
 
 async function init() {
-  const [newsResult, waytoagiResult, statusResult] = await Promise.allSettled([
+  const [newsResult, waytoagiResult, statusResult, briefResult] = await Promise.allSettled([
     loadNewsData(),
     loadWaytoagiData(),
     loadSourceStatusData(),
+    loadDailyBriefData(),
   ]);
 
   if (newsResult.status === "fulfilled") {
@@ -688,6 +782,17 @@ async function init() {
   } else {
     waytoagiUpdatedAtEl.textContent = "加载失败";
     waytoagiListEl.innerHTML = `<div class="waytoagi-error">${waytoagiResult.reason.message}</div>`;
+  }
+
+  if (briefResult.status === "fulfilled") {
+    state.dailyBrief = briefResult.value;
+    const items = state.dailyBrief.items || [];
+    if (items.length) {
+      briefMetaEl.textContent = `${items.length} 条 · ${fmtTime(state.dailyBrief.generated_at)}`;
+      renderDailyBrief(items, false);
+    }
+  } else if (state.itemsAi.length) {
+    renderDailyBrief(state.itemsAi.map((item) => ({ primary_item: item, importance_label: "AI精选", earliest_at: item.published_at || item.first_seen_at })), true);
   }
 }
 

@@ -397,7 +397,9 @@ ai-news-radar/
 ├── data/
 │   ├── latest-24h.json
 │   ├── latest-24h-all.json
-│   ├── source-status.json
+│   ├── daily-brief.json    # v0.6 每日要闻 Briefing（后端生成，缺失时前端自动回退）
+│   ├── stories-merged.json # v0.6 合并故事全量（可选）
+│   ├── source-status.json  # 含 items_24h / ai_relevance_rate / trust_score 等富化字段
 │   ├── email-digest.json  # 可选，AgentMail开启后生成
 │   └── archive.json
 ├── feeds/
