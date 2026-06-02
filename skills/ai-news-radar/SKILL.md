@@ -25,6 +25,37 @@ When this skill triggers inside the repo, read these files first:
 - `references/v2-method.md` when the user asks for product optimization, source
   coverage strategy, Skill packaging, or "v2" direction.
 
+## Data Outputs (v0.6)
+
+The backend (`scripts/update_news.py`) produces these files under `data/`:
+
+| File | Description |
+|---|---|
+| `latest-24h.json` | Primary AI-signal items (always present) |
+| `latest-24h-all.json` | Full dedup + raw all-mode items (lazy-loaded) |
+| `source-status.json` | Source health; v0.6 adds `items_24h`, `ai_relevance_rate`, `duplicate_rate`, `unique_coverage`, `trust_score`, `health_status` per site |
+| `daily-brief.json` | v0.6 Briefing layer: merged stories with `importance_score`, `importance_label`, `duplicate_count`, `primary_item`, `sources[]` |
+| `stories-merged.json` | v0.6 optional full merged story list |
+| `archive.json` | Rolling archive for overlap checks |
+| `email-digest.json` | Optional AgentMail metadata digest (publish only with `EMAIL_DIGEST_PUBLISH=1`) |
+
+If `daily-brief.json` is absent, the frontend falls back to the first 12 `latest-24h.json` AI items and labels them `AI精选回退`.
+
+### `daily-brief.json` story item shape
+
+```json
+{
+  "story_id": "...",
+  "importance_score": 0.87,
+  "importance_label": "⭐ 官方更新",
+  "duplicate_count": 3,
+  "primary_item": { "id": "...", "site_id": "...", "site_name": "...", "source": "...", "title": "...", "title_zh": "...", "title_en": "...", "url": "...", "published_at": "..." },
+  "sources": [ { "site_id": "...", "site_name": "...", "source": "...", "url": "..." } ],
+  "earliest_at": "...",
+  "latest_at": "..."
+}
+```
+
 ## V2 Workflow
 
 Use this order for non-trivial product or source-strategy work:
