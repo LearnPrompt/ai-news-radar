@@ -937,3 +937,46 @@ summary:focus-visible {
     flex-direction: column;
   }
 }
+
+/* Motion layer */
+.story-card,
+.news-card,
+.coverage-card,
+.stat {
+  will-change: transform;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.story-card:hover,
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.coverage-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-card,
+  .news-card,
+  .coverage-card,
+  .stat {
+    will-change: auto;
+    transition: none;
+    transform: none !important;
+  }
+
+  .story-card:hover,
+  .news-card:hover,
+  .coverage-card:hover,
+  .stat:hover {
+    box-shadow: none;
+  }
+}

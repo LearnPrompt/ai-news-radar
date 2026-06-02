@@ -433,10 +433,10 @@ function renderList() {
 
   if (state.siteFilter) {
     renderGroupedBySource(filtered);
-    return;
+  } else {
+    renderGroupedBySiteAndSource(filtered);
   }
-
-  renderGroupedBySiteAndSource(filtered);
+  document.dispatchEvent(new CustomEvent("aiRadar:listRendered"));
 }
 
 function waytoagiViews(waytoagi) {
@@ -685,6 +685,7 @@ function renderDailyBrief(items, isFallback) {
     frag.appendChild(card);
   });
   storyListEl.appendChild(frag);
+  document.dispatchEvent(new CustomEvent("aiRadar:briefRendered"));
 }
 
 async function loadDailyBriefData() {
