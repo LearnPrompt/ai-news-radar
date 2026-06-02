@@ -15,6 +15,7 @@ import time
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
@@ -2977,6 +2978,412 @@ def dedupe_items_by_title_url(items: list[dict[str, Any]], random_pick: bool = T
     return out
 
 
+TITLE_STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "for",
+    "from",
+    "in",
+    "into",
+    "is",
+    "new",
+    "of",
+    "on",
+    "the",
+    "to",
+    "with",
+    "发布",
+    "推出",
+    "上线",
+    "更新",
+}
+
+VENDOR_ALIASES = {
+    "openai": "openai",
+    "anthropic": "anthropic",
+    "claude": "anthropic",
+    "google": "google",
+    "deepmind": "google",
+    "gemini": "google",
+    "microsoft": "microsoft",
+    "github": "github",
+    "huggingface": "huggingface",
+    "hugging face": "huggingface",
+    "meta": "meta",
+    "llama": "meta",
+    "deepseek": "deepseek",
+    "mistral": "mistral",
+    "xai": "xai",
+    "grok": "xai",
+}
+
+MODEL_RE = re.compile(
+    r"(?i)\b("
+    r"gpt[-\s]?\d+(?:\.\d+)?[a-z]*|"
+    r"claude(?:[-\s]?(?:opus|sonnet|haiku))?[-\s]?\d+(?:\.\d+)?|"
+    r"gemini[-\s]?\d+(?:\.\d+)?|"
+    r"llama[-\s]?\d+(?:\.\d+)?|"
+    r"deepseek[-\s]?[a-z0-9.]+|"
+    r"grok[-\s]?\d+(?:\.\d+)?|"
+    r"mistral[-\s]?[a-z0-9.]+"
+    r")\b"
+)
+
+SOURCE_TIER_IMPORTANCE = {
+    "official": 1.0,
+    "ai_vertical": 0.78,
+    "builders": 0.62,
+    "user_opml": 0.5,
+    "advanced": 0.45,
+    "discussion": 0.32,
+    "other": 0.25,
+}
+
+SOURCE_TIER_TRUST = {
+    "official": 0.98,
+    "ai_vertical": 0.82,
+    "builders": 0.7,
+    "user_opml": 0.58,
+    "advanced": 0.54,
+    "discussion": 0.42,
+    "other": 0.35,
+}
+
+
+def canonical_story_url(raw_url: str) -> str:
+    normalized = normalize_url(raw_url)
+    try:
+        parsed = urlparse(normalized)
+    except Exception:
+        return normalized
+    query_pairs = parse_qsl(parsed.query, keep_blank_values=True)
+    if query_pairs:
+        identity_keys = {"id", "item", "p"}
+        kept = [(k, v) for k, v in query_pairs if k.lower() in identity_keys]
+        parsed = parsed._replace(query=urlencode(kept, doseq=True))
+    return urlunparse(parsed).rstrip("/")
+
+
+def title_tokens(title: str) -> set[str]:
+    compact = re.sub(r"https?://\S+", " ", str(title or "").lower())
+    tokens = re.findall(r"[a-z0-9]+|[\u4e00-\u9fff]{2,}", compact)
+    return {tok for tok in tokens if tok not in TITLE_STOPWORDS and len(tok) >= 2}
+
+
+def normalized_story_title(item: dict[str, Any]) -> str:
+    title = str(item.get("title_original") or item.get("title") or "").strip().lower()
+    title = re.sub(r"\s*/\s*.+$", "", title) if item.get("title_bilingual") else title
+    return re.sub(r"\s+", " ", title)
+
+
+def title_is_mergeable(title: str) -> bool:
+    tokens = title_tokens(title)
+    return len(tokens) >= 4 and len(str(title or "").strip()) >= 18
+
+
+def title_similarity(a: str, b: str) -> float:
+    ta = title_tokens(a)
+    tb = title_tokens(b)
+    if not ta or not tb:
+        return 0.0
+    jaccard = len(ta & tb) / len(ta | tb)
+    sequence = SequenceMatcher(None, a.lower(), b.lower()).ratio()
+    return round(max(sequence, (sequence * 0.6) + (jaccard * 0.4)), 4)
+
+
+def title_entities(title: str) -> tuple[set[str], set[str]]:
+    lower = str(title or "").lower()
+    vendors = {canonical for alias, canonical in VENDOR_ALIASES.items() if alias in lower}
+    models = {re.sub(r"\s+", "-", m.group(1).lower()) for m in MODEL_RE.finditer(lower)}
+    return vendors, models
+
+
+def story_titles_can_merge(a: str, b: str) -> bool:
+    vendors_a, models_a = title_entities(a)
+    vendors_b, models_b = title_entities(b)
+    if vendors_a and vendors_b and vendors_a.isdisjoint(vendors_b):
+        return False
+    if models_a and models_b and models_a.isdisjoint(models_b):
+        return False
+    return True
+
+
+def recency_score(record: dict[str, Any], now: datetime, window_hours: int) -> float:
+    ts = event_time(record)
+    if not ts:
+        return 0.0
+    age_hours = max(0.0, (now - ts).total_seconds() / 3600)
+    return max(0.0, min(1.0, (float(window_hours) - age_hours) / max(1.0, float(window_hours))))
+
+
+def ai_relevance_score(record: dict[str, Any]) -> float:
+    value = record.get("ai_relevance_score")
+    if value is None:
+        value = record.get("ai_score")
+    if value is None and isinstance(record.get("ai_relevance"), dict):
+        value = record["ai_relevance"].get("score")
+    try:
+        return max(0.0, min(1.0, float(value)))
+    except Exception:
+        return 1.0 if record.get("ai_is_related") else 0.0
+
+
+def story_id_for_item(item: dict[str, Any]) -> str:
+    url = canonical_story_url(str(item.get("url") or ""))
+    title = normalized_story_title(item)
+    basis = url or title or str(item.get("id") or "")
+    return "story_" + hashlib.sha1(basis.encode("utf-8")).hexdigest()[:12]
+
+
+def calculate_item_importance(
+    item: dict[str, Any],
+    now: datetime,
+    window_hours: int,
+    duplicate_count: int = 1,
+) -> dict[str, Any]:
+    tier = str(item.get("source_tier") or source_tier_for_site(str(item.get("site_id") or "")).get("source_tier"))
+    source_score = SOURCE_TIER_IMPORTANCE.get(tier, SOURCE_TIER_IMPORTANCE["other"])
+    relevance = ai_relevance_score(item)
+    recency = recency_score(item, now, window_hours)
+    heat = min(1.0, max(0, duplicate_count - 1) / 4)
+    score = (source_score * 0.4) + (relevance * 0.3) + (recency * 0.2) + (heat * 0.1)
+    return {
+        "score": round(max(0.0, min(1.0, score)), 4),
+        "breakdown": {
+            "source_tier": round(source_score, 4),
+            "ai_relevance": round(relevance, 4),
+            "recency": round(recency, 4),
+            "story_heat": round(heat, 4),
+        },
+    }
+
+
+def importance_label(score: float, primary_item: dict[str, Any], duplicate_count: int) -> str:
+    tier = str(primary_item.get("source_tier") or "")
+    if score >= 0.86 and duplicate_count >= 3:
+        return "🔥 重大发布"
+    if tier == "official":
+        return "⭐ 官方更新"
+    if duplicate_count >= 3:
+        return "🔥 多源热议"
+    if score >= 0.72:
+        return "📰 行业动态"
+    return "📌 值得关注"
+
+
+def choose_primary_story_item(
+    items: list[dict[str, Any]],
+    now: datetime,
+    window_hours: int,
+) -> dict[str, Any]:
+    def key(item: dict[str, Any]) -> tuple[int, float, float, str]:
+        tier_rank = int(source_tier_for_site(str(item.get("site_id") or "")).get("source_tier_rank", 9))
+        importance = calculate_item_importance(item, now, window_hours, duplicate_count=len(items))["score"]
+        ts = event_time(item)
+        return (tier_rank, -importance, -(ts.timestamp() if ts else 0), str(item.get("title") or ""))
+
+    return min(items, key=key)
+
+
+def story_source_ref(item: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "site_id": item.get("site_id"),
+        "site_name": item.get("site_name"),
+        "source": item.get("source"),
+        "url": item.get("url"),
+    }
+
+
+def build_story_record(
+    story_id: str,
+    items: list[dict[str, Any]],
+    now: datetime,
+    window_hours: int,
+) -> dict[str, Any]:
+    sorted_items = sorted(items, key=source_tier_sort_key)
+    primary = choose_primary_story_item(sorted_items, now, window_hours)
+    importance = calculate_item_importance(primary, now, window_hours, duplicate_count=len(items))
+    times = [ts for ts in (event_time(item) for item in sorted_items) if ts]
+    return {
+        "story_id": story_id,
+        "importance_score": importance["score"],
+        "importance_label": importance_label(importance["score"], primary, len(items)),
+        "importance_breakdown": importance["breakdown"],
+        "duplicate_count": len(items),
+        "primary_item": {
+            "id": primary.get("id"),
+            "title": primary.get("title_bilingual") or primary.get("title"),
+            "url": primary.get("url"),
+        },
+        "sources": [story_source_ref(item) for item in sorted_items],
+        "earliest_at": iso(min(times)) if times else None,
+        "latest_at": iso(max(times)) if times else None,
+    }
+
+
+def merge_story_items(
+    items: list[dict[str, Any]],
+    now: datetime,
+    window_hours: int,
+    title_window_hours: int = 6,
+    title_threshold: float = 0.86,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    groups: dict[str, list[dict[str, Any]]] = {}
+    group_titles: dict[str, str] = {}
+    group_times: dict[str, datetime | None] = {}
+    canonical_to_story: dict[str, str] = {}
+    events: list[dict[str, Any]] = []
+
+    ordered = sorted(items, key=lambda item: event_time(item) or datetime.min.replace(tzinfo=UTC))
+    for item in ordered:
+        item_id = str(item.get("id") or "")
+        canonical_url = canonical_story_url(str(item.get("url") or ""))
+        title = normalized_story_title(item)
+        item_time = event_time(item)
+        story_id: str | None = None
+        reason = ""
+        similarity = 0.0
+
+        if canonical_url and canonical_url in canonical_to_story:
+            story_id = canonical_to_story[canonical_url]
+            reason = "canonical_url"
+            similarity = 1.0
+        elif title_is_mergeable(title):
+            for candidate_id, candidate_title in group_titles.items():
+                candidate_time = group_times.get(candidate_id)
+                if item_time and candidate_time:
+                    delta_hours = abs((item_time - candidate_time).total_seconds()) / 3600
+                    if delta_hours > title_window_hours:
+                        continue
+                sim = title_similarity(title, candidate_title)
+                if sim >= title_threshold and story_titles_can_merge(title, candidate_title):
+                    story_id = candidate_id
+                    reason = "title_similarity"
+                    similarity = sim
+                    break
+
+        if story_id is None:
+            story_id = story_id_for_item(item)
+            groups[story_id] = []
+            group_titles[story_id] = title
+            group_times[story_id] = item_time
+            if canonical_url:
+                canonical_to_story[canonical_url] = story_id
+        else:
+            events.append(
+                {
+                    "story_id": story_id,
+                    "item_id": item_id,
+                    "merged_into": story_id,
+                    "reason": reason,
+                    "similarity": round(similarity, 4),
+                }
+            )
+            if canonical_url:
+                canonical_to_story[canonical_url] = story_id
+
+        groups.setdefault(story_id, []).append(item)
+
+    stories = [build_story_record(story_id, group_items, now, window_hours) for story_id, group_items in groups.items()]
+    stories.sort(key=lambda story: (-float(story.get("importance_score") or 0), str(story.get("latest_at") or "")))
+    return stories, events
+
+
+def build_daily_brief_payload(
+    stories: list[dict[str, Any]],
+    generated_at: str,
+    window_hours: int,
+    min_items: int = 10,
+    max_items: int = 20,
+) -> dict[str, Any]:
+    limit = len(stories) if len(stories) < min_items else min(max_items, len(stories))
+    items = sorted(stories, key=lambda story: float(story.get("importance_score") or 0), reverse=True)[:limit]
+    return {
+        "generated_at": generated_at,
+        "window_hours": window_hours,
+        "total_items": len(items),
+        "items": items,
+    }
+
+
+def build_stories_payload(
+    stories: list[dict[str, Any]],
+    generated_at: str,
+    window_hours: int,
+) -> dict[str, Any]:
+    return {
+        "generated_at": generated_at,
+        "window_hours": window_hours,
+        "total_stories": len(stories),
+        "stories": stories,
+    }
+
+
+def build_merge_log_payload(events: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    return {
+        "generated_at": generated_at,
+        "merge_strategy": "url_or_title_similarity_v0_6",
+        "events": events,
+    }
+
+
+def enrich_source_health_statuses(
+    statuses: list[dict[str, Any]],
+    all_items: list[dict[str, Any]],
+    stories: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    story_count_by_site: dict[str, int] = {}
+    duplicate_refs_by_site: dict[str, int] = {}
+    for story in stories:
+        seen_sites = {str(src.get("site_id") or "") for src in story.get("sources", []) if src.get("site_id")}
+        for sid in seen_sites:
+            story_count_by_site[sid] = story_count_by_site.get(sid, 0) + 1
+        if int(story.get("duplicate_count") or 0) > 1:
+            for sid in seen_sites:
+                duplicate_refs_by_site[sid] = duplicate_refs_by_site.get(sid, 0) + 1
+
+    items_by_site: dict[str, list[dict[str, Any]]] = {}
+    for item in all_items:
+        items_by_site.setdefault(str(item.get("site_id") or ""), []).append(item)
+
+    enriched: list[dict[str, Any]] = []
+    for status in statuses:
+        out = dict(status)
+        sid = str(out.get("site_id") or "")
+        tier = source_tier_for_site(sid)
+        site_items = items_by_site.get(sid, [])
+        items_24h = len(site_items)
+        ai_count = sum(1 for item in site_items if item.get("ai_is_related", is_ai_related_record(item)))
+        ai_rate = (ai_count / items_24h) if items_24h else 0.0
+        unique_coverage = (story_count_by_site.get(sid, 0) / items_24h) if items_24h else 0.0
+        duplicate_rate = (duplicate_refs_by_site.get(sid, 0) / items_24h) if items_24h else 0.0
+        trust = SOURCE_TIER_TRUST.get(str(tier["source_tier"]), SOURCE_TIER_TRUST["other"])
+        if not out.get("ok"):
+            health_status = "failed"
+        elif items_24h == 0:
+            health_status = "stale"
+        elif ai_rate >= 0.65:
+            health_status = "healthy"
+        else:
+            health_status = "low_signal"
+
+        out.update(tier)
+        out["source_type"] = tier["source_tier"]
+        out["source_type_label"] = tier["source_tier_label"]
+        out["health_status"] = health_status
+        out["items_24h"] = items_24h
+        out["ai_relevance_rate"] = round(max(0.0, min(1.0, ai_rate)), 4)
+        out["duplicate_rate"] = round(max(0.0, min(1.0, duplicate_rate)), 4)
+        out["unique_coverage"] = round(max(0.0, min(1.0, unique_coverage)), 4)
+        out["trust_score"] = round(max(0.0, min(1.0, trust)), 4)
+        enriched.append(out)
+    return enriched
+
+
 def build_latest_payloads(latest_payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     """Split initial AI payload from bulky all-mode lists for lazy browser loading."""
     slim_payload = dict(latest_payload)
@@ -3014,6 +3421,9 @@ def main() -> int:
     latest_path = output_dir / "latest-24h.json"
     latest_all_path = output_dir / "latest-24h-all.json"
     status_path = output_dir / "source-status.json"
+    daily_brief_path = output_dir / "daily-brief.json"
+    stories_merged_path = output_dir / "stories-merged.json"
+    merge_log_path = output_dir / "merge-log.json"
     waytoagi_path = output_dir / "waytoagi-7d.json"
     title_cache_path = output_dir / "title-zh-cache.json"
     email_digest_path = output_dir / AGENTMAIL_DIGEST_FILE
@@ -3161,6 +3571,11 @@ def main() -> int:
     latest_items_all_dedup = dedupe_items_by_title_url(latest_items_all, random_pick=True)
     latest_items_ai_dedup.sort(key=source_tier_sort_key)
     latest_items_all_dedup.sort(key=source_tier_sort_key)
+    stories, merge_events = merge_story_items(latest_items, now=now, window_hours=args.window_hours)
+    generated_at = iso(now)
+    daily_brief_payload = build_daily_brief_payload(stories, generated_at=generated_at, window_hours=args.window_hours)
+    stories_merged_payload = build_stories_payload(stories, generated_at=generated_at, window_hours=args.window_hours)
+    merge_log_payload = build_merge_log_payload(merge_events, generated_at=generated_at)
 
     # site stats
     site_stat: dict[str, dict[str, Any]] = {}
@@ -3227,9 +3642,11 @@ def main() -> int:
         ),
     }
 
+    enriched_statuses = enrich_source_health_statuses(statuses, latest_items_all, stories)
+
     status_payload = {
-        "generated_at": iso(now),
-        "sites": statuses,
+        "generated_at": generated_at,
+        "sites": enriched_statuses,
         "successful_sites": sum(1 for s in statuses if s["ok"]),
         "failed_sites": [s["site_id"] for s in statuses if not s["ok"]],
         "zero_item_sites": [s["site_id"] for s in statuses if s.get("ok") and int(s.get("item_count") or 0) == 0],
@@ -3284,6 +3701,18 @@ def main() -> int:
 
     latest_path.write_text(json.dumps(sanitize_public_payload(latest_payload), ensure_ascii=False, indent=2), encoding="utf-8")
     latest_all_path.write_text(json.dumps(sanitize_public_payload(latest_all_payload), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    daily_brief_path.write_text(
+        json.dumps(sanitize_public_payload(daily_brief_payload), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    stories_merged_path.write_text(
+        json.dumps(sanitize_public_payload(stories_merged_payload), ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    merge_log_path.write_text(
+        json.dumps(sanitize_public_payload(merge_log_payload), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     archive_path.write_text(
         json.dumps(sanitize_public_payload(archive_payload), ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
@@ -3299,6 +3728,9 @@ def main() -> int:
 
     print(f"Wrote: {latest_path} ({len(latest_items)} items)")
     print(f"Wrote: {latest_all_path} ({len(latest_items_all_dedup)} all-mode items)")
+    print(f"Wrote: {daily_brief_path} ({daily_brief_payload.get('total_items', 0)} brief items)")
+    print(f"Wrote: {stories_merged_path} ({stories_merged_payload.get('total_stories', 0)} stories)")
+    print(f"Wrote: {merge_log_path} ({len(merge_events)} merge events)")
     print(f"Wrote: {archive_path} ({len(archive)} items)")
     print(f"Wrote: {status_path}")
     if email_digest_payload is not None:
