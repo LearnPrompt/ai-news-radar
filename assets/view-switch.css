@@ -4,6 +4,13 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
+  margin: 4px 0 0;
+  color: var(--muted, #66645f);
+  font-size: 13px;
+}
+
+.hero-meta {
+  align-self: center;
 }
 
 .view-switch {
@@ -102,6 +109,14 @@ html[data-radar-view="classic"] .data-source-reset-btn:focus-visible {
 }
 
 @media (max-width: 760px) {
+  .hero {
+    gap: 10px;
+  }
+
+  .hero-links {
+    width: auto;
+  }
+
   .view-switch-btn {
     padding: 0 7px;
     font-size: 11px;

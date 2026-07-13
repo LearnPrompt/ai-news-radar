@@ -115,6 +115,20 @@ baseline, then let the aggregator layer add breadth.
   community signal lane so it can appear under the Community tab without
   occupying a standalone homepage block.
 
+## Broad Aggregator Policy
+
+- **Retired**: TopHub, Buzzing, and Info Flow are not fetched and are purged
+  when an older archive is loaded. Repeated audits found that their broad,
+  non-AI inventories produced very low AI keep rates and almost no overlap with
+  AI HOT while adding large volumes of hard-to-read or promotional headlines.
+- **Constrained**: Zeli remains a Hacker News heat reference, but its 24-hour
+  hot-list label is not an AI allowlist. Every Zeli title must pass the same
+  meaningful AI-signal gate as other discussion sources.
+- **Retained for now**: TechURLs and NewsNow remain discussion-tier sources.
+  Their titles and downstream selection contribution are currently more useful
+  than the retired aggregators, but they should remain lower priority than
+  official, vertical-AI, and curated-media sources.
+
 ## Disabled Default Sources
 
 - **X API direct recent search**: supported as an advanced, secret-backed adapter

@@ -59,6 +59,46 @@ class AiRelevanceScoringTests(unittest.TestCase):
         self.assertGreaterEqual(result["score"], 0.65)
         self.assertEqual(result["label"], "agent_workflow")
 
+    def test_zeli_hotlist_uses_the_normal_ai_signal_gate(self):
+        rec = {
+            "site_id": "zeli",
+            "site_name": "Zeli",
+            "source": "Hacker News · 24h最热",
+            "title": "Grok CLI uploaded the whole home directory to GCS",
+            "url": "https://example.com/grok-cli",
+        }
+        result = score_ai_relevance(rec)
+        self.assertTrue(result["is_ai_related"])
+        self.assertEqual(result["reason"], "matched_ai_signal")
+
+        unrelated = dict(rec, title="An Infuriating Goodbye to Photoshop")
+        unrelated_result = score_ai_relevance(unrelated)
+        self.assertFalse(unrelated_result["is_ai_related"])
+        self.assertEqual(unrelated_result["reason"], "missing_meaningful_ai_signal")
+
+    def test_ascii_ai_keywords_do_not_match_inside_unrelated_words(self):
+        precursor = {
+            "site_id": "newsnow",
+            "site_name": "NewsNow",
+            "source": "Hacker News",
+            "title": "Precursor",
+            "url": "https://news.ycombinator.com/item?id=1",
+        }
+        self.assertFalse(score_ai_relevance(precursor)["is_ai_related"])
+
+        cursor = dict(precursor, title="Cursor ships a new coding agent")
+        self.assertTrue(score_ai_relevance(cursor)["is_ai_related"])
+
+    def test_ai_domain_alone_is_not_a_relevance_signal(self):
+        rec = {
+            "site_id": "zeli",
+            "site_name": "Zeli",
+            "source": "Hacker News · 24h最热",
+            "title": "Against Usefulness",
+            "url": "https://example.ai/against-usefulness",
+        }
+        self.assertFalse(score_ai_relevance(rec)["is_ai_related"])
+
     def test_trusted_ai_source_defaults_to_keep(self):
         rec = {
             "site_id": "aihot",

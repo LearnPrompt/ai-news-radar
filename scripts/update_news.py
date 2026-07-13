@@ -121,11 +121,15 @@ OFFICIAL_AI_FEEDS: tuple[dict[str, str], ...] = (
 )
 OFFICIAL_AI_MAX_AGE_DAYS = 45
 CURATED_AI_MEDIA_MAX_AGE_DAYS = 30
-# Per-fetch item cap for wide discussion-tier aggregators (buzzing/iris).
-# They dominate raw volume with very low AI keep rates (see
-# reports/source-quality/v0.8-audit.md); cap them at the fetch layer so a
-# single round cannot flood the archive. Override via env for experiments.
+# Safety cap retained for the legacy/manual Buzzing and Info Flow fetch helpers.
+# Those sources are no longer registered in the public task list, but keeping
+# the bounded adapters makes audit experiments safe.
 DISCUSSION_FETCH_CAP = int(os.environ.get("DISCUSSION_FETCH_CAP", "50"))
+# Broad aggregators retired from the public pipeline after repeated source
+# audits showed very low AI density and near-zero overlap with AI HOT.  Keep the
+# explicit denylist here as well as removing their fetch tasks so records from
+# older archive snapshots cannot leak back into the current 24-hour view.
+RETIRED_SOURCE_IDS = frozenset({"tophub", "buzzing", "iris"})
 CURATED_AI_MEDIA_FEEDS: tuple[dict[str, Any], ...] = (
     {
         "title": "The Decoder AI News",
@@ -2237,23 +2241,24 @@ def fetch_newsnow(session: requests.Session, now: datetime) -> list[RawItem]:
     return out
 
 
+BUILTIN_SOURCE_TASKS = (
+    ("official_ai", "Official AI Updates", fetch_official_ai_updates),
+    ("curated_media", "Curated Media", fetch_curated_ai_media),
+    ("aibreakfast", "AI Breakfast", fetch_ai_breakfast),
+    ("followbuilders", "Follow Builders", fetch_follow_builders),
+    ("techurls", "TechURLs", fetch_techurls),
+    ("bestblogs", "BestBlogs", fetch_bestblogs),
+    ("zeli", "Zeli", fetch_zeli),
+    ("hackernews", "Hacker News", fetch_hacker_news_algolia),
+    ("aihubtoday", "AI HubToday", fetch_ai_hubtoday),
+    ("aibase", "AIbase", fetch_aibase),
+    ("aihot", "AI HOT", fetch_aihot),
+    ("newsnow", "NewsNow", fetch_newsnow),
+)
+
+
 def collect_all(session: requests.Session, now: datetime) -> tuple[list[RawItem], list[dict[str, Any]]]:
-    tasks = [
-        ("official_ai", "Official AI Updates", fetch_official_ai_updates),
-        ("curated_media", "Curated Media", fetch_curated_ai_media),
-        ("aibreakfast", "AI Breakfast", fetch_ai_breakfast),
-        ("followbuilders", "Follow Builders", fetch_follow_builders),
-        ("techurls", "TechURLs", fetch_techurls),
-        ("buzzing", "Buzzing", fetch_buzzing),
-        ("iris", "Info Flow", fetch_iris),
-        ("bestblogs", "BestBlogs", fetch_bestblogs),
-        ("zeli", "Zeli", fetch_zeli),
-        ("hackernews", "Hacker News", fetch_hacker_news_algolia),
-        ("aihubtoday", "AI HubToday", fetch_ai_hubtoday),
-        ("aibase", "AIbase", fetch_aibase),
-        ("aihot", "AI HOT", fetch_aihot),
-        ("newsnow", "NewsNow", fetch_newsnow),
-    ]
+    tasks = BUILTIN_SOURCE_TASKS
 
     raw_items: list[RawItem] = []
     statuses: list[dict[str, Any]] = []
@@ -2669,12 +2674,16 @@ def load_archive(path: Path) -> dict[str, dict[str, Any]]:
     out: dict[str, dict[str, Any]] = {}
     if isinstance(items, list):
         for it in items:
+            if str(it.get("site_id") or "") in RETIRED_SOURCE_IDS:
+                continue
             item_id = it.get("id")
             if item_id:
                 out[item_id] = it
     elif isinstance(items, dict):
         for item_id, it in items.items():
             if isinstance(it, dict):
+                if str(it.get("site_id") or "") in RETIRED_SOURCE_IDS:
+                    continue
                 it["id"] = item_id
                 out[item_id] = it
     return out

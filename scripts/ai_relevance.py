@@ -21,6 +21,7 @@ AI_KEYWORDS = [
     "aigc",
     "llm",
     "gpt",
+    "grok",
     "claude",
     "gemini",
     "deepseek",
@@ -191,7 +192,7 @@ CURATED_MEDIA_BUSINESS_TERMS = [
 ]
 
 LABEL_KEYWORDS = [
-    ("model_release", ["model", "gpt", "claude", "gemini", "deepseek", "llm", "模型", "大模型", "发布", "release"]),
+    ("model_release", ["model", "gpt", "grok", "claude", "gemini", "deepseek", "llm", "模型", "大模型", "发布", "release"]),
     ("developer_tool", ["copilot", "codex", "mcp", "api", "sdk", "developer", "开发者", "编程", "代码", "coding"]),
     ("agent_workflow", ["agent", "智能体", "workflow", "工作流", "tool use", "function calling"]),
     ("research_paper", ["paper", "arxiv", "research", "benchmark", "eval", "论文", "研究", "评测", "榜单"]),
@@ -207,6 +208,15 @@ def contains_any_keyword(haystack: str, keywords: list[str]) -> bool:
     return any(k in h for k in keywords)
 
 
+def contains_keyword(haystack: str, keyword: str) -> bool:
+    """Match ASCII keywords as terms, while keeping CJK substring matching."""
+    h = haystack.lower()
+    k = keyword.lower()
+    if re.search(r"[a-z0-9]", k):
+        return re.search(rf"(?<![a-z0-9]){re.escape(k)}(?![a-z0-9])", h) is not None
+    return k in h
+
+
 def contains_unsafe_promotional_content(text: str) -> bool:
     """Block explicit adult promotion without hiding a single policy/news mention."""
     if any(pattern.search(text) for pattern in UNSAFE_HARD_PATTERNS):
@@ -215,15 +225,14 @@ def contains_unsafe_promotional_content(text: str) -> bool:
 
 
 def matched_keywords(haystack: str, keywords: list[str]) -> list[str]:
-    h = haystack.lower()
-    return sorted({k for k in keywords if k in h})
+    return sorted({k for k in keywords if contains_keyword(haystack, k)})
 
 
 def contains_meaningful_ai_signal(haystack: str) -> bool:
     h = haystack.lower()
     if MEANINGFUL_EN_SIGNAL_RE.search(h):
         return True
-    return any(k in h for k in AI_KEYWORDS if k not in BROAD_AI_TERMS)
+    return any(contains_keyword(h, k) for k in AI_KEYWORDS if k not in BROAD_AI_TERMS)
 
 
 def _label_for_text(text: str, has_tech: bool) -> str:
@@ -261,17 +270,18 @@ def score_ai_relevance(record: dict[str, Any]) -> dict[str, Any]:
     source = str(record.get("source") or "")
     site_name = str(record.get("site_name") or "")
     url = str(record.get("url") or "")
-    # Keyword matching is substring-based, so only the URL host may participate:
-    # full URLs (e.g. Google News base64 paths) randomly contain substrings like
-    # "llm"/"gpt" and turn unrelated world news into "AI" items.
+    # Relevance is primarily based on reader-visible text. A hostname may add a
+    # known full keyword such as `openai`, but a generic `.ai` suffix is not
+    # evidence and URL paths never participate.
+    text = f"{title} {source} {site_name}".lower()
     try:
         url_host = (urlparse(url).netloc or "").lower()
     except Exception:
         url_host = ""
-    text = f"{title} {source} {site_name} {url_host}".lower()
+    signal_text = f"{text} {url_host}"
 
-    ai_signals = matched_keywords(text, AI_KEYWORDS)
-    tech_signals = matched_keywords(text, TECH_KEYWORDS)
+    ai_signals = matched_keywords(signal_text, AI_KEYWORDS)
+    tech_signals = matched_keywords(signal_text, TECH_KEYWORDS)
     noise = matched_keywords(text, NOISE_KEYWORDS) + matched_keywords(text, COMMERCE_NOISE_KEYWORDS)
     source_prior = SOURCE_PRIORS.get(site_id, 0.0)
 
@@ -285,16 +295,7 @@ def score_ai_relevance(record: dict[str, Any]) -> dict[str, Any]:
             noise=["unsafe_promotional_content"],
         )
 
-    if site_id == "zeli":
-        if "24h" in source.lower() or "24h最热" in source:
-            return _result(
-                is_ai_related=True,
-                score=max(AI_RELEVANCE_THRESHOLD, 0.62 + source_prior),
-                label="curated_hotlist",
-                reason="zeli_24h_hot_allowlist",
-                signals=["zeli_24h_hot"],
-                noise=noise,
-            )
+    if site_id == "zeli" and not ("24h" in source.lower() or "24h最热" in source):
         return _result(
             is_ai_related=False,
             score=0.2,
@@ -364,7 +365,7 @@ def score_ai_relevance(record: dict[str, Any]) -> dict[str, Any]:
             noise=noise,
         )
 
-    has_ai = contains_meaningful_ai_signal(text)
+    has_ai = contains_meaningful_ai_signal(text) or any(k not in BROAD_AI_TERMS for k in ai_signals)
     has_broad_ai = contains_any_keyword(text, list(BROAD_AI_TERMS)) or EN_SIGNAL_RE.search(text) is not None
     has_tech = bool(tech_signals)
 

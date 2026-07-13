@@ -1,8 +1,13 @@
+import json
 import unittest
 from datetime import datetime, timezone
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from scripts.update_news import (
+    BUILTIN_SOURCE_TASKS,
+    RETIRED_SOURCE_IDS,
     add_bilingual_fields,
     add_creator_ranking_fields,
     add_source_tier_fields,
@@ -20,6 +25,7 @@ from scripts.update_news import (
     is_ai_related_record,
     is_hubtoday_generic_anchor_title,
     is_hubtoday_placeholder_title,
+    load_archive,
     maybe_fetch_agentmail_digest,
     maybe_fetch_socialdata_updates,
     socialdata_status_base,
@@ -147,6 +153,37 @@ class TopicFilterTests(unittest.TestCase):
         }
         self.assertTrue(is_ai_related_record(keep))
         self.assertFalse(is_ai_related_record(drop))
+
+    def test_zeli_24h_hot_still_requires_an_ai_signal(self):
+        rec = {
+            "site_id": "zeli",
+            "site_name": "Zeli",
+            "source": "Hacker News · 24h最热",
+            "title": "An Infuriating Goodbye to Photoshop",
+            "url": "https://example.com/photoshop",
+        }
+        self.assertFalse(is_ai_related_record(rec))
+
+    def test_retired_sources_are_neither_fetched_nor_reloaded_from_archive(self):
+        active_source_ids = {site_id for site_id, _site_name, _fetcher in BUILTIN_SOURCE_TASKS}
+        self.assertTrue(RETIRED_SOURCE_IDS.isdisjoint(active_source_ids))
+
+        with TemporaryDirectory() as tmp:
+            archive_path = Path(tmp) / "archive.json"
+            archive_path.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {"id": "old-top", "site_id": "tophub"},
+                            {"id": "old-buzz", "site_id": "buzzing"},
+                            {"id": "old-iris", "site_id": "iris"},
+                            {"id": "keep", "site_id": "techurls"},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(set(load_archive(archive_path)), {"keep"})
 
     def test_hn_algolia_keyword_score_requires_multiple_signals(self):
         self.assertGreaterEqual(hn_algolia_keyword_score("OpenAI releases Codex agent tools"), 0.38)

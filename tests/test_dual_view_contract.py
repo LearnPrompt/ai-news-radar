@@ -62,6 +62,26 @@ def test_view_switch_follows_update_time_in_both_headers():
         assert 'class="view-toolbar"' not in source
 
 
+def test_both_headers_keep_time_and_switch_inside_the_headline():
+    for path in ("index.html", "classic/index.html"):
+        source = read(path)
+        headline_position = source.index('class="hero-headline"')
+        updated_position = source.index('id="updatedAt"')
+        switch_position = source.index('class="view-switch"')
+        meta_position = source.index('class="hero-meta"')
+
+        assert headline_position < updated_position < switch_position < meta_position
+        assert 'class="hero-tag"' not in source
+        assert ">GitHub 与接入指南</a>" in source
+
+
+def test_classic_header_does_not_animate_the_view_switch_container():
+    source = read("classic/assets/motion.js")
+
+    assert 'addFrom(".hero-headline"' not in source
+    assert 'addFrom(".hero-meta"' not in source
+
+
 def test_mobile_is_the_versioned_default_view():
     source = read("assets/view-mode.js")
 

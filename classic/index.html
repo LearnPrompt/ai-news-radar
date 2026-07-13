@@ -45,21 +45,20 @@
           <div class="hero-headline">
             <img class="hero-logo" src="./assets/logo.svg" alt="AI News Radar Logo" />
             <div>
-              <p class="hero-tag">AI INTELLIGENCE RADAR</p>
               <h1>AI News Radar</h1>
+              <div class="hero-updated hero-view-row">
+                <span class="updated-label">更新时间</span>
+                <span class="updated" id="updatedAt">加载中...</span>
+                <div class="view-switch" role="group" aria-label="视角切换">
+                  <span class="view-switch-label">视角</span>
+                  <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
+                  <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="hero-meta">
-          <div class="hero-view-row">
-            <span class="updated-label">更新时间</span>
-            <span class="updated" id="updatedAt">加载中...</span>
-            <div class="view-switch" role="group" aria-label="视角切换">
-              <span class="view-switch-label">视角</span>
-              <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
-              <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
-            </div>
-          </div>
           <span class="source-status-pill" id="sourceStatusPill">源状态加载中</span>
           <div class="hero-links" aria-label="项目入口">
             <a
@@ -67,7 +66,7 @@
               href="https://github.com/LearnPrompt/ai-news-radar"
               target="_blank"
               rel="noopener noreferrer"
-            >接入 Agent</a>
+            >GitHub 与接入指南</a>
           </div>
         </div>
 

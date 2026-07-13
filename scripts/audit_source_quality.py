@@ -279,11 +279,11 @@ HISTORICAL_KEEP_RATE = {
 }
 
 DISCUSSION_NOTES = {
-    "buzzing": "buzzing.cc 全量 feed，覆盖 HN/Reddit/Twitter 等中文化聚合，主题不限 AI。",
-    "iris": "Info Flow 多 feed 聚合，科技向但非 AI 专属。",
+    "buzzing": "buzzing.cc 全量 feed，主题不限 AI；已于 2026-07-13 从公开流水线退役。",
+    "iris": "Info Flow 多 feed 聚合，科技向但非 AI 专属；已于 2026-07-13 从公开流水线退役。",
     "techurls": "科技新闻聚合，科技占比高但 AI 纯度一般。",
     "newsnow": "热点聚合，量级中等。",
-    "zeli": "Zeli 只取 HN 24h 最热，相关性规则对其默认放行（keep_rate 100% 是规则白名单效应，非真实 AI 纯度）。",
+    "zeli": "Zeli 只取 HN 24h 最热；2026-07-13 起取消整榜白名单，每条标题必须通过 AI 信号门槛。",
     "hackernews": "HN 官方源，量小且规则默认放行。",
 }
 
@@ -335,9 +335,9 @@ def recommendation_sections(stats: dict[str, dict[str, Any]]) -> list[str]:
     lines.extend(
         [
             "",
-            "本轮已实施的限流：`DISCUSSION_FETCH_CAP=50`（环境变量可调）作用于"
-            " `fetch_buzzing` / `fetch_iris` 两个 fetcher，"
-            "单轮抓取截断到 50 条；其余 discussion 源暂不动。",
+            "当前实施状态：TopHub、Buzzing、Info Flow 已从公开抓取任务退役，"
+            "旧归档记录在加载时清除；Zeli 已取消整榜白名单。"
+            "TechURLs、NewsNow 与聚焦关键词的 Hacker News 暂时保留。",
             "",
             "### 保留",
             "",
