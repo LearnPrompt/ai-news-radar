@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN" data-radar-view="classic">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="../" />
+    <title>AI News Radar｜24 小时 AI 更新雷达</title>
+    <meta
+      name="description"
+      content="自动整理过去 24 小时值得看的 AI、模型和开发者工具更新；伯乐Skill（Scout Skill）帮你从一堆信源里选出千里马。"
+    />
+    <link rel="canonical" href="https://learnprompt.github.io/ai-news-radar/" />
+    <meta property="og:title" content="AI News Radar｜24 小时 AI 更新雷达" />
+    <meta
+      property="og:description"
+      content="自动整理过去 24 小时值得看的 AI、模型和开发者工具更新；伯乐Skill（Scout Skill）帮你从一堆信源里选出千里马。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://learnprompt.github.io/ai-news-radar/" />
+    <meta property="og:site_name" content="AI News Radar" />
+    <meta name="application-name" content="AI News Radar" />
+    <meta name="theme-color" content="#f6f6f2" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AI News Radar" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="AI News Radar｜24 小时 AI 更新雷达" />
+    <meta
+      name="twitter:description"
+      content="自动整理过去 24 小时值得看的 AI、模型和开发者工具更新；伯乐Skill（Scout Skill）帮你从一堆信源里选出千里马。"
+    />
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <script src="./assets/view-mode.js" data-root="../"></script>
+    <link rel="stylesheet" href="./classic/assets/styles.css?v=ui-polish-0626a" />
+    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713a" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div class="hero-main">
+          <div class="hero-headline">
+            <img class="hero-logo" src="./assets/logo.svg" alt="AI News Radar Logo" />
+            <div>
+              <p class="hero-tag">AI INTELLIGENCE RADAR</p>
+              <h1>AI News Radar</h1>
+            </div>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <span class="updated-label">更新时间</span>
+          <span class="updated" id="updatedAt">加载中...</span>
+          <span class="source-status-pill" id="sourceStatusPill">源状态加载中</span>
+          <div class="hero-links" aria-label="项目入口">
+            <a
+              class="hero-link"
+              href="https://github.com/LearnPrompt/ai-news-radar"
+              target="_blank"
+              rel="noopener noreferrer"
+            >接入 Agent</a>
+          </div>
+        </div>
+
+        <section class="stats" id="stats"></section>
+
+        <section class="section-nav-wrap" aria-label="内容栏目">
+          <div class="section-tabs" id="sectionTabs" role="tablist" aria-label="AI 新闻栏目"></div>
+          <div class="section-summary" id="sectionSummary">正在整理栏目...</div>
+        </section>
+      </header>
+
+      <section class="primary-controls">
+        <input id="searchInput" type="search" placeholder="搜索 AI 信号 / 来源" />
+        <div class="mode-hint" id="modeHint">AI强相关</div>
+      </section>
+
+      <div class="sticky-summary-bar" aria-label="当前视图摘要">
+        <strong>AI News Radar</strong>
+        <span id="stickySummaryText">正在整理 24 小时信号...</span>
+      </div>
+
+      <div class="view-toolbar">
+        <details class="advanced-panel">
+          <summary>
+            <span>高级筛选</span>
+            <span class="advanced-summary" id="advancedSummary">加载中...</span>
+          </summary>
+          <div class="advanced-content">
+            <div class="advanced-controls">
+            <label class="field">
+              <span>时间范围</span>
+              <select id="timeRangeSelect" aria-label="时间范围">
+                <option value="24h">过去 24 小时</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>来源类型</span>
+              <select id="sourceTypeSelect">
+                <option value="">全部来源</option>
+                <option value="official">官方 / 一手</option>
+                <option value="media">精选媒体 / 日报</option>
+                <option value="community">社区 / HN / Builders</option>
+                <option value="rss">RSS / OPML</option>
+                <option value="aggregate">聚合源</option>
+                <option value="creator">自媒体</option>
+                <option value="advanced">进阶源</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>内容类型</span>
+              <select id="sectionSelect"></select>
+            </label>
+            <label class="field">
+              <span>信号等级</span>
+              <select id="signalLevelSelect">
+                <option value="">全部信号</option>
+                <option value="high">高优先级</option>
+                <option value="curated">精选 / 官方</option>
+                <option value="multi">多源验证</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>具体来源</span>
+              <select id="siteSelect">
+                <option value="">全部站点</option>
+              </select>
+            </label>
+            <div class="field">
+              <span>AI 相关度</span>
+              <div class="mode-switch">
+                <button id="modeAiBtn" class="mode-btn active" type="button">AI强相关</button>
+                <button id="modeAllBtn" class="mode-btn" type="button">全量</button>
+              </div>
+            </div>
+            <label id="allDedupeWrap" class="all-dedupe" for="allDedupeToggle">
+              <input id="allDedupeToggle" type="checkbox" checked />
+              <span class="all-dedupe-dot"></span>
+              <span id="allDedupeLabel">去重开</span>
+            </label>
+          </div>
+          <div class="data-source-indicator" id="dataSourceIndicator" hidden>
+            <span id="dataSourceIndicatorText"></span>
+            <button type="button" id="dataSourceResetBtn" class="data-source-reset-btn">恢复本地</button>
+          </div>
+          <div class="source-health" id="sourceHealth">源状态加载中...</div>
+          <details class="source-detail-panel">
+            <summary>查看源状态详情</summary>
+            <div class="source-health-details" id="sourceHealthDetails"></div>
+            <section class="coverage-strip" id="coverageStrip" aria-label="Source coverage status"></section>
+            <section class="source-status-table" id="sourceStatusTable" aria-label="源状态详情"></section>
+            <section class="site-pills" id="sitePills"></section>
+            </details>
+          </div>
+        </details>
+        <div class="view-switch" role="group" aria-label="画面切换">
+          <span class="view-switch-label">画面</span>
+          <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
+          <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
+        </div>
+      </div>
+
+      <section class="bole-picks-wrap" aria-label="今日 Top 3" id="bolePicksWrap">
+        <div class="bole-picks-head">
+          <div>
+            <p class="section-eyebrow">TODAY'S SIGNALS</p>
+            <h2 id="topStoriesTitle">今日重点信号</h2>
+          </div>
+          <div class="bole-head-tools">
+            <div class="bole-view-toggle" id="boleViewToggle" hidden>
+              <button id="boleHotBtn" class="mode-btn" type="button">当前热点</button>
+              <button id="boleTimelineBtn" class="mode-btn" type="button">时间线</button>
+            </div>
+            <span id="bolePicksMeta">按评分排序</span>
+          </div>
+        </div>
+        <div id="bolePicksList" class="bole-board"></div>
+      </section>
+
+      <section class="waytoagi-wrap">
+        <div class="waytoagi-head">
+          <h2>社区更新 · WaytoAGI</h2>
+          <div class="waytoagi-tools">
+            <div class="waytoagi-switch">
+              <button id="waytoagiTodayBtn" class="waytoagi-btn active" type="button">最近更新日</button>
+              <button id="waytoagi7dBtn" class="waytoagi-btn" type="button">近7日</button>
+            </div>
+            <span id="waytoagiUpdatedAt">加载中...</span>
+          </div>
+        </div>
+        <div id="waytoagiMeta" class="waytoagi-meta"></div>
+        <div id="waytoagiList" class="waytoagi-list"></div>
+      </section>
+
+      <section class="list-wrap">
+        <div class="list-head">
+          <h2 id="listTitle">全量 AI 情报源</h2>
+          <div class="list-head-tools">
+            <div class="list-sort-tools" id="listSortTools" role="group" aria-label="全量列表排序">
+              <button class="list-sort-btn active" type="button" data-sort="priority" title="综合来源权重、AI相关度、新鲜度与信号强度">综合</button>
+              <button class="list-sort-btn" type="button" data-sort="latest" title="按发布时间或发现时间倒序">最新</button>
+              <button class="list-sort-btn" type="button" data-sort="ai" title="按高相关度信号倒序">高分</button>
+              <button class="list-sort-btn" type="button" data-sort="source" title="按来源聚合度整理">来源</button>
+            </div>
+            <span id="resultCount">0 条</span>
+          </div>
+        </div>
+        <div id="newsList" class="news-list"></div>
+      </section>
+
+    </main>
+
+    <template id="itemTpl">
+      <article class="news-card">
+        <a class="title" target="_blank" rel="noopener noreferrer"></a>
+        <div class="meta-row">
+          <span class="site"></span>
+          <span class="category"></span>
+          <span class="source"></span>
+          <time class="time"></time>
+        </div>
+        <p class="news-summary"></p>
+      </article>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+    <script src="./classic/assets/motion.js?v=ui-adjustment-0620a" defer></script>
+    <script src="./classic/assets/app.js?v=ui-polish-0626a" defer></script>
+  </body>
+</html>

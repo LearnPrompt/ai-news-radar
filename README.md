@@ -22,7 +22,7 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 [English](README.en.md) · [雷达Skill](skills/radar/README.md) · [伯乐Skill](skills/ai-news-radar/README.md) · [信息源策略](docs/SOURCE_COVERAGE.md)
 
-**更新说明**：v0.9 把界面收敛成单层信息架构（栏目 tab × 精选/全量 × 时间轴），旧的三视图截图存档于 [`/legacy/`](legacy/)，保留至 2026 年 8 月中旬。
+**更新说明**：站点现在保留两套画面。手机首次访问默认进入 v0.9 单层信息架构；桌面首次访问默认进入基于提交 [`752a603`](https://github.com/LearnPrompt/ai-news-radar/commit/752a6031fba48085c4cf3d97f67a14e087a1ced7) 的经典 Top 3 桌面版。两边都能在「高级筛选」右侧切换，手动选择会记在本地浏览器里。
 
 </div>
 
@@ -34,7 +34,7 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 ![ai-radar demo](skills/radar/assets/demo.gif)
 
-**② 直接看网页** → 打开 [radar.learnprompt.pro](https://radar.learnprompt.pro)。v0.9 起是单层信息架构：顶部「全部/模型/产品/开发者/行业/论文/社区/自媒体」栏目 tab + 「精选/全量」全局开关，主列表按时间倒序、按日分组，「当前热点」榜不设固定条数单独看当下最热。每条精选卡片自带一句话「推荐理由」，命中当日 TOP3 的故事还能展开实用派、毒舌评论员、论文警察三种口味并排锐评；同一事件被多家信源报道时会折叠成「多源 N」标签，点开看每家独立标题。
+**② 直接看网页** → 打开 [radar.learnprompt.pro](https://radar.learnprompt.pro)。手机默认进入 v0.9 单层时间轴；桌面默认进入带独立 Top 3 区块的经典版。两套画面读取同一份最新数据，随时可用「高级筛选」右侧的画面切换按钮来回切换。
 
 **③ fork 拥有自己的筛子** → fork本仓库，信源换成你自己的 OPML，口味改 `personas/` 下的 markdown 文件，数据长在你自己的 GitHub Pages 上。跳到[fork 指南](#fork-指南五步拥有自己的雷达)。
 
@@ -70,8 +70,9 @@ v0.8 的三视图（伯乐精选 / AI信号流 / 热点榜）合并成了一层�
 - **推荐理由**：每条精选卡片带一句话点评；命中当日 TOP3 的故事在卡片内直接展开三口味并排锐评，不再是单独的首页板块
 - **同一事件展开**：同一事件被 2 家以上信源报道时，卡片上出现「多源 N」标签，点开看每家独立标题、来源和相对时间
 - **标题增强**：标题过短或黑话过多时，会拿原文上下文（自家抓取失败时回退到 r.jina.ai）交给 LLM 改写得更完整；配 `DEEPSEEK_API_KEY` 才生效，没配就保留原标题，不影响其余流程
-- **数据同源开关**：给页面 URL 加 `?data=<data目录地址>` 可以让前端读取另一份 `data/`（比如验证另一个分支或 PR 生成的数据），选择会记在浏览器本地，方便多分支开发时来回切换
+- **数据同源开关**：给页面 URL 加 `?data=<data目录地址>` 可以让两套画面读取同一份替代 `data/`（比如验证另一个分支或 PR 生成的数据），选择会记在浏览器本地，切换手机版/经典版时不会回落到另一份快照
 - **聚合源子来源分类**：聚合站点条目会按原始平台再细分成 X / 公众号 / HN / RSS 小标签，紧跟在来源 chip 之后
+- **双画面入口**：屏宽 760px 及以下默认使用当前手机版，桌面默认使用 [`/classic/`](classic/) 的 v0.7 Top 3 经典界面；手动选择会持久化。访问 `?view=auto` 可清除手动选择，恢复按设备自动判断
 
 ## v0.8：三口味 persona 锐评
 
@@ -226,6 +227,8 @@ python -m http.server 8080
 ```text
 http://localhost:8080
 ```
+
+桌面宽度默认打开经典 Top 3 画面，手机宽度默认打开当前 v0.9 画面。两边都可在「高级筛选」右侧手动切换；如需恢复设备默认，访问 `http://localhost:8080/?view=auto`。
 
 如果你有自己的 OPML：
 

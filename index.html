@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-radar-view="mobile">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,7 +33,9 @@
     <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="./site.webmanifest" />
+    <script src="./assets/view-mode.js" data-root="./"></script>
     <link rel="stylesheet" href="./assets/styles.css?v=aihot-0712k" />
+    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713a" />
   </head>
   <body>
     <a class="skip-link" href="#hotBoardWrap">跳到当前热点</a>
@@ -83,32 +85,39 @@
         <button class="clear-filters-btn" id="clearFiltersBtn" type="button" hidden>清除筛选</button>
       </section>
 
-      <details class="advanced-panel">
-        <summary>
-          <span>高级筛选</span>
-          <span class="advanced-hint">只看某个来源，或检查各信源采集是否正常</span>
-        </summary>
-        <div class="advanced-content">
-          <div class="advanced-controls">
-            <label class="field">
-              <span>具体来源</span>
-              <select id="siteSelect">
-                <option value="">全部站点</option>
-              </select>
-            </label>
+      <div class="view-toolbar">
+        <details class="advanced-panel">
+          <summary>
+            <span>高级筛选</span>
+            <span class="advanced-hint">只看某个来源，或检查各信源采集是否正常</span>
+          </summary>
+          <div class="advanced-content">
+            <div class="advanced-controls">
+              <label class="field">
+                <span>具体来源</span>
+                <select id="siteSelect">
+                  <option value="">全部站点</option>
+                </select>
+              </label>
+            </div>
+            <div class="data-source-indicator" id="dataSourceIndicator" hidden>
+              <span id="dataSourceIndicatorText"></span>
+              <button type="button" id="dataSourceResetBtn" class="data-source-reset-btn">恢复本地</button>
+            </div>
+            <div class="source-health" id="sourceHealth">源状态加载中...</div>
+            <details class="source-detail-panel">
+              <summary>查看源状态详情</summary>
+              <div class="source-health-details" id="sourceHealthDetails"></div>
+              <section class="source-status-table" id="sourceStatusTable" aria-label="源状态详情"></section>
+            </details>
           </div>
-          <div class="data-source-indicator" id="dataSourceIndicator" hidden>
-            <span id="dataSourceIndicatorText"></span>
-            <button type="button" id="dataSourceResetBtn" class="data-source-reset-btn">恢复本地</button>
-          </div>
-          <div class="source-health" id="sourceHealth">源状态加载中...</div>
-          <details class="source-detail-panel">
-            <summary>查看源状态详情</summary>
-            <div class="source-health-details" id="sourceHealthDetails"></div>
-            <section class="source-status-table" id="sourceStatusTable" aria-label="源状态详情"></section>
-          </details>
+        </details>
+        <div class="view-switch" role="group" aria-label="画面切换">
+          <span class="view-switch-label">画面</span>
+          <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
+          <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
         </div>
-      </details>
+      </div>
 
       <section class="list-wrap hot-board-wrap" id="hotBoardWrap" aria-label="当前热点">
         <div class="list-head">
