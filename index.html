@@ -33,9 +33,9 @@
     <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="./site.webmanifest" />
-    <script src="./assets/view-mode.js" data-root="./"></script>
+    <script src="./assets/view-mode.js?v=dual-view-0713c" data-root="./"></script>
     <link rel="stylesheet" href="./assets/styles.css?v=aihot-0712k" />
-    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713a" />
+    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713b" />
   </head>
   <body>
     <a class="skip-link" href="#hotBoardWrap">跳到当前热点</a>
@@ -46,10 +46,15 @@
             <img class="hero-logo" src="./assets/logo.svg" alt="AI News Radar Logo" />
             <div>
               <h1>AI News Radar</h1>
-              <p class="hero-updated">
+              <div class="hero-updated hero-view-row">
                 <span class="updated-label">更新时间</span>
                 <span class="updated" id="updatedAt">加载中...</span>
-              </p>
+                <div class="view-switch" role="group" aria-label="视角切换">
+                  <span class="view-switch-label">视角</span>
+                  <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
+                  <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -85,8 +90,7 @@
         <button class="clear-filters-btn" id="clearFiltersBtn" type="button" hidden>清除筛选</button>
       </section>
 
-      <div class="view-toolbar">
-        <details class="advanced-panel">
+      <details class="advanced-panel">
           <summary>
             <span>高级筛选</span>
             <span class="advanced-hint">只看某个来源，或检查各信源采集是否正常</span>
@@ -111,13 +115,7 @@
               <section class="source-status-table" id="sourceStatusTable" aria-label="源状态详情"></section>
             </details>
           </div>
-        </details>
-        <div class="view-switch" role="group" aria-label="画面切换">
-          <span class="view-switch-label">画面</span>
-          <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
-          <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
-        </div>
-      </div>
+      </details>
 
       <section class="list-wrap hot-board-wrap" id="hotBoardWrap" aria-label="当前热点">
         <div class="list-head">

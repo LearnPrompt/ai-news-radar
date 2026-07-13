@@ -34,9 +34,9 @@
     <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="./site.webmanifest" />
-    <script src="./assets/view-mode.js" data-root="../"></script>
+    <script src="./assets/view-mode.js?v=dual-view-0713c" data-root="../"></script>
     <link rel="stylesheet" href="./classic/assets/styles.css?v=ui-polish-0626a" />
-    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713a" />
+    <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713b" />
   </head>
   <body>
     <main class="shell">
@@ -51,8 +51,15 @@
           </div>
         </div>
         <div class="hero-meta">
-          <span class="updated-label">更新时间</span>
-          <span class="updated" id="updatedAt">加载中...</span>
+          <div class="hero-view-row">
+            <span class="updated-label">更新时间</span>
+            <span class="updated" id="updatedAt">加载中...</span>
+            <div class="view-switch" role="group" aria-label="视角切换">
+              <span class="view-switch-label">视角</span>
+              <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
+              <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
+            </div>
+          </div>
           <span class="source-status-pill" id="sourceStatusPill">源状态加载中</span>
           <div class="hero-links" aria-label="项目入口">
             <a
@@ -82,8 +89,7 @@
         <span id="stickySummaryText">正在整理 24 小时信号...</span>
       </div>
 
-      <div class="view-toolbar">
-        <details class="advanced-panel">
+      <details class="advanced-panel">
           <summary>
             <span>高级筛选</span>
             <span class="advanced-summary" id="advancedSummary">加载中...</span>
@@ -154,13 +160,7 @@
             <section class="site-pills" id="sitePills"></section>
             </details>
           </div>
-        </details>
-        <div class="view-switch" role="group" aria-label="画面切换">
-          <span class="view-switch-label">画面</span>
-          <button class="view-switch-btn" type="button" data-radar-view-target="mobile">手机版</button>
-          <button class="view-switch-btn" type="button" data-radar-view-target="classic">经典版</button>
-        </div>
-      </div>
+      </details>
 
       <section class="bole-picks-wrap" aria-label="今日 Top 3" id="bolePicksWrap">
         <div class="bole-picks-head">

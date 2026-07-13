@@ -22,7 +22,7 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 [English](README.en.md) · [雷达Skill](skills/radar/README.md) · [伯乐Skill](skills/ai-news-radar/README.md) · [信息源策略](docs/SOURCE_COVERAGE.md)
 
-**更新说明**：站点现在保留两套画面。手机首次访问默认进入 v0.9 单层信息架构；桌面首次访问默认进入基于提交 [`752a603`](https://github.com/LearnPrompt/ai-news-radar/commit/752a6031fba48085c4cf3d97f67a14e087a1ced7) 的经典 Top 3 桌面版。两边都能在「高级筛选」右侧切换，手动选择会记在本地浏览器里。
+**更新说明**：站点现在保留两套画面，所有设备默认进入 v0.9 手机版单层信息架构；也可切换到基于提交 [`752a603`](https://github.com/LearnPrompt/ai-news-radar/commit/752a6031fba48085c4cf3d97f67a14e087a1ced7) 的经典 Top 3 版。两边都能在首屏更新时间后切换；桌面会记住手动选择，手机每次重新打开链接仍默认手机版。
 
 </div>
 
@@ -34,7 +34,7 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 ![ai-radar demo](skills/radar/assets/demo.gif)
 
-**② 直接看网页** → 打开 [radar.learnprompt.pro](https://radar.learnprompt.pro)。手机默认进入 v0.9 单层时间轴；桌面默认进入带独立 Top 3 区块的经典版。两套画面读取同一份最新数据，随时可用「高级筛选」右侧的画面切换按钮来回切换。
+**② 直接看网页** → 打开 [radar.learnprompt.pro](https://radar.learnprompt.pro)。手机和桌面都默认进入 v0.9 单层时间轴，也可切换到带独立 Top 3 区块的经典版。两套画面读取同一份最新数据，随时可用首屏更新时间后的视角按钮来回切换；手机重新打开或刷新后仍回到手机版。
 
 **③ fork 拥有自己的筛子** → fork本仓库，信源换成你自己的 OPML，口味改 `personas/` 下的 markdown 文件，数据长在你自己的 GitHub Pages 上。跳到[fork 指南](#fork-指南五步拥有自己的雷达)。
 
@@ -72,7 +72,7 @@ v0.8 的三视图（伯乐精选 / AI信号流 / 热点榜）合并成了一层�
 - **标题增强**：标题过短或黑话过多时，会拿原文上下文（自家抓取失败时回退到 r.jina.ai）交给 LLM 改写得更完整；配 `DEEPSEEK_API_KEY` 才生效，没配就保留原标题，不影响其余流程
 - **数据同源开关**：给页面 URL 加 `?data=<data目录地址>` 可以让两套画面读取同一份替代 `data/`（比如验证另一个分支或 PR 生成的数据），选择会记在浏览器本地，切换手机版/经典版时不会回落到另一份快照
 - **聚合源子来源分类**：聚合站点条目会按原始平台再细分成 X / 公众号 / HN / RSS 小标签，紧跟在来源 chip 之后
-- **双画面入口**：屏宽 760px 及以下默认使用当前手机版，桌面默认使用 [`/classic/`](classic/) 的 v0.7 Top 3 经典界面；手动选择会持久化。访问 `?view=auto` 可清除手动选择，恢复按设备自动判断
+- **双画面入口**：所有屏宽默认使用当前手机版，也可在首屏更新时间后切换到 [`/classic/`](classic/) 的 v0.7 Top 3 经典界面；桌面手动选择会持久化，手机可当次查看经典版，但重新打开任意站内链接或刷新后仍默认手机版。访问 `?view=auto` 可清除手动选择，恢复手机版默认
 
 ## v0.8：三口味 persona 锐评
 
@@ -228,7 +228,7 @@ python -m http.server 8080
 http://localhost:8080
 ```
 
-桌面宽度默认打开经典 Top 3 画面，手机宽度默认打开当前 v0.9 画面。两边都可在「高级筛选」右侧手动切换；如需恢复设备默认，访问 `http://localhost:8080/?view=auto`。
+所有屏宽都默认打开当前 v0.9 手机版画面，也可在首屏更新时间后手动切换到经典 Top 3 画面。手机刷新或重新打开链接时固定回到手机版；桌面如需清除已保存选择，可访问 `http://localhost:8080/?view=auto`。
 
 如果你有自己的 OPML：
 

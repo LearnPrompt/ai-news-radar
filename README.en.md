@@ -22,7 +22,7 @@ Then ask your agent: `What happened in AI today?`
 
 [中文](README.md) · [Radar Skill](skills/radar/README.md) · [Scout Skill](skills/ai-news-radar/README.md) · [Source strategy](docs/SOURCE_COVERAGE.md)
 
-**What's new**: the site now keeps two UI surfaces. First-time mobile visitors get the v0.9 single-layer timeline, while desktop visitors get the classic Top 3 layout based on commit [`752a603`](https://github.com/LearnPrompt/ai-news-radar/commit/752a6031fba48085c4cf3d97f67a14e087a1ced7). Both pages expose a persistent view switch beside Advanced Filters.
+**What's new**: the site now keeps two UI surfaces. Every device defaults to the v0.9 mobile-first single-layer timeline, with the classic Top 3 layout based on commit [`752a603`](https://github.com/LearnPrompt/ai-news-radar/commit/752a6031fba48085c4cf3d97f67a14e087a1ced7) still available. Both pages expose a view switch immediately after the first-screen update time; desktop remembers a manual choice, while every fresh phone open defaults to mobile.
 
 </div>
 
@@ -34,7 +34,7 @@ Then ask your agent: `What happened in AI today?`
 
 ![ai-radar demo](skills/radar/assets/demo.gif)
 
-**② Read the site directly** → open [radar.learnprompt.pro](https://radar.learnprompt.pro). Mobile defaults to the v0.9 single-layer timeline; desktop defaults to the classic layout with a dedicated Top 3 block. Both views read the same current data, and the view switch beside Advanced Filters moves between them at any time.
+**② Read the site directly** → open [radar.learnprompt.pro](https://radar.learnprompt.pro). Mobile and desktop both default to the v0.9 single-layer timeline, with the classic layout and its dedicated Top 3 block one switch away. Both views read the same current data, and the view switch after the first-screen update time moves between them; a phone refresh or fresh link open returns to mobile.
 
 **③ Fork and own your own filter** → fork this repo, swap in your own OPML sources, edit a markdown file under `personas/` to change the taste, and the data grows on your own GitHub Pages. Jump to the [fork guide](#fork-guide-your-own-radar-in-five-steps).
 
@@ -72,7 +72,7 @@ v0.8's three views (Scout Picks / AI Signal Flow / Hot board) are now one layer:
 - **Title enhancement**: when a title is too terse or jargon-heavy, the pipeline micro-crawls the source page for context (falling back to r.jina.ai on direct-fetch failure) and has an LLM rewrite it. Requires `DEEPSEEK_API_KEY`; without it, titles stay as-is and nothing else breaks
 - **Data-source switch**: append `?data=<data-dir-url>` to make both UI surfaces read the same alternate `data/` directory (e.g. to preview another branch's or PR's generated data). The choice persists in local storage and survives switching between mobile and classic views
 - **aggregator sub-source classification**: items from aggregator sites get a further breakdown chip — X / WeChat / HN / RSS — right after the channel chip
-- **Dual-view entry**: viewports at 760px or below default to the current mobile UI; desktop defaults to the v0.7 Top 3 UI under [`/classic/`](classic/). A manual choice persists, and `?view=auto` clears it to restore device-based selection
+- **Dual-view entry**: every viewport defaults to the current mobile UI, with the v0.7 Top 3 UI under [`/classic/`](classic/) available from the switch after the first-screen update time. Desktop persists a manual choice; phones can view Classic for the current navigation but return to Mobile on any refresh or fresh site link. `?view=auto` clears a desktop choice and restores the mobile default
 
 ## v0.8: three-persona reviews
 
@@ -228,7 +228,7 @@ Open:
 http://localhost:8080
 ```
 
-Desktop widths default to the classic Top 3 view; mobile widths default to the current v0.9 view. Both pages have a manual switch beside Advanced Filters. Open `http://localhost:8080/?view=auto` to clear a saved choice and restore device-based selection.
+Every viewport defaults to the current v0.9 mobile view, with a manual switch after the first-screen update time for the classic Top 3 view. Phones return to Mobile on refresh or a fresh link open; on desktop, open `http://localhost:8080/?view=auto` to clear a saved choice and restore the mobile default.
 
 If you have your own OPML:
 

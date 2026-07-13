@@ -1,41 +1,38 @@
-.view-toolbar {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
-  align-items: start;
-  margin-top: 12px;
-}
-
-.view-toolbar > .advanced-panel {
+.hero-view-row {
+  display: flex;
   min-width: 0;
-  margin-top: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
 
 .view-switch {
   display: inline-flex;
-  min-height: 43px;
+  min-height: 30px;
+  flex: 0 0 auto;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   border: 1px solid var(--line-soft, rgba(23, 23, 23, 0.12));
-  border-radius: var(--radius, 8px);
-  padding: 3px;
+  border-radius: 999px;
+  padding: 2px;
   background: rgba(251, 250, 247, 0.78);
 }
 
 .view-switch-label {
-  padding: 0 7px 0 8px;
-  color: var(--muted, #66645f);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   white-space: nowrap;
 }
 
 .view-switch-btn {
-  min-height: 35px;
+  min-height: 24px;
   border: 0;
-  border-radius: calc(var(--radius, 8px) - 2px);
-  padding: 0 10px;
+  border-radius: 999px;
+  padding: 0 8px;
   color: var(--muted, #66645f);
   background: transparent;
   font: inherit;
@@ -105,26 +102,8 @@ html[data-radar-view="classic"] .data-source-reset-btn:focus-visible {
 }
 
 @media (max-width: 760px) {
-  .view-toolbar {
-    gap: 8px;
-  }
-
-  .view-switch {
-    gap: 2px;
-  }
-
-  .view-switch-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
   .view-switch-btn {
-    padding: 0 8px;
+    padding: 0 7px;
     font-size: 11px;
   }
 }

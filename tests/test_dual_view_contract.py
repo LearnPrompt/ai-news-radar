@@ -49,3 +49,37 @@ def test_both_pages_expose_bidirectional_view_switch():
         assert 'data-radar-view-target="mobile"' in source
         assert 'data-radar-view-target="classic"' in source
         assert "assets/view-mode.js" in source
+
+
+def test_view_switch_follows_update_time_in_both_headers():
+    for path in ("index.html", "classic/index.html"):
+        source = read(path)
+        updated_position = source.index('id="updatedAt"')
+        switch_position = source.index('class="view-switch"')
+        status_position = source.index('id="sourceStatusPill"')
+
+        assert updated_position < switch_position < status_position
+        assert 'class="view-toolbar"' not in source
+
+
+def test_mobile_is_the_versioned_default_view():
+    source = read("assets/view-mode.js")
+
+    assert 'const STORAGE_KEY = "aiNewsRadarViewV2"' in source
+    assert 'const LEGACY_STORAGE_KEY = "aiNewsRadarView"' in source
+    assert 'const MOBILE_OVERRIDE_KEY = "aiNewsRadarMobileViewOnce"' in source
+    assert 'const MOBILE_BREAKPOINT = "(max-width: 760px)"' in source
+    assert "const isMobileViewport = window.matchMedia(MOBILE_BREAKPOINT).matches" in source
+    assert 'const mobileOverride = isMobileViewport ? readMobileOverride() : ""' in source
+    assert "const preference = isMobileViewport" in source
+    assert "? mobileOverride" in source
+    assert 'const deviceDefault = "mobile"' in source
+
+
+def test_mobile_classic_choice_is_one_navigation_only():
+    source = read("assets/view-mode.js")
+
+    assert "function readMobileOverride()" in source
+    assert "window.sessionStorage.removeItem(MOBILE_OVERRIDE_KEY)" in source
+    assert "function writeMobileOverride(view)" in source
+    assert "writeMobileOverride(view)" in source

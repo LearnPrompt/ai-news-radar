@@ -1,7 +1,9 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "aiNewsRadarView";
+  const STORAGE_KEY = "aiNewsRadarViewV2";
+  const LEGACY_STORAGE_KEY = "aiNewsRadarView";
+  const MOBILE_OVERRIDE_KEY = "aiNewsRadarMobileViewOnce";
   const MOBILE_BREAKPOINT = "(max-width: 760px)";
   const VALID_VIEWS = new Set(["mobile", "classic"]);
   const script = document.currentScript;
@@ -10,6 +12,13 @@
   const currentView = document.documentElement.dataset.radarView || "mobile";
   const params = new URLSearchParams(window.location.search);
   const requestedView = params.get("view") || "";
+  const isMobileViewport = window.matchMedia(MOBILE_BREAKPOINT).matches;
+
+  try {
+    window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+  } catch {
+    // Storage can be unavailable in private or hardened browser contexts.
+  }
 
   function readPreference() {
     try {
@@ -32,16 +41,42 @@
     }
   }
 
+  function readMobileOverride() {
+    try {
+      const value = window.sessionStorage.getItem(MOBILE_OVERRIDE_KEY) || "";
+      window.sessionStorage.removeItem(MOBILE_OVERRIDE_KEY);
+      return VALID_VIEWS.has(value) ? value : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function writeMobileOverride(view) {
+    try {
+      if (VALID_VIEWS.has(view)) {
+        window.sessionStorage.setItem(MOBILE_OVERRIDE_KEY, view);
+      } else {
+        window.sessionStorage.removeItem(MOBILE_OVERRIDE_KEY);
+      }
+    } catch {
+      // Storage can be unavailable in private or hardened browser contexts.
+    }
+  }
+
   if (requestedView === "auto") {
     writePreference("");
-  } else if (VALID_VIEWS.has(requestedView)) {
+    writeMobileOverride("");
+  } else if (!isMobileViewport && VALID_VIEWS.has(requestedView)) {
     writePreference(requestedView);
   }
 
-  const preference = requestedView === "auto"
-    ? ""
-    : (VALID_VIEWS.has(requestedView) ? requestedView : readPreference());
-  const deviceDefault = window.matchMedia(MOBILE_BREAKPOINT).matches ? "mobile" : "classic";
+  const mobileOverride = isMobileViewport ? readMobileOverride() : "";
+  const preference = isMobileViewport
+    ? mobileOverride
+    : (requestedView === "auto"
+      ? ""
+      : (VALID_VIEWS.has(requestedView) ? requestedView : readPreference()));
+  const deviceDefault = "mobile";
   const targetView = preference || deviceDefault;
 
   function destination(view) {
@@ -61,7 +96,8 @@
 
   function chooseView(view) {
     if (!VALID_VIEWS.has(view)) return;
-    writePreference(view);
+    if (isMobileViewport) writeMobileOverride(view);
+    else writePreference(view);
     if (view === currentView) return;
     window.location.assign(destination(view).href);
   }
@@ -97,6 +133,7 @@
     choose: chooseView,
     reset() {
       writePreference("");
+      writeMobileOverride("");
       window.location.replace(destination(deviceDefault).href);
     },
   };
