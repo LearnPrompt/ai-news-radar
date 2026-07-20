@@ -1,8 +1,8 @@
 # HR Radar Source Quality Pilot Results
 
-**Run date:** 2026-07-20  
-**Branch:** `codex/hr-radar-quality-pilot`  
-**Baseline:** `origin/master` at `c20a89a6069362c0cc1d67e88cfb5ced1892d632`  
+**Run date:** 2026-07-20
+**Branch:** `codex/hr-radar-quality-pilot`
+**Baseline:** `origin/master` at `c20a89a6069362c0cc1d67e88cfb5ced1892d632`
 **Live output:** `/tmp/ai-news-radar-hr-quality-20260720-v3/`
 
 ## Decision

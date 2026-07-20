@@ -1,11 +1,11 @@
 # HR Radar Phase 2 Development Plan
 
-**Status:** Ready for implementation  
-**Planning date:** 2026-07-20  
-**Working branch:** `codex/hr-radar-quality-pilot`  
-**Working tree:** `$HOME/agent-workbench/worktrees/ai-news-radar-hr-quality`  
-**Current branch head:** `2519e72`  
-**Current `origin/master`:** `ece3e61618f03f32cb028de234b6350eee13bdd5`  
+**Status:** Ready for implementation
+**Planning date:** 2026-07-20
+**Working branch:** `codex/hr-radar-quality-pilot`
+**Working tree:** `$HOME/agent-workbench/worktrees/ai-news-radar-hr-quality`
+**Pilot implementation commit:** `2519e72`
+**Current `origin/master`:** `ece3e61618f03f32cb028de234b6350eee13bdd5`
 **Related external PR:** `LearnPrompt/ai-news-radar#22`, head `13b43a3`
 
 ## Objective
