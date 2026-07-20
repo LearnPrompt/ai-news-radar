@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "lookback_days": 180,
+  "sources": [
+    {
+      "id": "china_job_home",
+      "name": "中国就业网",
+      "type": "html",
+      "url": "https://chinajob.mohrss.gov.cn/",
+      "region": "全国",
+      "authority": "official_hr_news",
+      "item_selector": "a[href]",
+      "allowed_hosts": [
+        "chinajob.mohrss.gov.cn",
+        "www.mohrss.gov.cn"
+      ],
+      "date_regexes": [
+        "/(?:h5/)?c/(?P<date>\\d{4}-\\d{2}-\\d{2})/",
+        "/\\d{6}/t(?P<date>\\d{8})_"
+      ]
+    },
+    {
+      "id": "beijing_hrss_policy",
+      "name": "北京市人力资源和社会保障局政策",
+      "type": "html",
+      "url": "https://rsj.beijing.gov.cn/xxgk/zfxxgk/zfxxgk_zc/",
+      "region": "北京",
+      "authority": "official_policy",
+      "item_selector": "table.zyjd_table01 tr",
+      "title_selector": "a[title]",
+      "date_selector": "td:last-child"
+    },
+    {
+      "id": "shanghai_hrss_policy",
+      "name": "上海市人力资源和社会保障局政策",
+      "type": "html",
+      "url": "https://rsj.sh.gov.cn/tzcwj_17116/index.html",
+      "region": "上海",
+      "authority": "official_policy",
+      "item_selector": "ul.uli14 li",
+      "title_selector": "a[href]",
+      "date_selector": "span"
+    },
+    {
+      "id": "shenzhen_hrss_policy",
+      "name": "深圳市人力资源和社会保障局政策",
+      "type": "html",
+      "url": "https://hrss.sz.gov.cn/xxgk/zcfgjjd/zcfg/",
+      "region": "深圳",
+      "authority": "official_policy",
+      "item_selector": "tr",
+      "title_selector": "a[href]",
+      "date_selector": "td:last-child"
+    },
+    {
+      "id": "hr_dive",
+      "name": "HR Dive",
+      "type": "rss",
+      "url": "https://www.hrdive.com/feeds/news/",
+      "region": "全球",
+      "authority": "industry_media"
+    },
+    {
+      "id": "moka_ai_recruiting",
+      "name": "Moka AI招聘",
+      "type": "html",
+      "url": "https://www.mokahr.com/blog/tag/ai%E6%8B%9B%E8%81%98",
+      "region": "中国",
+      "authority": "vendor",
+      "item_selector": "article",
+      "title_selector": "h2.blog-entry-title a[href]",
+      "date_selector": ".blog-entry-date"
+    }
+  ]
+}
