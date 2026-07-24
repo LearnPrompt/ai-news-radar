@@ -51,6 +51,65 @@ def test_both_pages_expose_bidirectional_view_switch():
         assert "assets/view-mode.js" in source
 
 
+def test_both_pages_share_the_service_status_banner():
+    loader = read("assets/service-status.js")
+    assert 'get("data")' in loader
+    assert 'localStorage.getItem("dataBaseUrl")' in loader
+    assert "service-status.json" in loader
+    assert 'incident.status !== "resolved"' in loader
+    assert "ChatGPT / OpenAI 服务状态" in loader
+    assert "ChatGPT 等 OpenAI 服务错误率升高" in loader
+
+    mobile_source = read("index.html")
+    classic_source = read("classic/index.html")
+    assert 'id="serviceStatusPanel"' in mobile_source
+    assert 'id="serviceStatusPanel"' in classic_source
+    assert './assets/service-status.js?v=chatgpt-status-0724' in mobile_source
+    assert './assets/service-status.js?v=chatgpt-status-0724' in classic_source
+
+
+def test_data_fetches_revalidate_without_unique_cache_busters():
+    for path in ("assets/app.js", "classic/assets/app.js"):
+        source = read(path)
+        assert "async function fetchJson(path)" in source
+        assert 'cache: "no-cache"' in source
+        assert "AbortController" in source
+        assert '?t=${Date.now()}' not in source
+
+    loader = read("assets/service-status.js")
+    assert 'cache: "no-cache"' in loader
+    assert "AbortController" in loader
+    assert '?t=${Date.now()}' not in loader
+
+
+def test_both_pages_are_self_hosted_and_have_social_previews():
+    for path in ("index.html", "classic/index.html"):
+        source = read(path)
+        assert "https://github.com/1625517181-jpg/ai-news-radar" in source
+        assert "https://github.com/LearnPrompt/ai-news-radar" not in source
+        assert 'content="summary_large_image"' in source
+        assert "/assets/og.jpg" in source
+        assert "cdn.jsdelivr.net/npm/gsap" not in source
+
+    assert (ROOT / "assets/og.jpg").stat().st_size > 0
+
+
+def test_motion_uses_native_browser_animations():
+    for path in ("assets/motion.js", "classic/assets/motion.js"):
+        source = read(path)
+        assert ".animate(" in source
+        assert "prefers-reduced-motion: reduce" in source
+        assert "window.gsap" not in source
+
+
+def test_both_views_offer_a_reload_path_after_primary_data_failure():
+    for path in ("assets/app.js", "classic/assets/app.js"):
+        source = read(path)
+        assert "function renderPrimaryLoadError(error)" in source
+        assert 'retry.textContent = "重新加载"' in source
+        assert "window.location.reload()" in source
+
+
 def test_view_switch_follows_update_time_in_both_headers():
     for path in ("index.html", "classic/index.html"):
         source = read(path)

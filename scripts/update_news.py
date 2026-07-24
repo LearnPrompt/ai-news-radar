@@ -51,6 +51,10 @@ WAYTOAGI_DEFAULT = (
     "https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e?fromScene=spaceOverview"
 )
 WAYTOAGI_HISTORY_FALLBACK = "https://waytoagi.feishu.cn/wiki/FjiOwWp2giA7hRk6jjfcPioCnAc"
+OPENAI_STATUS_API_URL = "https://status.openai.com/api/v2/incidents.json"
+OPENAI_STATUS_PAGE_URL = "https://status.openai.com/"
+OPENAI_INCIDENT_URL = "https://status.openai.com/incidents/{incident_id}"
+ACTIVE_SERVICE_INCIDENT_STATUSES = {"investigating", "identified", "monitoring"}
 
 RSS_FEED_REPLACEMENTS: dict[str, str] = {
     "https://rsshub.app/infoq/recommend": "https://www.infoq.cn/feed",
@@ -1804,6 +1808,128 @@ def fetch_official_ai_updates(session: requests.Session, now: datetime) -> list[
         raise ValueError("No official AI update sources returned items")
 
     return out
+
+
+def service_incident_title_zh(title: str) -> str:
+    normalized = re.sub(r"\s+", " ", str(title or "")).strip()
+    exact = {
+        "Elevated Error Rates": "ChatGPT 等 OpenAI 服务错误率升高",
+        "Elevated Errors in Codex Review": "Codex Review 错误率升高",
+    }
+    if normalized in exact:
+        return exact[normalized]
+
+    patterns = (
+        (r"(?i)^Elevated Errors in (.+)$", r"\1 错误率升高"),
+        (r"(?i)^Elevated errors affecting (.+)$", r"\1 错误率升高"),
+        (r"(?i)^Elevated API error rates and latency on (.+)$", r"\1 API 错误率及延迟升高"),
+        (
+            r"(?i)^Some users may experience elevated error rates in (.+)$",
+            r"部分用户在使用 \1 时可能遇到较高错误率",
+        ),
+        (r"(?i)^Issues with (.+)$", r"\1 出现问题"),
+    )
+    for pattern, replacement in patterns:
+        if re.match(pattern, normalized):
+            return re.sub(pattern, replacement, normalized).strip()
+    return normalized
+
+
+def build_openai_service_status_payload(payload: dict[str, Any], now: datetime) -> dict[str, Any]:
+    incidents: list[dict[str, Any]] = []
+    for incident in payload.get("incidents") or []:
+        if not isinstance(incident, dict):
+            continue
+        status = str(incident.get("status") or "").strip().lower()
+        if status not in ACTIVE_SERVICE_INCIDENT_STATUSES:
+            continue
+        incident_id = str(incident.get("id") or "").strip()
+        title = re.sub(r"\s+", " ", str(incident.get("name") or "")).strip()
+        if not incident_id or not title:
+            continue
+
+        updates = [item for item in (incident.get("incident_updates") or []) if isinstance(item, dict)]
+        updates.sort(
+            key=lambda item: parse_date_any(item.get("updated_at") or item.get("created_at"), now)
+            or datetime.min.replace(tzinfo=UTC),
+            reverse=True,
+        )
+        latest_update = updates[0] if updates else {}
+        components = sorted({
+            str(component.get("name") or "").strip()
+            for component in (incident.get("components") or [])
+            if isinstance(component, dict) and str(component.get("name") or "").strip()
+        })
+        incidents.append({
+            "id": incident_id,
+            "provider": "OpenAI",
+            "title": title,
+            "title_zh": service_incident_title_zh(title),
+            "status": status,
+            "impact": str(incident.get("impact") or "none").strip().lower(),
+            "started_at": iso(parse_date_any(incident.get("created_at"), now) or now),
+            "updated_at": iso(
+                parse_date_any(incident.get("updated_at"), now)
+                or parse_date_any(latest_update.get("updated_at") or latest_update.get("created_at"), now)
+                or now
+            ),
+            "message": re.sub(r"\s+", " ", str(latest_update.get("body") or "")).strip(),
+            "affected_components": components,
+            "url": OPENAI_INCIDENT_URL.format(incident_id=incident_id),
+        })
+
+    impact_rank = {"critical": 3, "major": 2, "minor": 1, "none": 0}
+    incidents.sort(
+        key=lambda item: (
+            impact_rank.get(str(item.get("impact") or ""), 0),
+            parse_iso(item.get("updated_at")) or datetime.min.replace(tzinfo=UTC),
+        ),
+        reverse=True,
+    )
+    return {
+        "schema_version": 1,
+        "generated_at": iso(now),
+        "ok": True,
+        "active_count": len(incidents),
+        "providers": [{
+            "id": "openai",
+            "name": "OpenAI",
+            "status_url": OPENAI_STATUS_PAGE_URL,
+            "ok": True,
+            "active_count": len(incidents),
+        }],
+        "incidents": incidents,
+    }
+
+
+def fetch_service_status(session: requests.Session, now: datetime) -> dict[str, Any]:
+    try:
+        response = session.get(
+            OPENAI_STATUS_API_URL,
+            timeout=15,
+            headers={"Accept": "application/json"},
+        )
+        response.raise_for_status()
+        payload = response.json()
+        if not isinstance(payload, dict):
+            raise ValueError("OpenAI status payload is not an object")
+        return build_openai_service_status_payload(payload, now)
+    except Exception:
+        return {
+            "schema_version": 1,
+            "generated_at": iso(now),
+            "ok": False,
+            "active_count": 0,
+            "providers": [{
+                "id": "openai",
+                "name": "OpenAI",
+                "status_url": OPENAI_STATUS_PAGE_URL,
+                "ok": False,
+                "active_count": 0,
+            }],
+            "incidents": [],
+            "error": "OpenAI 服务状态暂时无法读取",
+        }
 
 
 def parse_ai_breakfast_items(markdown_text: str, now: datetime) -> list[RawItem]:
@@ -6240,6 +6366,7 @@ def main() -> int:
     latest_all_path = output_dir / "latest-24h-all.json"
     latest_all_raw_path = output_dir / "latest-24h-all-raw.json"
     status_path = output_dir / "source-status.json"
+    service_status_path = output_dir / "service-status.json"
     daily_brief_path = output_dir / "daily-brief.json"
     stories_merged_path = output_dir / "stories-merged.json"
     merge_log_path = output_dir / "merge-log.json"
@@ -6252,6 +6379,7 @@ def main() -> int:
     paid_source_state = load_paid_source_state(paid_source_state_path)
 
     session = create_session()
+    service_status_payload = fetch_service_status(session, now)
     raw_items, statuses = collect_all(session, now)
     rss_feed_statuses: list[dict[str, Any]] = []
     email_digest_payload, agentmail_status = maybe_fetch_agentmail_digest(
@@ -6659,6 +6787,10 @@ def main() -> int:
         encoding="utf-8",
     )
     status_path.write_text(json.dumps(sanitize_public_payload(status_payload), ensure_ascii=False, indent=2), encoding="utf-8")
+    service_status_path.write_text(
+        json.dumps(sanitize_public_payload(service_status_payload), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     paid_source_state_path.write_text(
         json.dumps(sanitize_public_payload(paid_source_state), ensure_ascii=False, indent=2),
         encoding="utf-8",
@@ -6679,6 +6811,7 @@ def main() -> int:
     print(f"Wrote: {merge_log_path} ({len(merge_events)} merge events)")
     print(f"Wrote: {archive_path} ({len(archive)} items)")
     print(f"Wrote: {status_path}")
+    print(f"Wrote: {service_status_path} ({service_status_payload.get('active_count', 0)} active incidents)")
     print(f"Wrote: {paid_source_state_path}")
     if email_digest_payload is not None:
         print(f"Wrote: {email_digest_path} ({email_digest_payload.get('total_messages', 0)} email items)")

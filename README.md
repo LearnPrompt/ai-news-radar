@@ -6,19 +6,19 @@
 
 **先帮你从一堆信源里选出千里马，再把分散消息合并成故事线，最后用三种口味替你锐评每日头条。**
 
-[![GitHub stars](https://img.shields.io/github/stars/LearnPrompt/ai-news-radar?style=flat-square&color=f5c542)](https://github.com/LearnPrompt/ai-news-radar/stargazers)
-[![Live](https://img.shields.io/badge/Live-news.learnprompt.pro-green?style=flat-square)](https://news.learnprompt.pro)
-[![Actions](https://img.shields.io/github/actions/workflow/status/LearnPrompt/ai-news-radar/update-news.yml?branch=master&label=update&style=flat-square)](https://github.com/LearnPrompt/ai-news-radar/actions/workflows/update-news.yml)
+[![GitHub stars](https://img.shields.io/github/stars/1625517181-jpg/ai-news-radar?style=flat-square&color=f5c542)](https://github.com/1625517181-jpg/ai-news-radar/stargazers)
+[![Live](https://img.shields.io/badge/Live-1625517181--jpg.github.io-green?style=flat-square)](https://1625517181-jpg.github.io/ai-news-radar/)
+[![Actions](https://img.shields.io/github/actions/workflow/status/1625517181-jpg/ai-news-radar/update-news.yml?branch=master&label=update&style=flat-square)](https://github.com/1625517181-jpg/ai-news-radar/actions/workflows/update-news.yml)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-ai--radar%20%2B%20%E4%BC%AF%E4%B9%90-blueviolet?style=flat-square)](skills/radar/README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 
 ```bash
-npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
+npx skills add 1625517181-jpg/ai-news-radar -s ai-radar -g
 ```
 
 装完对Agent说一句：`今天AI圈有什么？`
 
-**在线站** → [news.learnprompt.pro](https://news.learnprompt.pro)（数据源/备用：[learnprompt.github.io/ai-news-radar](https://learnprompt.github.io/ai-news-radar/)）
+**在线站** → [1625517181-jpg.github.io/ai-news-radar](https://1625517181-jpg.github.io/ai-news-radar/)
 
 [English](README.en.md) · [雷达Skill](skills/radar/README.md) · [伯乐Skill](skills/ai-news-radar/README.md) · [信息源策略](docs/SOURCE_COVERAGE.md)
 
@@ -34,7 +34,7 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 ![ai-radar demo](skills/radar/assets/demo.gif)
 
-**② 直接看网页** → 打开 [news.learnprompt.pro](https://news.learnprompt.pro)。默认是手机版视图，右上角「视角」开关能切到经典版（旧版桌面界面，路径 `/classic/`），也可以直接用 `?view=mobile` / `?view=classic` / `?view=auto` 指定，两个视图读同一份 `data/` 目录数据。v0.9 起是单层信息架构：顶部「全部/模型/产品/开发者/行业/论文/社区/自媒体」栏目 tab + 「精选/全量」全局开关，主列表按时间倒序、按日分组，「当前热点」榜不设固定条数单独看当下最热。每条精选卡片自带一句话「推荐理由」；同一事件被多家信源报道时会折叠成「多源 N」标签，点开看每家独立标题。
+**② 直接看网页** → 打开 [1625517181-jpg.github.io/ai-news-radar](https://1625517181-jpg.github.io/ai-news-radar/)。默认是手机版视图，右上角「视角」开关能切到经典版（旧版桌面界面，路径 `/classic/`），也可以直接用 `?view=mobile` / `?view=classic` / `?view=auto` 指定，两个视图读同一份 `data/` 目录数据。v0.9 起是单层信息架构：顶部「全部/模型/产品/开发者/行业/论文/社区/自媒体」栏目 tab + 「精选/全量」全局开关，主列表按时间倒序、按日分组，「当前热点」榜不设固定条数单独看当下最热。每条精选卡片自带一句话「推荐理由」；同一事件被多家信源报道时会折叠成「多源 N」标签，点开看每家独立标题。
 
 **③ fork 拥有自己的筛子** → fork本仓库，信源换成你自己的 OPML，口味改 `personas/` 下的 markdown 文件，数据长在你自己的 GitHub Pages 上。跳到[fork 指南](#fork-指南五步拥有自己的雷达)。
 
@@ -204,6 +204,7 @@ AI News Radar学习了现代新闻学的技术，不是简单堆信息源，一�
 - `data/latest-24h-all.json`：最近24小时广义AI相关消息（score >= 0.3）
 - `data/latest-24h-all-raw.json`：最近24小时零过滤全量消息（dev-only，不接入前端UI）
 - `data/source-status.json`：来源抓取状态、成功率、站点覆盖和源健康
+- `data/service-status.json`：官方服务当前仍在处理的故障；无活动故障时网页自动隐藏该栏
 - `data/stories-merged.json`：故事合并后的完整事件集合
 - `data/merge-log.json`：故事合并过程和命中记录，方便调试与审计
 
@@ -277,6 +278,7 @@ python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml fee
 - 支持手动触发 `workflow_dispatch`；需要忽略 TikHub 的正常付费源间隔时，显式传入 `force_tikhub=true`
 - 默认每 30 分钟运行一次：`*/30 * * * *`
 - 自动生成并提交 `data/*.json`；工作流使用 `git add data/`，避免新增 JSON 文件因为白名单遗漏而停留在旧更新时间
+- 每轮读取 OpenAI 官方状态接口，活动故障进入独立“服务状态”小栏，恢复后自动消失，不参与普通新闻排序
 - 如果设置 `DEEPSEEK_API_KEY`，会给每日精选打 persona 分、生成三口味 TOP3 点评、启用标题增强、生成精选条目的真实推荐理由，并给出更可靠的中文翻译（拒答文案和退化输出会自动回退原标题）；不设置时自动降级为规则分、原始标题和谷歌翻译，推荐理由区块不显示，核心流程照样跑
 - 默认 DeepSeek 模型是 `deepseek-v4-flash`（DeepSeek 官方将于 2026-07-24 弃用 `deepseek-chat` 别名），可以设置仓库 Variable `DEEPSEEK_MODEL` 覆盖
 - 如果设置 `TITLE_ENHANCE_MAX_PER_RUN`，会限制每次运行最多改写的标题条数；不设置默认 30

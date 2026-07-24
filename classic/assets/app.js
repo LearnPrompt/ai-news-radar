@@ -66,6 +66,30 @@ function dataUrl(path) {
   return `${base}/${file}`;
 }
 
+const DATA_FETCH_TIMEOUT_MS = 15000;
+
+async function fetchJson(path) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), DATA_FETCH_TIMEOUT_MS);
+  const filename = String(path || "").split("/").pop() || "数据";
+  try {
+    const response = await fetch(dataUrl(path), {
+      cache: "no-cache",
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`${filename} 返回 ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw new Error(`${filename} 加载超时`);
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 const statsEl = document.getElementById("stats");
 const siteSelectEl = document.getElementById("siteSelect");
 const sitePillsEl = document.getElementById("sitePills");
@@ -1881,6 +1905,7 @@ function buildBoleFollowupPanel(rows, topCount, usesStories) {
 
 function renderBolePicks() {
   if (!bolePicksListEl || !bolePicksMetaEl) return;
+  bolePicksListEl.removeAttribute("aria-busy");
   bolePicksListEl.innerHTML = "";
   bolePicksListEl.className = "top-stories-grid";
   if (boleViewToggleEl) boleViewToggleEl.hidden = true;
@@ -2503,6 +2528,7 @@ function renderSiteGroups(items) {
 }
 
 function renderList() {
+  newsListEl.removeAttribute("aria-busy");
   const filtered = getFilteredItems();
   renderListSortTools();
   resultCountEl.textContent = `${fmtNumber(filtered.length)} 条`;
@@ -2867,19 +2893,13 @@ function renderSourceHealth(errorMessage = "") {
 }
 
 async function loadNewsData() {
-  const res = await fetch(`${dataUrl("data/latest-24h.json")}?t=${Date.now()}`);
-  if (!res.ok) throw new Error(`加载 latest-24h.json 失败: ${res.status}`);
-  return res.json();
+  return fetchJson("data/latest-24h.json");
 }
 
 async function loadAllModeData() {
   if (state.allDataLoaded) return;
   if (!state.allDataPromise) {
-    state.allDataPromise = fetch(`${dataUrl(state.allDataUrl)}?t=${Date.now()}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`加载 latest-24h-all.json 失败: ${res.status}`);
-        return res.json();
-      })
+    state.allDataPromise = fetchJson(state.allDataUrl)
       .then((payload) => {
         state.itemsAllRaw = payload.items_all_raw || payload.items_all || state.itemsAi;
         state.itemsAll = payload.items_all || state.itemsAi;
@@ -2896,30 +2916,72 @@ async function loadAllModeData() {
 }
 
 async function loadWaytoagiData() {
-  const res = await fetch(`${dataUrl("data/waytoagi-7d.json")}?t=${Date.now()}`);
-  if (!res.ok) throw new Error(`加载 waytoagi-7d.json 失败: ${res.status}`);
-  return res.json();
+  return fetchJson("data/waytoagi-7d.json");
 }
 
 async function loadSourceStatusData() {
-  const res = await fetch(`${dataUrl("data/source-status.json")}?t=${Date.now()}`);
-  if (!res.ok) throw new Error(`加载 source-status.json 失败: ${res.status}`);
-  return res.json();
+  return fetchJson("data/source-status.json");
 }
 
 async function loadDailyBriefData() {
-  const res = await fetch(`${dataUrl("data/daily-brief.json")}?t=${Date.now()}`);
-  if (!res.ok) throw new Error(`加载 daily-brief.json 失败: ${res.status}`);
-  return res.json();
+  return fetchJson("data/daily-brief.json");
 }
 
 async function loadStoriesData() {
-  const res = await fetch(`${dataUrl(state.storiesDataUrl)}?t=${Date.now()}`);
-  if (!res.ok) throw new Error(`加载 stories-merged.json 失败: ${res.status}`);
-  return res.json();
+  return fetchJson(state.storiesDataUrl);
+}
+
+function loadingSkeleton(count = 3) {
+  const stack = document.createElement("div");
+  stack.className = "skeleton-stack";
+  stack.setAttribute("aria-hidden", "true");
+  for (let index = 0; index < count; index += 1) {
+    const card = document.createElement("div");
+    card.className = "skeleton-card";
+    const meta = document.createElement("span");
+    meta.className = "skeleton-line skeleton-line-short";
+    const title = document.createElement("span");
+    title.className = "skeleton-line skeleton-line-title";
+    const body = document.createElement("span");
+    body.className = "skeleton-line skeleton-line-body";
+    card.append(meta, title, body);
+    stack.appendChild(card);
+  }
+  return stack;
+}
+
+function renderInitialLoading() {
+  updatedAtEl.textContent = "正在同步...";
+  [bolePicksListEl, newsListEl].forEach((container, index) => {
+    if (!container) return;
+    container.replaceChildren(loadingSkeleton(index === 0 ? 2 : 4));
+    container.setAttribute("aria-busy", "true");
+  });
+}
+
+function renderPrimaryLoadError(error) {
+  newsListEl.removeAttribute("aria-busy");
+  bolePicksListEl?.removeAttribute("aria-busy");
+  const box = document.createElement("div");
+  box.className = "empty load-error";
+  box.setAttribute("role", "alert");
+  const title = document.createElement("h3");
+  title.textContent = "暂时没有加载成功";
+  const message = document.createElement("p");
+  message.textContent = "可能是网络波动，稍后重试通常即可恢复。";
+  const detail = document.createElement("small");
+  detail.textContent = error?.message || "未知错误";
+  const retry = document.createElement("button");
+  retry.type = "button";
+  retry.className = "empty-reset-btn";
+  retry.textContent = "重新加载";
+  retry.addEventListener("click", () => window.location.reload());
+  box.append(title, message, detail, retry);
+  newsListEl.replaceChildren(box);
 }
 
 async function init() {
+  renderInitialLoading();
   const [newsResult, waytoagiResult, statusResult, briefResult, storiesResult] = await Promise.allSettled([
     loadNewsData(),
     loadWaytoagiData(),
@@ -2974,9 +3036,11 @@ async function init() {
     renderBolePicks();
     renderList();
     updatedAtEl.textContent = fmtTime(state.generatedAt);
+    updatedAtEl.dateTime = state.generatedAt || "";
+    updatedAtEl.title = state.generatedAt ? new Date(state.generatedAt).toLocaleString("zh-CN") : "";
   } else {
     updatedAtEl.textContent = "新闻数据加载失败";
-    newsListEl.innerHTML = `<div class="empty">${newsResult.reason.message}</div>`;
+    renderPrimaryLoadError(newsResult.reason);
     renderCoverageStrip(newsResult.reason.message);
   }
 
@@ -3001,10 +3065,14 @@ async function init() {
   document.dispatchEvent(new CustomEvent("aiRadar:ready"));
 }
 
+let searchRenderFrame = 0;
 searchInputEl.addEventListener("input", (e) => {
   state.query = e.target.value;
-  renderBolePicks();
-  renderList();
+  window.cancelAnimationFrame(searchRenderFrame);
+  searchRenderFrame = window.requestAnimationFrame(() => {
+    renderBolePicks();
+    renderList();
+  });
 });
 
 siteSelectEl.addEventListener("change", (e) => {

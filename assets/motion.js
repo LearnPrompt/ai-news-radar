@@ -1,31 +1,36 @@
-(function () {
-  if (!window.gsap) return;
+(() => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const mm = gsap.matchMedia();
+  function animateTransform(elements, distance = 12, duration = 360) {
+    Array.from(elements).forEach((element, index) => {
+      if (typeof element.animate !== "function") return;
+      element.getAnimations().forEach((animation) => animation.cancel());
+      element.animate(
+        [
+          { transform: `translateY(${distance}px)` },
+          { transform: "translateY(0)" },
+        ],
+        {
+          duration,
+          delay: Math.min(index * 28, 240),
+          easing: "cubic-bezier(.2,.8,.2,1)",
+        },
+      );
+    });
+  }
 
-  mm.add("(prefers-reduced-motion: no-preference)", function () {
-    gsap.defaults({ duration: 0.55, ease: "power3.out" });
-
-    // Intro / list entry animations intentionally live in styles.css as
-    // transform-only @keyframes: any JS "from" tween that touches opacity
-    // strands elements invisible when the tab is hidden mid-flight, because
-    // the GSAP ticker freezes while rendering is paused.
-
-    // Section scroll reveal via IntersectionObserver. Keep sections visible:
-    // hiding whole content blocks can leave blank viewports after responsive
-    // reflow or rapid mobile scrolling.
-    const revealEls = document.querySelectorAll(".waytoagi-wrap, .list-wrap");
-    if (revealEls.length && window.IntersectionObserver) {
-      gsap.set(revealEls, { y: 14 });
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            gsap.to(entry.target, { y: 0, duration: 0.45, clearProps: "transform" });
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      revealEls.forEach(function (el) { observer.observe(el); });
-    }
+  document.addEventListener("aiRadar:listRendered", () => {
+    animateTransform(document.querySelectorAll(".timeline-item, .news-card"), 9, 300);
   });
-}());
+
+  const sections = document.querySelectorAll(".waytoagi-wrap, .list-wrap");
+  if (!sections.length || !window.IntersectionObserver) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      animateTransform([entry.target], 12, 340);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+  sections.forEach((section) => observer.observe(section));
+})();

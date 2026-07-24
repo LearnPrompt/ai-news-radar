@@ -26,6 +26,7 @@ The project can be packaged as a Skill because it covers the common public paths
 for AI news collection:
 
 - official RSS/Atom/JSON and changelog pages
+- official public service-status APIs for a separate, non-news incident lane
 - OPML collections for personal source lists
 - public GitHub-generated feeds such as curated X/blog/newsletter projects
 - public newsletter archives and static pages
@@ -78,6 +79,14 @@ The public site should directly track these high-signal official sources:
 Aggregator sites may already surface some of these updates, but they are not
 guaranteed to be complete or timely. Keep these official sources as a stable
 baseline, then let the aggregator layer add breadth.
+
+Operational incidents use a separate built-in path:
+
+- **OpenAI Status**: reads the official public incidents JSON endpoint and emits
+  only unresolved `investigating`, `identified`, or `monitoring` incidents to
+  `data/service-status.json`. These incidents do not enter the news archive,
+  relevance scoring, story merge, or daily ranking. The web UI and Radar Skill
+  show the compact service-status section only while an incident is active.
 
 ## Built-In Curated Feeds
 

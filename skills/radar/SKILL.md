@@ -14,7 +14,7 @@ description: |
 第一件事：确定数据源地址。所有请求都基于这一行——
 
 ```bash
-BASE_URL=https://learnprompt.github.io/ai-news-radar/data
+BASE_URL=https://1625517181-jpg.github.io/ai-news-radar/data
 ```
 
 **fork / 自部署用户只需要改这一行**，换成 `https://<用户名>.github.io/ai-news-radar/data`。GitHub Pages 是数据的 canonical 源，不要换成其他镜像域名。第一次发现用户有自己的部署时问一次，之后记住。
@@ -32,6 +32,7 @@ BASE_URL=https://learnprompt.github.io/ai-news-radar/data
 | `top3-personas.json` | ~4KB | 每日TOP3的三种口味点评并排 | 用户要"毒舌一点/换个口味/三种口味对比" |
 | `stories-merged.json` | ~1.4MB | 多源合并后的故事线（importance分层） | 用户问"今天的大事/故事线"，先查新鲜度 |
 | `source-status.json` | ~8KB | 每个信源的健康状态、抓取量、耗时 | 用户问"信源健康/哪些源有料" |
+| `service-status.json` | ~5KB | OpenAI 等服务当前仍在处理的官方故障 | 默认简报先检查；有故障才显示 |
 | `latest-24h-all.json` | ~12MB | 含非AI的全量条目 | 仅用户明确说"全部/包括非AI"才拉，**先提醒体积** |
 | `archive.json` | ~56MB | 全部历史存档 | **默认禁止**。确需历史数据时先告知体积并征得同意 |
 
@@ -41,9 +42,12 @@ BASE_URL=https://learnprompt.github.io/ai-news-radar/data
 
 ```bash
 curl -s "$BASE_URL/daily-brief.json" -o /tmp/radar-brief.json
+curl -s "$BASE_URL/service-status.json" -o /tmp/radar-service-status.json
 python3 -c "import json;d=json.load(open('/tmp/radar-brief.json'));print(d['generated_at'],d['total_items'])"
 ```
 
+- `service-status.json` 中 `ok=true` 且 `active_count>0`：在简报最前面增加“服务状态”，列出正在处理的故障；`active_count=0` 时整段省略。
+- 状态为 `resolved` 的事件不会进入该文件；不要把已恢复事件继续当作当前故障。
 - `daily-brief.json` 超过 **48 小时**未更新：不要用它回答"今天"类问题，降级到 `latest-24h.json`，并说明降级原因。
 - `latest-24h.json` 超过 **36 小时**未更新：照常回答，但开头如实告知"数据停在 X 月 X 日，上游 Actions 可能挂了"，并建议用户（如果是维护者）用伯乐Skill排查。
 - 绝不把过期数据当新鲜数据报给用户。诚实标注数据时间永远是简报的一部分。
@@ -59,6 +63,7 @@ python3 -c "import json;d=json.load(open('/tmp/radar-brief.json'));print(d['gene
 | "毒舌一点"、"锐评"、"换个口味"、"三种口味对比" | `top3-personas.json`——TOP3 三种口味并排 |
 | "今天的大事"、"故事线"、"有什么值得关注的事件" | `stories-merged.json`（新鲜度通过时）按 `importance_score` 取头部 |
 | "哪些信源健康/有料"、"源状态" | `source-status.json` |
+| "ChatGPT/Claude/OpenAI是不是挂了"、"服务故障" | `service-status.json`；仅报告仍在处理的官方事件 |
 | "全部动态/包括非AI的" | `latest-24h-all.json`（先提醒 ~12MB） |
 | "上周/上个月的AI新闻" | 如实说明：公开数据滚动窗口为24小时，历史需 `archive.json`（56MB），先征得同意再拉 |
 
@@ -114,6 +119,19 @@ for i in d['items']:
     if i.get('persona_review'):
         line += f"\n    点评({i.get('persona_score')}分): {i['persona_review']}"
     print(line)
+EOF
+```
+
+### 当前服务状态（默认简报先检查）
+
+```bash
+curl -s "$BASE_URL/service-status.json" -o /tmp/radar-service-status.json
+python3 - <<'EOF'
+import json
+d = json.load(open('/tmp/radar-service-status.json'))
+if d.get('ok') and d.get('active_count', 0) > 0:
+    for i in d.get('incidents', []):
+        print(f"[{i.get('provider','')}] {i.get('title_zh') or i.get('title')} — {i.get('status')} — {i.get('url')}")
 EOF
 ```
 
@@ -222,6 +240,10 @@ EOF
 
 > 数据窗口: 过去24小时 | 数据时间: [generated_at转为人话] | [N]条精选 / [M]个信源
 
+## 服务状态
+- **[服务名：故障标题]** — [调查中/已定位/恢复监控中]
+  [官方状态页链接]
+
 ## 模型发布
 - **[标题]** — [来源] ([信源层级])
   [一句话说明，有原文链接]
@@ -237,6 +259,7 @@ EOF
 简报规则：
 
 - 每条必须带原文 `url`，用户要深挖时直接点。
+- “服务状态”只在 `service-status.json` 有活动故障时显示，并放在普通新闻之前；没有活动故障时完全省略。
 - 官方一手源的条目优先展示，热议参考只做"值得注意"的补充，不混排。
 - 标题有 `title_zh` 用中文，原文是英文时可用 `title_bilingual`。
 - 条数克制：默认10-20条，宁缺毋滥。用户要更多再加。
@@ -245,7 +268,8 @@ EOF
 
 ## 失败模式
 
-- **Pages 404 / 网络失败**：换 raw 地址重试一次：`https://raw.githubusercontent.com/LearnPrompt/ai-news-radar/master/data/latest-24h.json`。还不行就如实告知，不要编造新闻。
+- **Pages 404 / 网络失败**：换 raw 地址重试一次：`https://raw.githubusercontent.com/1625517181-jpg/ai-news-radar/master/data/latest-24h.json`。还不行就如实告知，不要编造新闻。
+- **service-status.json 不存在或读取失败**：继续生成普通简报，不要把读取失败解释成“服务正常”。
 - **数据过期**：见"新鲜度检查"。照常回答 + 显著标注 + 建议维护者排查。
 - **top3-personas.json 为空**：降级模式，如实说明三口味点评需要上游配 LLM Key，退回普通简报。
 - **某类别为空**（如当天没有论文）：如实说"过去24小时雷达里没有论文类条目"，不要拿别的类别凑数。
