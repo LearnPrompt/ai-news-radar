@@ -74,9 +74,12 @@ optional adapters without changing the public default.
 - Treat AgentMail as a private advanced source, not a public default source.
   Never commit `AGENTMAIL_API_KEY`, `AGENTMAIL_INBOX_ID`, inbox addresses,
   full email bodies, raw emails, or private newsletter contents.
-- Keep AgentMail disabled unless `EMAIL_DIGEST_ENABLED=1` and both required
-  credentials are present. Only call the list-messages endpoint; do not call
-  `/raw` or read `text`/`html` bodies.
+- Keep AgentMail disabled unless `EMAIL_DIGEST_ENABLED=1` is explicit. For QQ
+  Agent Mail, use `AGENTMAIL_PROVIDER=agently_cli` after `agently-cli auth
+  login`; only call `agently-cli message +list`, never `message +read` for the
+  public pipeline. The legacy API path may use `AGENTMAIL_PROVIDER=api` with
+  `AGENTMAIL_API_KEY` and `AGENTMAIL_INBOX_ID`, but it must only call the
+  list-messages endpoint; do not call `/raw` or read `text`/`html` bodies.
 - Do not publish `data/email-digest.json` to public Pages by default. Only allow
   publication when the maintainer explicitly sets `EMAIL_DIGEST_PUBLISH=1` and
   understands the site/repo privacy implications.
@@ -102,10 +105,12 @@ the repository secret `FOLLOW_OPML_B64` to override the public demo OPML. If the
 secret is not configured, the workflow uses `feeds/follow.example.opml` as a
 small public RSS/OPML demo so the hosted page shows the OPML path working. Do not
 commit the private OPML file.
-For AgentMail, use `EMAIL_DIGEST_ENABLED=1`, `AGENTMAIL_API_KEY`, and
-`AGENTMAIL_INBOX_ID` only in environment variables or GitHub Secrets. Keep
-`EMAIL_DIGEST_PUBLISH` unset unless the maintainer explicitly wants a private
-Pages/repo to publish the metadata-only email digest.
+For AgentMail, use `EMAIL_DIGEST_ENABLED=1` plus either
+`AGENTMAIL_PROVIDER=agently_cli` for a locally authorized QQ Agent Mail CLI, or
+`AGENTMAIL_PROVIDER=api` with `AGENTMAIL_API_KEY` and `AGENTMAIL_INBOX_ID` in
+environment variables or GitHub Secrets. Keep `EMAIL_DIGEST_INCLUDE_IN_RADAR`
+and `EMAIL_DIGEST_PUBLISH` unset unless the maintainer explicitly wants a
+private Pages/repo to publish the metadata-only email digest.
 
 ## Evaluate A New Source
 

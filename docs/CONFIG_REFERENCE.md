@@ -132,6 +132,8 @@ SocialData 同时跑两路:① 中英关键词搜索发现新声音;② 一个�
 **Variables(可选,只当急停开关用):**
 `SOCIALDATA_ENABLED`、`TIKHUB_ENABLED`、`X_API_ENABLED` —— 不设=默认开;设 `0`=关。
 
+AgentMail 另有本地/私有运行变量：`EMAIL_DIGEST_ENABLED=1` 打开邮箱摘要，`AGENTMAIL_PROVIDER=agently_cli` 使用已授权的 QQ `agently-cli message +list`，`EMAIL_DIGEST_INCLUDE_IN_RADAR=1` 才把 metadata-only 邮件摘要作为 `agentmail` 源加入主 Radar 数据。
+
 其余所有调参(query / 排序 / 时间窗 / 每日上限 / 间隔 / 平台)**全部已搬进代码常量,GitHub 上不用再配**。
 
 ---

@@ -6,11 +6,15 @@ from scripts.update_news import (
     add_bilingual_fields,
     add_creator_ranking_fields,
     add_source_tier_fields,
+    agentmail_digest_items_to_raw_items,
     build_agentmail_digest_payload,
     build_creator_hot_items,
     build_latest_payloads,
     dedupe_items_by_title_url,
+    extract_agently_cli_messages,
+    extract_json_object_from_cli_output,
     fetch_agentmail_digest,
+    fetch_agentmail_digest_via_cli,
     fetch_aihot,
     fetch_ai_hubtoday,
     fetch_hacker_news_algolia,
@@ -701,6 +705,81 @@ class TopicFilterTests(unittest.TestCase):
         self.assertEqual(payload["items"][0]["sender_domain"], "mail.alphasignal.ai")
         self.assertIn("AI research digest", payload["items"][0]["subject"])
 
+    def test_agentmail_digest_supports_agently_cli_message_shape(self):
+        payload = build_agentmail_digest_payload(
+            [
+                {
+                    "message_id": "msg_qq_1",
+                    "created_at": "2026-07-30T14:01:34Z",
+                    "from": {"name": "TLDR AI", "email": "dan@tldrnewsletter.com"},
+                    "subject": "OpenAI tops ARC-AGI-3",
+                    "snippet": "GPT-5.6 Sol scores just 7.8% on the ARC-AGI-3 benchmark",
+                    "body": "FULL BODY SHOULD NOT SHIP",
+                }
+            ],
+            generated_at="2026-07-31T01:00:00Z",
+            window_hours=24,
+            allowed_sender_domains=["tldrnewsletter.com"],
+        )
+        item = payload["items"][0]
+        dumped = str(payload)
+        self.assertEqual(item["sender_domain"], "tldrnewsletter.com")
+        self.assertEqual(item["received_at"], "2026-07-30T14:01:34Z")
+        self.assertIn("GPT-5.6 Sol", item["preview"])
+        self.assertNotIn("dan@tldrnewsletter.com", dumped)
+        self.assertNotIn("FULL BODY", dumped)
+
+    def test_extract_agently_cli_messages_ignores_tip_lines(self):
+        raw = """tip: agently-cli message +read --id msg_123
+        {"ok": true, "data": {"data": [{"message_id": "msg_123", "subject": "AI"}]}}
+        """
+        payload = extract_json_object_from_cli_output(raw)
+        messages = extract_agently_cli_messages(payload)
+        self.assertEqual(messages[0]["message_id"], "msg_123")
+
+    def test_fetch_agentmail_digest_via_cli_uses_list_only(self):
+        completed = __import__("subprocess").CompletedProcess(
+            args=[],
+            returncode=0,
+            stdout='{"ok": true, "data": {"data": [{"message_id": "msg_3", "created_at": "2026-07-30T00:00:00Z", "from": {"email": "news@example.com"}, "subject": "Claude update", "snippet": "Metadata only"}]}}',
+            stderr="",
+        )
+
+        with patch("subprocess.run", return_value=completed) as run_mock:
+            payload = fetch_agentmail_digest_via_cli(
+                generated_at="2026-07-31T01:00:00Z",
+                after="2026-07-30T01:00:00Z",
+                limit=10,
+                cli_path="agently-cli",
+                window_hours=24,
+            )
+        command = run_mock.call_args.args[0]
+        self.assertEqual(command[:3], ["agently-cli", "message", "+list"])
+        self.assertIn("--after", command)
+        self.assertNotIn("+read", command)
+        self.assertEqual(payload["items"][0]["sender_domain"], "example.com")
+
+    def test_agentmail_digest_items_can_be_promoted_to_radar_source(self):
+        payload = build_agentmail_digest_payload(
+            [
+                {
+                    "message_id": "msg_4",
+                    "created_at": "2026-07-30T10:08:39Z",
+                    "from": {"email": "news@daily.therundown.ai"},
+                    "subject": "Second victim surfaces in OpenAI's agent breach",
+                    "snippet": "The sci-fi style breach that saw OpenAI’s models hack into Hugging Face",
+                }
+            ],
+            generated_at="2026-07-31T01:00:00Z",
+            window_hours=24,
+        )
+        items = agentmail_digest_items_to_raw_items(payload)
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].site_id, "agentmail")
+        self.assertEqual(items[0].site_name, "AgentMail")
+        self.assertIn("therundown.ai", items[0].source)
+        self.assertEqual(items[0].url, "https://agent.qq.com/")
+
     def test_fetch_agentmail_digest_uses_list_messages_endpoint_only(self):
         class FakeResponse:
             def raise_for_status(self):
@@ -767,7 +846,7 @@ class TopicFilterTests(unittest.TestCase):
         self.assertIsNone(status["ok"])
         self.assertEqual(session.calls, 0)
 
-    def test_agentmail_enabled_without_credentials_does_not_request_network(self):
+    def test_agentmail_api_enabled_without_credentials_does_not_request_network(self):
         class NoNetworkSession:
             def __init__(self):
                 self.calls = 0
@@ -777,7 +856,7 @@ class TopicFilterTests(unittest.TestCase):
                 raise AssertionError("AgentMail should not fetch without full credentials")
 
         session = NoNetworkSession()
-        with patch.dict("os.environ", {"EMAIL_DIGEST_ENABLED": "1"}, clear=True):
+        with patch.dict("os.environ", {"EMAIL_DIGEST_ENABLED": "1", "AGENTMAIL_PROVIDER": "api"}, clear=True):
             payload, status = maybe_fetch_agentmail_digest(
                 session,
                 generated_at="2026-05-03T01:00:00Z",

@@ -314,9 +314,13 @@ FOLLOW_OPML_B64
 本地方式：
 
 ```bash
+npm install -g @tencent-qqmail/agently-cli
+agently-cli auth login
 export EMAIL_DIGEST_ENABLED=1
-export AGENTMAIL_API_KEY="你的AgentMail API Key"
-export AGENTMAIL_INBOX_ID="你的Inbox ID"
+export AGENTMAIL_PROVIDER=agently_cli
+export AGENTMAIL_ALLOWED_SENDER_DOMAINS=tldrnewsletter.com,daily.therundown.ai
+# 只有明确想把邮件元数据放进主 Radar 时才打开：
+export EMAIL_DIGEST_INCLUDE_IN_RADAR=1
 python scripts/update_news.py --output-dir data --window-hours 24
 ```
 
@@ -324,9 +328,11 @@ python scripts/update_news.py --output-dir data --window-hours 24
 
 ```text
 默认不启用AgentMail。
-默认只调用 GET /v0/inboxes/{inbox_id}/messages。
-默认不读取 /raw，不读取 text/html 正文。
+QQ Agent Mail 路径默认只调用 agently-cli message +list。
+旧 API 路径只调用 GET /v0/inboxes/{inbox_id}/messages。
+默认不读取 /raw，不读取 message +read，不读取 text/html 正文。
 默认只输出脱敏后的标题、预览片段、发件域名、链接、附件数量和时间。
+默认不把邮件元数据加入主 Radar，只有设置 EMAIL_DIGEST_INCLUDE_IN_RADAR=1 才会加入。
 GitHub Actions默认不会提交 data/email-digest.json；只有设置 EMAIL_DIGEST_PUBLISH=1 才会提交。
 ```
 

@@ -12,6 +12,7 @@ import math
 import os
 import random
 import re
+import subprocess
 import time
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -242,6 +243,8 @@ HN_ALGOLIA_QUERY_PAUSE_SECONDS = 0.1
 AGENTMAIL_API_BASE_DEFAULT = "https://api.agentmail.to"
 AGENTMAIL_DIGEST_FILE = "email-digest.json"
 AGENTMAIL_DEFAULT_LIMIT = 50
+AGENTMAIL_PROVIDER_DEFAULT = "agently_cli"
+AGENTMAIL_CLI_DEFAULT = "agently-cli"
 PAID_SOURCE_STATE_FILE = "paid-source-state.json"
 PAID_SOURCE_DEFAULT_INTERVAL_HOURS = 24
 PAID_SOURCE_DEFAULT_INTERVAL_HOURS_BY_PREFIX = {
@@ -3186,26 +3189,43 @@ def filter_agentmail_messages_by_domain(
     return [
         msg
         for msg in messages
-        if domain_matches_filter(sender_domain_from_address(str(msg.get("from") or "")), allowed_domains)
+        if domain_matches_filter(agentmail_sender_domain(msg), allowed_domains)
     ]
+
+
+def agentmail_sender_domain(message: dict[str, Any]) -> str | None:
+    sender = message.get("from")
+    if isinstance(sender, dict):
+        return sender_domain_from_address(str(sender.get("email") or ""))
+    return sender_domain_from_address(str(sender or ""))
+
+
+def agentmail_message_timestamp(message: dict[str, Any]) -> Any:
+    return message.get("timestamp") or message.get("created_at") or message.get("received_at")
+
+
+def agentmail_message_preview(message: dict[str, Any]) -> str:
+    return str(message.get("preview") or message.get("snippet") or "")
 
 
 def safe_agentmail_item(message: dict[str, Any]) -> dict[str, Any]:
     """Convert an AgentMail MessageItem into a metadata-only public digest item."""
     message_id = str(message.get("message_id") or "")
     stable_id = hashlib.sha1(message_id.encode("utf-8")).hexdigest()[:12] if message_id else "unknown"
-    domain = sender_domain_from_address(str(message.get("from") or ""))
+    domain = agentmail_sender_domain(message)
     attachments = message.get("attachments") or []
+    if not isinstance(attachments, list):
+        attachments = []
     return {
         "id": f"agentmail:{stable_id}",
         "source_type": "email_newsletter",
         "source": f"AgentMail · {domain}" if domain else "AgentMail",
         "sender_domain": domain,
         "subject": compact_public_snippet(str(message.get("subject") or ""), max_chars=180),
-        "preview": compact_public_snippet(str(message.get("preview") or ""), max_chars=240),
-        "received_at": message.get("timestamp") or message.get("created_at"),
+        "preview": compact_public_snippet(agentmail_message_preview(message), max_chars=240),
+        "received_at": agentmail_message_timestamp(message),
         "has_attachments": bool(attachments),
-        "attachment_count": len(attachments) if isinstance(attachments, list) else 0,
+        "attachment_count": len(attachments),
     }
 
 
@@ -3270,6 +3290,105 @@ def fetch_agentmail_digest(
         window_hours=window_hours,
         allowed_sender_domains=allowed_sender_domains,
     )
+
+
+def extract_json_object_from_cli_output(output: str) -> dict[str, Any]:
+    """Parse a JSON envelope from CLI output that may include tip lines."""
+    text = str(output or "")
+    start = text.find("{")
+    end = text.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("No JSON object found in agently-cli output")
+    parsed = json.loads(text[start : end + 1])
+    if not isinstance(parsed, dict):
+        raise ValueError("agently-cli output is not a JSON object")
+    return parsed
+
+
+def extract_agently_cli_messages(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    data = payload.get("data") if isinstance(payload, dict) else {}
+    if isinstance(data, dict):
+        inner = data.get("data")
+        if isinstance(inner, list):
+            return [msg for msg in inner if isinstance(msg, dict)]
+        messages = data.get("messages")
+        if isinstance(messages, list):
+            return [msg for msg in messages if isinstance(msg, dict)]
+    messages = payload.get("messages") if isinstance(payload, dict) else []
+    if isinstance(messages, list):
+        return [msg for msg in messages if isinstance(msg, dict)]
+    return []
+
+
+def fetch_agentmail_digest_via_cli(
+    *,
+    generated_at: str,
+    after: str,
+    limit: int = AGENTMAIL_DEFAULT_LIMIT,
+    cli_path: str = AGENTMAIL_CLI_DEFAULT,
+    window_hours: int = 24,
+    allowed_sender_domains: list[str] | None = None,
+) -> dict[str, Any]:
+    """Fetch QQ Agent Mail metadata through agently-cli; never reads message bodies."""
+    command = [
+        cli_path or AGENTMAIL_CLI_DEFAULT,
+        "message",
+        "+list",
+        "--dir",
+        "inbox",
+        "--limit",
+        str(max(1, min(int(limit or AGENTMAIL_DEFAULT_LIMIT), 100))),
+        "--after",
+        after,
+    ]
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=45,
+    )
+    output = "\n".join(part for part in (completed.stdout, completed.stderr) if part)
+    if completed.returncode != 0:
+        raise RuntimeError(f"agently-cli exited with {completed.returncode}")
+    payload = extract_json_object_from_cli_output(output)
+    if payload.get("ok") is False:
+        raise RuntimeError("agently-cli returned ok=false")
+    messages = extract_agently_cli_messages(payload)
+    return build_agentmail_digest_payload(
+        messages,
+        generated_at=generated_at,
+        window_hours=window_hours,
+        allowed_sender_domains=allowed_sender_domains,
+    )
+
+
+def agentmail_digest_items_to_raw_items(payload: dict[str, Any]) -> list[RawItem]:
+    items = payload.get("items") if isinstance(payload, dict) else []
+    out: list[RawItem] = []
+    if not isinstance(items, list):
+        return out
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        subject = compact_public_snippet(str(item.get("subject") or ""), max_chars=180)
+        preview = compact_public_snippet(str(item.get("preview") or ""), max_chars=260)
+        if not subject:
+            continue
+        received_at = parse_date_any(item.get("received_at"), utc_now())
+        domain = str(item.get("sender_domain") or "").strip()
+        out.append(
+            RawItem(
+                site_id="agentmail",
+                site_name="AgentMail",
+                source=f"AgentMail · {domain}" if domain else "AgentMail",
+                title=subject,
+                url="https://agent.qq.com/",
+                published_at=received_at,
+                meta={"summary": preview, "email_source_type": "newsletter_metadata"},
+            )
+        )
+    return out
 
 
 def env_flag(name: str) -> bool:
@@ -3408,33 +3527,56 @@ def maybe_fetch_agentmail_digest(
         "item_count": 0,
         "privacy": "metadata_only_no_body",
         "published_by_default": False,
+        "provider": None,
+        "include_in_radar": env_flag("EMAIL_DIGEST_INCLUDE_IN_RADAR"),
     }
     if not status["enabled"]:
         return None, status
 
+    provider = str(os.environ.get("AGENTMAIL_PROVIDER") or "").strip().lower()
     agentmail_api_key = str(os.environ.get("AGENTMAIL_API_KEY") or "").strip()
     agentmail_inbox_id = str(os.environ.get("AGENTMAIL_INBOX_ID") or "").strip()
+    if not provider:
+        provider = "api" if (agentmail_api_key and agentmail_inbox_id) else AGENTMAIL_PROVIDER_DEFAULT
+    status["provider"] = provider
+
     agentmail_base_url = str(os.environ.get("AGENTMAIL_API_BASE_URL") or AGENTMAIL_API_BASE_DEFAULT).strip()
     agentmail_limit = env_int("AGENTMAIL_LIMIT", AGENTMAIL_DEFAULT_LIMIT)
+    agentmail_cli = str(os.environ.get("AGENTMAIL_CLI") or AGENTMAIL_CLI_DEFAULT).strip()
     allowed_sender_domains = parse_domain_filter(str(os.environ.get("AGENTMAIL_ALLOWED_SENDER_DOMAINS") or ""))
     status["allowed_sender_domains"] = allowed_sender_domains
-    if not (agentmail_api_key and agentmail_inbox_id):
+
+    if provider == "api" and not (agentmail_api_key and agentmail_inbox_id):
         status["ok"] = False
         status["error"] = "missing_agentmail_credentials"
         return None, status
+    if provider not in {"api", "agently_cli"}:
+        status["ok"] = False
+        status["error"] = "unsupported_agentmail_provider"
+        return None, status
 
     try:
-        payload = fetch_agentmail_digest(
-            session,
-            api_key=agentmail_api_key,
-            inbox_id=agentmail_inbox_id,
-            generated_at=generated_at,
-            after=after,
-            limit=agentmail_limit,
-            base_url=agentmail_base_url,
-            window_hours=window_hours,
-            allowed_sender_domains=allowed_sender_domains,
-        )
+        if provider == "api":
+            payload = fetch_agentmail_digest(
+                session,
+                api_key=agentmail_api_key,
+                inbox_id=agentmail_inbox_id,
+                generated_at=generated_at,
+                after=after,
+                limit=agentmail_limit,
+                base_url=agentmail_base_url,
+                window_hours=window_hours,
+                allowed_sender_domains=allowed_sender_domains,
+            )
+        else:
+            payload = fetch_agentmail_digest_via_cli(
+                generated_at=generated_at,
+                after=after,
+                limit=agentmail_limit,
+                cli_path=agentmail_cli,
+                window_hours=window_hours,
+                allowed_sender_domains=allowed_sender_domains,
+            )
         status["ok"] = True
         status["item_count"] = int(payload.get("total_messages") or 0)
         return payload, status
@@ -6260,6 +6402,22 @@ def main() -> int:
         after=iso(now - timedelta(hours=args.window_hours)),
         window_hours=args.window_hours,
     )
+    if agentmail_status.get("enabled"):
+        agentmail_items = agentmail_digest_items_to_raw_items(email_digest_payload or {})
+        if agentmail_status.get("include_in_radar") and agentmail_items:
+            raw_items.extend(agentmail_items)
+        statuses.append(
+            {
+                "site_id": "agentmail",
+                "site_name": "AgentMail",
+                "ok": bool(agentmail_status.get("ok")) if agentmail_status.get("ok") is not None else True,
+                "item_count": len(agentmail_items) if agentmail_status.get("include_in_radar") else 0,
+                "duration_ms": 0,
+                "error": agentmail_status.get("error"),
+                "skipped": not bool(agentmail_status.get("include_in_radar")),
+                "skip_reason": None if agentmail_status.get("include_in_radar") else "email_digest_not_included_in_radar",
+            }
+        )
     x_api_items, x_api_status = maybe_fetch_x_api_updates(session, now)
     if x_api_status.get("enabled"):
         raw_items.extend(x_api_items)
