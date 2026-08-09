@@ -896,6 +896,30 @@ class TopicFilterTests(unittest.TestCase):
         self.assertIsNone(all_items[0]["title_zh"])
         self.assertEqual(all_items[1]["title_zh"], "OpenAI 发布新智能体")
 
+    def test_agentmail_ai_mode_translation_is_prioritized_with_primary_budget(self):
+        ai_items_input = [
+            {"site_id": "other", "title": "Other source consumes budget", "url": "https://example.com/other"},
+            {"site_id": "agentmail", "title": "OpenAI ships a new agent", "url": "https://newsletter.example.com/agent"},
+        ]
+
+        def fake_translate(title):
+            return {
+                "Other source consumes budget": "其它来源消耗预算",
+                "OpenAI ships a new agent": "OpenAI 发布新智能体",
+            }[title]
+
+        with patch("scripts.update_news.translate_to_zh_deepseek", side_effect=fake_translate):
+            ai_items, _, _ = add_bilingual_fields(
+                ai_items_input,
+                [],
+                session=None,
+                cache={},
+                max_new_translations=1,
+                max_new_translations_all=0,
+            )
+        self.assertIsNone(ai_items[0]["title_zh"])
+        self.assertEqual(ai_items[1]["title_zh"], "OpenAI 发布新智能体")
+
     def test_agentmail_short_emoji_titles_can_still_translate(self):
         item = {
             "site_id": "agentmail",

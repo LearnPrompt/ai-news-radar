@@ -5395,6 +5395,12 @@ def add_bilingual_fields(
             out["title_bilingual"] = f"{zh_title} / {title}"
         return out
 
+    if max_new_translations > 0:
+        # AgentMail items are visible in the default AI timeline too; warm
+        # them before other AI sources consume the smaller primary cap.
+        for it in items_ai:
+            if str(it.get("site_id") or "") == "agentmail":
+                enrich(it, allow_translate=True, is_ai_pool=True)
     ai_out = [enrich(it, allow_translate=True, is_ai_pool=True) for it in items_ai]
     if max_new_translations_all > 0:
         # AgentMail newsletter items often enter only the broad/all pool; warm
