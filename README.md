@@ -282,7 +282,10 @@ python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml fee
 - 如果设置 `TITLE_ENHANCE_MAX_PER_RUN`，会限制每次运行最多改写的标题条数；不设置默认 30
 - 如果没有设置 `FOLLOW_OPML_B64`，线上工作流会自动使用公开示例 `feeds/follow.example.opml`，让页面展示 RSS/OPML 能力
 - 如果设置 `FOLLOW_OPML_B64`，会优先自动解码为私有 `feeds/follow.opml`
-- 如果设置 `EMAIL_DIGEST_ENABLED=1`、`AGENTMAIL_API_KEY`、`AGENTMAIL_INBOX_ID`，会生成脱敏邮箱摘要
+- 如果设置 `EMAIL_DIGEST_ENABLED=1`，会生成脱敏邮箱摘要；`AGENTMAIL_PROVIDER=agently_cli` 通过已授权的 QQ Agent Mail CLI 读取 `message +list` 元数据，`AGENTMAIL_PROVIDER=api` 兼容旧 `AGENTMAIL_API_KEY` / `AGENTMAIL_INBOX_ID` 模式
+- 如果额外设置 `AGENTMAIL_RESOLVE_PUBLIC_URLS=1`，QQ Agent Mail CLI 模式会对每封候选邮件执行一次 `message +read`，只抽取 `Read online` / `View in browser` 这类公开 newsletter 链接；正文不会写入任何 JSON。没有公开链接的邮件不会进入 Radar 主列表，避免跳到私有邮箱首页
+- 只有额外设置 `EMAIL_DIGEST_INCLUDE_IN_RADAR=1`，才会把邮件 subject / snippet / sender domain / timestamp 作为独立 `agentmail` 源放进 Radar 主数据
+- AgentMail 进入 Radar 的标题会和其它英文源一样走双语标题流程：有 `DEEPSEEK_API_KEY` 时优先 DeepSeek 翻译，没有时回退谷歌翻译；翻译数量仍受 `--translate-max-new` / `--translate-max-new-broad` 限制
 - 只有额外设置 `EMAIL_DIGEST_PUBLISH=1`，才会提交 `data/email-digest.json`
 - 如果设置 `X_API_ENABLED=1`、`X_BEARER_TOKEN` 和预算变量，会在每日指定UTC窗口用官方X API抓取少量公开Post；默认关闭，且当前X API按返回资源计费
 - 如果设置 `SOCIALDATA_ENABLED=1`、`SOCIALDATA_API_KEY` 和预算变量，会按 `SOCIALDATA_RUN_INTERVAL_HOURS`（默认12小时）通过 SocialData.tools 抓取少量公开 X/Twitter 搜索结果；默认关闭，API Key 只应放在本地环境变量或 GitHub Secrets

@@ -12,6 +12,7 @@ import math
 import os
 import random
 import re
+import subprocess
 import time
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -19,7 +20,7 @@ from datetime import date, datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
+from urllib.parse import parse_qsl, unquote, urlencode, urljoin, urlparse, urlunparse
 from zoneinfo import ZoneInfo
 
 import requests
@@ -242,6 +243,33 @@ HN_ALGOLIA_QUERY_PAUSE_SECONDS = 0.1
 AGENTMAIL_API_BASE_DEFAULT = "https://api.agentmail.to"
 AGENTMAIL_DIGEST_FILE = "email-digest.json"
 AGENTMAIL_DEFAULT_LIMIT = 50
+AGENTMAIL_PROVIDER_DEFAULT = "agently_cli"
+AGENTMAIL_CLI_DEFAULT = "agently-cli"
+AGENTMAIL_PUBLIC_LINK_TEXT_RE = re.compile(
+    r"\b(read\s+online|view\s+in\s+browser|read\s+in\s+browser|open\s+in\s+browser|"
+    r"read\s+on\s+web|view\s+online|web\s+version)\b",
+    re.I,
+)
+AGENTMAIL_PUBLIC_LINK_REJECT_RE = re.compile(
+    r"\b(unsubscribe|manage\s+preferences|privacy|terms|sponsor|advertise|"
+    r"feedback|rate\s+this|log\s+in|subscribe)\b",
+    re.I,
+)
+AGENTMAIL_PUBLIC_URL_REJECT_HOSTS = (
+    "agent.qq.com",
+    "email.beehiivstatus.com",
+)
+AGENTMAIL_TRACKING_QUERY_PREFIXES = ("utm_",)
+AGENTMAIL_TRACKING_QUERY_KEYS = {
+    "_bhlid",
+    "email",
+    "email_id",
+    "mc_cid",
+    "mc_eid",
+    "ref",
+    "subscriber",
+    "subscriber_id",
+}
 PAID_SOURCE_STATE_FILE = "paid-source-state.json"
 PAID_SOURCE_DEFAULT_INTERVAL_HOURS = 24
 PAID_SOURCE_DEFAULT_INTERVAL_HOURS_BY_PREFIX = {
@@ -3186,27 +3214,196 @@ def filter_agentmail_messages_by_domain(
     return [
         msg
         for msg in messages
-        if domain_matches_filter(sender_domain_from_address(str(msg.get("from") or "")), allowed_domains)
+        if domain_matches_filter(agentmail_sender_domain(msg), allowed_domains)
     ]
+
+
+def agentmail_sender_domain(message: dict[str, Any]) -> str | None:
+    sender = message.get("from")
+    if isinstance(sender, dict):
+        return sender_domain_from_address(str(sender.get("email") or ""))
+    return sender_domain_from_address(str(sender or ""))
+
+
+def agentmail_message_timestamp(message: dict[str, Any]) -> Any:
+    return message.get("timestamp") or message.get("created_at") or message.get("received_at")
+
+
+def agentmail_message_preview(message: dict[str, Any]) -> str:
+    return str(message.get("preview") or message.get("snippet") or "")
+
+
+def agentmail_message_id(message: dict[str, Any]) -> str:
+    return str(message.get("message_id") or message.get("id") or "").strip()
+
+
+def clean_agentmail_public_url(raw_url: Any) -> str:
+    """Return a public, browser-openable newsletter URL without common tracking params."""
+    url = str(raw_url or "").strip()
+    if not url:
+        return ""
+    url = url.replace("&amp;", "&")
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        return ""
+    decoded_path = unquote(parsed.path)
+    nested_match = re.search(r"https?://[^/\s]+[^\s]*", decoded_path)
+    if nested_match and parsed.netloc.lower().startswith("tracking."):
+        return clean_agentmail_public_url(nested_match.group(0))
+    host = parsed.netloc.lower()
+    if any(host == blocked or host.endswith(f".{blocked}") for blocked in AGENTMAIL_PUBLIC_URL_REJECT_HOSTS):
+        return ""
+    query = [
+        (key, value)
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+        if key.lower() not in AGENTMAIL_TRACKING_QUERY_KEYS
+        and not any(key.lower().startswith(prefix) for prefix in AGENTMAIL_TRACKING_QUERY_PREFIXES)
+    ]
+    return urlunparse(
+        (
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            parsed.params,
+            urlencode(query, doseq=True),
+            "",
+        )
+    )
+
+
+def agentmail_explicit_public_url(message: dict[str, Any]) -> str:
+    """Use URL-like fields from list/API metadata when providers expose them."""
+    for key in ("public_url", "web_url", "permalink", "archive_url", "url"):
+        cleaned = clean_agentmail_public_url(message.get(key))
+        if cleaned:
+            return cleaned
+    links = message.get("links")
+    candidates: list[Any] = []
+    if isinstance(links, dict):
+        candidates.extend(links.values())
+    elif isinstance(links, list):
+        candidates.extend(links)
+    for link in candidates:
+        if isinstance(link, dict):
+            cleaned = clean_agentmail_public_url(link.get("url") or link.get("href"))
+        else:
+            cleaned = clean_agentmail_public_url(link)
+        if cleaned:
+            return cleaned
+    return ""
+
+
+def score_agentmail_public_link(text: str, url: str) -> int:
+    cleaned = clean_agentmail_public_url(url)
+    if not cleaned:
+        return -100
+    label = re.sub(r"\s+", " ", str(text or "")).strip()
+    if AGENTMAIL_PUBLIC_LINK_REJECT_RE.search(label) or AGENTMAIL_PUBLIC_LINK_REJECT_RE.search(cleaned):
+        return -100
+    host = urlparse(cleaned).netloc.lower()
+    score = 0
+    if AGENTMAIL_PUBLIC_LINK_TEXT_RE.search(label):
+        score += 100
+    if "link.mail.beehiiv.com" in host or "substack.com" in host:
+        score += 15
+    if "youtube.com" in host or "youtu.be" in host or "linkedin.com" in host:
+        score -= 20
+    if label and label.lower().strip() in {"read more", "read the full issue", "continue reading"}:
+        score += 40
+    return score
+
+
+def extract_agentmail_public_url_from_body(body: str) -> str:
+    """Extract a public newsletter issue URL from a message body without storing the body."""
+    html = str(body or "")
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    candidates: list[tuple[int, str]] = []
+    for anchor in soup.find_all("a"):
+        href = anchor.get("href")
+        if not href:
+            continue
+        text = anchor.get_text(" ", strip=True)
+        cleaned = clean_agentmail_public_url(href)
+        score = score_agentmail_public_link(text, cleaned)
+        if score > 0:
+            candidates.append((score, cleaned))
+    if not candidates:
+        for raw_url in re.findall(r"https?://[^\s\"'<>]+", html):
+            cleaned = clean_agentmail_public_url(raw_url)
+            score = score_agentmail_public_link("", cleaned)
+            if score > 0:
+                candidates.append((score, cleaned))
+    if not candidates:
+        return ""
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    return candidates[0][1]
+
+
+def read_agentmail_public_url_via_cli(message_id: str, cli_path: str = AGENTMAIL_CLI_DEFAULT) -> str:
+    """Read one message only to extract a public newsletter URL; body is never returned or stored."""
+    if not message_id:
+        return ""
+    command = [cli_path or AGENTMAIL_CLI_DEFAULT, "message", "+read", "--id", message_id]
+    completed = subprocess.run(command, check=False, capture_output=True, text=True, timeout=45)
+    if completed.returncode != 0:
+        return ""
+    output = "\n".join(part for part in (completed.stdout, completed.stderr) if part)
+    try:
+        payload = extract_json_object_from_cli_output(output)
+    except Exception:
+        return ""
+    data = payload.get("data") if isinstance(payload, dict) else {}
+    if not isinstance(data, dict):
+        data = {}
+    explicit = agentmail_explicit_public_url(data)
+    if explicit:
+        return explicit
+    return extract_agentmail_public_url_from_body(str(data.get("body") or ""))
+
+
+def enrich_agentmail_messages_with_public_urls(
+    messages: list[dict[str, Any]],
+    *,
+    cli_path: str = AGENTMAIL_CLI_DEFAULT,
+    resolve_public_urls: bool = False,
+) -> list[dict[str, Any]]:
+    enriched: list[dict[str, Any]] = []
+    for message in messages:
+        copy = dict(message)
+        public_url = agentmail_explicit_public_url(copy)
+        if not public_url and resolve_public_urls:
+            public_url = read_agentmail_public_url_via_cli(agentmail_message_id(copy), cli_path=cli_path)
+        if public_url:
+            copy["public_url"] = public_url
+        enriched.append(copy)
+    return enriched
 
 
 def safe_agentmail_item(message: dict[str, Any]) -> dict[str, Any]:
     """Convert an AgentMail MessageItem into a metadata-only public digest item."""
-    message_id = str(message.get("message_id") or "")
+    message_id = agentmail_message_id(message)
     stable_id = hashlib.sha1(message_id.encode("utf-8")).hexdigest()[:12] if message_id else "unknown"
-    domain = sender_domain_from_address(str(message.get("from") or ""))
+    domain = agentmail_sender_domain(message)
     attachments = message.get("attachments") or []
-    return {
+    if not isinstance(attachments, list):
+        attachments = []
+    item = {
         "id": f"agentmail:{stable_id}",
         "source_type": "email_newsletter",
         "source": f"AgentMail · {domain}" if domain else "AgentMail",
         "sender_domain": domain,
         "subject": compact_public_snippet(str(message.get("subject") or ""), max_chars=180),
-        "preview": compact_public_snippet(str(message.get("preview") or ""), max_chars=240),
-        "received_at": message.get("timestamp") or message.get("created_at"),
+        "preview": compact_public_snippet(agentmail_message_preview(message), max_chars=240),
+        "received_at": agentmail_message_timestamp(message),
         "has_attachments": bool(attachments),
-        "attachment_count": len(attachments) if isinstance(attachments, list) else 0,
+        "attachment_count": len(attachments),
     }
+    public_url = clean_agentmail_public_url(message.get("public_url"))
+    if public_url:
+        item["public_url"] = public_url
+    return item
 
 
 def build_agentmail_digest_payload(
@@ -3270,6 +3467,117 @@ def fetch_agentmail_digest(
         window_hours=window_hours,
         allowed_sender_domains=allowed_sender_domains,
     )
+
+
+def extract_json_object_from_cli_output(output: str) -> dict[str, Any]:
+    """Parse a JSON envelope from CLI output that may include tip lines."""
+    text = str(output or "")
+    start = text.find("{")
+    end = text.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("No JSON object found in agently-cli output")
+    parsed = json.loads(text[start : end + 1])
+    if not isinstance(parsed, dict):
+        raise ValueError("agently-cli output is not a JSON object")
+    return parsed
+
+
+def extract_agently_cli_messages(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    data = payload.get("data") if isinstance(payload, dict) else {}
+    if isinstance(data, dict):
+        inner = data.get("data")
+        if isinstance(inner, list):
+            return [msg for msg in inner if isinstance(msg, dict)]
+        messages = data.get("messages")
+        if isinstance(messages, list):
+            return [msg for msg in messages if isinstance(msg, dict)]
+    messages = payload.get("messages") if isinstance(payload, dict) else []
+    if isinstance(messages, list):
+        return [msg for msg in messages if isinstance(msg, dict)]
+    return []
+
+
+def fetch_agentmail_digest_via_cli(
+    *,
+    generated_at: str,
+    after: str,
+    limit: int = AGENTMAIL_DEFAULT_LIMIT,
+    cli_path: str = AGENTMAIL_CLI_DEFAULT,
+    window_hours: int = 24,
+    allowed_sender_domains: list[str] | None = None,
+    resolve_public_urls: bool = False,
+) -> dict[str, Any]:
+    """Fetch QQ Agent Mail metadata through agently-cli; never reads message bodies."""
+    command = [
+        cli_path or AGENTMAIL_CLI_DEFAULT,
+        "message",
+        "+list",
+        "--dir",
+        "inbox",
+        "--limit",
+        str(max(1, min(int(limit or AGENTMAIL_DEFAULT_LIMIT), 100))),
+        "--after",
+        after,
+    ]
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=45,
+    )
+    output = "\n".join(part for part in (completed.stdout, completed.stderr) if part)
+    if completed.returncode != 0:
+        raise RuntimeError(f"agently-cli exited with {completed.returncode}")
+    payload = extract_json_object_from_cli_output(output)
+    if payload.get("ok") is False:
+        raise RuntimeError("agently-cli returned ok=false")
+    messages = extract_agently_cli_messages(payload)
+    messages = enrich_agentmail_messages_with_public_urls(
+        messages,
+        cli_path=cli_path,
+        resolve_public_urls=resolve_public_urls,
+    )
+    return build_agentmail_digest_payload(
+        messages,
+        generated_at=generated_at,
+        window_hours=window_hours,
+        allowed_sender_domains=allowed_sender_domains,
+    )
+
+
+def agentmail_digest_items_to_raw_items(payload: dict[str, Any]) -> list[RawItem]:
+    items = payload.get("items") if isinstance(payload, dict) else []
+    out: list[RawItem] = []
+    if not isinstance(items, list):
+        return out
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        subject = compact_public_snippet(str(item.get("subject") or ""), max_chars=180)
+        preview = compact_public_snippet(str(item.get("preview") or ""), max_chars=260)
+        if not subject:
+            continue
+        public_url = clean_agentmail_public_url(item.get("public_url"))
+        if not public_url:
+            continue
+        received_at = parse_date_any(item.get("received_at"), utc_now())
+        domain = str(item.get("sender_domain") or "").strip()
+        out.append(
+            RawItem(
+                site_id="agentmail",
+                site_name="AgentMail",
+                source=f"AgentMail · {domain}" if domain else "AgentMail",
+                title=subject,
+                url=public_url,
+                published_at=received_at,
+                meta={
+                    "summary": preview,
+                    "email_source_type": "newsletter_metadata",
+                },
+            )
+        )
+    return out
 
 
 def env_flag(name: str) -> bool:
@@ -3408,33 +3716,59 @@ def maybe_fetch_agentmail_digest(
         "item_count": 0,
         "privacy": "metadata_only_no_body",
         "published_by_default": False,
+        "provider": None,
+        "include_in_radar": env_flag("EMAIL_DIGEST_INCLUDE_IN_RADAR"),
     }
     if not status["enabled"]:
         return None, status
 
+    provider = str(os.environ.get("AGENTMAIL_PROVIDER") or "").strip().lower()
     agentmail_api_key = str(os.environ.get("AGENTMAIL_API_KEY") or "").strip()
     agentmail_inbox_id = str(os.environ.get("AGENTMAIL_INBOX_ID") or "").strip()
+    if not provider:
+        provider = "api" if (agentmail_api_key and agentmail_inbox_id) else AGENTMAIL_PROVIDER_DEFAULT
+    status["provider"] = provider
+
     agentmail_base_url = str(os.environ.get("AGENTMAIL_API_BASE_URL") or AGENTMAIL_API_BASE_DEFAULT).strip()
     agentmail_limit = env_int("AGENTMAIL_LIMIT", AGENTMAIL_DEFAULT_LIMIT)
+    agentmail_cli = str(os.environ.get("AGENTMAIL_CLI") or AGENTMAIL_CLI_DEFAULT).strip()
     allowed_sender_domains = parse_domain_filter(str(os.environ.get("AGENTMAIL_ALLOWED_SENDER_DOMAINS") or ""))
+    resolve_public_urls = env_flag("AGENTMAIL_RESOLVE_PUBLIC_URLS")
     status["allowed_sender_domains"] = allowed_sender_domains
-    if not (agentmail_api_key and agentmail_inbox_id):
+    status["resolve_public_urls"] = resolve_public_urls
+
+    if provider == "api" and not (agentmail_api_key and agentmail_inbox_id):
         status["ok"] = False
         status["error"] = "missing_agentmail_credentials"
         return None, status
+    if provider not in {"api", "agently_cli"}:
+        status["ok"] = False
+        status["error"] = "unsupported_agentmail_provider"
+        return None, status
 
     try:
-        payload = fetch_agentmail_digest(
-            session,
-            api_key=agentmail_api_key,
-            inbox_id=agentmail_inbox_id,
-            generated_at=generated_at,
-            after=after,
-            limit=agentmail_limit,
-            base_url=agentmail_base_url,
-            window_hours=window_hours,
-            allowed_sender_domains=allowed_sender_domains,
-        )
+        if provider == "api":
+            payload = fetch_agentmail_digest(
+                session,
+                api_key=agentmail_api_key,
+                inbox_id=agentmail_inbox_id,
+                generated_at=generated_at,
+                after=after,
+                limit=agentmail_limit,
+                base_url=agentmail_base_url,
+                window_hours=window_hours,
+                allowed_sender_domains=allowed_sender_domains,
+            )
+        else:
+            payload = fetch_agentmail_digest_via_cli(
+                generated_at=generated_at,
+                after=after,
+                limit=agentmail_limit,
+                cli_path=agentmail_cli,
+                window_hours=window_hours,
+                allowed_sender_domains=allowed_sender_domains,
+                resolve_public_urls=resolve_public_urls,
+            )
         status["ok"] = True
         status["item_count"] = int(payload.get("total_messages") or 0)
         return payload, status
@@ -4945,6 +5279,18 @@ def is_valid_zh_translation(original: str, translated: str, *, strict: bool = Tr
     return True
 
 
+def agentmail_title_translation_input(title: str) -> str:
+    """Remove trailing emoji/decorative markers that often make newsletter titles hard to translate."""
+    cleaned = re.sub(r"[^\w\s.,:;!?&'()/+-]", "", str(title or ""), flags=re.UNICODE)
+    cleaned = re.sub(r"[\s,，、·|/\\:;!！?？.\-–—_]+$", "", cleaned).strip()
+    return cleaned or str(title or "").strip()
+
+
+def is_acceptable_agentmail_translation(translated: str) -> bool:
+    text = str(translated or "").strip()
+    return bool(text and has_cjk(text) and not _looks_like_translation_refusal(text))
+
+
 def add_bilingual_fields(
     items_ai: list[dict[str, Any]],
     items_all: list[dict[str, Any]],
@@ -4968,6 +5314,7 @@ def add_bilingual_fields(
         out = dict(item)
         title = str(out.get("title") or "").strip()
         url = normalize_url(str(out.get("url") or ""))
+        is_agentmail_item = str(out.get("site_id") or "") == "agentmail"
         provided_zh = str(out.pop("provided_title_zh", "") or "").strip()
         provided_en_raw = str(out.pop("provided_title_en", "") or "").strip()
         provided_en = provided_en_raw if is_mostly_english(provided_en_raw) else ""
@@ -4989,7 +5336,8 @@ def add_bilingual_fields(
             out["title_zh"] = title
             return out
 
-        if not is_mostly_english(title):
+        english_probe = agentmail_title_translation_input(title) if is_agentmail_item else title
+        if not is_mostly_english(english_probe):
             return out
 
         out["title_en"] = title
@@ -5000,22 +5348,29 @@ def add_bilingual_fields(
         if not zh_title:
             ds_key = ZH_CACHE_DS_PREFIX + title
             cached_ds = cache.get(ds_key)
-            if cached_ds and is_valid_zh_translation(title, cached_ds, strict=False):
+            if cached_ds and (
+                is_valid_zh_translation(title, cached_ds, strict=False)
+                or (is_agentmail_item and is_acceptable_agentmail_translation(cached_ds))
+            ):
                 zh_title = cached_ds
                 cache_hit_key = ds_key
             elif not has_ds_key:
                 # 谷歌时代的裸 key 旧缓存只在 DeepSeek 不可用时兜底命中；
                 # 有 key 时视为 miss，触发 DeepSeek 重译逐步替换旧翻译。
                 cached_google = cache.get(title)
-                if cached_google and is_valid_zh_translation(title, cached_google, strict=False):
+                if cached_google and (
+                    is_valid_zh_translation(title, cached_google, strict=False)
+                    or (is_agentmail_item and is_acceptable_agentmail_translation(cached_google))
+                ):
                     zh_title = cached_google
                     cache_hit_key = title
         if not zh_title and allow_translate:
             budget = max_new_translations if is_ai_pool else max_new_translations_all
             translated_now = translated_now_ai if is_ai_pool else translated_now_all
             if translated_now < budget:
-                tr = translate_to_zh_deepseek(title)
-                if tr and is_valid_zh_translation(title, tr):
+                translation_input = english_probe
+                tr = translate_to_zh_deepseek(translation_input)
+                if tr and (is_valid_zh_translation(title, tr) or (is_agentmail_item and is_acceptable_agentmail_translation(tr))):
                     zh_title = repair_zh_title_translation(title, tr)
                     cache[ZH_CACHE_DS_PREFIX + title] = zh_title
                     if is_ai_pool:
@@ -5023,8 +5378,8 @@ def add_bilingual_fields(
                     else:
                         translated_now_all += 1
                 else:
-                    tr = translate_to_zh_cn(session, title)
-                    if tr and is_valid_zh_translation(title, tr):
+                    tr = translate_to_zh_cn(session, translation_input)
+                    if tr and (is_valid_zh_translation(title, tr) or (is_agentmail_item and is_acceptable_agentmail_translation(tr))):
                         zh_title = repair_zh_title_translation(title, tr)
                         cache[title] = zh_title
                         if is_ai_pool:
@@ -5040,7 +5395,19 @@ def add_bilingual_fields(
             out["title_bilingual"] = f"{zh_title} / {title}"
         return out
 
+    if max_new_translations > 0:
+        # AgentMail items are visible in the default AI timeline too; warm
+        # them before other AI sources consume the smaller primary cap.
+        for it in items_ai:
+            if str(it.get("site_id") or "") == "agentmail":
+                enrich(it, allow_translate=True, is_ai_pool=True)
     ai_out = [enrich(it, allow_translate=True, is_ai_pool=True) for it in items_ai]
+    if max_new_translations_all > 0:
+        # AgentMail newsletter items often enter only the broad/all pool; warm
+        # their translations before broader public-source noise consumes the cap.
+        for it in items_all:
+            if str(it.get("site_id") or "") == "agentmail":
+                enrich(it, allow_translate=True, is_ai_pool=False)
     all_out = [
         enrich(it, allow_translate=max_new_translations_all > 0, is_ai_pool=False) for it in items_all
     ]
@@ -6260,6 +6627,27 @@ def main() -> int:
         after=iso(now - timedelta(hours=args.window_hours)),
         window_hours=args.window_hours,
     )
+    if agentmail_status.get("enabled"):
+        agentmail_items = agentmail_digest_items_to_raw_items(email_digest_payload or {})
+        email_items = (email_digest_payload or {}).get("items")
+        if not isinstance(email_items, list):
+            email_items = []
+        agentmail_status["public_url_count"] = sum(1 for item in email_items if isinstance(item, dict) and item.get("public_url"))
+        agentmail_status["radar_item_count"] = len(agentmail_items)
+        if agentmail_status.get("include_in_radar") and agentmail_items:
+            raw_items.extend(agentmail_items)
+        statuses.append(
+            {
+                "site_id": "agentmail",
+                "site_name": "AgentMail",
+                "ok": bool(agentmail_status.get("ok")) if agentmail_status.get("ok") is not None else True,
+                "item_count": len(agentmail_items) if agentmail_status.get("include_in_radar") else 0,
+                "duration_ms": 0,
+                "error": agentmail_status.get("error"),
+                "skipped": not bool(agentmail_status.get("include_in_radar")),
+                "skip_reason": None if agentmail_status.get("include_in_radar") else "email_digest_not_included_in_radar",
+            }
+        )
     x_api_items, x_api_status = maybe_fetch_x_api_updates(session, now)
     if x_api_status.get("enabled"):
         raw_items.extend(x_api_items)

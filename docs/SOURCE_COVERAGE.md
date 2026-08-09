@@ -179,13 +179,17 @@ baseline, then let the aggregator layer add breadth.
   `xiaohongshu_web_v3.fetch_search_notes`, records the `search_surface` in
   public raw output, and treats Web V3 failures as non-fatal when App V2
   succeeds.
-- **AgentMail digest**: supported as an advanced, secret-backed metadata digest
-  through `EMAIL_DIGEST_ENABLED=1`, `AGENTMAIL_API_KEY`, and
-  `AGENTMAIL_INBOX_ID`, but disabled by default. It deliberately lists messages
+- **AgentMail digest**: supported as an advanced metadata-only source through
+  `EMAIL_DIGEST_ENABLED=1`, but disabled by default. For the current QQ Agent
+  Mail path, set `AGENTMAIL_PROVIDER=agently_cli` after `agently-cli auth login`;
+  the fetcher only calls `agently-cli message +list` and never reads bodies. The
+  legacy API path remains available with `AGENTMAIL_PROVIDER=api`,
+  `AGENTMAIL_API_KEY`, and `AGENTMAIL_INBOX_ID`. It deliberately lists messages
   only and does not publish body text, raw `.eml`, full email addresses, or
-  secrets. For a single-newsletter demo, set
-  `AGENTMAIL_ALLOWED_SENDER_DOMAINS=alphasignal.ai` to keep shared-inbox output
-  scoped to AlphaSignal metadata.
+  secrets. Use `AGENTMAIL_ALLOWED_SENDER_DOMAINS` to scope a shared inbox. Only
+  set `EMAIL_DIGEST_INCLUDE_IN_RADAR=1` when the maintainer explicitly wants
+  subject/snippet metadata to appear as the standalone `agentmail` source in
+  Radar data.
 
 See `docs/research/advanced-source-free-tier-budget-2026-05-10.md` for the X API
 and AgentMail budget notes.
