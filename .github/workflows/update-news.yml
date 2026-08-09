@@ -63,6 +63,7 @@ jobs:
           AGENTMAIL_API_BASE_URL: ${{ vars.AGENTMAIL_API_BASE_URL }}
           AGENTMAIL_LIMIT: ${{ vars.AGENTMAIL_LIMIT }}
           AGENTMAIL_ALLOWED_SENDER_DOMAINS: ${{ vars.AGENTMAIL_ALLOWED_SENDER_DOMAINS }}
+          AGENTMAIL_RESOLVE_PUBLIC_URLS: ${{ secrets.AGENTMAIL_RESOLVE_PUBLIC_URLS || vars.AGENTMAIL_RESOLVE_PUBLIC_URLS }}
           EMAIL_DIGEST_INCLUDE_IN_RADAR: ${{ secrets.EMAIL_DIGEST_INCLUDE_IN_RADAR || vars.EMAIL_DIGEST_INCLUDE_IN_RADAR }}
           # Paid X/social sources (X API, SocialData, TikHub): keys live in
           # secrets; optional tuning variables override code defaults.
