@@ -34,6 +34,11 @@ except ModuleNotFoundError:  # pragma: no cover - direct `python scripts/update_
     from ai_relevance import AI_BROAD_RELEVANCE_FLOOR, add_ai_relevance_fields, is_broadly_ai_related, score_ai_relevance
 
 try:
+    from scripts.llm_provider import llm_api_key_available, resolve_llm_config
+except ModuleNotFoundError:  # pragma: no cover - direct `python scripts/update_news.py`
+    from llm_provider import llm_api_key_available, resolve_llm_config
+
+try:
     import feedparser
 except ModuleNotFoundError:
     feedparser = None
@@ -4775,11 +4780,12 @@ def translate_to_zh_deepseek(text: str, timeout: int = 20) -> str | None:
     s = (text or "").strip()
     if not s:
         return None
-    api_key = str(os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+    config = resolve_llm_config()
+    api_key = config["api_key"]
     if not api_key:
         return None
-    base_url = str(os.environ.get("DEEPSEEK_API_BASE_URL") or "https://api.deepseek.com").strip().rstrip("/")
-    model = str(os.environ.get("DEEPSEEK_MODEL") or "deepseek-v4-flash").strip()
+    base_url = config["base_url"]
+    model = config["model"]
     protected_terms, _ = _get_translation_glossary()
     if protected_terms:
         term_list = "、".join(protected_terms)
@@ -4994,7 +5000,7 @@ def add_bilingual_fields(
 
         out["title_en"] = title
 
-        has_ds_key = bool(str(os.environ.get("DEEPSEEK_API_KEY") or "").strip())
+        has_ds_key = llm_api_key_available()
         cache_hit_key: str | None = None
         zh_title = zh_by_url.get(url)
         if not zh_title:
@@ -5313,11 +5319,12 @@ def enhance_title_deepseek(title: str, context: str, timeout: int = 45) -> str |
     context_s = str(context or "").strip()
     if not title_s:
         return None
-    api_key = str(os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+    config = resolve_llm_config()
+    api_key = config["api_key"]
     if not api_key:
         return None
-    base_url = str(os.environ.get("DEEPSEEK_API_BASE_URL") or "https://api.deepseek.com").strip().rstrip("/")
-    model = str(os.environ.get("DEEPSEEK_MODEL") or "deepseek-v4-flash").strip()
+    base_url = config["base_url"]
+    model = config["model"]
     system_prompt = (
         "你是科技新闻编辑，负责把语焉不详、看不出信息量的英文标题改写成一条完整的中文资讯标题。"
         "输出一条中文资讯标题，不超过28个字（英文名称按一个词计）。"
@@ -5375,9 +5382,9 @@ def add_title_enhancements(
     cache: dict[str, str],
     max_new_per_run: int | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, str]]:
-    """Micro-crawl + DeepSeek-rewrite gated items_ai entries into an
-    informative `title_enhanced_zh`. No-ops entirely without a DeepSeek key."""
-    if not str(os.environ.get("DEEPSEEK_API_KEY") or "").strip():
+    """Micro-crawl + LLM-rewrite gated items_ai entries into an
+    informative `title_enhanced_zh`. No-ops entirely without an LLM key."""
+    if not llm_api_key_available():
         return items_ai, cache
 
     if max_new_per_run is None:
@@ -5447,11 +5454,12 @@ def generate_recommend_reason_deepseek(
     text_s = str(full_text or "").strip()
     if not title_s or not text_s:
         return None
-    api_key = str(os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+    config = resolve_llm_config()
+    api_key = config["api_key"]
     if not api_key:
         return None
-    base_url = str(os.environ.get("DEEPSEEK_API_BASE_URL") or "https://api.deepseek.com").strip().rstrip("/")
-    model = str(os.environ.get("DEEPSEEK_MODEL") or "deepseek-v4-flash").strip()
+    base_url = config["base_url"]
+    model = config["model"]
     system_prompt = (
         "你是科技新闻编辑，负责为一篇具体的文章写一句「为什么值得读」的中文推荐语。"
         "输出一句中文，40到80个字之间。"
@@ -5513,15 +5521,15 @@ def add_recommend_reasons(
     cache: dict[str, str],
     max_new_per_run: int | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, str]]:
-    """Full-text-fetch + DeepSeek-authored, per-item `recommend_reason_zh`
+    """Full-text-fetch + LLM-authored, per-item `recommend_reason_zh`
     for the already AI-relevance-filtered `items_ai` set (same scope as
     `add_title_enhancements()` — deliberately not expanded to the unfiltered
-    pool, to control fetch/LLM cost). No-ops entirely without a DeepSeek key.
+    pool, to control fetch/LLM cost). No-ops entirely without an LLM key.
     Uses an independent per-run budget (`REASON_ENHANCE_MAX_PER_RUN`) from
     title enhancement, since full-text fetch + reasoning is more expensive
     per item; shares the same on-disk cache dict/file as title enhancement
     (distinct `RECOMMEND_REASON_CACHE_PREFIX` key namespace) for consistency."""
-    if not str(os.environ.get("DEEPSEEK_API_KEY") or "").strip():
+    if not llm_api_key_available():
         return items_ai, cache
 
     if max_new_per_run is None:

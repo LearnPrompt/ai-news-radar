@@ -127,10 +127,13 @@ SocialData 同时跑两路:① 中英关键词搜索发现新声音;② 一个�
 代码里搞不定、**必须**留在 GitHub 的,只有这些:
 
 **Secrets(密钥,绝不能写进代码):**
-`SOCIALDATA_API_KEY`、`TIKHUB_API_KEY`、`X_BEARER_TOKEN`、`AGENTMAIL_API_KEY`、`AGENTMAIL_INBOX_ID`、`FOLLOW_OPML_B64`
+`SOCIALDATA_API_KEY`、`TIKHUB_API_KEY`、`X_BEARER_TOKEN`、`AGENTMAIL_API_KEY`、`AGENTMAIL_INBOX_ID`、`FOLLOW_OPML_B64`、`DEEPSEEK_API_KEY`、`ORCAROUTER_API_KEY`
 
 **Variables(可选,只当急停开关用):**
 `SOCIALDATA_ENABLED`、`TIKHUB_ENABLED`、`X_API_ENABLED` —— 不设=默认开;设 `0`=关。
+
+**LLM 上游相关(可选,默认 DeepSeek):**
+`DEEPSEEK_API_KEY`(secret)启用 DeepSeek 驱动的 persona 评分、标题增强、推荐理由与中文翻译;`DEEPSEEK_MODEL`(variable,默认 `deepseek-v4-flash`)覆盖模型。改设 `ORCAROUTER_API_KEY`(secret)时,这些 OpenAI 兼容的 LLM 功能改走 [OrcaRouter](https://www.orcarouter.ai) 网关(自适应路由 + 故障转移),默认模型 `orcarouter/auto`,可用 `ORCAROUTER_MODEL`(variable)覆盖;`ORCAROUTER_API_BASE_URL` 可覆盖默认端点 `https://api.orcarouter.ai/v1`。两个 key 走同一套环境变量读取逻辑;在 GitHub Actions 里用 OrcaRouter 时,把 `ORCAROUTER_API_KEY`/`ORCAROUTER_MODEL` 像 `DEEPSEEK_*` 一样在 workflow 的 env 块里转发即可。两个 key 都不设则全部回退到规则分/谷歌翻译。
 
 其余所有调参(query / 排序 / 时间窗 / 每日上限 / 间隔 / 平台)**全部已搬进代码常量,GitHub 上不用再配**。
 
