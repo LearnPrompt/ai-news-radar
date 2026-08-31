@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR × AI 资讯台</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+    .header { background: #1a237e; color: white; padding: 20px; text-align: center; }
+    .header h1 { font-size: 24px; margin-bottom: 8px; }
+    .header .subtitle { font-size: 14px; opacity: 0.9; }
+    .header .update-time { font-size: 12px; margin-top: 8px; opacity: 0.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    .category { margin-bottom: 24px; }
+    .category-title { font-size: 18px; font-weight: 600; color: #1a237e; padding: 12px 16px; background: white; border-left: 4px solid #1a237e; margin-bottom: 12px; }
+    .category-count { font-size: 14px; color: #666; font-weight: normal; }
+    .item { background: white; padding: 16px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .item-title { font-size: 15px; font-weight: 500; color: #333; line-height: 1.5; flex: 1; }
+    .item-title a { color: #1565c0; text-decoration: none; }
+    .item-title a:hover { text-decoration: underline; }
+    .item-ai { font-size: 11px; background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 12px; white-space: nowrap; margin-left: 8px; }
+    .item-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .item-source { color: #666; }
+    .item-region { background: #f0f0f0; padding: 1px 6px; border-radius: 4px; margin-left: 8px; }
+    .empty { text-align: center; padding: 40px; color: #999; font-size: 14px; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #999; }
+    .disclaimer { background: #fff3e0; border: 1px solid #ffe0b2; padding: 12px 16px; margin-bottom: 20px; border-radius: 6px; font-size: 13px; color: #e65100; }
+    @media (max-width: 600px) {
+      .container { padding: 10px; }
+      .item-header { flex-direction: column; }
+      .item-ai { margin-left: 0; margin-top: 6px; display: inline-block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>HR × AI 资讯台</h1>
+    <div class="subtitle">聚焦 HR 与 AI 交叉领域</div>
+    <div class="update-time" id="update-time">加载中...</div>
+  </div>
+  
+  <div class="container">
+    <div class="disclaimer">
+      ⚠️ 本页面仅汇总公开资讯，不构成劳动法律意见。政策类内容请以官方原文及法务意见为准。
+    </div>
+    <div id="content">加载中...</div>
+  </div>
+  
+  <div class="footer">
+    HR × AI 资讯台 · 内部试运行
+  </div>
+
+  <script>
+    async function loadData() {
+      try {
+        const response = await fetch('../data/hr-radar.json');
+        if (!response.ok) throw new Error('数据加载失败');
+        const data = await response.json();
+        
+        document.getElementById('update-time').textContent = 
+          '更新时间：' + (data.generated_at ? data.generated_at.substring(0, 19).replace('T', ' ') : '未知');
+        
+        const content = document.getElementById('content');
+        
+        if (!data.items_by_category || Object.keys(data.items_by_category).length === 0) {
+          content.innerHTML = '<div class="empty">暂无资讯</div>';
+          return;
+        }
+        
+        let html = '';
+        
+        for (const category of data.categories) {
+          const items = data.items_by_category[category] || [];
+          if (items.length === 0) continue;
+          
+          html += '<div class="category">';
+          html += '<div class="category-title">' + escapeHtml(category) + 
+                  '<span class="category-count"> (' + items.length + ')</span></div>';
+          
+          for (const item of items) {
+            html += '<div class="item">';
+            html += '<div class="item-header">';
+            html += '<div class="item-title">';
+            html += '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + 
+                    escapeHtml(item.title) + '</a>';
+            html += '</div>';
+            if (item.is_ai_hr) {
+              html += '<span class="item-ai">AI×HR</span>';
+            }
+            html += '</div>';
+            html += '<div class="item-meta">';
+            html += '<span class="item-source">' + escapeHtml(item.source_name || '未知来源') + '</span>';
+            if (item.source_region && item.source_region !== '未知') {
+              html += '<span class="item-region">' + escapeHtml(item.source_region) + '</span>';
+            }
+            html += '<span style="margin-left: 8px;">' + formatTime(item.published_at) + '</span>';
+            html += '</div>';
+            html += '</div>';
+          }
+          
+          html += '</div>';
+        }
+        
+        content.innerHTML = html;
+        
+      } catch (err) {
+        document.getElementById('content').innerHTML = 
+          '<div class="empty">加载失败: ' + escapeHtml(err.message) + '</div>';
+      }
+    }
+    
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function formatTime(isoString) {
+      if (!isoString) return '';
+      try {
+        const d = new Date(isoString);
+        return d.toLocaleString('zh-CN', { 
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+        });
+      } catch(e) {
+        return '';
+      }
+    }
+    
+    loadData();
+  </script>
+</body>
+</html>
