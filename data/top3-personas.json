@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T11:54:54.556722Z",
+  "generated_at": "2026-09-03T15:39:13.672859Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_76c94f0602dc",
+      "title": "Hugging Face 发布开源工具 funes，为编码智能体提供可本地持有的记忆层 / Give Your Coding Agents a Memory You Own",
+      "url": "https://huggingface.co/blog/funes",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 80,
+          "review": "记忆层开源是好东西，先看看能不能扛住真项目折腾。"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "官方博客有细节但未见代码与第三方验证，开源自证难独立复现。"
+        },
+        "pragmatic": {
+          "score": 90,
+          "review": "开源可自托管，给 Agent 加记忆直接可用，省了外部存储顾虑。"
+        }
+      }
+    },
+    {
+      "story_id": "story_edf252f7cb9c",
+      "title": "通过100步GRPO微调350M模型，实现更好的结构化输出 / Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps",
+      "url": "https://huggingface.co/blog/grpo-with-trl-ifstruct",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "100步见效是实在话，可对比基线选得够巧，换个任务试试？"
+        },
+        "paper-police": {
+          "score": 48,
+          "review": "博客给了训练细节和效果数字，但未见代码复现与第三方验证。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "开源配方+可复现步骤，要做结构化输出的可以直接抄作业。"
+        }
+      }
+    },
+    {
       "story_id": "story_f2e8c1eb7be1",
       "title": "内容排除功能现已全面登陆 Copilot 应用及 CLI / Content exclusions generally available in Copilot app and CLI",
       "url": "https://github.blog/changelog/2026-09-02-content-exclusions-generally-available-in-copilot-app-and-cli",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 70,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 85,
           "review": "Copilot内容排除全平台可用，敏感仓库屏蔽今天就能配。"
-        }
-      }
-    },
-    {
-      "story_id": "story_0fd4fc0249e5",
-      "title": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型 / Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
-      "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 65,
-          "review": "官方发布没有跑分没有对比，闪个名字就想让我高潮？"
-        },
-        "paper-police": {
-          "score": 25,
-          "review": "仅官方博客声明，无论文代码，评测数字待第三方复现。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "新模型今天能上手测，跑任务先看定价和限流，别急着改线上。"
-        }
-      }
-    },
-    {
-      "story_id": "story_bbd546f9bbd7",
-      "title": "Claude 在 Cowork 和 Claude Code 中支持后台操作电脑 / Claude can now use your computer in the background in Claude Cowork and Claude Code. Give it someth…",
-      "url": "https://x.com/claudeai/status/2095226833293685100",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 68,
-          "review": "后台操作听着酷，先演示个不翻车的真实任务再吹。"
-        },
-        "paper-police": {
-          "score": 25,
-          "review": "仅官方推特说法，无技术文档或演示，后台操作能力未经验证。"
-        },
-        "pragmatic": {
-          "score": 78,
-          "review": "后台操作电脑能挂自动化任务，但先确认权限边界和安全限制。"
         }
       }
     }
