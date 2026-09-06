@@ -30,7 +30,11 @@ from pathlib import Path
 
 import requests
 
-DEFAULT_API_BASE_URL = "https://api.deepseek.com"
+try:
+    from scripts.llm_provider import resolve_llm_config
+except ModuleNotFoundError:  # pragma: no cover - direct `python scripts/persona_score.py`
+    from llm_provider import resolve_llm_config
+
 DEFAULT_MODEL = "deepseek-chat"
 CACHE_VERSION = 1
 CACHE_MAX_AGE_DAYS = 21
@@ -426,9 +430,10 @@ def main(argv: list[str] | None = None) -> int:
     items = all_items[: args.max_items]
     skipped = len(all_items) - len(items)
 
-    api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
-    base_url = os.environ.get("DEEPSEEK_API_BASE_URL", "").strip() or DEFAULT_API_BASE_URL
-    model = os.environ.get("DEEPSEEK_MODEL", "").strip() or DEFAULT_MODEL
+    config = resolve_llm_config(default_model=DEFAULT_MODEL)
+    api_key = config["api_key"]
+    base_url = config["base_url"]
+    model = config["model"]
     enabled = os.environ.get("PERSONA_ENABLED", "").strip() != "0"
 
     now = datetime.now(timezone.utc)

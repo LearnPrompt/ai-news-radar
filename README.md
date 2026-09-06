@@ -219,7 +219,7 @@ AI News Radar学习了现代新闻学的技术，不是简单堆信息源，一�
 
 1. **Fork** [LearnPrompt/ai-news-radar](https://github.com/LearnPrompt/ai-news-radar)。
 2. **开 Actions**：fork 后 GitHub 默认暂停 workflow，去 Actions 页点一下启用，`update-news.yml` 每30分钟自动跑。
-3. **（可选）配 `DEEPSEEK_API_KEY`**：Settings → Secrets and variables → Actions 加一个 secret，就能获得 persona 锐评、标题增强、精选条目的真实推荐理由，以及更可靠的中文标题翻译（拒答文案和退化输出会自动回退原标题）。不配也全流程能跑，自动降级成规则分、原始标题加谷歌翻译，推荐理由区块直接不显示。默认模型是 `deepseek-v4-flash`，需要换模型可以另配一个 Variable `DEEPSEEK_MODEL` 覆盖。想控制每次运行改写多少条标题，可以再配一个 `TITLE_ENHANCE_MAX_PER_RUN`（不配默认 30）。
+3. **（可选）配 `DEEPSEEK_API_KEY` 或 `ORCAROUTER_API_KEY`**：Settings → Secrets and variables → Actions 加一个 secret，就能获得 persona 锐评、标题增强、精选条目的真实推荐理由，以及更可靠的中文标题翻译（拒答文案和退化输出会自动回退原标题）。不配也全流程能跑，自动降级成规则分、原始标题加谷歌翻译，推荐理由区块直接不显示。默认 DeepSeek 模型是 `deepseek-v4-flash`，需要换模型可以另配一个 Variable `DEEPSEEK_MODEL` 覆盖。也可以改配 `ORCAROUTER_API_KEY`，让这些 LLM 功能改走 [OrcaRouter](https://www.orcarouter.ai)（一个 OpenAI 兼容的 AI 网关），默认模型是 `orcarouter/auto`（可用 `ORCAROUTER_MODEL` 覆盖）。两个 key 走的是同一套环境变量读取逻辑，所以 GitHub Actions 部署时，只要像 `DEEPSEEK_*` 那样把 `ORCAROUTER_API_KEY`/`ORCAROUTER_MODEL` 也在 workflow 的 env 块里转发即可。想控制每次运行改写多少条标题，可以再配一个 `TITLE_ENHANCE_MAX_PER_RUN`（不配默认 30）。
 4. **开 GitHub Pages**：Settings → Pages，选 master 分支根目录。几分钟后你的雷达就活了。
 5. **改 skill 一行**：把 `skills/radar/SKILL.md` 顶部的 `BASE_URL` 换成 `https://<你的用户名>.github.io/ai-news-radar/data`，你的 Agent 从此读你自己的数据。
 
@@ -284,7 +284,8 @@ python scripts/update_news.py --output-dir data --window-hours 24 --rss-opml fee
 - 默认每 30 分钟运行一次：`*/30 * * * *`
 - 自动生成并提交 `data/*.json`；工作流使用 `git add data/`，避免新增 JSON 文件因为白名单遗漏而停留在旧更新时间
 - 如果设置 `DEEPSEEK_API_KEY`，会给每日精选打 persona 分、生成三口味 TOP3 点评、启用标题增强、生成精选条目的真实推荐理由，并给出更可靠的中文翻译（拒答文案和退化输出会自动回退原标题）；不设置时自动降级为规则分、原始标题和谷歌翻译，推荐理由区块不显示，核心流程照样跑
-- 默认 DeepSeek 模型是 `deepseek-v4-flash`（DeepSeek 官方将于 2026-07-24 弃用 `deepseek-chat` 别名），可以设置仓库 Variable `DEEPSEEK_MODEL` 覆盖
+- 改设 `ORCAROUTER_API_KEY` 时，上面这些 OpenAI 兼容的 LLM 功能会改走 [OrcaRouter](https://www.orcarouter.ai)（带自适应路由和故障转移的 AI 网关），而不是 DeepSeek
+- 默认 DeepSeek 模型是 `deepseek-v4-flash`（DeepSeek 官方将于 2026-07-24 弃用 `deepseek-chat` 别名），可以设置仓库 Variable `DEEPSEEK_MODEL` 覆盖；走 OrcaRouter 时默认模型是 `orcarouter/auto`，用 `ORCAROUTER_MODEL` 覆盖
 - 如果设置 `TITLE_ENHANCE_MAX_PER_RUN`，会限制每次运行最多改写的标题条数；不设置默认 30
 - 如果没有设置 `FOLLOW_OPML_B64`，线上工作流会自动使用公开示例 `feeds/follow.example.opml`，让页面展示 RSS/OPML 能力
 - 如果设置 `FOLLOW_OPML_B64`，会优先自动解码为私有 `feeds/follow.opml`
