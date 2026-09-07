@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T16:54:56.249970Z",
+  "generated_at": "2026-09-07T20:58:54.108604Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_89772b9cda52",
+      "title": "基于AMD GPU的vLLM中的推测性解码",
+      "url": "https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "推测性解码不是新词，AMD跑通值得写，但加速比和对比基线呢？"
+        },
+        "paper-police": {
+          "score": 22,
+          "review": "官方博客有细节但未开源代码，推测性解码效果需独立验证。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "用AMD GPU跑推理的可以看，推测性解码提速方案值得抄。"
+        }
+      }
+    },
+    {
       "story_id": "story_545843532362",
       "title": "Coop——运行 Claude Code 和 Codex 的隔离 VM 环境 / Coop – Isolated VM Environments for Running Claude Code and Codex",
       "url": "https://news.ycombinator.com/item?id=49593842",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 55,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 72,
           "review": "跑 AI agent 怕乱改环境？这工具能隔离，试玩成本低，可关注。"
-        }
-      }
-    },
-    {
-      "story_id": "story_89772b9cda52",
-      "title": "在 AMD GPU 上使用 vLLM 进行推测解码 / Speculative Decoding in vLLM on AMD GPUs",
-      "url": "https://news.ycombinator.com/item?id=49596054",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 64,
-          "review": "适配算务实，但推测解码的老把戏换个GPU就宣称突破，基准呢？"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "vLLM 开源可查，但该功能无测评报告或独立复现，仍属技术分享。"
-        },
-        "pragmatic": {
-          "score": 70,
-          "review": "AMD 用户跑推理可参考，能省 token 生成时间，但需自行验证收益。"
         }
       }
     }
