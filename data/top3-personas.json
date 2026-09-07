@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T10:42:11.172213Z",
+  "generated_at": "2026-09-07T13:03:51.581469Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_89772b9cda52",
+      "title": "在 AMD GPU 上使用 vLLM 进行推测解码 / Speculative Decoding in vLLM on AMD GPUs",
+      "url": "https://news.ycombinator.com/item?id=49596054",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 64,
+          "review": "适配算务实，但推测解码的老把戏换个GPU就宣称突破，基准呢？"
+        },
+        "paper-police": {
+          "score": 42,
+          "review": "vLLM 开源可查，但该功能无测评报告或独立复现，仍属技术分享。"
+        },
+        "pragmatic": {
+          "score": 70,
+          "review": "AMD 用户跑推理可参考，能省 token 生成时间，但需自行验证收益。"
+        }
+      }
+    },
+    {
       "story_id": "story_fb302e7d3b11",
       "title": "李飞飞团队推出世界模型 Atlas，或成通往 AGI 的核心原语",
       "url": "https://www.aibase.com/news/30883",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 35,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 60,
           "review": "世界模型是方向但没开放，先看论文是否带可跑的代码。"
-        }
-      }
-    },
-    {
-      "story_id": "story_2ebcbcb9674f",
-      "title": "AI界的数学里程碑：Claude 仅用 11 天拿下费马大定理端到端形式化证明",
-      "url": "https://www.aibase.com/news/30876",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 50,
-          "review": "11天是算上人类喂思路的时间吧？先把交互日志亮出来再谈里程碑。"
-        },
-        "paper-police": {
-          "score": 22,
-          "review": "只有一个自媒体报道，无论文无代码，费马大定理证明无法核验。"
-        },
-        "pragmatic": {
-          "score": 58,
-          "review": "证明能力亮眼，但暂无产品化工具，数学研究者可留意后续。"
         }
       }
     }
