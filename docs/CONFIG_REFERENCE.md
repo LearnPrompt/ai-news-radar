@@ -132,6 +132,8 @@ SocialData 同时跑两路:① 中英关键词搜索发现新声音;② 一个�
 **Variables(可选,只当急停开关用):**
 `SOCIALDATA_ENABLED`、`TIKHUB_ENABLED`、`X_API_ENABLED` —— 不设=默认开;设 `0`=关。
 
+AgentMail 另有本地/私有运行变量：`EMAIL_DIGEST_ENABLED=1` 打开邮箱摘要，`AGENTMAIL_PROVIDER=agently_cli` 使用已授权的 QQ `agently-cli message +list`，`EMAIL_DIGEST_INCLUDE_IN_RADAR=1` 才把 metadata-only 邮件摘要作为 `agentmail` 源加入主 Radar 数据。
+
 其余所有调参(query / 排序 / 时间窗 / 每日上限 / 间隔 / 平台)**全部已搬进代码常量,GitHub 上不用再配**。
 
 ---
@@ -170,3 +172,7 @@ SocialData 同时跑两路:① 中英关键词搜索发现新声音;② 一个�
 ---
 
 *改完代码后,跑一遍测试确认无误:`python -m unittest tests.test_topic_filter -q`*
+
+### AgentMail execution environment
+
+`agently_cli` requires the CLI installed and authenticated in the same private runtime. Hosted GitHub Actions does not install the CLI or receive a personal OAuth session automatically; setting Variables alone does not make this mode available. Use the legacy API credentials in a hosted runner, or run the CLI mode locally. Keep `EMAIL_DIGEST_ENABLED`, `AGENTMAIL_RESOLVE_PUBLIC_URLS`, `EMAIL_DIGEST_INCLUDE_IN_RADAR` and `EMAIL_DIGEST_PUBLISH` disabled unless explicitly needed. Domain filtering runs before optional body reads. Only reviewed public newsletter archive links should be published; extracting a URL does not independently verify its access policy.
