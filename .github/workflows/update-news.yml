@@ -61,6 +61,11 @@ jobs:
       - name: Update data
         env:
           EMAIL_DIGEST_ENABLED: ${{ secrets.EMAIL_DIGEST_ENABLED || vars.EMAIL_DIGEST_ENABLED }}
+          AGENTMAIL_PROVIDER: ${{ vars.AGENTMAIL_PROVIDER }}
+          AGENTMAIL_CLI: ${{ vars.AGENTMAIL_CLI }}
+          # Body reads are limited to explicitly authorized local/private runs.
+          AGENTMAIL_RESOLVE_PUBLIC_URLS: "0"
+          EMAIL_DIGEST_INCLUDE_IN_RADAR: ${{ secrets.EMAIL_DIGEST_INCLUDE_IN_RADAR || vars.EMAIL_DIGEST_INCLUDE_IN_RADAR }}
           AGENTMAIL_API_KEY: ${{ secrets.AGENTMAIL_API_KEY }}
           AGENTMAIL_INBOX_ID: ${{ secrets.AGENTMAIL_INBOX_ID }}
           AGENTMAIL_API_BASE_URL: ${{ vars.AGENTMAIL_API_BASE_URL }}
