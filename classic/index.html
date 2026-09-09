@@ -42,6 +42,7 @@
     <script src="./assets/view-mode.js?v=dual-view-0713c" data-root="../"></script>
     <link rel="stylesheet" href="./classic/assets/styles.css?v=ui-polish-0626a" />
     <link rel="stylesheet" href="./assets/view-switch.css?v=dual-view-0713b" />
+    <link rel="stylesheet" href="../assets/service-status.css?v=20260909" />
   </head>
   <body>
     <main class="shell">
@@ -82,6 +83,8 @@
           <div class="section-summary" id="sectionSummary">正在整理栏目...</div>
         </section>
       </header>
+
+      <section class="service-status-panel" id="serviceStatusPanel" aria-live="polite" hidden></section>
 
       <section class="primary-controls">
         <input id="searchInput" type="search" placeholder="搜索 AI 信号 / 来源" />
@@ -232,5 +235,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
     <script src="./classic/assets/motion.js?v=ui-adjustment-0620a" defer></script>
     <script src="./classic/assets/app.js?v=ui-polish-0626a" defer></script>
+    <script src="../assets/service-status.js?v=20260909" defer></script>
   </body>
 </html>

@@ -1,0 +1,31 @@
+name: Test Radar
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'assets/**'
+      - 'classic/**'
+      - 'index.html'
+      - 'requirements.txt'
+      - '.github/workflows/test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: node --test tests/service-status.test.mjs
+      - run: node --check assets/app.js && node --check classic/assets/app.js && node --check assets/service-status.js
