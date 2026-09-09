@@ -266,3 +266,7 @@ The public deployment should remain GitHub Pages + GitHub Actions:
 
 This keeps the public version easy to fork while still letting each maintainer
 bring their own private source list.
+
+## Official service status
+
+The collector reads OpenAI’s public status API and writes `data/service-status.json` separately from news. Only investigating, identified and monitoring incidents appear in the shared mobile/classic banner; resolved incidents, failed reads and snapshots older than two hours stay hidden. A hidden banner is not an assertion that every service is healthy. The normal update workflow publishes the generated file.

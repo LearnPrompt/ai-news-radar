@@ -1,0 +1,117 @@
+.service-status-panel {
+  margin: 10px 0 14px;
+  padding: 11px 13px;
+  border: 1px solid rgba(185, 116, 24, 0.28);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 249, 237, 0.98), rgba(255, 253, 247, 0.96));
+  box-shadow: 0 8px 24px rgba(104, 67, 17, 0.06);
+}
+
+.service-status-panel[hidden] {
+  display: none;
+}
+
+.service-status-panel.has-major {
+  border-color: rgba(179, 52, 52, 0.32);
+  background: linear-gradient(135deg, rgba(255, 244, 242, 0.98), rgba(255, 250, 248, 0.96));
+}
+
+.service-status-heading,
+.service-status-title-wrap,
+.service-incident,
+.service-incident-meta {
+  display: flex;
+  align-items: center;
+}
+
+.service-status-heading {
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.service-status-title-wrap {
+  gap: 7px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.service-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c48122;
+  box-shadow: 0 0 0 4px rgba(196, 129, 34, 0.12);
+}
+
+.has-major .service-status-dot {
+  background: #ba4040;
+  box-shadow: 0 0 0 4px rgba(186, 64, 64, 0.12);
+}
+
+.service-status-count {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.service-incident-list {
+  display: grid;
+  gap: 5px;
+}
+
+.service-incident {
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding-top: 5px;
+  border-top: 1px solid rgba(131, 91, 31, 0.10);
+}
+
+.service-incident-main {
+  min-width: 0;
+}
+
+.service-incident-meta {
+  gap: 6px;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.service-phase {
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: rgba(196, 129, 34, 0.10);
+  color: #8b5a16;
+}
+
+.service-incident-title {
+  display: block;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.service-incident-title:hover {
+  color: var(--accent);
+}
+
+.service-incident-time {
+  flex: 0 0 auto;
+  color: var(--muted-soft);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .service-incident {
+    align-items: flex-start;
+  }
+
+  .service-incident-time {
+    padding-top: 14px;
+  }
+}
