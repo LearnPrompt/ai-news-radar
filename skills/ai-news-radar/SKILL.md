@@ -76,8 +76,10 @@ optional adapters without changing the public default.
   full email bodies, raw emails, or private newsletter contents.
 - Keep AgentMail disabled unless `EMAIL_DIGEST_ENABLED=1` is explicit. For QQ
   Agent Mail, use `AGENTMAIL_PROVIDER=agently_cli` after `agently-cli auth
-  login`; only call `agently-cli message +list`, never `message +read` for the
-  public pipeline. The legacy API path may use `AGENTMAIL_PROVIDER=api` with
+  login`; default to `agently-cli message +list`. Only an explicitly authorized
+  private run may set `AGENTMAIL_RESOLVE_PUBLIC_URLS=1` to read allowed senders’
+  messages in memory for archive URLs; never persist bodies. Keep this disabled
+  in the public workflow. The legacy API path may use `AGENTMAIL_PROVIDER=api` with
   `AGENTMAIL_API_KEY` and `AGENTMAIL_INBOX_ID`, but it must only call the
   list-messages endpoint; do not call `/raw` or read `text`/`html` bodies.
 - Do not publish `data/email-digest.json` to public Pages by default. Only allow

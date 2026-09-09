@@ -3246,11 +3246,13 @@ def clean_agentmail_public_url(raw_url: Any) -> str:
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         return ""
-    decoded_path = unquote(parsed.path)
-    nested_match = re.search(r"https?://[^/\s]+[^\s]*", decoded_path)
-    if nested_match and parsed.netloc.lower().startswith("tracking."):
-        return clean_agentmail_public_url(nested_match.group(0))
-    host = parsed.netloc.lower()
+    if parsed.username or parsed.password:
+        return ""
+    host = (parsed.hostname or "").lower()
+    if host.startswith("tracking."):
+        # Decode only the embedded URL segment, excluding the redirect's /1/token suffix.
+        nested_match = re.search(r"https?:(?:%2f){2}[^/\s]+", parsed.path, re.I)
+        return clean_agentmail_public_url(unquote(nested_match.group(0))) if nested_match else ""
     if any(host == blocked or host.endswith(f".{blocked}") for blocked in AGENTMAIL_PUBLIC_URL_REJECT_HOSTS):
         return ""
     query = [
@@ -3346,13 +3348,18 @@ def read_agentmail_public_url_via_cli(message_id: str, cli_path: str = AGENTMAIL
     if not message_id:
         return ""
     command = [cli_path or AGENTMAIL_CLI_DEFAULT, "message", "+read", "--id", message_id]
-    completed = subprocess.run(command, check=False, capture_output=True, text=True, timeout=45)
+    try:
+        completed = subprocess.run(command, check=False, capture_output=True, text=True, timeout=45)
+    except (OSError, subprocess.TimeoutExpired):
+        return ""
     if completed.returncode != 0:
         return ""
     output = "\n".join(part for part in (completed.stdout, completed.stderr) if part)
     try:
         payload = extract_json_object_from_cli_output(output)
     except Exception:
+        return ""
+    if payload.get("ok") is False:
         return ""
     data = payload.get("data") if isinstance(payload, dict) else {}
     if not isinstance(data, dict):
@@ -3507,7 +3514,7 @@ def fetch_agentmail_digest_via_cli(
     allowed_sender_domains: list[str] | None = None,
     resolve_public_urls: bool = False,
 ) -> dict[str, Any]:
-    """Fetch QQ Agent Mail metadata through agently-cli; never reads message bodies."""
+    """Fetch metadata; optionally read allowed messages in memory to extract an archive URL."""
     command = [
         cli_path or AGENTMAIL_CLI_DEFAULT,
         "message",
@@ -3533,6 +3540,7 @@ def fetch_agentmail_digest_via_cli(
     if payload.get("ok") is False:
         raise RuntimeError("agently-cli returned ok=false")
     messages = extract_agently_cli_messages(payload)
+    messages = filter_agentmail_messages_by_domain(messages, allowed_sender_domains or [])
     messages = enrich_agentmail_messages_with_public_urls(
         messages,
         cli_path=cli_path,

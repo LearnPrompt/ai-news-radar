@@ -172,3 +172,7 @@ AgentMail 另有本地/私有运行变量：`EMAIL_DIGEST_ENABLED=1` 打开邮�
 ---
 
 *改完代码后,跑一遍测试确认无误:`python -m unittest tests.test_topic_filter -q`*
+
+### AgentMail execution environment
+
+`agently_cli` requires the CLI installed and authenticated in the same private runtime. Hosted GitHub Actions does not install the CLI or receive a personal OAuth session automatically; setting Variables alone does not make this mode available. Use the legacy API credentials in a hosted runner, or run the CLI mode locally. Keep `EMAIL_DIGEST_ENABLED`, `AGENTMAIL_RESOLVE_PUBLIC_URLS`, `EMAIL_DIGEST_INCLUDE_IN_RADAR` and `EMAIL_DIGEST_PUBLISH` disabled unless explicitly needed. Domain filtering runs before optional body reads. Only reviewed public newsletter archive links should be published; extracting a URL does not independently verify its access policy.

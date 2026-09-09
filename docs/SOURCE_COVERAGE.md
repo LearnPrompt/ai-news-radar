@@ -182,7 +182,7 @@ baseline, then let the aggregator layer add breadth.
 - **AgentMail digest**: supported as an advanced metadata-only source through
   `EMAIL_DIGEST_ENABLED=1`, but disabled by default. For the current QQ Agent
   Mail path, set `AGENTMAIL_PROVIDER=agently_cli` after `agently-cli auth login`;
-  the fetcher only calls `agently-cli message +list` and never reads bodies. The
+  the fetcher defaults to `agently-cli message +list`. In a privately authorized run, `AGENTMAIL_RESOLVE_PUBLIC_URLS=1` may read allowed senders’ messages in memory to extract newsletter archive URLs; bodies are never written to output. The
   legacy API path remains available with `AGENTMAIL_PROVIDER=api`,
   `AGENTMAIL_API_KEY`, and `AGENTMAIL_INBOX_ID`. It deliberately lists messages
   only and does not publish body text, raw `.eml`, full email addresses, or

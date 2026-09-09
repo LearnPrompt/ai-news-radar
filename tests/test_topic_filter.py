@@ -783,7 +783,7 @@ class TopicFilterTests(unittest.TestCase):
             clean_agentmail_public_url(
                 "https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fa.tldrnewsletter.com%2Fweb-version%3Futm_source=email%26p=abc/1/token"
             ),
-            "https://a.tldrnewsletter.com/web-version?p=abc%2F1%2Ftoken",
+            "https://a.tldrnewsletter.com/web-version?p=abc",
         )
 
     def test_fetch_agentmail_digest_via_cli_can_resolve_public_urls_without_storing_body(self):
