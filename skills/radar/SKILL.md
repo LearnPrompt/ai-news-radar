@@ -14,7 +14,7 @@ description: |
 第一件事：确定数据源地址。所有请求都基于这一行——
 
 ```bash
-BASE_URL=https://learnprompt.github.io/ai-news-radar/data
+BASE_URL=https://news.learnprompt.pro/data
 ```
 
 **fork / 自部署用户只需要改这一行**，换成 `https://<用户名>.github.io/ai-news-radar/data`。GitHub Pages 是数据的 canonical 源，不要换成其他镜像域名。第一次发现用户有自己的部署时问一次，之后记住。
@@ -40,7 +40,7 @@ BASE_URL=https://learnprompt.github.io/ai-news-radar/data
 任何回答之前，先看 `generated_at`：
 
 ```bash
-curl -s "$BASE_URL/daily-brief.json" -o /tmp/radar-brief.json
+curl -fsSL "$BASE_URL/daily-brief.json" -o /tmp/radar-brief.json
 python3 -c "import json;d=json.load(open('/tmp/radar-brief.json'));print(d['generated_at'],d['total_items'])"
 ```
 
@@ -104,7 +104,7 @@ python3 -c "import json;d=json.load(open('/tmp/radar-brief.json'));print(d['gene
 ### 默认路径：日报精选（含 persona 点评）
 
 ```bash
-curl -s "$BASE_URL/daily-brief.json" -o /tmp/radar-brief.json
+curl -fsSL "$BASE_URL/daily-brief.json" -o /tmp/radar-brief.json
 python3 - <<'EOF'
 import json
 d = json.load(open('/tmp/radar-brief.json'))
@@ -120,7 +120,7 @@ EOF
 ### 追问细节 / 要更多：升级 24 小时全量
 
 ```bash
-curl -s "$BASE_URL/latest-24h.json" -o /tmp/radar-24h.json
+curl -fsSL "$BASE_URL/latest-24h.json" -o /tmp/radar-24h.json
 python3 - <<'EOF'
 import json
 d = json.load(open('/tmp/radar-24h.json'))
@@ -165,7 +165,7 @@ EOF
 ### 三口味点评（"毒舌一点 / 换个口味"）
 
 ```bash
-curl -s "$BASE_URL/top3-personas.json" -o /tmp/radar-top3.json
+curl -fsSL "$BASE_URL/top3-personas.json" -o /tmp/radar-top3.json
 python3 - <<'EOF'
 import json
 NAMES = {'pragmatic': '实用派', 'cynic': '毒舌评论员', 'paper-police': '较真党'}
@@ -184,7 +184,7 @@ EOF
 ### 故事线（先过新鲜度）
 
 ```bash
-curl -s "$BASE_URL/stories-merged.json" -o /tmp/radar-stories.json
+curl -fsSL "$BASE_URL/stories-merged.json" -o /tmp/radar-stories.json
 python3 - <<'EOF'
 import json, datetime
 d = json.load(open('/tmp/radar-stories.json'))
@@ -202,7 +202,7 @@ EOF
 ### 信源健康（"哪些源有料"）
 
 ```bash
-curl -s "$BASE_URL/source-status.json" -o /tmp/radar-status.json
+curl -fsSL "$BASE_URL/source-status.json" -o /tmp/radar-status.json
 python3 - <<'EOF'
 import json
 d = json.load(open('/tmp/radar-status.json'))
