@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T06:25:17.296324Z",
+  "generated_at": "2026-09-11T10:03:05.011680Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_4f6a9ae0c6f7",
-      "title": "DeepSeek AI 发布 DeepSeek-V4.1-Flash：1M 上下文、FP4 KV 缓存与跨层注意力复用 / DeepSeek AI Released DeepSeek-V4.1-Flash with 1M Context， FP4 KV Cache， and Cross-Layer Attention Reuse",
-      "url": "https://www.marktechpost.com/2026/09/10/deepseek-ai-released-deepseek-v4-1-flash-with-1m-context-fp4-kv-cache-and-cross-layer-attention-reuse",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 62,
-          "review": "1M 上下文和 FP4 缓存写得挺具体，但通篇没有一张评测表，先信一半。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "单一媒体转述，无 arXiv、无仓库、无第三方跑分，1M 上下文只能算宣称。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "1M 上下文加 FP4 KV 缓存，长文档和 Agent 记忆的显存账单能砍一大截，能调 API 就赶紧试。"
-        }
-      }
-    },
-    {
       "story_id": "story_b2726331d325",
       "title": "OpenAI 在 ChatGPT Work 中推出 Data agent / Now everyone can put data to work",
       "url": "https://openai.com/index/put-data-to-work",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -60,7 +40,7 @@
       "story_id": "story_353d7797f4fb",
       "title": "AI Scan 面向 pull request API 开放公开预览 / AI Scan for pull request APIs in public preview",
       "url": "https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 80,
           "review": "能把 AI 安全扫描接进 CI 和 PR 流程，公开预览现在就能试；API 未定，先小范围接。"
+        }
+      }
+    },
+    {
+      "story_id": "story_6c68adbdb622",
+      "title": "DeepSeek 发布 V4.1-Flash，大幅降低 AI Agent 的 KV cache 内存需求 / New Deepseek model V4.1-Flash cuts memory needs for AI agents",
+      "url": "https://the-decoder.com/new-deepseek-model-v4-1-flash-cuts-memory-needs-for-ai-agents",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 58,
+          "review": "「大幅降低」降了几成？通篇没数字，省下的内存大概都省在了披露上。"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "仅一篇二手报道，论文、代码、跑分全无，凭标题无法复现任何结论。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "跑长上下文 Agent 的显存能省一截，值夜班的运维会谢你；先压测自家并发再换。"
         }
       }
     }
