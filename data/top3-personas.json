@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T10:03:05.011680Z",
+  "generated_at": "2026-09-11T11:48:21.008197Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_9cc4559ef9f0",
+      "title": "实测 DeepSeek V4.1 Flash：价格大降、原生带视觉，作者用游戏与城市生成任务验证表现",
+      "url": "https://mp.weixin.qq.com/s?__biz=Mzg3MTk3NzYzNw%3D%3D&mid=2247511119&idx=1&sn=0f53b5017e41b16afc9b201966ce2bda",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 70,
+          "review": "降价和原生视觉是实打实的，但拿生成游戏和小镇当考卷，好看不等于好用。"
+        },
+        "paper-police": {
+          "score": 24,
+          "review": "自媒体实测而已，无官方论文、开源代码与可复现跑分，模型名真伪都待查。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "API 降价加原生视觉，多模态任务能直接换上去，先跑一轮对比测试。"
+        }
+      }
+    },
+    {
+      "story_id": "story_fe90ca3f92b8",
+      "title": "小米开源工业级目标说话人语音识别大模型 CocktailASR-1",
+      "url": "https://www.aibase.com/news/31001",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 68,
+          "review": "开源是真的，但'工业级'三个字得拿榜单和许可证说话，别只放权重不放配方。"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "只给了聚合新闻链接，没论文、没仓库、没跑分，开源两字无从核对。"
+        },
+        "pragmatic": {
+          "score": 83,
+          "review": "开源可下载，做多人会议转写、指定说话人提取的今天就能试；其他方向不用管。"
+        }
+      }
+    },
+    {
       "story_id": "story_b2726331d325",
       "title": "OpenAI 在 ChatGPT Work 中推出 Data agent / Now everyone can put data to work",
       "url": "https://openai.com/index/put-data-to-work",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 82,
           "review": "企业版用户现在能把取数跑数丢给 Agent，先拿脏表试一轮看准不准。"
-        }
-      }
-    },
-    {
-      "story_id": "story_353d7797f4fb",
-      "title": "AI Scan 面向 pull request API 开放公开预览 / AI Scan for pull request APIs in public preview",
-      "url": "https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "预览版先上线，误报率、定价、限流照例缺席，等 GA 再敲锣。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "官方changelog只宣告预览上线，扫描准确率无基准、无第三方复现，够用不够信。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "能把 AI 安全扫描接进 CI 和 PR 流程，公开预览现在就能试；API 未定，先小范围接。"
-        }
-      }
-    },
-    {
-      "story_id": "story_6c68adbdb622",
-      "title": "DeepSeek 发布 V4.1-Flash，大幅降低 AI Agent 的 KV cache 内存需求 / New Deepseek model V4.1-Flash cuts memory needs for AI agents",
-      "url": "https://the-decoder.com/new-deepseek-model-v4-1-flash-cuts-memory-needs-for-ai-agents",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "「大幅降低」降了几成？通篇没数字，省下的内存大概都省在了披露上。"
-        },
-        "paper-police": {
-          "score": 28,
-          "review": "仅一篇二手报道，论文、代码、跑分全无，凭标题无法复现任何结论。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "跑长上下文 Agent 的显存能省一截，值夜班的运维会谢你；先压测自家并发再换。"
         }
       }
     }
