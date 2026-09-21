@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T10:53:29.252889Z",
+  "generated_at": "2026-09-21T14:25:55.236825Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_67bbb2f19d0e",
-      "title": "Qwen 开源 Qwen-Image-2.1：7B 统一生成与编辑并原生支持透明图像 / Qwen-Image-2.1： Compact， Efficient， and Unified Image Creation",
-      "url": "https://qwen.ai/blog?id=qwen-image-2.1",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 78,
-          "review": "原生透明通道是实打实的差异点，7B 能本地部署；但 unified、efficient 全是形容词，跑分呢？"
-        },
-        "paper-police": {
-          "score": 58,
-          "review": "官方博客称开源7B权重，但缺论文与第三方复现，等仓库和跑分再定论。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "7B 权重能本地跑，原生透明通道省掉抠图，做电商图和素材的今天就能试。"
-        }
-      }
-    },
-    {
       "story_id": "story_1f933272e9f7",
       "title": "通义千问发布 Qwen-Image-2.1：7B 单检查点同时支持图像生成与编辑 / Qwen-Image-2.1 × @HuggingApps： live demo on Spaces！ 🖼 One single checkpoint for generation and edit…",
       "url": "https://x.com/Alibaba_Qwen/status/2101866671900401913",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 62,
@@ -53,6 +33,26 @@
         "pragmatic": {
           "score": 86,
           "review": "7B 单权重同时做生成和编辑，显存要求低，demo 已能试，本地部署今天就能跑。"
+        }
+      }
+    },
+    {
+      "story_id": "story_1b06f1be2557",
+      "title": "tokenizers v1：编码、解码与扩展，实测 / tokenizers v1: encode, decode and scaling, measured",
+      "url": "https://huggingface.co/blog/tokenizers-v1",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 80,
+          "review": "0.x 熬了五年才敢叫 1.0，好在带的是实测数据而不是形容词。"
+        },
+        "paper-police": {
+          "score": 74,
+          "review": "官方博客有实测数据，代码开源可查；缺独立复现，算证据较充分。"
+        },
+        "pragmatic": {
+          "score": 78,
+          "review": "分词底层库出 1.0，性能提升但要留意破坏性改动，升级前先跑通测试。"
         }
       }
     },
