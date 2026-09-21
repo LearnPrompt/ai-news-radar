@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T17:16:27.773900Z",
+  "generated_at": "2026-09-21T21:26:23.120133Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_1f933272e9f7",
-      "title": "通义千问发布 Qwen-Image-2.1：7B 单检查点同时支持图像生成与编辑 / Qwen-Image-2.1 × @HuggingApps： live demo on Spaces！ 🖼 One single checkpoint for generation and edit…",
-      "url": "https://x.com/Alibaba_Qwen/status/2101866671900401913",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 62,
-          "review": "单检查点兼顾生成与编辑，架构上是真活；可榜单和编辑保真度呢，通稿一个字没提。"
-        },
-        "paper-police": {
-          "score": 55,
-          "review": "官方推文配了可在线试用的 demo，但权重、论文、跑分都未提及，等开源仓库和评测出来再定。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "7B 单权重同时做生成和编辑，显存要求低，demo 已能试，本地部署今天就能跑。"
-        }
-      }
-    },
-    {
       "story_id": "story_5593750731a9",
       "title": "xAI 发布 Grok 4.7，主打编码与知识工作 / Grok 4.7 Sep 21， 2026 # Introducing Grok 4.7 SpaceXAI's most powerful model for coding and knowledge work. Twice as fast， at half the price of comparable models. Read More",
       "url": "https://x.ai/news/grok-4-7",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 55,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 80,
           "review": "半价还快一倍，今天就能拉 API 跑自家评测；生产切换前先等第三方复测。"
+        }
+      }
+    },
+    {
+      "story_id": "story_1b06f1be2557",
+      "title": "tokenizers v1：编码、解码与扩展，实测 / tokenizers v1: encode, decode and scaling, measured",
+      "url": "https://huggingface.co/blog/tokenizers-v1",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 80,
+          "review": "0.x 熬了五年才敢叫 1.0，好在带的是实测数据而不是形容词。"
+        },
+        "paper-police": {
+          "score": 74,
+          "review": "官方博客有实测数据，代码开源可查；缺独立复现，算证据较充分。"
+        },
+        "pragmatic": {
+          "score": 78,
+          "review": "分词底层库出 1.0，性能提升但要留意破坏性改动，升级前先跑通测试。"
         }
       }
     }
