@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T10:17:41.969344Z",
+  "generated_at": "2026-09-22T12:58:36.829087Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_9bf1a94971e8",
+      "title": "transformers 支持直接加载 GGUF 量化模型，本地推理性能接近 llama.cpp / Transformers now runs llama.cpp quants",
+      "url": "https://huggingface.co/blog/transformers-llama-cpp-quants",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 74,
+          "review": "当年加载 GGUF 慢到没法用，如今只说“接近”——差多少，基准表敢贴全吗？"
+        },
+        "paper-police": {
+          "score": 78,
+          "review": "源码开源、博客给出跑分可自行复现，但性能对比仅官方自测，待第三方核验。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "transformers 现在直接吃 GGUF 量化模型，本地跑量化不用再切 llama.cpp，今天就能试。"
+        }
+      }
+    },
+    {
       "story_id": "story_3f10cf90ec97",
       "title": "Grok 4.7 现已上线 GitHub Copilot / Grok 4.7 is now available in GitHub Copilot",
       "url": "https://github.blog/changelog/2026-09-21-grok-4-7-is-now-available-in-github-copilot",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 50,
@@ -40,7 +60,7 @@
       "story_id": "story_ec8391fd6c37",
       "title": "SpaceXAI 最强模型 Grok 4.7 上线：长任务能力拉满，价格只有旗舰一半",
       "url": "https://www.aibase.com/news/31268",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 45,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 80,
           "review": "价格砍半确实能省钱，但单一来源，先拿长任务压测再决定迁不迁。"
-        }
-      }
-    },
-    {
-      "story_id": "story_f598d946da96",
-      "title": "小米发布开放权重模型 MiMo-V2.6-Pro，登顶 Artificial Analysis 开放权重模型智能指数 / Banger！ https://huggingface.co/collections/XiaomiMiMo/mimo-v26",
-      "url": "https://x.com/ClementDelangue/status/2102141768674222323",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 74,
-          "review": "权重真开放，这点认；但登的是单家榜单，指数高≠能干活。"
-        },
-        "paper-police": {
-          "score": 74,
-          "review": "权重已开源、第三方榜单可查，但缺技术报告与复现，暂不能全信。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "权重已放出，能直接下；先看许可证和显存，榜单第一不等于好调。"
         }
       }
     }
