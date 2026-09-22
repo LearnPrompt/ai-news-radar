@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T12:58:36.829087Z",
+  "generated_at": "2026-09-22T15:42:53.461966Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_cbd16b700896",
+      "title": "OpenRouter 推出 Batch API，批量推理可享半价 / Batch API： half-price inference by bundling requests",
+      "url": "https://openrouter.ai/blog/announcements/batch-api",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "半价折扣上游早有，OpenRouter只是转个手；省钱是真的，新意谈不上。"
+        },
+        "paper-police": {
+          "score": 32,
+          "review": "官方博客只报半价，无独立评测与复现细节，等实测账单再信。"
+        },
+        "pragmatic": {
+          "score": 89,
+          "review": "批量推理直接打五折，非实时任务今天就能切过去省账单。"
+        }
+      }
+    },
+    {
       "story_id": "story_9bf1a94971e8",
       "title": "transformers 支持直接加载 GGUF 量化模型，本地推理性能接近 llama.cpp / Transformers now runs llama.cpp quants",
       "url": "https://huggingface.co/blog/transformers-llama-cpp-quants",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 74,
@@ -37,42 +57,22 @@
       }
     },
     {
-      "story_id": "story_3f10cf90ec97",
-      "title": "Grok 4.7 现已上线 GitHub Copilot / Grok 4.7 is now available in GitHub Copilot",
-      "url": "https://github.blog/changelog/2026-09-21-grok-4-7-is-now-available-in-github-copilot",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 50,
-          "review": "小数点后一位的例行上新，changelog 里连句跑分都懒得给，先让用户自己猜能干啥。"
-        },
-        "paper-police": {
-          "score": 32,
-          "review": "官方 changelog 只说已上线，无论文无代码无跑分，能力无从验证。"
-        },
-        "pragmatic": {
-          "score": 87,
-          "review": "Copilot 模型下拉框里就能选，今天可上手对比，不用改任何代码。"
-        }
-      }
-    },
-    {
-      "story_id": "story_ec8391fd6c37",
-      "title": "SpaceXAI 最强模型 Grok 4.7 上线：长任务能力拉满，价格只有旗舰一半",
-      "url": "https://www.aibase.com/news/31268",
+      "story_id": "story_8f58046896f1",
+      "title": "Qwen-Image-2.1 开源发布，登顶 Arena 图像编辑榜开源第一 / Qwen-Image-2.1 by @Alibaba_Qwen just landed as the #1 open source model in the Image Edit Arena and …",
+      "url": "https://x.com/arena/status/2102416020678008986",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "长任务能力拉满，却不说测了啥；半价对标的旗舰是谁，也藏着。"
+          "score": 68,
+          "review": "「开源第一」前面还站着谁？Arena 投的是人眼偏好，不是像素级胜出。"
         },
         "paper-police": {
-          "score": 18,
-          "review": "长任务\"拉满\"从哪测的？论文、代码、跑分三无，单一来源宣称不算证据。"
+          "score": 62,
+          "review": "开源权重与Arena公开榜可查，但仅一条推文，无论文与仓库链接，待核实。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "价格砍半确实能省钱，但单一来源，先拿长任务压测再决定迁不迁。"
+          "score": 82,
+          "review": "开源图像编辑模型登顶，权重能直接下载自部署，做修图生成管线的可以换上去试试。"
         }
       }
     }
