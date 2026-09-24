@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T01:43:37.185687Z",
+  "generated_at": "2026-09-24T06:37:04.228399Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -57,22 +57,22 @@
       }
     },
     {
-      "story_id": "story_e8c6ef86f111",
-      "title": "Node 20 在 GitHub Actions 中已不再可用 / Node 20 is no longer available in GitHub Actions",
-      "url": "https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions",
+      "story_id": "story_e8d7d86b4448",
+      "title": "谁在何时说话一目了然：用 NVIDIA Nemotron 3 Diarization 构建实时多说话人 AI / **Know Who Spoke When: Build Real-Time, Multi-Speaker AI with NVIDIA Nemotron 3 Diarization**",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-diarization",
       "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
-          "review": "例行生命周期到点，不升级流水线就红给你看，没水分也没惊喜。"
+          "review": "权重是真放出来了，但\"实时\"底下多半藏着A100和精挑的会议数据集。"
         },
         "paper-police": {
-          "score": 72,
-          "review": "官方 changelog 直链可查，弃用事实明确；但仅此单源，缺迁移与兼容细节。"
+          "score": 55,
+          "review": "官方博客有技术细节，但未见论文、开源权重与DER跑分，需第三方复现再定论。"
         },
         "pragmatic": {
           "score": 82,
-          "review": "CI 用 Node 20 的构建今天就会挂，赶紧把 workflow 和 action 版本升到 22。"
+          "review": "做会议转写、客服录音分角色的可以直接拉权重试，重点看实时延迟和串音。"
         }
       }
     }
