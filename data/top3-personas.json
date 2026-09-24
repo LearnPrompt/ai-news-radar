@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T20:38:41.769302Z",
+  "generated_at": "2026-09-24T00:05:06.934137Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,50 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_8270efdbfdab",
-      "title": "OpenAI 发布 GPT-6 Sol 与 Luna，API 定价降至五折并公布基准成绩 / OpenAI Releases GPT-6 Sol and Luna： 50% Cheaper API Pricing and Benchmarks",
-      "url": "https://www.marktechpost.com/2026/09/22/openai-releases-gpt-6-sol-and-luna-50-cheaper-api-pricing-and-benchmarks",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 63,
-          "review": "API 打五折是真金白银，基准却还是自家出卷自家判，等第三方复现再吹。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "只给了基准数字，无论文无开源代码，单一来源无法复现，等第三方跑分。"
-        },
-        "pragmatic": {
-          "score": 92,
-          "review": "API 五折，今天就能改调用省钱；跑基准挑 Sol 还是 Luna 得看任务。"
-        }
-      }
-    },
-    {
-      "story_id": "story_f7f4cf21d48a",
-      "title": "Claude Opus 5.5 与 GPT-6 Sol/Luna 发布，Simon Willison 详解新一轮价格战 / Claude Opus 5.5， GPT-6 Sol， GPT-6 Luna， and a new price war",
-      "url": "https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "价格数字是真的，版本号是编的——5.5 和 Sol/Luna 更像市场部的命名游戏。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "两条来源实为同一博主，无论文无开源跑分，需第三方复现再定论。"
-        },
-        "pragmatic": {
-          "score": 88,
-          "review": "新模型已上线还打价格战，先比价再换主力模型，长上下文任务成本能砍一截。"
-        }
-      }
-    },
-    {
       "story_id": "story_0f3ada4f2787",
       "title": "Antigravity SDK 支持本地模型，可完全离线运行智能体 / Introducing Support for Local AI Models in the Antigravity SDK",
       "url": "https://developers.googleblog.com/introducing-support-for-local-ai-models-in-the-antigravity-sdk",
-      "rank": 3,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 65,
@@ -73,6 +33,46 @@
         "pragmatic": {
           "score": 86,
           "review": "SDK 能接本地模型离线跑 Agent，数据不出内网的场景今天就能试。"
+        }
+      }
+    },
+    {
+      "story_id": "story_ef9959cf1c4e",
+      "title": "Google DeepMind 发布 Gemini 3.8 Flash TTS 与 Flash-Lite TTS 语音生成模型 / Gemini 3.8 text-to-speech says hello",
+      "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 55,
+          "review": "Flash 后缀越堆越多，延迟、价格、对比基线一样没晒，发篇博客就算发布了。"
+        },
+        "paper-police": {
+          "score": 34,
+          "review": "官方博客发布，但无论文、无开源、无第三方评测数字，仅产品公告，无法复现。"
+        },
+        "pragmatic": {
+          "score": 85,
+          "review": "做语音功能的可以直接换 API，Flash-Lite 这档大概率便宜，先拿 Lite 压成本。"
+        }
+      }
+    },
+    {
+      "story_id": "story_e8c6ef86f111",
+      "title": "Node 20 在 GitHub Actions 中已不再可用 / Node 20 is no longer available in GitHub Actions",
+      "url": "https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "例行生命周期到点，不升级流水线就红给你看，没水分也没惊喜。"
+        },
+        "paper-police": {
+          "score": 72,
+          "review": "官方 changelog 直链可查，弃用事实明确；但仅此单源，缺迁移与兼容细节。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "CI 用 Node 20 的构建今天就会挂，赶紧把 workflow 和 action 版本升到 22。"
         }
       }
     }
