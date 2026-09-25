@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T12:07:43.643099Z",
+  "generated_at": "2026-09-25T16:08:50.015076Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,50 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_3b19ec10c80b",
-      "title": "Anthropic 发布 Claude Opus 5.5，面向更长、上下文更重的编码会话优化成本 / Coding sessions are longer and use more context. Claude Opus 5.5 is built with that in mind.",
-      "url": "https://claude.com/blog/claude-opus-5-5-built-for-coding-sessions-that-use-more-context",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "版本号加个 .5，成本降多少、上下文多长，一个数都没给，全靠\"built with that in mind\"撑场。"
-        },
-        "paper-police": {
-          "score": 30,
-          "review": "只有官方博客的优化说法，无论文、无开源、无第三方跑分，复现路径为零。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "新模型已上线，长会话编码更省钱，今天就能换上去跑重活。"
-        }
-      }
-    },
-    {
-      "story_id": "story_9edda83740af",
-      "title": "用 LFM2.5-VL-DSpark 加速视觉语言模型 / Accelerating vision-language models with LFM2.5-VL-DSpark",
-      "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-vl-dspark",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 68,
-          "review": "LFM2 是真家伙，但挂个 DSpark 后缀就想收加速税——先交代快了几倍、精度掉几个点。"
-        },
-        "paper-police": {
-          "score": 55,
-          "review": "官方博客发布，权重或可下载验证，但无论文与公开评测，缺第三方跑分。"
-        },
-        "pragmatic": {
-          "score": 85,
-          "review": "VLM 推理加速方案，模型已放 HF，做多模态部署的今天就能测提速。"
-        }
-      }
-    },
-    {
       "story_id": "story_c5257387fdcf",
       "title": "推出搭载 Live Avatar 的 Gemini 3.8 Live / Introducing Gemini 3.8 Live with Live Avatar",
       "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar",
-      "rank": 3,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 48,
@@ -73,6 +33,46 @@
         "pragmatic": {
           "score": 80,
           "review": "实时数字人接口上线，做语音客服/直播的可以先试；替换前先比价格和延迟。"
+        }
+      }
+    },
+    {
+      "story_id": "story_66517b370dff",
+      "title": "GitHub Security Lab 发布 LLM 驱动的 Fuzzing Taskflow，自动完成 C/C++ 项目模糊测试全流程 / AI-powered fuzzing with the GitHub Security Lab Taskflow Agent",
+      "url": "https://github.blog/security/application-security/ai-powered-fuzzing-with-the-github-security-lab-taskflow-agent",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "全流程自动化听着很美，可挖出几个洞、覆盖率多少，一个数没给。"
+        },
+        "paper-police": {
+          "score": 52,
+          "review": "官方博客讲流程，若仓库和实测数据未附，仍是自证。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "开源可 clone，做 C/C++ 安全审计的能直接拿来跑 fuzzing 流程，省去手搓 harness。"
+        }
+      }
+    },
+    {
+      "story_id": "story_ef34871d3530",
+      "title": "Show HN：Agent 驱动的 CUDA Kernel 优化器 / Show HN: Agentic CUDA Kernel Optimizer",
+      "url": "https://github.com/bertaye/agentic-cuda-optimizer",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 45,
+          "review": "Agent 写 CUDA kernel 不新鲜，敢不敢贴对标 cuBLAS 与 Triton 的实测数据？"
+        },
+        "paper-police": {
+          "score": 68,
+          "review": "代码已开源可查，但缺论文与第三方基准复现，先按工程实现计分。"
+        },
+        "pragmatic": {
+          "score": 74,
+          "review": "写 CUDA 的可以 clone 来试试自动调 kernel，非 GPU 方向的人先收藏。"
         }
       }
     }
