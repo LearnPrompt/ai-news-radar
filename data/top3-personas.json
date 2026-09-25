@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T16:08:50.015076Z",
+  "generated_at": "2026-09-25T20:51:31.767928Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_c5257387fdcf",
-      "title": "推出搭载 Live Avatar 的 Gemini 3.8 Live / Introducing Gemini 3.8 Live with Live Avatar",
-      "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar",
+      "story_id": "story_fa6f9d4b24a5",
+      "title": "Claude Devs 测算 Opus 5.5 相比 Opus 5 在 Claude Code 任务中的成本变化 / Opus 5.5 is 20% cheaper per input and output token than Opus 5， and 60% cheaper on cache reads. So w…",
+      "url": "https://x.com/ClaudeDevs/status/2103548467729887677",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 48,
-          "review": "版本号跳到 3.8，主打竟是个头像；延迟、并发和价格一个字没提。"
+          "score": 68,
+          "review": "单价降了是真事，但任务级成本得看 token 用量涨没涨，这张账只算了一半。"
         },
         "paper-police": {
-          "score": 26,
-          "review": "官方博客只报了个名字，论文、代码、跑分全无，复现无从谈起。"
+          "score": 38,
+          "review": "只有推文报价，无官方定价页或实测成本明细，无从复现，等账单验证。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "实时数字人接口上线，做语音客服/直播的可以先试；替换前先比价格和延迟。"
+          "score": 88,
+          "review": "token 单价降 20%、缓存读取降 60%，跑 Claude Code 的账单一夜缩水，值得重算成本换模型。"
         }
       }
     },
     {
-      "story_id": "story_66517b370dff",
-      "title": "GitHub Security Lab 发布 LLM 驱动的 Fuzzing Taskflow，自动完成 C/C++ 项目模糊测试全流程 / AI-powered fuzzing with the GitHub Security Lab Taskflow Agent",
-      "url": "https://github.blog/security/application-security/ai-powered-fuzzing-with-the-github-security-lab-taskflow-agent",
+      "story_id": "story_3086a0a8d592",
+      "title": "Agent 自动修复现已支持 Copilot Memory / Agentic autofix now uses Copilot Memory",
+      "url": "https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 62,
-          "review": "全流程自动化听着很美，可挖出几个洞、覆盖率多少，一个数没给。"
+          "score": 58,
+          "review": "给自动修复挂上记忆就算一次更新，可修复成功率、回滚率一个数字没给。"
         },
         "paper-police": {
-          "score": 52,
-          "review": "官方博客讲流程，若仓库和实测数据未附，仍是自证。"
+          "score": 34,
+          "review": "官方 changelog 只说明功能上线，无评测数字、无复现方法，修得准不准无从验证。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "开源可 clone，做 C/C++ 安全审计的能直接拿来跑 fuzzing 流程，省去手搓 harness。"
+          "score": 82,
+          "review": "自动修复带上记忆，重复 PR 的修复建议会更准，用 Copilot 的团队今天就能感受到。"
         }
       }
     },
     {
-      "story_id": "story_ef34871d3530",
-      "title": "Show HN：Agent 驱动的 CUDA Kernel 优化器 / Show HN: Agentic CUDA Kernel Optimizer",
-      "url": "https://github.com/bertaye/agentic-cuda-optimizer",
+      "story_id": "story_6caff5a1f26b",
+      "title": "Claude 开放插件目录提交门户，Plugins 成为第三方扩展的主要方式 / Build plugins for Claude",
+      "url": "https://claude.com/blog/build-plugins-for-claude",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "Agent 写 CUDA kernel 不新鲜，敢不敢贴对标 cuBLAS 与 Triton 的实测数据？"
+          "score": 55,
+          "review": "应用商店换个名字叫插件目录，开发者排队交表，货架能不能摆满另说。"
         },
         "paper-police": {
-          "score": 68,
-          "review": "代码已开源可查，但缺论文与第三方基准复现，先按工程实现计分。"
+          "score": 38,
+          "review": "仅官方博客一条来源，门户可访问但无第三方验证、无评测数据，只能算产品通告。"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "写 CUDA 的可以 clone 来试试自动调 kernel，非 GPU 方向的人先收藏。"
+          "score": 76,
+          "review": "想蹭 Claude 流量的，现在就能提交插件进目录抢占入口；不做的可略过。"
         }
       }
     }
