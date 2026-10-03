@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T13:31:43.253775Z",
+  "generated_at": "2026-10-03T15:19:54.386444Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_4a16ec3b839b",
+      "title": "OpenAI 发布 GPT-5.5 Pro，ECI 得分 162 / GPT-5.5 Pro",
+      "url": "https://epoch.ai/models/gpt-5-5-pro",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 50,
+          "review": "小数点后加个 5 就敢叫 Pro，全靠 Epoch 一个数字撑场，成本和翻车率呢？"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "Epoch 有公开评测方法，但仅单一来源，无论文无代码，等能复现的第三方报告。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "新旗舰已能上手，跑分看着漂亮，但先拿自己业务任务实测再决定迁不迁移。"
+        }
+      }
+    },
+    {
+      "story_id": "story_744efe81d191",
+      "title": "OpenAI 发布闭源模型 GPT-6.1 Sol，定价为输入 $2 / 输出 $10 每 1M tokens / GPT-6.1 Sol",
+      "url": "https://epoch.ai/models/gpt-6-1-sol",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 55,
+          "review": "闭源加定价先行，跑分和复现欠奉；先晒第三方评测再吹。"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "闭源无论文无代码，定价可查但能力不可复现；等第三方独立评测跑分再定论。"
+        },
+        "pragmatic": {
+          "score": 85,
+          "review": "API 已可调用，$2/$10 的价码直接和现有模型比价，切不切先跑自家 benchmark。"
+        }
+      }
+    },
+    {
       "story_id": "story_87eab6a95e56",
       "title": "OpenAI 发布 GPT-6 家族实用指南：选型、提示词与长任务管理 / A model guide for the GPT-6 family",
       "url": "https://openai.com/index/practical-guide-building-gpt-6",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 82,
           "review": "选型和提示词套路直接能抄，长任务管理那节先扫一遍再动工。"
-        }
-      }
-    },
-    {
-      "story_id": "story_3f3282702712",
-      "title": "GitHub App 无状态安装 token 正式推出 / Stateless GitHub App installation tokens rolled out",
-      "url": "https://github.blog/changelog/2026-10-02-stateless-github-app-installation-tokens-rolled-out",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 74,
-          "review": "无状态省了缓存和续期，运维痛点真解决；但权限滥用的老账，改个token管不了。"
-        },
-        "paper-police": {
-          "score": 58,
-          "review": "官方 changelog 说明功能已上线，可自行调用验证，但单一来源无第三方复现。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "做 GitHub App 集成的该看了：token 不用落库管理，CI 和 Serverless 场景省掉一套续期逻辑。"
-        }
-      }
-    },
-    {
-      "story_id": "story_71cae9cfd0ac",
-      "title": "Muse 开源设备可用 SDK 在 ESP32 或 Raspberry Pi 上自行构建",
-      "url": "https://gadgets.muse.ai",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "开源 SDK 值得点头，但 ESP32 那点内存能跑什么？别只丢个点灯 demo 就算生态。"
-        },
-        "paper-police": {
-          "score": 40,
-          "review": "宣称开源却只给营销页和HN帖子，仓库地址呢？没有可clone的代码就不算开源。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "能 clone 到 ESP32/树莓派跑端侧原型，硬件玩家今天就能动手；不碰硬件的略过。"
         }
       }
     }
