@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T15:19:54.386444Z",
+  "generated_at": "2026-10-03T20:00:28.795887Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_bfe1831f2b4e",
+      "title": "Qwen3-Coder-480B-A35B：阿里于 2025 年 7 月 31 日发布的开源权重编码模型 / Qwen3-Coder-480B-A35B",
+      "url": "https://epoch.ai/models/qwen3-coder-480b-a35b",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 82,
+          "review": "权重确实放出来了，只是 480B 加载时的显存账单没人口头报一下。"
+        },
+        "paper-police": {
+          "score": 70,
+          "review": "权重开源，Epoch AI 提供评测，但未见论文/技术报告，可复现细节待补。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "开源权重可直接下载本地跑，480B 太大但 A35B 激活适合自托管编码，省 API 钱。"
+        }
+      }
+    },
+    {
       "story_id": "story_4a16ec3b839b",
       "title": "OpenAI 发布 GPT-5.5 Pro，ECI 得分 162 / GPT-5.5 Pro",
       "url": "https://epoch.ai/models/gpt-5-5-pro",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 50,
@@ -37,42 +57,22 @@
       }
     },
     {
-      "story_id": "story_744efe81d191",
-      "title": "OpenAI 发布闭源模型 GPT-6.1 Sol，定价为输入 $2 / 输出 $10 每 1M tokens / GPT-6.1 Sol",
-      "url": "https://epoch.ai/models/gpt-6-1-sol",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 55,
-          "review": "闭源加定价先行，跑分和复现欠奉；先晒第三方评测再吹。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "闭源无论文无代码，定价可查但能力不可复现；等第三方独立评测跑分再定论。"
-        },
-        "pragmatic": {
-          "score": 85,
-          "review": "API 已可调用，$2/$10 的价码直接和现有模型比价，切不切先跑自家 benchmark。"
-        }
-      }
-    },
-    {
-      "story_id": "story_87eab6a95e56",
-      "title": "OpenAI 发布 GPT-6 家族实用指南：选型、提示词与长任务管理 / A model guide for the GPT-6 family",
-      "url": "https://openai.com/index/practical-guide-building-gpt-6",
+      "story_id": "story_e850d66720d9",
+      "title": "Z.ai 与清华大学发布开源权重模型 GLM-4.6",
+      "url": "https://epoch.ai/models/glm-4-6",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 58,
-          "review": "官方教你选型，却不摆延迟、价格和失败率——指南越厚，越像给限制打圆场。"
+          "score": 74,
+          "review": "权重开源这点认，就是版本号一个季度跳一档，跑得比能力曲线还快。"
         },
         "paper-police": {
-          "score": 28,
-          "review": "官方指南只有选型与提示词建议，无论文、无代码、无跑分，能力无从复现。"
+          "score": 85,
+          "review": "权重开源、Epoch 独立评测在案，可复现；若配技术报告更完整。"
         },
         "pragmatic": {
-          "score": 82,
-          "review": "选型和提示词套路直接能抄，长任务管理那节先扫一遍再动工。"
+          "score": 86,
+          "review": "开源权重可直接拉下来跑，本地部署或微调今天就能开工。"
         }
       }
     }
