@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T21:40:21.792293Z",
+  "generated_at": "2026-10-03T02:08:15.813558Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,42 +37,42 @@
       }
     },
     {
-      "story_id": "story_7d80f29039e4",
-      "title": "AutoSynthData：为企业级 Agent 生成训练数据 / AutoSynthData: Generating Training Data for Enterprise Agents",
-      "url": "https://huggingface.co/blog/ServiceNow-AI/autosynthdata",
+      "story_id": "story_3f3282702712",
+      "title": "GitHub App 无状态安装 token 正式推出 / Stateless GitHub App installation tokens rolled out",
+      "url": "https://github.blog/changelog/2026-10-02-stateless-github-app-installation-tokens-rolled-out",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 58,
-          "review": "合成数据谁都会生成，关键是拿什么证明它比真实工单好用？"
+          "score": 74,
+          "review": "无状态省了缓存和续期，运维痛点真解决；但权限滥用的老账，改个token管不了。"
         },
         "paper-police": {
-          "score": 44,
-          "review": "官方博客讲了方法，无论文无开源无第三方跑分，复现不了就只是个故事。"
+          "score": 58,
+          "review": "官方 changelog 说明功能已上线，可自行调用验证，但单一来源无第三方复现。"
         },
         "pragmatic": {
-          "score": 76,
-          "review": "做企业 Agent 缺训练数据的可以抄这套合成流程，先看有没有放出代码再动手。"
+          "score": 82,
+          "review": "做 GitHub App 集成的该看了：token 不用落库管理，CI 和 Serverless 场景省掉一套续期逻辑。"
         }
       }
     },
     {
-      "story_id": "story_2e2e433e3cb1",
-      "title": "开源 AstaBrief：Asta 中的快速报告生成模型 / Open-sourcing AstaBrief, the fast report-generation model in Asta",
-      "url": "https://huggingface.co/blog/allenai/astabrief",
+      "story_id": "story_cc4a44476dc4",
+      "title": "Copilot 代码审查：新增 API 支持与新的默认审查强度 / Copilot code review: API support and new default effort level",
+      "url": "https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "模型确实开源了，但'快速'后面最好跟个延迟数字，别让读者自己猜。"
+          "score": 70,
+          "review": "API 支持算真干货，可'新的默认强度'连原档位都没交代，怎么复现对比？"
         },
         "paper-police": {
-          "score": 55,
-          "review": "开源了模型和代码，但未见论文与公开基准，性能复现待验证。"
+          "score": 34,
+          "review": "官方 changelog 属实，但只讲功能不讲效果，审查质量无 benchmark，无法验证。"
         },
         "pragmatic": {
-          "score": 72,
-          "review": "模型已开源可下载，做自动报告生成的能直接试；场景偏窄，先跑demo再定。"
+          "score": 80,
+          "review": "Copilot 审查能通过 API 接进 CI 了，顺手也能调审查强度省额度，值得今天就试。"
         }
       }
     }
