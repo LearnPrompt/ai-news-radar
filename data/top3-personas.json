@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T15:55:39.132989Z",
+  "generated_at": "2026-10-04T20:20:47.277742Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,42 +17,22 @@
   ],
   "items": [
     {
-      "story_id": "story_c7ba5f8749ed",
-      "title": "在 Claude 和 Claude Code 中充分利用 Opus 5.5",
-      "url": "https://claude.dev/blog/getting-the-most-out-of-opus-5-5",
+      "story_id": "story_22f350167c25",
+      "title": "Show HN: 在 macOS 上对每张照片和视频的每一帧进行 AI 搜索",
+      "url": "https://github.com/allenv0/SCM",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "版本号从 4.5 直接跳到 5.5，benchmark 没影，使用教程倒先上线了。"
+          "score": 60,
+          "review": "一小时 30fps 视频就是十万帧要过一遍模型，索引体积和耗时敢不敢贴出来？"
         },
         "paper-police": {
-          "score": 18,
-          "review": "claude.dev 非官方域名，无论文、无开源、无评测数字，一篇用法博客撑不起任何性能声明。"
+          "score": 65,
+          "review": "代码开源可自查这点达标，但无论文、无公开评测基准，搜索效果全靠自述。"
         },
         "pragmatic": {
-          "score": 84,
-          "review": "新模型已能上手，提示词技巧抄完就能提效，先拿旧任务试跑对比。"
-        }
-      }
-    },
-    {
-      "story_id": "story_52f3cf9a90e0",
-      "title": "LMSYS 发布开源聊天模型 Vicuna-13B，用 ShareGPT 对话微调 LLaMA，训练成本约 $300 / Blog Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90% ChatGPT Quality We introduce Vicuna-13B, an open-source chatbot trained by fine-tuning LLaMA on user-shared conversations collected from ShareGPT. Preliminary evaluation using GPT-4 as a judge shows Vicuna-13B achiev... The Vicuna Team March 30, 2023",
-      "url": "https://www.lmsys.org/blog/2023-03-30-vicuna",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "模型是真的，评测就80题还让GPT-4当裁判，90%质量听听就好。"
-        },
-        "paper-police": {
-          "score": 74,
-          "review": "权重和评测方法可查，但仅博客，GPT-4 评判未经独立复现，缺论文。"
-        },
-        "pragmatic": {
-          "score": 74,
-          "review": "权重能直接拉下来跑，$300微调配方可抄，但已是2023年老底子，只配当基线。"
+          "score": 82,
+          "review": "开源可 clone，Mac 用户今天就能本地帧级搜素材；非苹果生态只能围观。"
         }
       }
     },
@@ -60,7 +40,7 @@
       "story_id": "story_6c512ed5ed17",
       "title": "Google 论文揭示 LLM 会隐瞒负面结果，一句 honesty 提示可大幅改善 / Hugely revealing paper from Google.",
       "url": "https://x.com/rohanpaul_ai/status/2106502600703222202",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 72,
           "review": "论文结论能立刻用：跑分析任务时给提示加句诚实要求，能少被模型糊弄。"
+        }
+      }
+    },
+    {
+      "story_id": "story_1be63ddb3fed",
+      "title": "Microsoft ThinkingBox 在 Hugging Face 上发布，以数据库终态和 20 次重复评测智能体 / The Agent Said It Was Done. The Database Disagreed.",
+      "url": "https://huggingface.co/blog/microsoft/thinkingbox",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 74,
+          "review": "只认数据库终态、重复20次，总算不信智能体的\"我干完了\"；可惜诚实评测如今也成了卖点。"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "20次重复评测方法公开，但仅官方博客自述，无论文无第三方复现。"
+        },
+        "pragmatic": {
+          "score": 70,
+          "review": "给智能体做评测的基准，查数据库终态而非听它自称完成，20次重复跑更适合测稳定性，搭Agent的可以拿来验货。"
         }
       }
     }
