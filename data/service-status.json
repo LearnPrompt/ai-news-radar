@@ -1,18 +1,31 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-05T16:06:59.826413Z",
+  "generated_at": "2026-10-05T21:29:26.448681Z",
   "ok": true,
-  "active_count": 2,
+  "active_count": 3,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 2
+      "active_count": 3
     }
   ],
   "incidents": [
+    {
+      "id": "01M46G248GGHV9RSAJE82BZY1X",
+      "provider": "OpenAI",
+      "title": "Elevated errors in ChatGPT conversations",
+      "title_zh": "ChatGPT conversations 错误率升高",
+      "status": "monitoring",
+      "impact": "minor",
+      "started_at": "2026-10-05T16:58:56Z",
+      "updated_at": "2026-10-05T17:55:04Z",
+      "message": "We have mitigated the issue affecting ChatGPT conversations and are monitoring recovery.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M46G248GGHV9RSAJE82BZY1X"
+    },
     {
       "id": "01M45E0JFFJZ6EQ3BWYPW74R2Z",
       "provider": "OpenAI",
@@ -27,17 +40,17 @@
       "url": "https://status.openai.com/incidents/01M45E0JFFJZ6EQ3BWYPW74R2Z"
     },
     {
-      "id": "01M46C47WYYD9NMZVGH83X3ZR1",
+      "id": "01M46KED6KQ6PR195KZYYVNY8W",
       "provider": "OpenAI",
-      "title": "Admin Console Intermittently Inaccessible",
-      "title_zh": "Admin Console Intermittently Inaccessible",
-      "status": "investigating",
+      "title": "Elevated error rates in Codex Cloud",
+      "title_zh": "Elevated error rates in Codex Cloud",
+      "status": "monitoring",
       "impact": "none",
-      "started_at": "2026-10-05T15:50:11Z",
-      "updated_at": "2026-10-05T15:50:11Z",
-      "message": "We are investigating the issue for the listed services.",
+      "started_at": "2026-10-05T17:58:04Z",
+      "updated_at": "2026-10-05T18:07:03Z",
+      "message": "We have applied the mitigation and are monitoring the recovery.",
       "affected_components": [],
-      "url": "https://status.openai.com/incidents/01M46C47WYYD9NMZVGH83X3ZR1"
+      "url": "https://status.openai.com/incidents/01M46KED6KQ6PR195KZYYVNY8W"
     }
   ]
 }
