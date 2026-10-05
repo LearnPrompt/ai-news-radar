@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T00:05:42.927351Z",
+  "generated_at": "2026-10-05T02:10:07.708662Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_92fa9be3e195",
+      "title": "PromptArmor 披露 Databricks Genie 恶意 Skill 可绕过四类控制实施钓鱼与数据外泄 / Four Databricks Genie Controls That Don't Stop Malicious Skills",
+      "url": "https://www.promptarmor.com/resources/four-databricks-genie-controls-that-dont-stop-malicious-skills",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "四类控制被逐个点名绕开，PoC 有板有眼；但只有披露方一面之词，Databricks 还没接招。"
+        },
+        "paper-police": {
+          "score": 52,
+          "review": "安全博客披露了绕过细节，但无独立复现或公开PoC，单源证据待第三方验证。"
+        },
+        "pragmatic": {
+          "score": 70,
+          "review": "用 Genie 或做 Skill 权限隔离的，那四层控制形同虚设，先别把敏感数据接进去。"
+        }
+      }
+    },
+    {
       "story_id": "story_8d78ad21f2cb",
       "title": "Homa：AI 集群中 TCP 的终结 [视频] / Homa: The end of TCP for AI clusters [video]",
       "url": "https://www.youtube.com/watch?v=eZ8WWZzoaR0",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 70,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 48,
           "review": "数据中心网络层的学术向分享，除非你在自建 AI 集群调 RDMA，否则跟日常写代码没关系。"
-        }
-      }
-    },
-    {
-      "story_id": "story_7690a865b944",
-      "title": "如何用 AI 扩展意图、质量和艺术性 [视频] / How to scale intent, quality, and artistry with AI [video]",
-      "url": "https://www.youtube.com/watch?v=GLvFTMtw4Jk",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 35,
-          "review": "两个「来源」都是 Hacker News，多源验证成了自己跟自己点头；内容还只是场视频。"
-        },
-        "paper-police": {
-          "score": 18,
-          "review": "一个视频演讲，无论文、无代码、无公开benchmark，说法无法复现。"
-        },
-        "pragmatic": {
-          "score": 28,
-          "review": "又是一场理念演讲，没有代码和工具，看完也落不了地。"
         }
       }
     }
