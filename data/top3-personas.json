@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T15:34:18.011896Z",
+  "generated_at": "2026-10-06T19:50:05.095567Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_34879e2db3e2",
-      "title": "Mistral Large 4 上线 OpenRouter 公测：1T 参数、512K 上下文 / Le Chonk has arrived 🐈",
-      "url": "https://x.com/OpenRouter/status/2107471559040635360",
+      "story_id": "story_a4b54cc613c1",
+      "title": "Google 发布 EmbeddingGemma 2：基于 Gemma 4 的开源多模态嵌入模型 / EmbeddingGemma 2: The Developer Guide",
+      "url": "https://developers.googleblog.com/embeddinggemma-2-the-developer-guide",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 58,
-          "review": "一条推文就算上线，跑分、定价、权重全缺席，1T参数先当形容词听。"
+          "score": 72,
+          "review": "开源是真，多模态嵌入也有用，但没贴跑分和许可证细节，先别急着喊颠覆。"
         },
         "paper-police": {
-          "score": 30,
-          "review": "参数和上下文是标签，论文、权重、跑分全无，公测上线不等于可验证。"
+          "score": 42,
+          "review": "官方博客宣称开源，但未见仓库与评测细节，等代码和复现结果再认。"
         },
         "pragmatic": {
-          "score": 82,
-          "review": "OpenRouter 上今天就能调，512K 上下文适合长文档场景；但从 X 公测贴来的，定价和稳定性还得自己测。"
+          "score": 87,
+          "review": "开源可直接拉，多模态检索本地就能跑，省掉外部embedding API账单，建议先测召回率再切。"
         }
       }
     },
     {
-      "story_id": "story_45464a737294",
-      "title": "Secret scanning 新增对 Lovable、Supabase 等的检测器 / Secret scanning adds detectors for Lovable, Supabase, and more",
-      "url": "https://github.blog/changelog/2026-10-05-secret-scanning-adds-detectors-for-lovable-supabase-and-more",
+      "story_id": "story_0101f6369b65",
+      "title": "Claude Code 云端会话实战指南：每个任务独占一台 VM，可并行跑任务并以分支收尾 / Claude Code in the cloud: a field guide to cloud sessions",
+      "url": "https://claude.dev/blog/claude-code-in-the-cloud",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "给新晋热门平台补密钥检测，干货虽小却没注水，攒人品型更新。"
+          "score": 70,
+          "review": "每任务独占一台 VM 是真隔离，可惜账单和并发上限一个字没提。"
         },
         "paper-police": {
-          "score": 60,
-          "review": "官方更新属实可验证，但仅功能通告，无评测数据或复现细节，够不上技术证据。"
+          "score": 40,
+          "review": "官方博客讲用法，机制描述清晰但无跑分无对比，属产品文档非可验证评测。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "用 Supabase 或 Lovable 的仓库今天起自动扫泄漏密钥，白捡一层防线，去设置里确认开启即可。"
+          "score": 86,
+          "review": "能直接上手：任务拆到独立 VM 并行跑、分支收尾，多任务交付流程今天就能照抄。"
         }
       }
     },
     {
-      "story_id": "story_6d96ce488e8a",
-      "title": "Reflection 发布 501B-A23B 开源编码模型 Beam / [AINews] Reflection Beam - 501B-A23B American Open Model",
-      "url": "https://www.latent.space/p/ainews-reflection-beam-501b-a23b",
+      "story_id": "story_948c9ff22b36",
+      "title": "Google DeepMind 发布多模态嵌入模型 EmbeddingGemma 2 / Bring multimodal semantic search to the edge with EmbeddingGemma 2",
+      "url": "https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 80,
-          "review": "501B总参数、23B激活，开源权重是真货；拿“美国产”当卖点，水分不少。"
+          "score": 73,
+          "review": "上代只会读字，这代学会看图，权重确实给了；但\"边缘多模态\"这词比模型还重。"
         },
         "paper-police": {
-          "score": 35,
-          "review": "称开源却无论文链接与仓库地址，单源转述，未验证前仅当发布传闻。"
+          "score": 48,
+          "review": "官方博客单源宣称，论文与开源权重均未见，等第三方跑分复现再定论。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "开源编码权重可下载，但501B自托管门槛高，先等第三方API报价和实测数据。"
+          "score": 86,
+          "review": "本地就能跑图文混合检索，做端侧 RAG 的可以换模型试效果。"
         }
       }
     }
