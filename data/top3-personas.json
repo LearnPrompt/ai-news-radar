@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T11:57:45.922200Z",
+  "generated_at": "2026-10-07T15:48:34.026534Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_0101f6369b65",
-      "title": "Claude Code 云端会话实战指南：每个任务独占一台 VM，可并行跑任务并以分支收尾 / Claude Code in the cloud: a field guide to cloud sessions",
-      "url": "https://claude.dev/blog/claude-code-in-the-cloud",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 70,
-          "review": "每任务独占一台 VM 是真隔离，可惜账单和并发上限一个字没提。"
-        },
-        "paper-police": {
-          "score": 40,
-          "review": "官方博客讲用法，机制描述清晰但无跑分无对比，属产品文档非可验证评测。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "能直接上手：任务拆到独立 VM 并行跑、分支收尾，多任务交付流程今天就能照抄。"
-        }
-      }
-    },
-    {
       "story_id": "story_79247d86835a",
       "title": "堆叠式 pull requests 正式可用 / Stacked pull requests generally available",
       "url": "https://github.blog/changelog/2026-10-06-stacked-pull-requests-generally-available",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 84,
           "review": "原生支持链式 PR，巨型改动终于能拆开逐层评审合并，今天就能用。"
+        }
+      }
+    },
+    {
+      "story_id": "story_20180e64f056",
+      "title": "Decisions API 已进入公开测试阶段",
+      "url": "https://developers.openai.com/api/docs/guides/decisions",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 52,
+          "review": "公测二字很诚实：文档先行，限流、定价、稳定性都还留着后门，开发者先当免费测试员。"
+        },
+        "paper-police": {
+          "score": 42,
+          "review": "官方文档证实公测，但无论文、代码与可复现评测，证据仅到存在性。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "公开测试就能接，但 beta 阶段接口和定价可能变，先用小流量试别进主链路。"
         }
       }
     }
