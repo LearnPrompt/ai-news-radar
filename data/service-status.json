@@ -1,18 +1,31 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T19:32:32.198195Z",
+  "generated_at": "2026-10-09T21:42:04.475975Z",
   "ok": true,
-  "active_count": 1,
+  "active_count": 2,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 1
+      "active_count": 2
     }
   ],
   "incidents": [
+    {
+      "id": "01M4H7FKXDA425TDNP2CRGEYA3",
+      "provider": "OpenAI",
+      "title": "Some ChatGPT content may be unavailable on Android",
+      "title_zh": "Some ChatGPT content may be unavailable on Android",
+      "status": "identified",
+      "impact": "major",
+      "started_at": "2026-10-09T21:00:39Z",
+      "updated_at": "2026-10-09T21:00:39Z",
+      "message": "We have identified an issue affecting the ChatGPT Android app where users may see “This content is unavailable in this version of the app” instead of certain content. A fix is rolling out gradually in the latest Android version. Users can use ChatGPT on the web while we work to restore the experience for older app versions.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M4H7FKXDA425TDNP2CRGEYA3"
+    },
     {
       "id": "01M4GV1M2A3K38T73JCVCD9G0R",
       "provider": "OpenAI",
