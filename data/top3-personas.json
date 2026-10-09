@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T22:25:11.964488Z",
+  "generated_at": "2026-10-09T03:09:31.331663Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,50 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_d783a04fd0f6",
-      "title": "GPT-6.1 Sol 在 Codex 和 ChatGPT 中极速运行 / GPT-6.1 Sol Ultrafast in Codex and ChatGPT Work",
-      "url": "https://developers.openai.com/codex/changelog",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 45,
-          "review": "版本号加个 Sol 后缀就敢叫极速，延迟降了几毫秒倒是一个字不提。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "官方 changelog 算一手来源，但无论文、无跑分、无独立复现，单源更新不予采信。"
-        },
-        "pragmatic": {
-          "score": 87,
-          "review": "模型已在 Codex 和 ChatGPT 上线，速度提升今天就能在编码里体感，直接换用试跑即可。"
-        }
-      }
-    },
-    {
-      "story_id": "story_4c6f4f6c7de5",
-      "title": "Google 开源 ML Drift 端侧 GPU 推理引擎，接替 TFLite GPU delegate / ML Drift: Next-Gen GPU AI/ML Inference at the Edge",
-      "url": "https://developers.googleblog.com/ml-drift-next-gen-gpu-aiml-inference-at-the-edge",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "换掉自家 TFLite delegate 算真迭代，但通篇没基准没复现，「下一代」先打个折。"
-        },
-        "paper-police": {
-          "score": 35,
-          "review": "官方博客宣称开源，但仓库链接与跑分皆无，先交 GitHub 和 benchmark 再评。"
-        },
-        "pragmatic": {
-          "score": 84,
-          "review": "端侧 GPU 推理要换底座了，TFLite delegate 项目可评估迁移，新项目直接上手。"
-        }
-      }
-    },
-    {
       "story_id": "story_6550b85414dd",
       "title": "Claude 九月回顾：Chat 与 Cowork 合一，Claude 5.5 系列模型上线 / What's new in Claude: September recap",
       "url": "https://www.youtube.com/shorts/n9WfoNW2XnE",
-      "rank": 3,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 52,
@@ -73,6 +33,46 @@
         "pragmatic": {
           "score": 82,
           "review": "新模型和界面合并都上线了，直接去试；迁移前先看 API 有没有改。"
+        }
+      }
+    },
+    {
+      "story_id": "story_9d420c28c726",
+      "title": "Artificial Analysis 评测 Google Nano Banana 2.1，两榜居第 4 且价格为前代一半 / Google's Nano Banana 2.1 takes #4 on both AA-Image-T2I v2.0 and AA-Image-Editing v2.0, at half the price of Nano Banana 2",
+      "url": "https://x.com/ArtificialAnlys/status/2108236656700768310",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "两榜第四，离榜首还有距离；但价格腰斩是真的，这刀砍得比排名好看。"
+        },
+        "paper-police": {
+          "score": 60,
+          "review": "第三方榜单有公开方法可查，但仅一条推文、无论文代码，等独立复测。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "图像生成 API 半价且仍在第一梯队，跑批量出图的今天就能换省成本。"
+        }
+      }
+    },
+    {
+      "story_id": "story_6e2cc0057ae4",
+      "title": "如何在单张 RTX 5090 上用 MiniMax H3 生成实时视频 / How I Generated Live Video with MiniMax H3 on a Single GPU",
+      "url": "https://blog.comfy.org/p/how-i-generated-live-video-with-minimax",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "5090本就是顶配卡,'单张'听着谦虚；'实时'两字背后没写分辨率和延迟。"
+        },
+        "paper-police": {
+          "score": 40,
+          "review": "单方教程博客，无论文、无公开benchmark、无第三方复现，仅能算有迹可循。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "单卡5090跑实时视频生成，教程可照着复现；先确认权重是否放开再动手。"
         }
       }
     }
