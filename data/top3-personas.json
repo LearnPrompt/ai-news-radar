@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T12:05:20.399890Z",
+  "generated_at": "2026-10-09T15:30:10.603057Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,42 +37,42 @@
       }
     },
     {
-      "story_id": "story_e42c7cb753df",
-      "title": "Zenity 研究人员发现一条提示词即可劫持 AWS 账户内全部 AgentCore 智能体 / A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
-      "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+      "story_id": "story_db170a853e6a",
+      "title": "Anthropic重磅推出OSS Scanner，用最强AI模型为全球开源软件免费扫漏洞",
+      "url": "https://www.aibase.com/news/31503",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 70,
-          "review": "一锅端 AgentCore 听着吓人，单源报道先给复现步骤和 AWS 回应。"
+          "score": 57,
+          "review": "免费是真免费，可误报率多少、修好了几个CVE一个没提，扫出来的洞谁来复核？"
         },
         "paper-police": {
-          "score": 34,
-          "review": "只有媒体报道，无论文、无PoC代码、无复现步骤，安全结论无法验证。"
+          "score": 22,
+          "review": "仅一家聚合站转述，无官方公告、无扫描准确率数据、无开源，漏洞检出率谁验过？"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "跑 AWS AgentCore 的赶紧审查 Agent 间信任边界，一条提示词就能横向接管全账号。"
+          "score": 75,
+          "review": "开源维护者能白嫖一次AI漏洞扫描；先确认支持的语言栈和申请门槛，别指望它替你修。"
         }
       }
     },
     {
-      "story_id": "story_4b0f94357a4e",
-      "title": "Zenity 披露 AgentCore 漏洞链：一个公开 AI Agent 可控制同账户同区域所有 Agent / One public-facing AI agent on AWS could read, rewrite, and delete every other agent in the region",
-      "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+      "story_id": "story_02d66470e18a",
+      "title": "Triage 及以上权限的用户现在可以归档 pull request / Triage role users or higher can now archive pull requests",
+      "url": "https://github.blog/changelog/2026-10-08-triage-role-users-or-higher-can-now-archive-pull-requests",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 76,
-          "review": "能读能改能删的攻击链是真的，不是PPT漏洞；可AWS的补丁时间表还欠着。"
+          "score": 74,
+          "review": "权限表多一行就发条公告，胜在没有\"革命性\"三个字。"
         },
         "paper-police": {
-          "score": 40,
-          "review": "仅转述厂商披露，无原始技术报告、CVE 或 PoC，漏洞链无法复现验证。"
+          "score": 62,
+          "review": "官方更新已上线，功能可自行验证，但属产品变更非技术成果，无评测可言。"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "用 AWS AgentCore 的先收紧 IAM：同账户同区域的 Agent 别共用角色，一个公开入口就能连坐。"
+          "score": 68,
+          "review": "仓库维护者现在可让 triage 角色归档过期 PR，少一堆手动清理，今天生效。"
         }
       }
     }
