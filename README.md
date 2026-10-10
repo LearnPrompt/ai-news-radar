@@ -128,7 +128,7 @@ AI News Radar从来都不是单纯把信息抓回来，
 
 ### 今天值得做
 
-首页新增一个简短项目模块，从 **GitHub Trending** 公开日榜和 **Product Hunt**
+首页主信息流之后、页面最下方新增一个简短项目模块，从 **GitHub Trending** 公开日榜和 **Product Hunt**
 官方 Atom feed 中筛选 AI 相关项目，每次最多显示 4 个，每个只保留项目名、来源、
 一句话推荐和打开项目的链接。两个视图共用 `data/today-projects.json`，随现有更新任务刷新。
 推荐依据项目真实简介生成，不代表已经试用；没有模型 Key 也能展示基于简介的推荐。

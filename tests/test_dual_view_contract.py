@@ -106,12 +106,15 @@ def test_mobile_classic_choice_is_one_navigation_only():
     assert "writeMobileOverride(view)" in source
 
 
-def test_both_views_show_today_projects_before_news():
+def test_both_views_show_today_projects_after_news():
     for path in ("index.html", "classic/index.html"):
         source = read(path)
         assert 'id="todayProjectsTitle">今天值得做' in source
         assert 'id="todayProjectsList"' in source
-        assert source.index('id="todayProjectsWrap"') < source.index('id="newsList"')
+        assert source.index('id="newsList"') < source.index('id="todayProjectsWrap"')
+        from bs4 import BeautifulSoup
+        main_sections = BeautifulSoup(source, "html.parser").select("main > section")
+        assert main_sections[-1].get("id") == "todayProjectsWrap"
 
 
 def test_today_projects_load_independently_in_both_views():
