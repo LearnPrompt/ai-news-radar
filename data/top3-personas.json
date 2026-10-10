@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T02:30:32.893605Z",
+  "generated_at": "2026-10-10T08:37:48.252966Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_5af832d4a5f1",
+      "title": "Cloudflare 发布开放权重决策模型 Clef-omni，新增支持音视频多模态输入",
+      "url": "https://www.aibase.com/news/31531",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 44,
+          "review": "「决策模型」到底决策什么？没跑分没参数，开放权重不等于开放诚意。"
+        },
+        "paper-police": {
+          "score": 27,
+          "review": "开放权重喊出来了，权重在哪、论文和跑分在哪？单一聚合源无链接，不算证据。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "开放权重可直接拉下来部署，音视频输入省了自建管线，先跑个 benchmark 再定换不换。"
+        }
+      }
+    },
+    {
       "story_id": "story_cac0574655fa",
       "title": "GitHub Copilot 每周发布 — 10 月 5 日 / GitHub Copilot weekly releases — October 5",
       "url": "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -40,7 +60,7 @@
       "story_id": "story_03281ba48285",
       "title": "CodeQL 2.27.2 改进 C++、Go、Rust 和 JavaScript 分析能力 / CodeQL 2.27.2 improves C++, Go, Rust, and JavaScript analysis",
       "url": "https://github.blog/changelog/2026-10-09-codeql-2-27-2-improves-c-go-rust-and-javascript-analysis",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 70,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 70,
           "review": "跑 CodeQL 的可以顺手升级，多语言误报和覆盖率有改善，但只是小版本，不用专门排期。"
-        }
-      }
-    },
-    {
-      "story_id": "story_d37a736244a0",
-      "title": "为GPU集群带来显著影响的调度 / Impactful scheduling for GPU clusters",
-      "url": "https://huggingface.co/blog/allenai/impactful-scheduling",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 70,
-          "review": "形容词先行，利用率涨了几个点、排队短了几成——这些数字摆出来才算数。"
-        },
-        "paper-police": {
-          "score": 48,
-          "review": "官方技术博客，调度细节待查；无论文与开源代码，复现不了就不算数。"
-        },
-        "pragmatic": {
-          "score": 66,
-          "review": "管 GPU 集群的可以抄调度思路省卡时，纯调 API 的用不上，当技术博客扫一眼即可。"
         }
       }
     }
