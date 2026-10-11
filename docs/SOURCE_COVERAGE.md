@@ -91,6 +91,8 @@ baseline, then let the aggregator layer add breadth.
   discovery signals, labeled as updates, not verified first launches. Only when
   the feed omits an update timestamp does selection use publication time; invalid,
   stale or future updates are rejected rather than replaced with a fresh fetch time.
+  The 24-hour window ends when the HTTP response is received, so an update made
+  while earlier sources are being collected is not mistaken for a future event.
   Both sources participate in the existing news pipeline and source-health report;
   the earlier NewsNow bridge remains available and story merging handles overlaps.
   Their current AI-related projects also generate `data/today-projects.json` for

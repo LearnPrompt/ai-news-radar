@@ -7038,7 +7038,7 @@ def main() -> int:
     title_cache = load_title_zh_cache(title_cache_path)
     today_projects_payload = build_today_projects(
         [raw.meta["project_candidate"] for raw in raw_items if "project_candidate" in raw.meta],
-        now, statuses, cache=title_cache,
+        utc_now(), statuses, cache=title_cache,
         recommend=lambda name, summary: recommend_project(name, summary, session),
     )
     latest_items, latest_items_all, title_cache = add_bilingual_fields(

@@ -129,10 +129,15 @@ def fetch_github_projects(session: Any, now: datetime) -> list[dict[str, Any]]:
     return parse_github_trending(response.text, now)
 
 
-def fetch_producthunt_projects(session: Any, now: datetime) -> list[dict[str, Any]]:
+def fetch_producthunt_projects(
+    session: Any, now: datetime, *, clock: Callable[[], datetime] | None = None,
+) -> list[dict[str, Any]]:
     response = session.get(PRODUCTHUNT_FEED_URL, timeout=25)
     response.raise_for_status()
-    return parse_producthunt_feed(response.text, now)
+    # Earlier sources can take minutes. Updates already present in this response
+    # must be compared with observation time, not the whole job's start time.
+    observed_at = max(now, clock() if clock else datetime.now(UTC))
+    return parse_producthunt_feed(response.text, observed_at)
 
 
 def recommendation_fallback(project: dict[str, Any]) -> str:
