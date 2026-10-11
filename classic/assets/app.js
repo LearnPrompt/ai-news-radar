@@ -266,7 +266,8 @@ function renderTodayProjects(payload, failed = false) {
     name.textContent = item.project_name.trim();
     const source = document.createElement("span");
     source.className = "today-project-source";
-    source.textContent = item.site_name || "项目来源";
+    source.textContent = (item.site_name || "项目来源")
+      + (item.site_id === "producthunt" && item.recency_basis === "updated_at" ? " · 近期更新" : "");
     heading.append(name, source);
     const recommendation = document.createElement("p");
     recommendation.className = "today-project-reason";
@@ -1151,6 +1152,7 @@ function reasonText(item) {
 }
 
 function timelineIso(item) {
+  if (item.site_id === "producthunt" && item.recency_basis === "updated_at") return item.updated_at || "";
   const published = item.published_at || "";
   const seen = item.first_seen_at || "";
   const generated = state.generatedAt || "";
@@ -1162,6 +1164,11 @@ function timelineIso(item) {
     }
   }
   return published || seen;
+}
+
+function itemTimeText(item, fallback = "") {
+  return (item.site_id === "producthunt" && item.recency_basis === "updated_at" ? "更新于 " : "")
+    + fmtTime(timelineIso(item) || fallback);
 }
 
 function timelineMs(item) {
@@ -1427,7 +1434,7 @@ function buildBoleLead(row) {
   top.className = "bole-lead-top";
   const kicker = document.createElement("span");
   kicker.className = "bole-kicker";
-  kicker.textContent = `${labelText(item)} · ${fmtTime(timelineIso(item))}`;
+  kicker.textContent = `${labelText(item)} · ${itemTimeText(item)}`;
   const scoreEl = document.createElement("strong");
   scoreEl.className = `bole-score-orb ${scoreTone(score)}`;
   scoreEl.innerHTML = `<span>${score}</span><small>分</small>`;
@@ -1459,7 +1466,7 @@ function buildBoleTimelineRow(row, rank) {
 
   const time = document.createElement("time");
   time.className = "bole-row-time";
-  time.textContent = fmtTime(timelineIso(item));
+  time.textContent = itemTimeText(item);
 
   const body = document.createElement("div");
   body.className = "bole-row-body";
@@ -2176,7 +2183,7 @@ function buildTopStoryCard(row, rank) {
   // it on primary_item. Fall back to that aggregate time so Top 3 never shows
   // "时间未知" when the story itself has a verified latest/earliest timestamp.
   const storyTimeline = row.story?.latest_at || row.story?.earliest_at || "";
-  time.textContent = fmtTime(timelineIso(item) || storyTimeline);
+  time.textContent = itemTimeText(item, storyTimeline);
   const primarySource = itemSourceRefs(item, row)[0];
   const score = document.createElement("strong");
   const displayScore = row.story
@@ -2237,7 +2244,7 @@ function buildIntelCard(item, rank) {
   rankEl.className = "intel-card-rank";
   rankEl.textContent = `#${rank}`;
   const time = document.createElement("time");
-  time.textContent = fmtTime(timelineIso(item));
+  time.textContent = itemTimeText(item);
   const score = scorePercent(item);
   const scoreEl = document.createElement("strong");
   scoreEl.className = `intel-score ${scoreTone(score)}`;
@@ -2319,7 +2326,7 @@ function renderItemNode(item, context = {}) {
       metaRow.insertBefore(itemTagChip(label), sourceEl);
     });
 
-  node.querySelector(".time").textContent = fmtTime(item.published_at || item.first_seen_at);
+  node.querySelector(".time").textContent = itemTimeText(item);
 
   const titleEl = node.querySelector(".title");
   const zh = (item.title_zh || "").trim();

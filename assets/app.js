@@ -253,7 +253,8 @@ function renderTodayProjects(payload, failed = false) {
     name.textContent = item.project_name.trim();
     const source = document.createElement("span");
     source.className = "today-project-source";
-    source.textContent = item.site_name || "项目来源";
+    source.textContent = (item.site_name || "项目来源")
+      + (item.site_id === "producthunt" && item.recency_basis === "updated_at" ? " · 近期更新" : "");
     heading.append(name, source);
     const recommendation = document.createElement("p");
     recommendation.className = "today-project-reason";
@@ -983,6 +984,7 @@ function reasonText(item) {
 }
 
 function timelineIso(item) {
+  if (item.site_id === "producthunt" && item.recency_basis === "updated_at") return item.updated_at || "";
   const published = item.published_at || "";
   const seen = item.first_seen_at || "";
   const generated = state.generatedAt || "";
@@ -1150,7 +1152,7 @@ function buildEventSourceRow(source) {
 
   const timeEl = document.createElement("span");
   timeEl.className = "event-source-time";
-  timeEl.textContent = fmtRelativeTime(timelineMs(source));
+  timeEl.textContent = (source.site_id === "producthunt" && source.recency_basis === "updated_at" ? "更新于 " : "") + fmtRelativeTime(timelineMs(source));
 
   row.append(titleLink, nameEl, timeEl);
   return row;
@@ -1641,7 +1643,8 @@ function buildHotRow(row, rank) {
   const metaEl = document.createElement("span");
   metaEl.className = "hot-row-meta";
   const sourceCount = rowSourceCount(row);
-  const relTime = fmtRelativeTime(timelineMs(item) || storyTimeMs(row.story, "latest_at"));
+  const relTime = (item.site_id === "producthunt" && item.recency_basis === "updated_at" ? "更新于 " : "")
+    + fmtRelativeTime(timelineMs(item) || storyTimeMs(row.story, "latest_at"));
 
   // 同一事件展开：热点行的"N 个信源"变成可点击项，点击在 .hot-row 正下方插入/移除同一份子列表组件。
   const expandable = row.story && storySourceCount(row.story) >= 2;

@@ -358,6 +358,8 @@ PUBLIC_RAW_META_FIELDS: tuple[str, ...] = (
     "creator_metrics",
     "search_surface",
     "summary",
+    "updated_at",
+    "recency_basis",
 )
 
 
@@ -2539,7 +2541,8 @@ def project_raw_items(projects: list[dict[str, Any]]) -> list[RawItem]:
         site_id=p["site_id"], site_name=p["site_name"], source=p["site_name"],
         title=f"{p['project_name']} — {p['summary']}" if p["summary"] else p["project_name"],
         url=p["url"], published_at=p["published_at"],
-        meta={"summary": p["summary"], "project_candidate": p},
+        meta={"summary": p["summary"], "project_candidate": p,
+              "updated_at": iso(p.get("updated_at")), "recency_basis": p.get("recency_basis")},
     ) for p in projects]
 
 
@@ -3016,6 +3019,8 @@ def load_archive(path: Path) -> dict[str, dict[str, Any]]:
 
 
 def event_time(record: dict[str, Any]) -> datetime | None:
+    if record.get("site_id") == "producthunt" and record.get("recency_basis") == "updated_at":
+        return parse_iso(record.get("updated_at"))
     # RSS sources must rely on the source's publish time only.
     # first_seen_at is fetch time and would falsely mark historical items as "24h".
     if str(record.get("site_id") or "") == "opmlrss":
@@ -6422,6 +6427,8 @@ def story_item_link(item: dict[str, Any]) -> dict[str, Any]:
         "source_name": item.get("site_name"),
         "site_id": item.get("site_id"),
         "published_at": item.get("published_at"),
+        "updated_at": item.get("updated_at"),
+        "recency_basis": item.get("recency_basis"),
     }
 
 

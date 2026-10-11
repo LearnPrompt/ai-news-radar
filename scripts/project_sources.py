@@ -69,6 +69,22 @@ def parse_github_trending(html: str, now: datetime) -> list[dict[str, Any]]:
     return out
 
 
+def source_timestamp(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = dtparser.parse(str(value))
+        return parsed.replace(tzinfo=UTC) if not parsed.tzinfo else parsed.astimezone(UTC)
+    except (ValueError, TypeError, OverflowError):
+        return None
+
+
+def producthunt_activity(project: dict[str, Any]) -> datetime | None:
+    # Only a missing update permits a publication fallback; invalid updates
+    # must not turn into a different, apparently fresh event.
+    return project.get("updated_at") if project.get("recency_basis") == "updated_at" else project.get("published_at")
+
+
 def parse_producthunt_feed(xml: str, now: datetime) -> list[dict[str, Any]]:
     feed = feedparser.parse(xml)
     if not feed.entries:
@@ -80,16 +96,15 @@ def parse_producthunt_feed(xml: str, now: datetime) -> list[dict[str, Any]]:
         url = public_url(entry.get("link"), "producthunt.com")
         if not name or not url or url in seen:
             continue
-        # An update to an old launch is not a new product publication.
-        timestamp = entry.get("published") or entry.get("updated")
-        try:
-            published = dtparser.parse(str(timestamp))
-            if not published.tzinfo:
-                published = published.replace(tzinfo=UTC)
-            published = published.astimezone(UTC)
-        except (ValueError, TypeError, OverflowError):
-            continue
-        if not now - timedelta(hours=24) <= published <= now:
+        # Feed updates are useful discovery signals, not verified first launches.
+        # feedparser aliases missing updated to published; a plain dict reads
+        # only the actual feed fields so the fallback remains explicit.
+        timestamps = dict(entry)
+        published = source_timestamp(timestamps.get("published"))
+        updated = source_timestamp(timestamps.get("updated"))
+        basis = "updated_at" if "updated" in timestamps else "published_at"
+        activity = updated if basis == "updated_at" else published
+        if activity is None or not now - timedelta(hours=24) <= activity <= now:
             continue
         seen.add(url)
         contents = entry.get("content") or []
@@ -102,7 +117,8 @@ def parse_producthunt_feed(xml: str, now: datetime) -> list[dict[str, Any]]:
         out.append({
             "site_id": "producthunt", "site_name": PROJECT_SOURCES["producthunt"],
             "project_name": name, "url": url, "summary": summary,
-            "published_at": published, "observed_at": now, "source_rank": rank,
+            "published_at": published, "updated_at": updated, "recency_basis": basis,
+            "observed_at": now, "source_rank": rank,
         })
     return out
 
@@ -156,11 +172,12 @@ def build_today_projects(
             continue
         url = public_url(project.get("url"), "github.com" if sid == "github_trending" else "producthunt.com")
         observed = project.get("observed_at")
-        published = project.get("published_at")
         if not url or url in seen or not isinstance(observed, datetime) or not now - timedelta(hours=24) <= observed <= now:
             continue
-        if sid == "producthunt" and (not isinstance(published, datetime) or not now - timedelta(hours=24) <= published <= now):
-            continue
+        if sid == "producthunt":
+            activity = producthunt_activity(project)
+            if not isinstance(activity, datetime) or not now - timedelta(hours=24) <= activity <= now:
+                continue
         # Project names alone often contain no AI signal; score the real tagline too.
         relevance = score_ai_relevance({"title": f"{project['project_name']} {project['summary']}", "url": url})
         if not relevance["is_ai_related"]:
@@ -193,6 +210,8 @@ def build_today_projects(
             "site_id": project["site_id"], "site_name": PROJECT_SOURCES[project["site_id"]],
             "recommend_reason_zh": reason or recommendation_fallback(project),
             "published_at": project["published_at"].astimezone(UTC).isoformat().replace("+00:00", "Z") if project["published_at"] else None,
+            "updated_at": project["updated_at"].astimezone(UTC).isoformat().replace("+00:00", "Z") if project.get("updated_at") else None,
+            "recency_basis": project.get("recency_basis"),
             "observed_at": project["observed_at"].astimezone(UTC).isoformat().replace("+00:00", "Z"),
         })
     return {
