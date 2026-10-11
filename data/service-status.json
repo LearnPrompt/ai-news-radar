@@ -1,16 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T11:54:15.198847Z",
+  "generated_at": "2026-10-11T04:24:46.229281Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 1,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 1
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M4GV1M2A3K38T73JCVCD9G0R",
+      "provider": "OpenAI",
+      "title": "Delayed Costs data in the Compliance API",
+      "title_zh": "Delayed Costs data in the Compliance API",
+      "status": "monitoring",
+      "impact": "minor",
+      "started_at": "2026-10-09T17:23:18Z",
+      "updated_at": "2026-10-09T22:03:59Z",
+      "message": "We have implemented a mitigation, and delayed Costs data is now processing through the Compliance API. Some customers may continue to see incomplete Costs data while the backlog catches up. We expect this catch-up process to continue through Sunday, October 11. ChatGPT usage and API Platform requests remain unaffected. We are monitoring recovery.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M4GV1M2A3K38T73JCVCD9G0R"
+    }
+  ]
 }

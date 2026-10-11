@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T12:05:20.399890Z",
+  "generated_at": "2026-10-11T04:39:24.665841Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_9d420c28c726",
-      "title": "Artificial Analysis 评测 Google Nano Banana 2.1，两榜居第 4 且价格为前代一半 / Google's Nano Banana 2.1 takes #4 on both AA-Image-T2I v2.0 and AA-Image-Editing v2.0, at half the price of Nano Banana 2",
-      "url": "https://x.com/ArtificialAnlys/status/2108236656700768310",
+      "story_id": "story_10c2ddfd09bb",
+      "title": "huggingface/transformers — 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+      "url": "https://github.com/huggingface/transformers",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "两榜第四，离榜首还有距离；但价格腰斩是真的，这刀砍得比排名好看。"
+          "score": 86,
+          "review": "代码是真硬货，但\"state-of-the-art\"是模型的功劳，框架别往自己脸上贴。"
         },
         "paper-police": {
-          "score": 60,
-          "review": "第三方榜单有公开方法可查，但仅一条推文、无论文代码，等独立复测。"
+          "score": 88,
+          "review": "代码全开源、可复现，生态成熟；只是本条未附论文与跑分，仍属铁证级别。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "图像生成 API 半价且仍在第一梯队，跑批量出图的今天就能换省成本。"
+          "score": 88,
+          "review": "已开源可 clone，文本视觉音频多模态一把梭，选型做推理训练直接用它。"
         }
       }
     },
     {
-      "story_id": "story_e42c7cb753df",
-      "title": "Zenity 研究人员发现一条提示词即可劫持 AWS 账户内全部 AgentCore 智能体 / A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
-      "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+      "story_id": "story_6943c39598c5",
+      "title": "腾讯云开源内部自用 TeamAI 工具，支持跨 Agent 共享 Skill",
+      "url": "https://www.aibase.com/news/31546",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 70,
-          "review": "一锅端 AgentCore 听着吓人，单源报道先给复现步骤和 AWS 回应。"
+          "score": 60,
+          "review": "内部自用工具直接开源算实在，但跨 Agent 共享 Skill 这块，MCP 早占好坑了。"
         },
         "paper-police": {
-          "score": 34,
-          "review": "只有媒体报道，无论文、无PoC代码、无复现步骤，安全结论无法验证。"
+          "score": 66,
+          "review": "开源代码是实锤，但无论文无第三方评测，跨Agent共享效果待复现。"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "跑 AWS AgentCore 的赶紧审查 Agent 间信任边界，一条提示词就能横向接管全账号。"
+          "score": 85,
+          "review": "已开源能 clone，做多 Agent 协作的直接扒它的 Skill 共享设计。"
         }
       }
     },
     {
-      "story_id": "story_4b0f94357a4e",
-      "title": "Zenity 披露 AgentCore 漏洞链：一个公开 AI Agent 可控制同账户同区域所有 Agent / One public-facing AI agent on AWS could read, rewrite, and delete every other agent in the region",
-      "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+      "story_id": "story_5af832d4a5f1",
+      "title": "Cloudflare 发布开放权重决策模型 Clef-omni，新增支持音视频多模态输入",
+      "url": "https://www.aibase.com/news/31531",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 76,
-          "review": "能读能改能删的攻击链是真的，不是PPT漏洞；可AWS的补丁时间表还欠着。"
+          "score": 44,
+          "review": "「决策模型」到底决策什么？没跑分没参数，开放权重不等于开放诚意。"
         },
         "paper-police": {
-          "score": 40,
-          "review": "仅转述厂商披露，无原始技术报告、CVE 或 PoC，漏洞链无法复现验证。"
+          "score": 27,
+          "review": "开放权重喊出来了，权重在哪、论文和跑分在哪？单一聚合源无链接，不算证据。"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "用 AWS AgentCore 的先收紧 IAM：同账户同区域的 Agent 别共用角色，一个公开入口就能连坐。"
+          "score": 80,
+          "review": "开放权重可直接拉下来部署，音视频输入省了自建管线，先跑个 benchmark 再定换不换。"
         }
       }
     }
