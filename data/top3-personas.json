@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T06:14:48.113476Z",
+  "generated_at": "2026-10-11T08:51:48.208271Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_6943c39598c5",
-      "title": "腾讯云开源内部自用 TeamAI 工具，支持跨 Agent 共享 Skill",
-      "url": "https://www.aibase.com/news/31546",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 60,
-          "review": "内部自用工具直接开源算实在，但跨 Agent 共享 Skill 这块，MCP 早占好坑了。"
-        },
-        "paper-police": {
-          "score": 66,
-          "review": "开源代码是实锤，但无论文无第三方评测，跨Agent共享效果待复现。"
-        },
-        "pragmatic": {
-          "score": 85,
-          "review": "已开源能 clone，做多 Agent 协作的直接扒它的 Skill 共享设计。"
-        }
-      }
-    },
-    {
       "story_id": "story_5440d23b5bd7",
       "title": "multica-ai/andrej-karpathy-skills — A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "url": "https://github.com/multica-ai/andrej-karpathy-skills",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 35,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 80,
           "review": "clone 后把 CLAUDE.md 丢进项目即可，零成本试试能不能少踩几个编码坑。"
+        }
+      }
+    },
+    {
+      "story_id": "story_52b9cf29fe0a",
+      "title": "Talorys——基于 Cloudflare 免费套餐的自托管个人 AI 代理",
+      "url": "https://github.com/rociiu/talorys",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 65,
+          "review": "开源是真的，但 Workers 免费版 10ms CPU 上限，代理只能代不能理。"
+        },
+        "paper-police": {
+          "score": 68,
+          "review": "源码可查能自托管，但无评测基准和第三方验证，实际能力待跑通才算数。"
+        },
+        "pragmatic": {
+          "score": 74,
+          "review": "免费套餐就能跑的自托管代理，想省钱自建可以 clone 试；但个人项目，别急着上生产。"
         }
       }
     }
