@@ -15,6 +15,8 @@ def project(sid="github_trending", index=0, **changes):
         "site_id": sid, "site_name": sid, "project_name": f"Project {index}",
         "url": f"https://{host}/project-{index}", "summary": "AI document search with local LLMs",
         "published_at": NOW - timedelta(hours=1) if sid == "producthunt" else None,
+        "updated_at": NOW if sid == "producthunt" else None,
+        "recency_basis": "updated_at" if sid == "producthunt" else None,
         "observed_at": NOW, "source_rank": index + 1, **changes,
     }
 
@@ -38,25 +40,88 @@ def test_trending_markup_failure_does_not_look_like_healthy_zero():
         parse_github_trending("<html>Please sign in</html>", NOW)
 
 
-def test_producthunt_uses_publication_not_updated_and_strips_footer():
-    def entry(name, published, updated=NOW.isoformat(), link=None):
-        return f'''<entry><title>{name}</title>
-        <link href="{link or 'https://www.producthunt.com/products/' + name + '?utm_source=rss'}"/>
-        <published>{published}</published><updated>{updated}</updated>
-        <content type="html">&lt;p&gt;AI document search&lt;/p&gt;&lt;p&gt;&lt;a href="https://example.com"&gt;Discussion&lt;/a&gt; | &lt;a href="https://example.com"&gt;Link&lt;/a&gt;&lt;/p&gt;</content></entry>'''
-    xml = '<feed xmlns="http://www.w3.org/2005/Atom">' + "".join([
-        entry("fresh", "2026-10-09T09:00:00-07:00"),
-        entry("old", "2026-07-06T01:40:40-07:00"),
-        entry("future", "2026-10-10T00:00:00Z"),
-        entry("missing", "unknown"),
-        entry("unsafe", "2026-10-09T16:00:00Z", link="javascript:alert(1)"),
-    ]) + '</feed>'
-    items = parse_producthunt_feed(xml, NOW)
+def producthunt_entry(name, published, updated=NOW.isoformat(), link=None):
+    published_xml = f"<published>{published}</published>" if published is not None else ""
+    updated_xml = f"<updated>{updated}</updated>" if updated is not None else ""
+    return f'''<entry><title>{name}</title>
+    <link href="{link or 'https://www.producthunt.com/products/' + name + '?utm_source=rss'}"/>
+    {published_xml}{updated_xml}
+    <content type="html">&lt;p&gt;AI document search&lt;/p&gt;&lt;p&gt;&lt;a href="https://example.com"&gt;Discussion&lt;/a&gt; | &lt;a href="https://example.com"&gt;Link&lt;/a&gt;&lt;/p&gt;</content></entry>'''
+
+
+def producthunt_feed(*entries):
+    return '<feed xmlns="http://www.w3.org/2005/Atom">' + ''.join(entries) + '</feed>'
+
+
+def test_producthunt_accepts_recent_update_preserves_publication_and_strips_footer():
+    items = parse_producthunt_feed(producthunt_feed(
+        producthunt_entry("old", "2026-07-06T01:40:40-07:00", "2026-10-09T09:00:00-07:00"),
+        producthunt_entry("old", NOW.isoformat()),
+        producthunt_entry("unsafe", NOW.isoformat(), link="javascript:alert(1)"),
+    ), NOW)
     assert len(items) == 1
-    assert items[0]["project_name"] == "fresh"
+    assert items[0]["project_name"] == "old"
     assert items[0]["summary"] == "AI document search"
-    assert items[0]["url"] == "https://www.producthunt.com/products/fresh"
-    assert items[0]["published_at"].hour == 16
+    assert items[0]["url"] == "https://www.producthunt.com/products/old"
+    assert items[0]["published_at"] == datetime(2026, 7, 6, 8, 40, 40, tzinfo=timezone.utc)
+    assert items[0]["updated_at"] == NOW - timedelta(hours=1)
+    assert items[0]["recency_basis"] == "updated_at"
+
+
+@pytest.mark.parametrize("updated", ["unknown", "", (NOW - timedelta(hours=24, seconds=1)).isoformat(), (NOW + timedelta(seconds=1)).isoformat()])
+def test_producthunt_rejects_bad_stale_future_updates_even_with_fresh_publication(updated):
+    assert parse_producthunt_feed(producthunt_feed(producthunt_entry("bad", NOW.isoformat(), updated)), NOW) == []
+
+
+@pytest.mark.parametrize("published", [None, "unknown"])
+def test_producthunt_update_does_not_fabricate_missing_publication(published):
+    item = parse_producthunt_feed(producthunt_feed(producthunt_entry("updated", published)), NOW)[0]
+    assert item["published_at"] is None
+    assert item["updated_at"] == NOW
+
+
+def test_producthunt_missing_update_uses_genuine_publication_only():
+    items = parse_producthunt_feed(producthunt_feed(
+        producthunt_entry("fresh", NOW.isoformat(), None),
+        producthunt_entry("old", (NOW - timedelta(days=2)).isoformat(), None),
+        producthunt_entry("missing", None, None),
+    ), NOW)
+    assert len(items) == 1
+    assert items[0]["updated_at"] is None
+    assert items[0]["published_at"] == NOW
+    assert items[0]["recency_basis"] == "published_at"
+
+
+def test_producthunt_accepts_exact_24h_update_boundary():
+    items = parse_producthunt_feed(producthunt_feed(producthunt_entry("boundary", None, (NOW - timedelta(hours=24)).isoformat())), NOW)
+    assert len(items) == 1
+
+
+def test_producthunt_invalid_response_is_not_healthy_zero():
+    with pytest.raises(ValueError, match="no feed entries"):
+        parse_producthunt_feed("<html>challenge</html>", NOW)
+
+
+def test_producthunt_original_publication_is_not_used_for_update_event_time():
+    raw = update_news.project_raw_items([project("producthunt", published_at=NOW - timedelta(days=30))])[0]
+    record = {"site_id": raw.site_id, "published_at": update_news.iso(raw.published_at)}
+    update_news.apply_public_raw_meta(record, raw)
+    assert update_news.event_time(record) == NOW
+    assert record["published_at"] != record["updated_at"]
+    linked = update_news.story_item_link(record)
+    assert linked["updated_at"] == update_news.iso(NOW)
+    assert linked["recency_basis"] == "updated_at"
+    assert update_news.event_time({**record, "updated_at": None}) is None
+    assert update_news.event_time({**record, "site_id": "opmlrss"}) == raw.published_at
+
+
+def test_producthunt_selection_keeps_old_publication_with_recent_update():
+    payload = build_today_projects([project("producthunt", published_at=NOW - timedelta(days=30))], NOW, [])
+    assert payload["total_items"] == 1
+    item = payload["items"][0]
+    assert item["published_at"] == update_news.iso(NOW - timedelta(days=30))
+    assert item["updated_at"] == update_news.iso(NOW)
+    assert item["recency_basis"] == "updated_at"
 
 
 def test_selection_balances_sources_and_uses_taipei_date():
@@ -77,7 +142,9 @@ def test_selection_fills_from_remaining_source_and_rejects_noise_and_stale():
         project(index=13, url="https://github.com@evil.example/team/tool"),
         project(index=14, observed_at=NOW - timedelta(days=2)),
         project(index=15, observed_at=NOW + timedelta(hours=1)),
-        project("producthunt", 16, published_at=NOW - timedelta(days=3)),
+        project("producthunt", 16, updated_at=NOW - timedelta(days=3)),
+        project("producthunt", 17, updated_at=NOW + timedelta(seconds=1)),
+        project("producthunt", 18, updated_at=None),
         project(index=0, url=project()["url"] + "?utm_source=rss"),
     ]
     result = build_today_projects(candidates, NOW, [], limit=20)
@@ -127,7 +194,8 @@ def test_source_failure_keeps_other_sources_and_module_working(monkeypatch):
 
 def test_main_writes_project_payload_with_news_outputs(tmp_path, monkeypatch):
     monkeypatch.setattr(update_news, "utc_now", lambda: NOW)
-    monkeypatch.setattr(update_news, "collect_all", lambda *_: (update_news.project_raw_items([project()]), []))
+    candidates = [project(), project("producthunt", published_at=NOW - timedelta(days=30))]
+    monkeypatch.setattr(update_news, "collect_all", lambda *_: (update_news.project_raw_items(candidates), []))
     monkeypatch.setattr(update_news, "fetch_service_status", lambda *_: {})
     monkeypatch.setattr(update_news, "fetch_waytoagi_recent_7d", lambda *_: {"updates_7d": [], "updates_today": []})
     monkeypatch.setattr(update_news, "maybe_fetch_agentmail_digest", lambda *_, **kw: (None, {"enabled": False}))
@@ -140,9 +208,12 @@ def test_main_writes_project_payload_with_news_outputs(tmp_path, monkeypatch):
     assert update_news.main() == 0
     import json
     payload = json.loads((tmp_path / "today-projects.json").read_text())
-    assert payload["total_items"] == 1
+    assert payload["total_items"] == 2
     assert payload["items"][0]["project_name"] == "Project 0"
-    assert (tmp_path / "latest-24h.json").exists()
+    latest = json.loads((tmp_path / "latest-24h.json").read_text())
+    ph = next(item for item in latest["items"] if item["site_id"] == "producthunt")
+    assert ph["published_at"] == update_news.iso(NOW - timedelta(days=30))
+    assert ph["updated_at"] == update_news.iso(NOW)
 
 
 def test_project_copy_uses_action_prompt_and_rejects_multiple_sentences(monkeypatch):

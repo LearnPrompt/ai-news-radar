@@ -14,6 +14,7 @@ def test_project_rendering_freshness_safety_and_loading(view):
     # Load the real declarations and project renderer, without the news boot code.
     source = (ROOT / view).read_text(encoding="utf-8")
     prefix = source[: source.index("function fmtTime(iso)")]
+    prefix += source[source.index("function timelineIso(item)"):source.index("function timelineMs(item)")]
     script = r'''
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
@@ -76,6 +77,18 @@ assert.equal(card.children[1].textContent, valid.recommend_reason_zh);
 assert.equal(card.children[2].href, valid.url);
 assert.equal(card.children[2].rel, "noopener noreferrer");
 assert.equal(card.children[2].target, "_blank");
+const recent = { ...valid, site_id: "producthunt", site_name: "Product Hunt",
+  recency_basis: "updated_at", published_at: "2026-07-06T08:40:40Z", updated_at: fixedNow };
+render({ date: today, items: [recent] });
+assert.equal(list.children[0].children[0].children[1].textContent, "Product Hunt · 近期更新");
+context.recent = recent;
+assert.equal(vm.runInContext("timelineIso(recent)", context), fixedNow);
+context.recent = { ...recent, updated_at: null };
+assert.equal(vm.runInContext("timelineIso(recent)", context), "");
+context.recent = { ...recent, recency_basis: "published_at", updated_at: null };
+assert.equal(vm.runInContext("timelineIso(recent)", context), recent.published_at);
+render({ date: today, items: [context.recent] });
+assert.equal(list.children[0].children[0].children[1].textContent, "Product Hunt");
 render({ date: "2026-10-09", items: [valid] });
 assert.equal(list.children[0].textContent, "今天的项目推荐更新中。");
 assert.equal(meta.textContent, "");

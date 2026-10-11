@@ -86,8 +86,11 @@ baseline, then let the aggregator layer add breadth.
   time is unknown; this is a current observation of the ranking, not a new release.
 - **Product Hunt**: directly reads the official `https://www.producthunt.com/feed`
   Atom feed without credentials. It preserves product names and taglines, removes
-  the Discussion/Link footer, and keeps launches published in the last 24 hours.
-  An old launch with a newly updated feed entry does not qualify as a new launch.
+  the Discussion/Link footer, and keeps entries updated in the last 24 hours.
+  Original publication and update timestamps remain distinct. These are recent
+  discovery signals, labeled as updates, not verified first launches. Only when
+  the feed omits an update timestamp does selection use publication time; invalid,
+  stale or future updates are rejected rather than replaced with a fresh fetch time.
   Both sources participate in the existing news pipeline and source-health report;
   the earlier NewsNow bridge remains available and story merging handles overlaps.
   Their current AI-related projects also generate `data/today-projects.json` for
