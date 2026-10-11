@@ -2782,3 +2782,92 @@ summary:focus-visible {
     box-shadow: none;
   }
 }
+
+/* Compact project recommendations, shared by the mobile and classic views. */
+.today-projects-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+#todayProjectsMeta {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.today-project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+}
+
+.today-project-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+}
+
+.today-project-heading h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.today-project-source {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.today-project-reason {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.today-project-link {
+  align-self: flex-start;
+  margin-top: auto;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.today-project-link:hover {
+  text-decoration: underline;
+}
+
+.today-project-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.today-projects-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .today-projects-list {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px;
+  }
+
+  .today-project-card {
+    padding: 14px;
+  }
+}

@@ -11,6 +11,7 @@ DATA_FILES = (
     "source-status.json",
     "daily-brief.json",
     "stories-merged.json",
+    "today-projects.json",
 )
 
 
@@ -103,3 +104,23 @@ def test_mobile_classic_choice_is_one_navigation_only():
     assert "window.sessionStorage.removeItem(MOBILE_OVERRIDE_KEY)" in source
     assert "function writeMobileOverride(view)" in source
     assert "writeMobileOverride(view)" in source
+
+
+def test_both_views_show_today_projects_after_news():
+    for path in ("index.html", "classic/index.html"):
+        source = read(path)
+        assert 'id="todayProjectsTitle">今天值得做' in source
+        assert 'id="todayProjectsList"' in source
+        assert source.index('id="newsList"') < source.index('id="todayProjectsWrap"')
+        from bs4 import BeautifulSoup
+        main_sections = BeautifulSoup(source, "html.parser").select("main > section")
+        assert main_sections[-1].get("id") == "todayProjectsWrap"
+
+
+def test_today_projects_load_independently_in_both_views():
+    for path in ("assets/app.js", "classic/assets/app.js"):
+        source = read(path)
+        assert "initTodayProjects();\ninit();" in source
+        init_source = source[source.index("async function init()") :]
+        assert "await initTodayProjects" not in init_source
+        assert 'timeZone: "Asia/Taipei"' in source

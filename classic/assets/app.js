@@ -118,6 +118,8 @@ const SOURCE_KINDS = {
   aihot: { label: "AI HOT", tone: "hot" },
   aibreakfast: { label: "日报", tone: "newsletter" },
   followbuilders: { label: "Builders/X", tone: "builders" },
+  github_trending: { label: "GitHub Trending", tone: "builders" },
+  producthunt: { label: "Product Hunt", tone: "aihub" },
   xapi: { label: "X API", tone: "builders" },
   socialdata_x: { label: "X 搜索", tone: "builders" },
   tikhub_douyin: { label: "抖音", tone: "creator" },
@@ -209,6 +211,99 @@ function isUnsafeStory(story) {
   ].filter(Boolean);
   return refs.some((ref) => isUnsafeContent(ref));
 }
+
+// Today's projects are optional and load independently from the news timeline.
+const todayProjectsListEl = document.getElementById("todayProjectsList");
+const todayProjectsMetaEl = document.getElementById("todayProjectsMeta");
+
+function todayProjectsDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(now);
+  const value = (type) => parts.find((part) => part.type === type).value;
+  return `${value("year")}-${value("month")}-${value("day")}`;
+}
+
+function todayProjectUrl(value) {
+  if (typeof value !== "string") return "";
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function renderTodayProjects(payload, failed = false) {
+  if (!todayProjectsListEl || !todayProjectsMetaEl) return;
+  todayProjectsListEl.replaceChildren();
+  todayProjectsMetaEl.textContent = "";
+  const current = payload?.date === todayProjectsDate();
+  const items = current && Array.isArray(payload?.items) ? payload.items : [];
+  // Project names and recommendations need the same last-mile safety gate as news.
+  const visible = safeItems(items.filter((item) => item && typeof item === "object").map((item) => ({
+    ...item, title: item.project_name, title_zh: item.recommend_reason_zh, title_original: item.summary,
+  }))).filter((item) => typeof item.project_name === "string" && item.project_name.trim()
+    && typeof item.recommend_reason_zh === "string" && item.recommend_reason_zh.trim()
+    && todayProjectUrl(item.url)).slice(0, 4);
+  if (!visible.length) {
+    const empty = document.createElement("p");
+    empty.className = "today-projects-empty";
+    const sourcesFailed = Array.isArray(payload?.sources) && payload.sources.length > 0
+      && payload.sources.every((source) => source?.ok === false);
+    empty.textContent = failed || sourcesFailed ? "项目数据暂时加载失败，请稍后再试。"
+      : payload && !current ? "今天的项目推荐更新中。" : "今天暂无合适的项目推荐。";
+    todayProjectsListEl.appendChild(empty);
+    return;
+  }
+  todayProjectsMetaEl.textContent = `${visible.length} 个项目`;
+  visible.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "today-project-card";
+    const heading = document.createElement("div");
+    heading.className = "today-project-heading";
+    const name = document.createElement("h3");
+    name.textContent = item.project_name.trim();
+    const source = document.createElement("span");
+    source.className = "today-project-source";
+    source.textContent = item.site_name || "项目来源";
+    heading.append(name, source);
+    const recommendation = document.createElement("p");
+    recommendation.className = "today-project-reason";
+    recommendation.textContent = item.recommend_reason_zh.trim();
+    const link = document.createElement("a");
+    link.className = "today-project-link";
+    link.href = todayProjectUrl(item.url);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "打开项目 ↗";
+    link.setAttribute("aria-label", `打开项目：${item.project_name.trim()}`);
+    card.append(heading, recommendation, link);
+    todayProjectsListEl.appendChild(card);
+  });
+}
+
+async function initTodayProjects() {
+  if (!todayProjectsListEl) return;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    const res = await fetch(`${dataUrl("data/today-projects.json")}?t=${Date.now()}`, {
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`加载 today-projects.json 失败: ${res.status}`);
+    const payload = await res.json();
+    if (!payload || typeof payload.date !== "string" || !Array.isArray(payload.items)) {
+      throw new Error("项目数据格式错误");
+    }
+    renderTodayProjects(payload);
+  } catch {
+    renderTodayProjects(null, true);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+// End of today's projects module.
 
 function fmtTime(iso) {
   if (!iso) return "时间未知";
@@ -3131,4 +3226,5 @@ function renderDataSourceIndicator() {
 }
 
 renderDataSourceIndicator();
+initTodayProjects();
 init();
