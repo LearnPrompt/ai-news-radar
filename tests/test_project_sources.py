@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 
 from scripts import update_news
-from scripts.project_sources import build_today_projects, parse_github_trending, parse_producthunt_feed
+from scripts.project_sources import build_today_projects, fetch_producthunt_projects, parse_github_trending, parse_producthunt_feed
 
 
 NOW = datetime(2026, 10, 9, 17, tzinfo=timezone.utc)
@@ -102,6 +102,25 @@ def test_producthunt_invalid_response_is_not_healthy_zero():
         parse_producthunt_feed("<html>challenge</html>", NOW)
 
 
+def test_producthunt_fetch_uses_response_clock_for_updates_during_collection():
+    received_at = NOW + timedelta(minutes=5)
+    class Response:
+        text = producthunt_feed(
+            producthunt_entry("during-fetch", (NOW - timedelta(days=30)).isoformat(), received_at.isoformat()),
+            producthunt_entry("future", NOW.isoformat(), (received_at + timedelta(seconds=1)).isoformat()),
+        )
+        def raise_for_status(self):
+            pass
+    class Session:
+        def get(self, *_args, **_kwargs):
+            return Response()
+    items = fetch_producthunt_projects(Session(), NOW, clock=lambda: received_at)
+    assert len(items) == 1
+    assert items[0]["project_name"] == "during-fetch"
+    assert items[0]["observed_at"] == received_at
+    assert items[0]["updated_at"] == received_at
+
+
 def test_producthunt_original_publication_is_not_used_for_update_event_time():
     raw = update_news.project_raw_items([project("producthunt", published_at=NOW - timedelta(days=30))])[0]
     record = {"site_id": raw.site_id, "published_at": update_news.iso(raw.published_at)}
@@ -193,8 +212,11 @@ def test_source_failure_keeps_other_sources_and_module_working(monkeypatch):
 
 
 def test_main_writes_project_payload_with_news_outputs(tmp_path, monkeypatch):
-    monkeypatch.setattr(update_news, "utc_now", lambda: NOW)
-    candidates = [project(), project("producthunt", published_at=NOW - timedelta(days=30))]
+    received_at = NOW + timedelta(minutes=5)
+    times = iter([NOW, received_at])
+    monkeypatch.setattr(update_news, "utc_now", lambda: next(times))
+    candidates = [project(), project("producthunt", published_at=NOW - timedelta(days=30),
+                                      updated_at=received_at, observed_at=received_at)]
     monkeypatch.setattr(update_news, "collect_all", lambda *_: (update_news.project_raw_items(candidates), []))
     monkeypatch.setattr(update_news, "fetch_service_status", lambda *_: {})
     monkeypatch.setattr(update_news, "fetch_waytoagi_recent_7d", lambda *_: {"updates_7d": [], "updates_today": []})
@@ -209,11 +231,12 @@ def test_main_writes_project_payload_with_news_outputs(tmp_path, monkeypatch):
     import json
     payload = json.loads((tmp_path / "today-projects.json").read_text())
     assert payload["total_items"] == 2
+    assert payload["generated_at"] == update_news.iso(received_at)
     assert payload["items"][0]["project_name"] == "Project 0"
     latest = json.loads((tmp_path / "latest-24h.json").read_text())
     ph = next(item for item in latest["items"] if item["site_id"] == "producthunt")
     assert ph["published_at"] == update_news.iso(NOW - timedelta(days=30))
-    assert ph["updated_at"] == update_news.iso(NOW)
+    assert ph["updated_at"] == update_news.iso(received_at)
 
 
 def test_project_copy_uses_action_prompt_and_rejects_multiple_sentences(monkeypatch):
