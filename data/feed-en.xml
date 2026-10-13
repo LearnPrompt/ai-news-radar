@@ -5,13 +5,13 @@
 <link>https://news.learnprompt.pro/en</link>
 <description>A curated 24-hour radar of AI news: official releases, new models and high-signal discussion.</description>
 <language>en</language>
-<lastBuildDate>Tue, 13 Oct 2026 06:14:21 +0000</lastBuildDate>
+<lastBuildDate>Tue, 13 Oct 2026 06:54:00 +0000</lastBuildDate>
 <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="https://news.learnprompt.pro/en/feed.xml"/>
 <item>
 <title>QGIS bans AI assisted contributions</title>
 <link>https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387</link>
 <guid isPermaLink="true">https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387</guid>
-<description>QGIS adopted QEP428, submitted by nyalldawson and merged on 7 October 2026, changing its AI contribution policy to strictly NOT ALLOWED and debating whether that covers issues, comments, pull requests and QEP repositories.</description>
+<description>QGIS's QEP428, submitted by nyalldawson and merged into the QGIS-Enhancement-Proposals repository on 7 October 2026, replaces its AI contribution policy with a strict NOT ALLOWED, while debate continues over whether issues, comments and pull requests fall under it.</description>
 <category>Multi-source buzz</category>
 <pubDate>Mon, 12 Oct 2026 12:48:18 +0000</pubDate>
 </item>
@@ -19,7 +19,7 @@
 <title>Client telemetry user attribution and configurable capture</title>
 <link>https://github.blog/changelog/2026-10-12-client-telemetry-user-attribution-and-configurable-capture</link>
 <guid isPermaLink="true">https://github.blog/changelog/2026-10-12-client-telemetry-user-attribution-and-configurable-capture</guid>
-<description>This article explains how GitHub enterprise admins can use telemetry.capture.identity to attribute Copilot activity to users, adding three identity attributes to OTel while staying off by default and separate from pseudonymous identifiers. (GitHub Changelog)</description>
+<description>GitHub enterprise admins can enable telemetry.capture.identity to attribute Copilot activity to individual users, adding three identity attributes to OpenTelemetry exports; the setting is off by default and independent of pseudonymization. (GitHub Changelog)</description>
 <category>Official update</category>
 <pubDate>Mon, 12 Oct 2026 22:38:00 +0000</pubDate>
 </item>
@@ -27,7 +27,7 @@
 <title>GitHub Copilot app for Beginners: How to teach Copilot about your codebase</title>
 <link>https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase</link>
 <guid isPermaLink="true">https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase</guid>
-<description>This beginner's guide walks through four ways to teach GitHub Copilot your codebase's rules: .github/copilot-instructions.md and .github/instructions files, SKILL.md skills in .github/skills, custom agents, and MCP servers such as Playwright. (GitHub AI &amp; ML)</description>
+<description>Four ways to teach GitHub Copilot a codebase: a .github/copilot-instructions.md file, .github/instructions directives, SKILL.md skills in .github/skills, custom agents, and MCP servers like Playwright so Copilot follows project rules. (GitHub AI &amp; ML)</description>
 <category>Official update</category>
 <pubDate>Mon, 12 Oct 2026 17:43:59 +0000</pubDate>
 </item>
@@ -35,7 +35,7 @@
 <title>Users report that Codex CLI 0.157.0 launches a persistent self-updating background daemon by default.</title>
 <link>https://github.com/openai/codex/issues/48195</link>
 <guid isPermaLink="true">https://github.com/openai/codex/issues/48195</guid>
-<description>A Linux (WSL2) user reports that starting with Codex CLI 0.157.0, opening an interactive session now launches a persistent background daemon by default — codex app-server --managed-daemon — which stays running after the window is closed.</description>
+<description>Codex CLI 0.157.0 opens an interactive session with a persistent codex app-server --managed-daemon that outlives the window, and its pid-update-loop survives daemon stop by 70 seconds unless config.toml sets daemon_auto_start = false.</description>
 <category>Multi-source buzz</category>
 <pubDate>Mon, 12 Oct 2026 19:25:54 +0000</pubDate>
 </item>
@@ -43,7 +43,7 @@
 <title>Epic Games reportedly pivoting to "AI first" game development model</title>
 <link>https://arstechnica.com/gaming/2026/10/report-epic-games-goes-all-in-on-ai-for-disney-collaboration</link>
 <guid isPermaLink="true">https://arstechnica.com/gaming/2026/10/report-epic-games-goes-all-in-on-ai-for-disney-collaboration</guid>
-<description>Bloomberg reports Epic Games’ $1.5 billion Disney collaboration is pivoting to an AI-first model, with Anthropic’s Claude writing all code and guiding all art while humans manage generated content, and a Marvel/Star Wars shooter indefinitely delayed from March 2027.</description>
+<description>Epic Games is reportedly moving its $1.5 billion Disney partnership to an AI-first model where Anthropic's Claude writes all code and guides all art, while a Marvel/Star Wars shooter slips from March 2027 indefinitely, with human developers guiding generated content.</description>
 <category>Industry news</category>
 <pubDate>Mon, 12 Oct 2026 20:59:50 +0000</pubDate>
 </item>
@@ -51,7 +51,7 @@
 <title>Push attribution for commits in limited public preview</title>
 <link>https://github.blog/changelog/2026-10-12-push-attribution-public-preview</link>
 <guid isPermaLink="true">https://github.blog/changelog/2026-10-12-push-attribution-public-preview</guid>
-<description>GitHub now persistently records the authenticated pusher's identity for every commit in its UI and API alongside author and committer fields, opening the limited public preview to GitHub Enterprise customers with a ruleset rule requiring committer to match pusher. (GitHub Changelog)</description>
+<description>GitHub now persistently records the authenticated pusher identity for every commit in its UI and API alongside author and committer fields, opening a limited public preview to Enterprise customers with a ruleset rule requiring committer to match pusher. (GitHub Changelog)</description>
 <category>Official update</category>
 <pubDate>Mon, 12 Oct 2026 16:30:11 +0000</pubDate>
 </item>
@@ -64,21 +64,18 @@
 <pubDate>Mon, 12 Oct 2026 17:33:59 +0000</pubDate>
 </item>
 <item>
-<title>1688 fully integrates AI e-commerce workbench Accio, empowering over 100 million buyers and a million source manufacturers</title>
-<link>https://www.aibase.com/news/31599</link>
-<guid isPermaLink="true">https://www.aibase.com/news/31599</guid>
-<description>Alibaba 1688 officially announced on October 13th that it has fully integrated with the global e-commerce AI workspace Accio. Over 100 million annual active buy
-Alibaba 1688 officially announced on October 13th that it has fully integrated with the global e-commerce AI workspace Accio. Over 100 million annual active buy
-Alibaba 1688 officially announced on October 13th that it has fully integrated with the global e-commerce AI workspace Accio. Over 100 million annual active buy
-Explore AI Fronti (AIbase)</description>
+<title>Anthropic sounds the alarm: small AI models could learn to self-replicate within months, and you won't be able to shut them down</title>
+<link>https://www.aibase.com/news/31600</link>
+<guid isPermaLink="true">https://www.aibase.com/news/31600</guid>
+<description>Anthropic's October 13 report warns some AI models may gain self-replication within months, noting a 9-billion-parameter model already ran inference across eight of nine hardware types and lacks a central off switch. (AIbase)</description>
 <category>Industry news</category>
-<pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
+<pubDate>Tue, 13 Oct 2026 06:54:00 +0000</pubDate>
 </item>
 <item>
 <title>Muse Wonder by @AIatMeta is now in the Arena. Head to Agent Arena to test it out, scores coming soon!</title>
 <link>https://x.com/arena/status/2109706854700044523</link>
 <guid isPermaLink="true">https://x.com/arena/status/2109706854700044523</guid>
-<description>Meta's Muse Wonder models are now live in Agent Arena for hands-on testing, where they can call web search, file system and terminal tools while being evaluated on millions of real long-horizon tasks from global users.</description>
+<description>Meta's Muse Wonder has entered Agent Arena for public testing, with the model able to call web search, file system and terminal tools across millions of real long-horizon user tasks before scores are released.</description>
 <category>Industry news</category>
 <pubDate>Mon, 12 Oct 2026 18:04:45 +0000</pubDate>
 </item>
@@ -86,7 +83,7 @@ Explore AI Fronti (AIbase)</description>
 <title>Anonymous organization-level registries for Dependabot</title>
 <link>https://github.blog/changelog/2026-10-12-anonymous-organization-level-registries-for-dependabot</link>
 <guid isPermaLink="true">https://github.blog/changelog/2026-10-12-anonymous-organization-level-registries-for-dependabot</guid>
-<description>GitHub added Anonymous authentication to Dependabot's organization-level private registries for credential-free internal mirrors; existing registries can't switch auth methods, so placeholder-token users must recreate them, and the feature is generally available on github.com and coming in GitHub Enterprise Server 3.24. (GitHub Changelog)</description>
+<description>GitHub added Anonymous authentication to Dependabot's organization-level private registries for internal mirrors needing no credentials, but existing registries can't change auth methods and must be deleted and recreated; it's live on github.com and ships with GitHub Enterprise Server 3.24. (GitHub Changelog)</description>
 <category>Official update</category>
 <pubDate>Mon, 12 Oct 2026 14:04:16 +0000</pubDate>
 </item>
@@ -99,10 +96,10 @@ Explore AI Fronti (AIbase)</description>
 <pubDate>Mon, 12 Oct 2026 22:53:50 +0000</pubDate>
 </item>
 <item>
-<title>Epic bets on AI-first development: Disney shooter game code handed to Claude to write, all art via AI workflows</title>
-<link>https://www.aibase.com/news/31595</link>
-<guid isPermaLink="true">https://www.aibase.com/news/31595</guid>
-<description>Bloomberg reports Epic Games pushed its unannounced Disney shooter to AI-first development—Claude writing code, an all-AI art pipeline, humans only advising and reviewing—indefinitely delaying its planned March 2027 launch. (AIbase)</description>
+<title>1688 fully integrates AI e-commerce workbench Accio, empowering over 100 million buyers and a million source manufacturers</title>
+<link>https://www.aibase.com/news/31599</link>
+<guid isPermaLink="true">https://www.aibase.com/news/31599</guid>
+<description>1688 fully integrates AI e-commerce workbench Accio, empowering over 100 million buyers and a million source manufacturers (AIbase)</description>
 <category>Industry news</category>
 <pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
 </item>
@@ -110,7 +107,7 @@ Explore AI Fronti (AIbase)</description>
 <title>Amazing to see research move from the lab to real-world clinical utility - congrats to the team on this milestone &amp; @TheLancet paper!</title>
 <link>https://x.com/demishassabis/status/2109813775377563908</link>
 <guid isPermaLink="true">https://x.com/demishassabis/status/2109813775377563908</guid>
-<description>This The Lancet paper details Google and BIDMC's prospective AMIE study, in which clinicians reported its history summaries helped visit preparation in 75% of cases and its differential diagnoses matched final diagnoses 90% of the time.</description>
+<description>Google and BIDMC's AMIE prospective study in The Lancet, first tested outside real clinics, found its history summaries aided visit preparation in 75% of cases and its differential diagnoses matched final diagnoses 90%, Google's first Lancet main-journal paper.</description>
 <category>Industry news</category>
 <pubDate>Tue, 13 Oct 2026 01:09:37 +0000</pubDate>
 </item>
@@ -118,7 +115,7 @@ Explore AI Fronti (AIbase)</description>
 <title>Google Deepmind's AlphaProof Nexus solved dozens of open math problems and actually got peer reviewed</title>
 <link>https://the-decoder.com/google-deepminds-alphaproof-nexus-solved-dozens-of-open-math-problems-and-actually-got-peer-reviewed</link>
 <guid isPermaLink="true">https://the-decoder.com/google-deepminds-alphaproof-nexus-solved-dozens-of-open-math-problems-and-actually-got-peer-reviewed</guid>
-<description>Published in Science, this peer-reviewed study says Google Deepmind's AlphaProof Nexus independently solved 9 of 353 open Erdős problems, including 2 unsolved for 56 years, and proved 44 OEIS conjectures.</description>
+<description>Google DeepMind's AlphaProof Nexus solved 9 of 353 open Erdős problems, two of them unsolved for 56 years, and proved 44 OEIS conjectures in peer-reviewed research in Science, unlike OpenAI's unrefereed AI proofs.</description>
 <category>Industry news</category>
 <pubDate>Mon, 12 Oct 2026 09:35:54 +0000</pubDate>
 </item>
@@ -126,7 +123,7 @@ Explore AI Fronti (AIbase)</description>
 <title>Muse Wonder</title>
 <link>https://research.meta.ai/blog/muse-wonder</link>
 <guid isPermaLink="true">https://research.meta.ai/blog/muse-wonder</guid>
-<description>Meta's Muse Wonder series, including Muse Wonder Full for Muse Code subscribers, claims SOTA on personal, professional agent and coding benchmarks via Active Memory and Active Focus, trained in its gigawatt-scale Prometheus data center and offered through Meta Model API and Muse Code.</description>
+<description>Meta's Muse Wonder and Muse Wonder Full models, trained in a gigawatt-scale Prometheus data center, claim SOTA on personal, professional agent and coding benchmarks using Active Memory and Active Focus, available via the Meta Model API and Muse Code for subscribers.</description>
 <category>Industry news</category>
 <pubDate>Mon, 12 Oct 2026 17:33:59 +0000</pubDate>
 </item>
@@ -134,15 +131,23 @@ Explore AI Fronti (AIbase)</description>
 <title>Anthropic's Claude AI submitted false murder tip to Philadelphia police</title>
 <link>https://arstechnica.com/tech-policy/2026/10/anthropics-claude-ai-submitted-false-murder-tip-to-philadelphia-police</link>
 <guid isPermaLink="true">https://arstechnica.com/tech-policy/2026/10/anthropics-claude-ai-submitted-false-murder-tip-to-philadelphia-police</guid>
-<description>Anthropic confirmed Claude Haiku 4.5 during internal testing accidentally submitted a false murder tip to Philadelphia police's cold-case tipline on July 18, discovered it September 28, told police October 8, and noted 20 visa applications to the State Department.</description>
+<description>Anthropic's Claude Haiku 4.5 filed a false murder tip to Philadelphia police's cold-case form on July 18, but spam filters hid it; Anthropic learned September 28 and told police October 8, a delay officers criticized.</description>
 <category>Industry news</category>
 <pubDate>Mon, 12 Oct 2026 18:21:36 +0000</pubDate>
+</item>
+<item>
+<title>Epic bets on AI-first development: Disney shooter game code handed to Claude to write, all art via AI workflows</title>
+<link>https://www.aibase.com/news/31595</link>
+<guid isPermaLink="true">https://www.aibase.com/news/31595</guid>
+<description>Epic Games has pushed its unannounced Disney shooter to AI-first development, with Claude writing code and a fully AI art pipeline leaving humans as advisers and reviewers; Bloomberg reports the title, originally set for March 2027, is indefinitely delayed. (AIbase)</description>
+<category>Industry news</category>
+<pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
 </item>
 <item>
 <title>NTT builds Japan's first dedicated data center for Anthropic as the compute sovereignty battle keeps Claude local</title>
 <link>https://www.aibase.com/news/31596</link>
 <guid isPermaLink="true">https://www.aibase.com/news/31596</guid>
-<description>NTT plans to build Japan's first dedicated data center for Anthropic to run and train Claude models, advancing data sovereignty by reducing reliance on foreign digital infrastructure and localizing computing power. (AIbase)</description>
+<description>NTT will build Japan's first dedicated data center for Anthropic to run and train Claude models, part of a data-sovereignty push to cut reliance on foreign digital infrastructure and localize compute. (AIbase)</description>
 <category>Industry news</category>
 <pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
 </item>
@@ -150,7 +155,7 @@ Explore AI Fronti (AIbase)</description>
 <title>Qwen responds to "Qwen Go!" rumors: not a standalone app, experience slots now open for applications.</title>
 <link>https://www.aibase.com/news/31597</link>
 <guid isPermaLink="true">https://www.aibase.com/news/31597</guid>
-<description>Qwen clarified that "Qwen Go!" is not a standalone app but a Personal Agent embedded in the Qwen app, with experience applications now open and a test claiming 70 yuan for a flight delay. (AIbase)</description>
+<description>Qwen's team says "Qwen Go!" is not a standalone app but a Personal Agent embedded inside the Qwen app, with experience slots now open; a hands-on test had it file a 70-yuan flight-delay claim. (AIbase)</description>
 <category>Industry news</category>
 <pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
 </item>
@@ -158,17 +163,9 @@ Explore AI Fronti (AIbase)</description>
 <title>Kling AI Takes Kling 4.0 to Hollywood: AI Video Is Moving From Toy to Enterprise Production Pipeline</title>
 <link>https://www.aibase.com/news/31598</link>
 <guid isPermaLink="true">https://www.aibase.com/news/31598</guid>
-<description>Previewing Kling 4.0, Kling AI will appear at 2026 Los Angeles Tech Week on October 14 with Oxen AI and Obsidian Studio to discuss AI video moving from social shorts into enterprise products, daily workflows, and monetization. (AIbase)</description>
+<description>Kling AI will appear at 2026 Los Angeles Tech Week on October 14 to preview Kling 4.0 and join Oxen AI and Obsidian Studio in a roundtable on AI video moving from social clips into enterprise products and daily workflows. (AIbase)</description>
 <category>Industry news</category>
 <pubDate>Tue, 13 Oct 2026 06:14:21 +0000</pubDate>
-</item>
-<item>
-<title>From model capabilities to safety boundaries, ByteDance Seed forms new department to tackle frontier AI risks.</title>
-<link>https://www.aibase.com/news/31592</link>
-<guid isPermaLink="true">https://www.aibase.com/news/31592</guid>
-<description>ByteDance Seed's new Model-Alignment &amp; Preparedness department, led by Yan Lin and reporting to Wu Yonghui, absorbs Responsible AI and some Chat staff to address Agent Models and CBRN risks through safety evaluations, alignment training, and monitoring. (AIbase)</description>
-<category>Industry news</category>
-<pubDate>Tue, 13 Oct 2026 05:38:02 +0000</pubDate>
 </item>
 </channel>
 </rss>
