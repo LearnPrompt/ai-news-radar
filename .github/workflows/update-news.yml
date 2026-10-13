@@ -8,6 +8,16 @@ on:
         required: false
         default: false
         type: boolean
+      backfill_en:
+        description: "One-off: backfill English fields (en.title/summary/reason, project reason) into existing data/ via DeepSeek, capped by backfill_en_max"
+        required: false
+        default: false
+        type: boolean
+      backfill_en_max:
+        description: "Max new DeepSeek calls for the English backfill"
+        required: false
+        default: "400"
+        type: string
   schedule:
     # 分时段节奏（2026-08-30 卡尔定，全部 UTC；北京 = UTC+8）：
     # 高峰（北京周一至五 9-12 / 14-18）保持每小时；其余空闲时段 3 小时一轮；深夜 4 小时一轮。
@@ -111,6 +121,7 @@ jobs:
           DEEPSEEK_API_BASE_URL: ${{ vars.DEEPSEEK_API_BASE_URL }}
           DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
           TITLE_ENHANCE_MAX_PER_RUN: ${{ vars.TITLE_ENHANCE_MAX_PER_RUN }}
+          TRANSLATE_EN_MAX_NEW: ${{ vars.TRANSLATE_EN_MAX_NEW }}
         run: |
           if [ -f feeds/follow.opml ]; then
             python scripts/update_news.py --output-dir data --window-hours 24 --archive-days 21 --rss-opml feeds/follow.opml --rss-max-feeds "${RSS_MAX_FEEDS:-10}"
@@ -125,8 +136,19 @@ jobs:
           DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
         run: python scripts/persona_score.py --data-dir data
 
+      - name: Backfill English fields (manual, one-off)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill_en == 'true'
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_API_BASE_URL: ${{ vars.DEEPSEEK_API_BASE_URL }}
+          DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
+        run: python scripts/backfill_en.py --data-dir data --max-new "${{ github.event.inputs.backfill_en_max }}"
+
       - name: Generate RSS feed
         run: python scripts/generate_feed.py --data-dir data
+
+      - name: Generate English RSS feed
+        run: python scripts/generate_feed.py --data-dir data --lang en --out data/feed-en.xml
 
       - name: Commit and push changes
         env:

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" data-radar-view="mobile" data-root="/en/">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI News Radar | AI updates from the last 24 hours</title>
+    <meta
+      name="description"
+      content="A radar that curates the AI, model and developer-tool updates worth reading from the past 24 hours; Scout Skill helps you pick the thoroughbreds out of a pile of sources."
+    />
+    <link rel="canonical" href="https://news.learnprompt.pro/en" />
+    <link rel="alternate" hreflang="zh-CN" href="https://news.learnprompt.pro/" />
+    <link rel="alternate" hreflang="en" href="https://news.learnprompt.pro/en" />
+    <link rel="alternate" hreflang="x-default" href="https://news.learnprompt.pro/" />
+    <link rel="alternate" type="application/rss+xml" title="AI News Radar" href="/en/feed.xml" />
+    <meta property="og:title" content="AI News Radar | AI updates from the last 24 hours" />
+    <meta
+      property="og:description"
+      content="A radar that curates the AI, model and developer-tool updates worth reading from the past 24 hours; Scout Skill helps you pick the thoroughbreds out of a pile of sources."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://news.learnprompt.pro/en" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:site_name" content="AI News Radar" />
+    <meta property="og:image" content="https://news.learnprompt.pro/assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AI News Radar, AI updates from the last 24 hours" />
+    <meta name="application-name" content="AI News Radar" />
+    <meta name="theme-color" content="#f6f6f2" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AI News Radar" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI News Radar | AI updates from the last 24 hours" />
+    <meta
+      name="twitter:description"
+      content="A radar that curates the AI, model and developer-tool updates worth reading from the past 24 hours; Scout Skill helps you pick the thoroughbreds out of a pile of sources."
+    />
+    <meta name="twitter:image" content="https://news.learnprompt.pro/assets/og.png" />
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script src="/assets/view-mode.js?v=dual-view-0713c" data-root="/en/"></script>
+    <script src="/assets/i18n/en.js?v=i18n-1013a"></script>
+    <script src="/assets/i18n.js?v=i18n-1013a"></script>
+    <link rel="stylesheet" href="/assets/styles.css?v=today-projects-1009a" />
+    <link rel="stylesheet" href="/assets/service-status.css?v=20260909" />
+  </head>
+  <body>
+    <a class="skip-link" href="#hotBoardWrap">Skip to hot stories</a>
+    <main class="shell">
+      <header class="hero">
+        <div class="hero-main">
+          <div class="hero-headline">
+            <img class="hero-logo" src="/assets/logo.svg" alt="AI News Radar logo" />
+            <div>
+              <h1>AI News Radar</h1>
+              <div class="hero-updated hero-view-row">
+                <span class="updated-label">Updated</span>
+                <span class="updated" id="updatedAt">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <span class="source-status-pill" id="sourceStatusPill">Loading source status</span>
+          <div class="hero-links" aria-label="Project links">
+            <a
+              class="hero-link"
+              href="https://github.com/LearnPrompt/ai-news-radar"
+              target="_blank"
+              rel="noopener noreferrer"
+            >GitHub &amp; setup guide</a>
+            <a
+              class="hero-link"
+              href="https://aimap.carlwow.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >AI MAP topic graph</a>
+            <a
+              class="hero-link"
+              href="https://goodcase.carlwow.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >GoodCase use-case library</a>
+          </div>
+        </div>
+
+        <section class="section-nav-wrap" aria-label="Content sections">
+          <div class="section-tabs" id="sectionTabs" role="tablist" aria-label="AI news sections"></div>
+          <div class="section-scroll-hint" aria-hidden="true">Swipe to see more sections →</div>
+        </section>
+      </header>
+
+      <section class="service-status-panel" id="serviceStatusPanel" aria-live="polite" hidden></section>
+
+      <section class="primary-controls">
+        <div class="mode-switch curation-mode-switch" role="group" aria-label="Curated / All toggle">
+          <button id="modeSelectedBtn" class="mode-btn active" type="button" aria-pressed="true">
+            <span class="mode-btn-icon" aria-hidden="true">&#10022;</span>Curated
+          </button>
+          <button id="modeAllBtn" class="mode-btn" type="button" aria-pressed="false">
+            <span class="mode-btn-icon" aria-hidden="true">&#9776;</span>All
+          </button>
+        </div>
+        <input id="searchInput" type="search" placeholder="Search AI signals / sources" aria-label="Search AI signals or sources" />
+        <div class="mode-hint" id="modeHint">Loading curated</div>
+        <button class="clear-filters-btn" id="clearFiltersBtn" type="button" hidden>Clear filters</button>
+      </section>
+
+      <details class="advanced-panel">
+          <summary>
+            <span>Advanced filters</span>
+            <span class="advanced-hint">Show a single source, or check whether each source is being collected normally</span>
+          </summary>
+          <div class="advanced-content">
+            <div class="advanced-controls">
+              <label class="field">
+                <span>Source</span>
+                <select id="siteSelect">
+                  <option value="">All sites</option>
+                </select>
+              </label>
+            </div>
+            <div class="data-source-indicator" id="dataSourceIndicator" hidden>
+              <span id="dataSourceIndicatorText"></span>
+              <button type="button" id="dataSourceResetBtn" class="data-source-reset-btn">Use local data</button>
+            </div>
+            <div class="source-health" id="sourceHealth">Loading source status...</div>
+            <details class="source-detail-panel">
+              <summary>View source status details</summary>
+              <div class="source-health-details" id="sourceHealthDetails"></div>
+              <section class="source-status-table" id="sourceStatusTable" aria-label="Source status details"></section>
+            </details>
+          </div>
+      </details>
+
+
+      <section class="list-wrap hot-board-wrap" id="hotBoardWrap" aria-label="Current hot stories">
+        <div class="list-head">
+          <h2>Hot stories</h2>
+          <span id="hotBoardMeta">Sorted by heat</span>
+        </div>
+        <div id="hotBoardList" class="hot-board-list"></div>
+      </section>
+
+      <section class="list-wrap top3-board-wrap" id="top3BoardWrap" aria-label="Today's TOP3 · three-persona takes" hidden>
+        <div class="list-head">
+          <h2>Today's TOP3 · three-persona takes</h2>
+          <span id="top3BoardMeta"></span>
+        </div>
+        <div id="top3BoardList" class="top3-board-list"></div>
+      </section>
+
+      <section class="waytoagi-wrap" hidden>
+        <div class="waytoagi-head">
+          <h2>Community updates · WaytoAGI</h2>
+          <div class="waytoagi-tools">
+            <div class="waytoagi-switch">
+              <button id="waytoagiTodayBtn" class="waytoagi-btn active" type="button" aria-pressed="true">Latest update day</button>
+              <button id="waytoagi7dBtn" class="waytoagi-btn" type="button" aria-pressed="false">Last 7 days</button>
+            </div>
+            <span id="waytoagiUpdatedAt">Loading...</span>
+          </div>
+        </div>
+        <div id="waytoagiMeta" class="waytoagi-meta"></div>
+        <div id="waytoagiList" class="waytoagi-list"></div>
+      </section>
+
+      <section class="list-wrap" id="newsListWrap">
+        <div class="list-head">
+          <h2 id="listTitle">Curated</h2>
+          <div class="list-head-tools">
+            <label id="allDedupeWrap" class="all-dedupe" for="allDedupeToggle">
+              <input id="allDedupeToggle" type="checkbox" checked />
+              <span class="all-dedupe-dot"></span>
+              <span id="allDedupeLabel">Dedup on</span>
+            </label>
+            <span id="resultCount">0 items</span>
+          </div>
+        </div>
+        <div id="newsList" class="news-list" aria-live="polite"></div>
+      </section>
+
+      <section class="list-wrap today-projects-wrap" id="todayProjectsWrap" aria-labelledby="todayProjectsTitle">
+        <div class="list-head">
+          <h2 id="todayProjectsTitle">Worth building today</h2>
+          <span id="todayProjectsMeta"></span>
+        </div>
+        <div id="todayProjectsList" class="today-projects-list" aria-live="polite">
+          <p class="today-projects-empty">Loading project picks...</p>
+        </div>
+      </section>
+
+    </main>
+
+    <template id="itemTpl">
+      <article class="news-card">
+        <div class="news-card-body">
+          <div class="meta-row">
+            <span class="curated-badge" hidden>Curated</span>
+            <span class="site"></span>
+            <span class="source"></span>
+            <strong class="score-badge" hidden></strong>
+          </div>
+          <a class="title" target="_blank" rel="noopener noreferrer"></a>
+          <p class="news-summary"></p>
+          <div class="why-box" hidden>
+            <span class="why-label">Why it matters:</span>
+            <span class="why-text"></span>
+          </div>
+          <div class="persona-slot"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+    <script src="/assets/motion.js?v=aihot-0715b" defer></script>
+    <script src="/assets/app.js?v=i18n-1013a" defer></script>
+    <script src="/assets/service-status.js?v=i18n-1013a" defer></script>
+  </body>
+</html>

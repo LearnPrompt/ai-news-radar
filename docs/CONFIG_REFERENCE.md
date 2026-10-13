@@ -122,6 +122,13 @@ SocialData 同时跑两路:① 中英关键词搜索发现新声音;② 一个�
 
 ---
 
+## 8b. 英文页 `/en` 的翻译参数
+
+- `--translate-en-max-new`（默认 60，环境变量 `TRANSLATE_EN_MAX_NEW` 覆盖，Actions 里读仓库变量 `TRANSLATE_EN_MAX_NEW`）：每轮最多新调几次 DeepSeek 生成英文标题、摘要、推荐理由。只翻含中文的标题和摘要；推荐理由对已有中文理由的条目生成英文版；抖音、小红书创作者条目一律跳过。没有 `DEEPSEEK_API_KEY` 时整段不跑，条目不带 `en` 字段，英文页回退到原文。
+- 缓存 `data/en-cache.json`，键 `en1|<title|summary|reason>|sha1(url|text)`，失败写空值作 1 天负缓存，保存时修剪 21 天以上的条目。
+- 一次性回填：`workflow_dispatch` 勾 `backfill_en`，`backfill_en_max` 默认 400；或本机带 key 跑 `python scripts/backfill_en.py --data-dir data --max-new 400`，`--dry-run` 只报会调几次。2026-10-13 干跑：title 152、summary 40、reason 143、project 4，共 339 次，按 flash 单价约 3 元多。
+- 成本口径：之后每轮约 30 到 60 次，每天不到 1 元。
+
 ## 9. GitHub 上还需要配什么(只剩密钥 + 急停开关)
 
 代码里搞不定、**必须**留在 GitHub 的,只有这些:

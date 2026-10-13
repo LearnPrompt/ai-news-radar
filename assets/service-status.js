@@ -2,10 +2,30 @@
   const panel = document.getElementById("serviceStatusPanel");
   if (!panel) return;
 
+  // i18n 由 assets/i18n.js 提供（先于本文件加载）。经典版页面不加载 i18n，退回下面这份中文词条
+  // （与 assets/i18n/zh.json 的 svc.* 一致，由 tests/i18n.test.mjs 校验）。
+  const i18n = window.AINewsRadarI18n;
+  const ZH_FALLBACK = {
+    "svc.investigating": "调查中",
+    "svc.identified": "已定位",
+    "svc.monitoring": "恢复监控中",
+    "svc.elevatedErrors": "OpenAI 服务错误率升高",
+    "svc.incidentFallback": "服务异常",
+    "svc.processing": "处理中",
+    "svc.heading": "ChatGPT / OpenAI 服务状态",
+    "svc.count": "{n} 项官方故障",
+    "svc.aria": "ChatGPT 与 OpenAI 服务状态：{n} 项故障正在处理",
+  };
+  const t = i18n
+    ? i18n.t
+    : (key, params) => String(ZH_FALLBACK[key] || key).replace(/\{(\w+)\}/g, (whole, name) => (params && name in params ? String(params[name]) : whole));
+  const IS_EN = Boolean(i18n && i18n.isEN);
+  const LOCALE = i18n ? i18n.locale : "zh-CN";
+
   const STATUS_LABELS = {
-    investigating: "调查中",
-    identified: "已定位",
-    monitoring: "恢复监控中",
+    investigating: t("svc.investigating"),
+    identified: t("svc.identified"),
+    monitoring: t("svc.monitoring"),
   };
 
   function resolveDataBaseUrl() {
@@ -27,7 +47,7 @@
   function formatTime(value) {
     const date = new Date(value || "");
     if (Number.isNaN(date.getTime())) return "";
-    return new Intl.DateTimeFormat("zh-CN", {
+    return new Intl.DateTimeFormat(LOCALE, {
       month: "numeric",
       day: "numeric",
       hour: "2-digit",
@@ -50,9 +70,10 @@
 
   function incidentTitle(incident) {
     if (incident?.title === "Elevated Error Rates") {
-      return "OpenAI 服务错误率升高";
+      return t("svc.elevatedErrors");
     }
-    return incident?.title_zh || incident?.title || "服务异常";
+    // 英文版只用官方英文标题，不取 title_zh
+    return (IS_EN ? incident?.title : (incident?.title_zh || incident?.title)) || t("svc.incidentFallback");
   }
 
   function incidentNode(incident) {
@@ -71,7 +92,7 @@
 
     const phase = document.createElement("span");
     phase.className = "service-phase";
-    phase.textContent = STATUS_LABELS[incident.status] || incident.status || "处理中";
+    phase.textContent = STATUS_LABELS[incident.status] || incident.status || t("svc.processing");
     meta.append(provider, phase);
 
     const title = document.createElement("a");
@@ -115,12 +136,12 @@
     dot.className = "service-status-dot";
     dot.setAttribute("aria-hidden", "true");
     const title = document.createElement("strong");
-    title.textContent = "ChatGPT / OpenAI 服务状态";
+    title.textContent = t("svc.heading");
     titleWrap.append(dot, title);
 
     const count = document.createElement("span");
     count.className = "service-status-count";
-    count.textContent = `${incidents.length} 项官方故障`;
+    count.textContent = t("svc.count", { n: incidents.length });
     heading.append(titleWrap, count);
 
     const list = document.createElement("div");
@@ -133,10 +154,7 @@
       incidents.some((incident) => ["major", "critical"].includes(incident.impact)),
     );
     panel.hidden = false;
-    panel.setAttribute(
-      "aria-label",
-      `ChatGPT 与 OpenAI 服务状态：${incidents.length} 项故障正在处理`,
-    );
+    panel.setAttribute("aria-label", t("svc.aria", { n: incidents.length }));
   }
 
   const controller = new AbortController();

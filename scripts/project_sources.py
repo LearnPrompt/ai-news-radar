@@ -163,10 +163,66 @@ def recommendation_fallback(project: dict[str, Any]) -> str:
     return f"体验它主打的「{summary}」，看看是否解决你当前的问题。"
 
 
+def _has_cjk(text: str) -> bool:
+    return bool(re.search(r"[\u3400-\u9fff]", text or ""))
+
+
+def recommendation_fallback_en(project: dict[str, Any]) -> str | None:
+    """English mirror of recommendation_fallback for the /en edition. Built only
+    from the source's own English description; returns None when the summary
+    has CJK (nothing safe to quote in English)."""
+    summary = str(project["summary"]).strip().rstrip("。.!")
+    if not summary or _has_cjk(summary):
+        return None
+    actions = (
+        (r"diagram", "Use it to draw a diagram you are explaining and see whether it saves manual layout time."),
+        (r"code review", "Run its AI review on a piece of your own code and see whether it catches anything you missed."),
+        (r"file organiz", "Try its AI organizing on a small batch of files and check that it fits your habits."),
+        (r"cost tracking.*AI coding|AI coding.*cost tracking", "Pick a project you are building and see whether its AI coding cost tracking helps you control spend."),
+        (r"video editor|video editing", "Try its AI video editing on your own footage and see whether it cuts down manual work."),
+        (r"document search|retrieval|\bRAG\b", "Try its retrieval on a document of your own and see whether it finds what you need faster."),
+        (r"transcri", "Try its transcription on a recording of your own and check whether the accuracy meets your needs."),
+        (r"desktop.*agent|agent.*desktop", "Pick an everyday desktop task and see whether its AI agent can cut the repetitive steps."),
+    )
+    for pattern, action in actions:
+        if re.search(pattern, summary, re.I):
+            return action
+    summary = summary if len(summary) <= 140 else summary[:137] + "..."
+    if project["site_id"] == "github_trending":
+        return f'Take a look at what this open-source project offers ("{summary}") and judge whether it fits a task you have on hand.'
+    return f'Try what it promises ("{summary}") and see whether it solves a problem you have right now.'
+
+
+def project_reason_cache_key(url: str, summary: str, lang: str = "zh") -> str:
+    prefix = "project-recommend-en::" if lang == "en" else "project-recommend::"
+    return prefix + hashlib.sha256(f"{url}\n{summary}".encode()).hexdigest()
+
+
+def project_reason_en(
+    project: dict[str, Any],
+    recommend_en: Callable[[str, str], str | None] | None,
+    cache: dict[str, str],
+) -> str | None:
+    """English one-liner for a project: cache -> recommend_en (DeepSeek, lang="en")
+    -> recommendation_fallback_en -> None. `project` needs project_name, url,
+    summary, site_id."""
+    key = project_reason_cache_key(project["url"], project["summary"], "en")
+    reason = cache.get(key)
+    if not reason and recommend_en:
+        try:
+            reason = recommend_en(project["project_name"], project["summary"])
+        except Exception:
+            reason = None  # Optional copy generation must not stop public sources.
+        if reason:
+            cache[key] = reason
+    return reason or recommendation_fallback_en(project)
+
+
 def build_today_projects(
     projects: list[dict[str, Any]], now: datetime, statuses: list[dict[str, Any]],
     *, limit: int = 4, recommend: Callable[[str, str], str | None] | None = None,
     cache: dict[str, str] | None = None,
+    recommend_en: Callable[[str, str], str | None] | None = None,
 ) -> dict[str, Any]:
     cache = cache if cache is not None else {}
     buckets: dict[str, list[dict[str, Any]]] = {sid: [] for sid in PROJECT_SOURCES}
@@ -200,7 +256,7 @@ def build_today_projects(
     items = []
     for project in selected:
         name, summary = project["project_name"], project["summary"]
-        cache_key = "project-recommend::" + hashlib.sha256(f"{project['url']}\n{summary}".encode()).hexdigest()
+        cache_key = project_reason_cache_key(project["url"], summary)
         reason = cache.get(cache_key)
         if not reason and recommend:
             try:
@@ -214,6 +270,7 @@ def build_today_projects(
             "project_name": name, "url": project["url"], "summary": summary,
             "site_id": project["site_id"], "site_name": PROJECT_SOURCES[project["site_id"]],
             "recommend_reason_zh": reason or recommendation_fallback(project),
+            "recommend_reason_en": project_reason_en(project, recommend_en, cache),
             "published_at": project["published_at"].astimezone(UTC).isoformat().replace("+00:00", "Z") if project["published_at"] else None,
             "updated_at": project["updated_at"].astimezone(UTC).isoformat().replace("+00:00", "Z") if project.get("updated_at") else None,
             "recency_basis": project.get("recency_basis"),

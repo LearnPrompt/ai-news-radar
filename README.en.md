@@ -38,6 +38,8 @@ Then ask your agent: `What happened in AI today?`
 
 **③ Fork and own your own filter** → fork this repo, swap in your own OPML sources, edit a markdown file under `personas/` to change the taste, and the data grows on your own GitHub Pages. Jump to the [fork guide](#fork-guide-your-own-radar-in-five-steps).
 
+**English edition** → [news.learnprompt.pro/en](https://news.learnprompt.pro/en) is the same radar in English (mobile view only; the classic view stays Chinese for now). Titles, summaries and "why it matters" lines prefer the `en` field the pipeline writes into `data/` (the "why it matters" line never falls back to Chinese); Douyin / Xiaohongshu creator content is hidden. Its RSS feed is `/en/feed.xml`, and the Chinese and English pages point at each other with `hreflang` (both listed in `sitemap.xml`). UI strings live in `assets/i18n/zh.json` and `en.json`; after editing them run `node scripts/build_i18n.mjs`, and CI runs `python scripts/check_i18n_site.py` to keep the two pages, the sitemap and the catalogs consistent.
+
 The three lanes are one road: let your agent read the brief → read the site yourself → run your own radar.
 
 ---
