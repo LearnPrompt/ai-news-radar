@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T08:11:54.930897Z",
+  "generated_at": "2026-10-13T13:05:13.775560Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_25f006d4bed0",
+      "title": "面壁智能开源 MiniCPM-V 4.7，35B-A3B MoE 模型 3GB 内存端侧流畅运行",
+      "url": "https://mp.weixin.qq.com/s?__biz=Mzg3Mzg2MTg2NQ%3D%3D&mid=2247499456&idx=1&sn=03da7aed4dabbd4fca5c89ce88d4a90a",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 70,
+          "review": "35B 塞进 3GB，先交代量化位宽和实测帧率，别把'内存'重新定义一遍。"
+        },
+        "paper-police": {
+          "score": 42,
+          "review": "官方公众号宣称开源，但无 arXiv、无仓库链接、无第三方跑分，3GB 内存数字待复现。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "开源权重可直接拉，端侧 3GB 跑多模态，做手机/边缘 AI 的今天就能试。"
+        }
+      }
+    },
+    {
       "story_id": "story_06f333b9aafa",
       "title": "Dependabot 支持匿名组织级注册表 / Anonymous organization-level registries for Dependabot",
       "url": "https://github.blog/changelog/2026-10-12-anonymous-organization-level-registries-for-dependabot",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 74,
@@ -37,42 +57,22 @@
       }
     },
     {
-      "story_id": "story_8a809173e2e5",
-      "title": "用户报告 Codex CLI 0.157.0 默认启动持久化自更新后台守护进程",
-      "url": "https://github.com/openai/codex/issues/48195",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 74,
-          "review": "一个命令行工具装完就常驻后台自更新，用户得翻进程才发现，这惊喜谁受得了。"
-        },
-        "paper-police": {
-          "score": 55,
-          "review": "开源仓库issue可查、代码可复现，但官方未确认，仅用户单方报告，等维护者定性。"
-        },
-        "pragmatic": {
-          "score": 62,
-          "review": "用 Codex CLI 的先查一眼后台进程，自更新守护会偷跑流量还可能悄悄换版本，建议锁版本或关掉。"
-        }
-      }
-    },
-    {
-      "story_id": "story_cbebf0458204",
-      "title": "Meta 发布 Muse Wonder 与 Muse Wonder Full 模型，主打个人与专业智能体能力 / Muse Wonder",
-      "url": "https://research.meta.ai/blog/muse-wonder",
+      "story_id": "story_decdd084ef50",
+      "title": "LangChain 发布 langchain-scaledown 集成，用 ScaleDown 约束解码模型管理长时智能体上下文 / Building Long-Running Agents with ScaleDown and Deep Agents",
+      "url": "https://www.langchain.com/blog/building-long-running-agents-with-scaledown-and-deep-agents",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 42,
-          "review": "「个人版」加「Full 版」先占好价位，智能体的跑分、延迟、单价倒是一个没晒。"
+          "score": 44,
+          "review": "一次集成包发布会，压缩率、延迟、任务掉点一个数都没有，先等跑分。"
         },
         "paper-police": {
-          "score": 22,
-          "review": "只有Meta自家博客一篇，无论文、无开源、无第三方跑分，宣称能力无从复现。"
+          "score": 30,
+          "review": "厂商博客宣布集成，无评测数字、无基准、无第三方复现，先等仓库和跑分。"
         },
         "pragmatic": {
-          "score": 62,
-          "review": "先确认有没有开放 API 或权重，只有博客没接口的话今天用不上。"
+          "score": 72,
+          "review": "长跑智能体上下文压缩确实能省 token，但目前绑死 ScaleDown 一家，先看代码再决定要不要接。"
         }
       }
     }
