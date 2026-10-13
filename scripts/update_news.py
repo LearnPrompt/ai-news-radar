@@ -6149,6 +6149,29 @@ def generate_recommend_reason_deepseek(
     return content
 
 
+_EN_META_OPENER_RE = re.compile(
+    r"^(This|The) (article|piece|post|story|report|item|update|note) "
+    r"(details|explains|examines|profiles|reports|describes|covers|discusses|argues|notes|looks at|shows|says|highlights)"
+    r"( that| how| why)?[,:]?\s+"
+)
+_EN_META_OPENER_MIN_REMAINDER_WORDS = 8
+
+
+def strip_meta_opener(text: str) -> str:
+    """Repair English reason output that opens by talking about the piece
+    ("This article details X ...") instead of stating the fact: drop the
+    opener and capitalize what remains. If the remainder is shorter than
+    8 words the original text is kept."""
+    s = str(text or "")
+    m = _EN_META_OPENER_RE.match(s)
+    if not m:
+        return s
+    rest = s[m.end():]
+    if len(rest.split()) < _EN_META_OPENER_MIN_REMAINDER_WORDS:
+        return s
+    return rest[:1].upper() + rest[1:]
+
+
 def _generate_recommend_reason_en(
     title: str, full_text: str, *, timeout: int = 45, purpose: str = "read"
 ) -> str | None:
@@ -6174,11 +6197,16 @@ def _generate_recommend_reason_en(
             "Cite concrete facts, numbers or details from the source and say what this piece actually covers; "
             "no empty marketing language. Never invent numbers or facts that are not in the source. "
             "Keep company, product and people names in their original form. "
+            "Start with the fact itself; never begin with \"This article\", \"This piece\", \"This post\", "
+            "\"This story\", \"This report\", \"This item\" or any similar meta-opener that talks about the piece "
+            "instead of its content. "
             "The source may include a Chinese editor's note: use it only as a fact source and still write in English. "
             "Output only the sentence: no quotes, no prefix, no explanation."
         )
     user_content = f"Title: {title_s}\n\nSource:\n{text_s}"
     content = _deepseek_chat_text(system_prompt, user_content, temperature=0.3, timeout=timeout)
+    if content and purpose != "try":
+        content = strip_meta_opener(content)
     if not content or has_en_forbidden_chars(content):
         return None
     if _looks_like_translation_refusal(content):
@@ -6291,11 +6319,57 @@ EN_CACHE_MAX_AGE_DAYS = 21  # 超过 21 天未被命中的条目在保存时修�
 EN_NEGATIVE_TTL_DAYS = 1  # 失败（空文本）只负缓存 1 天，之后允许重试
 EN_CACHE_TOUCH_DAYS = 7  # 命中且条目已超过 7 天时刷新 at，避免每轮都改写缓存文件
 EN_KINDS = ("title", "summary", "reason")
+# reason 的 prompt 升级过（去掉 "This article ..." 式元开头），换前缀让旧 en1|reason| 条目不再命中，
+# 下次回填按新 prompt 重生成；旧条目无害，21 天后自动修剪。title/summary 仍用 en1|。
+EN_REASON_CACHE_PREFIX = "en2|"
 
 
 def en_cache_key(kind: str, url: str, text: str) -> str:
     digest = hashlib.sha1(f"{url}|{text}".encode("utf-8")).hexdigest()
-    return f"{EN_CACHE_PREFIX}{kind}|{digest}"
+    prefix = EN_REASON_CACHE_PREFIX if kind == "reason" else EN_CACHE_PREFIX
+    return f"{prefix}{kind}|{digest}"
+
+
+EN_TITLE_MAX_CHARS = 200
+_X_HOSTS = {"x.com", "twitter.com", "www.x.com", "www.twitter.com", "mobile.twitter.com", "mobile.x.com"}
+_X_SITE_IDS = {"xapi", "socialdata_x"}
+_EN_FIRST_SENTENCE_END_RE = re.compile(r"[。！？!?]|\n|\.(?=\s+[A-Z])")
+
+
+def is_x_item(item: dict[str, Any]) -> bool:
+    site_id = str(item.get("site_id") or "").strip().lower()
+    if site_id in _X_SITE_IDS or site_id.startswith("x_"):
+        return True
+    try:
+        host = (urlparse(str(item.get("url") or "")).hostname or "").lower()
+    except ValueError:
+        host = ""
+    return host in _X_HOSTS
+
+
+def title_for_en(item: dict[str, Any], title: str) -> str:
+    """Text actually sent to the EN translator. X posts (whose title is the whole
+    post) and titles over 200 chars are cut to the first sentence, then hard-capped
+    at 200 chars without a trailing partial word ("…" appended only on a hard cut)."""
+    s = str(title or "").strip()
+    if not s or not (is_x_item(item) or len(s) > EN_TITLE_MAX_CHARS):
+        return s
+    m = _EN_FIRST_SENTENCE_END_RE.search(s)
+    if m:
+        end = m.end() if s[m.start()] != "\n" else m.start()
+        first = s[:end].strip()
+        if first:
+            s = first
+    if len(s) <= EN_TITLE_MAX_CHARS:
+        return s
+    cut = s[:EN_TITLE_MAX_CHARS]
+    nxt = s[EN_TITLE_MAX_CHARS]
+    if (
+        cut[-1].isascii() and cut[-1].isalnum() and nxt.isascii() and nxt.isalnum()
+        and any(ch.isspace() for ch in cut)
+    ):
+        cut = cut.rsplit(None, 1)[0]
+    return cut.rstrip() + "…"
 
 
 def _parse_en_cache_at(value: Any) -> datetime | None:
@@ -6375,6 +6449,14 @@ def _en_resolve(
     state["used"] += 1
     result = call()
     cache[key] = {"text": result or "", "at": iso(now) or ""}
+    every = int(state.get("checkpoint_every") or 0)
+    checkpoint = state.get("checkpoint")
+    if every > 0 and checkpoint is not None and state["used"] % every == 0:
+        # 每累计 every 次新调用把当前缓存交给调用方落盘，被取消的长跑不会丢译文
+        try:
+            checkpoint(cache)
+        except Exception as exc:  # 落盘失败不应拖垮翻译本身
+            print(f"en cache checkpoint failed: {exc}")
     return result
 
 
@@ -6390,12 +6472,13 @@ def _en_fields_for_item(
     en_summary: str | None = None
     en_reason: str | None = None
 
+    title_en_src = title_for_en(item, title_src) if title_src else ""
     if title_src and has_cjk(title_src):
         en_title = _en_resolve(
-            cache, "title", url, title_src, now, state, lambda: translate_to_en_deepseek(title_src)
+            cache, "title", url, title_en_src, now, state, lambda: translate_to_en_deepseek(title_en_src)
         )
     if summary_src and has_cjk(summary_src):
-        if summary_src == title_src:
+        if summary_src == title_src and title_en_src == title_src:
             # summary 只是标题的拷贝（waytoagi 等），复用标题译文，不多花一次调用
             en_summary = en_title
         else:
@@ -6422,6 +6505,8 @@ def add_en_fields(
     cache: dict[str, dict[str, str]],
     max_new: int,
     now: datetime,
+    checkpoint_every: int = 0,
+    checkpoint: Any = None,
 ) -> tuple[list[dict[str, Any]], dict[str, dict[str, str]], int]:
     """Attach `item["en"] = {"title", "summary", "reason"}` (each str | None) for the
     English edition. Returns (items, cache, new_calls_used) so callers can share one
@@ -6433,11 +6518,19 @@ def add_en_fields(
     - reason: English rewrite of `recommend_reason_zh` when present;
     - creator items (CREATOR_SITE_IDS) are skipped entirely (no `en` key);
     - at most `max_new` DeepSeek calls per invocation; cache hits are free;
+    - optional incremental persistence: when `checkpoint_every` > 0 and `checkpoint`
+      is given, `checkpoint(cache)` is called after every `checkpoint_every`-th new
+      call of this invocation (counted per invocation, cache already holding that
+      call's result) so the caller can write the cache to disk; exceptions raised by
+      the callback are printed and swallowed. Default 0 = off;
     - whole feature is a no-op (no `en` key at all) when DEEPSEEK_API_KEY is unset.
     """
     if not str(os.environ.get("DEEPSEEK_API_KEY") or "").strip():
         return items, cache, 0
-    state: dict[str, Any] = {"used": 0, "max": max(0, int(max_new)), "dry": False, "counts": {}}
+    state: dict[str, Any] = {
+        "used": 0, "max": max(0, int(max_new)), "dry": False, "counts": {},
+        "checkpoint_every": max(0, int(checkpoint_every or 0)), "checkpoint": checkpoint,
+    }
     out: list[dict[str, Any]] = []
     for item in items:
         new_item = dict(item)
