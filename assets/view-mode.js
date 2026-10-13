@@ -9,6 +9,8 @@
   const script = document.currentScript;
   const rootHint = script?.dataset.root || "./";
   const rootUrl = new URL(rootHint, window.location.href);
+  // 英文版（data-root=/en/）只有手机版一个视角：经典版暂无英文，不渲染入口，也不读取/写入视角偏好。
+  const classicAvailable = !/^\/en\/?$/.test(rootHint);
   const currentView = document.documentElement.dataset.radarView || "mobile";
   const params = new URLSearchParams(window.location.search);
   const requestedView = params.get("view") || "";
@@ -63,7 +65,9 @@
     }
   }
 
-  if (requestedView === "auto") {
+  if (!classicAvailable) {
+    // 英文版：忽略 ?view= 与已存偏好，不动 localStorage 里中文站的视角选择
+  } else if (requestedView === "auto") {
     writePreference("");
     writeMobileOverride("");
   } else if (!isMobileViewport && VALID_VIEWS.has(requestedView)) {
@@ -77,10 +81,12 @@
       ? ""
       : (VALID_VIEWS.has(requestedView) ? requestedView : readPreference()));
   const deviceDefault = "mobile";
-  const targetView = preference || deviceDefault;
+  const targetView = classicAvailable ? (preference || deviceDefault) : deviceDefault;
 
   function destination(view) {
     const url = new URL(view === "classic" ? "classic/" : "./", rootUrl);
+    // trailingSlash=false 时 /en/ 会 308 到 /en，规范地址不带斜杠
+    if (url.pathname === "/en/") url.pathname = "/en";
     const passthrough = new URLSearchParams(window.location.search);
     passthrough.delete("view");
     url.search = passthrough.toString();
@@ -95,7 +101,7 @@
   }
 
   function chooseView(view) {
-    if (!VALID_VIEWS.has(view)) return;
+    if (!VALID_VIEWS.has(view) || !classicAvailable) return;
     if (isMobileViewport) writeMobileOverride(view);
     else writePreference(view);
     if (view === currentView) return;

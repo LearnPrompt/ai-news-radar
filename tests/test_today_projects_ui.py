@@ -1,12 +1,18 @@
-"""Execute the optional project module in both views with a small DOM stub."""
+"""Execute the optional project module in both views with a small DOM stub.
+
+Expected UI strings come from assets/i18n/zh.json (the classic view keeps the same literals).
+"""
 
 from pathlib import Path
+import json
+import os
 import subprocess
 
 import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ZH_JSON = ROOT / "assets/i18n/zh.json"
 
 
 @pytest.mark.parametrize("view", ["assets/app.js", "classic/assets/app.js"])
@@ -15,11 +21,19 @@ def test_project_rendering_freshness_safety_and_loading(view):
     source = (ROOT / view).read_text(encoding="utf-8")
     prefix = source[: source.index("function fmtTime(iso)")]
     prefix += source[source.index("function timelineIso(item)"):source.index("function timelineMs(item)")]
+    # assets/app.js 依赖 i18n 运行时；经典版不用它，多加载无副作用
+    zh_catalog = json.loads(ZH_JSON.read_text(encoding="utf-8"))
+    prefix = (ROOT / "assets/i18n/zh.js").read_text(encoding="utf-8") + "\n" \
+        + (ROOT / "assets/i18n.js").read_text(encoding="utf-8") + "\n" + prefix
+    assert zh_catalog["today.updating"]
     script = r'''
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
 const fs = require("node:fs");
 const source = fs.readFileSync(0, "utf8");
+const zh = JSON.parse(fs.readFileSync(process.env.ZH_JSON, "utf8"));
+// 复数词条在 zh 里 one/other 相同；{n} 用数字替换
+const zhText = (key, n) => (typeof zh[key] === "object" ? zh[key].other : zh[key]).replace("{n}", n);
 const fixedNow = "2026-10-09T16:30:00Z";
 class FixedDate extends Date {
   constructor(...args) { super(...(args.length ? args : [fixedNow])); }
@@ -69,7 +83,7 @@ const today = "2026-10-10"; // Taipei has advanced to the next day; UTC has not.
 assert.equal(vm.runInContext("todayProjectsDate()", context), today);
 render({ date: today, items: Array.from({ length: 6 }, () => ({ ...valid })) });
 assert.equal(list.children.length, 4);
-assert.equal(meta.textContent, "4 个项目");
+assert.equal(meta.textContent, zhText("today.count", 4));
 const card = list.children[0];
 assert.equal(card.children[0].children[0].textContent, valid.project_name);
 assert.equal(card.children[0].children[1].textContent, "GitHub Trending");
@@ -80,7 +94,7 @@ assert.equal(card.children[2].target, "_blank");
 const recent = { ...valid, site_id: "producthunt", site_name: "Product Hunt",
   recency_basis: "updated_at", published_at: "2026-07-06T08:40:40Z", updated_at: fixedNow };
 render({ date: today, items: [recent] });
-assert.equal(list.children[0].children[0].children[1].textContent, "Product Hunt · 近期更新");
+assert.equal(list.children[0].children[0].children[1].textContent, `Product Hunt · ${zh["today.recentUpdate"]}`);
 context.recent = recent;
 assert.equal(vm.runInContext("timelineIso(recent)", context), fixedNow);
 context.recent = { ...recent, updated_at: null };
@@ -90,7 +104,7 @@ assert.equal(vm.runInContext("timelineIso(recent)", context), recent.published_a
 render({ date: today, items: [context.recent] });
 assert.equal(list.children[0].children[0].children[1].textContent, "Product Hunt");
 render({ date: "2026-10-09", items: [valid] });
-assert.equal(list.children[0].textContent, "今天的项目推荐更新中。");
+assert.equal(list.children[0].textContent, zh["today.updating"]);
 assert.equal(meta.textContent, "");
 render({ date: today, items: [
   null,
@@ -102,9 +116,9 @@ render({ date: today, items: [
   { ...valid, recommend_reason_zh: "NSFW 虚拟女友" },
 ] });
 assert.equal(list.children.length, 1);
-assert.equal(list.children[0].textContent, "今天暂无合适的项目推荐。");
+assert.equal(list.children[0].textContent, zh["today.none"]);
 render({ date: today, items: [], sources: [{ ok: false }, { ok: false }] });
-assert.equal(list.children[0].textContent, "项目数据暂时加载失败，请稍后再试。");
+assert.equal(list.children[0].textContent, zh["today.failed"]);
 (async () => {
   let requested;
   let requestOptions;
@@ -128,12 +142,13 @@ assert.equal(list.children[0].textContent, "项目数据暂时加载失败，请
   ]) {
     context.fetch = response;
     await vm.runInContext("initTodayProjects()", context);
-    assert.equal(list.children[0].textContent, "项目数据暂时加载失败，请稍后再试。");
+    assert.equal(list.children[0].textContent, zh["today.failed"]);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });
 '''
     result = subprocess.run(
         ["node", "-e", script], input=prefix, text=True,
         capture_output=True, cwd=ROOT, timeout=20,
+        env={**os.environ, "ZH_JSON": str(ZH_JSON)},
     )
     assert result.returncode == 0, result.stderr

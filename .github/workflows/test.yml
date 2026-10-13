@@ -11,6 +11,10 @@ on:
       - 'assets/**'
       - 'classic/**'
       - 'index.html'
+      - 'en/**'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'vercel.json'
       - 'requirements.txt'
       - '.github/workflows/test.yml'
 
@@ -28,5 +32,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt pytest==8.3.4
       - run: python -m pytest -q
-      - run: node --test tests/service-status.test.mjs
+      - run: node --test tests/i18n.test.mjs tests/service-status.test.mjs
       - run: node --check assets/app.js && node --check classic/assets/app.js && node --check assets/service-status.js
+      - run: node --check assets/i18n.js && node --check assets/i18n/zh.js && node --check assets/i18n/en.js && node --check assets/view-mode.js
+      - run: python scripts/check_i18n_site.py

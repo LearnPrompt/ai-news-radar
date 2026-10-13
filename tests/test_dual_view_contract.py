@@ -1,5 +1,7 @@
-"""Regression checks for the mobile/classic data and safety contract."""
+"""Regression checks for the mobile/classic data and safety contract (plus the /en surface)."""
 
+import html
+import json
 from pathlib import Path
 
 
@@ -17,6 +19,11 @@ DATA_FILES = (
 
 def read(relative_path: str) -> str:
     return (ROOT / relative_path).read_text(encoding="utf-8")
+
+
+# 静态页面里写死的串从词条取，避免三份 HTML 与 i18n JSON 各说各话
+ZH = json.loads(read("assets/i18n/zh.json"))
+EN = json.loads(read("assets/i18n/en.json"))
 
 
 def test_both_views_share_data_source_override_contract():
@@ -73,7 +80,7 @@ def test_both_headers_keep_time_and_switch_inside_the_headline():
 
         assert headline_position < updated_position < switch_position < meta_position
         assert 'class="hero-tag"' not in source
-        assert ">GitHub 与接入指南</a>" in source
+        assert f">{ZH['page.githubLink']}</a>" in source
 
 
 def test_classic_header_does_not_animate_the_view_switch_container():
@@ -109,7 +116,7 @@ def test_mobile_classic_choice_is_one_navigation_only():
 def test_both_views_show_today_projects_after_news():
     for path in ("index.html", "classic/index.html"):
         source = read(path)
-        assert 'id="todayProjectsTitle">今天值得做' in source
+        assert f'id="todayProjectsTitle">{ZH["page.todayProjectsTitle"]}' in source
         assert 'id="todayProjectsList"' in source
         assert source.index('id="newsList"') < source.index('id="todayProjectsWrap"')
         from bs4 import BeautifulSoup
@@ -124,3 +131,78 @@ def test_today_projects_load_independently_in_both_views():
         init_source = source[source.index("async function init()") :]
         assert "await initTodayProjects" not in init_source
         assert 'timeZone: "Asia/Taipei"' in source
+
+
+def test_zh_page_declares_hreflang_rss_and_loads_i18n_before_app():
+    source = read("index.html")
+    assert 'hreflang="zh-CN" href="https://news.learnprompt.pro/"' in source
+    assert 'hreflang="en" href="https://news.learnprompt.pro/en"' in source
+    assert 'hreflang="x-default" href="https://news.learnprompt.pro/"' in source
+    assert 'type="application/rss+xml"' in source
+    assert source.index("assets/i18n/zh.js") < source.index("assets/i18n.js") < source.index("assets/app.js")
+    assert source.index("assets/i18n.js") < source.index("assets/service-status.js")
+
+
+def test_english_page_is_the_mobile_view_rooted_at_en():
+    source = read("en/index.html")
+    assert '<html lang="en"' in source
+    assert 'data-root="/en/"' in source
+    assert 'src="/assets/view-mode.js' in source
+    assert source.index("/assets/i18n/en.js") < source.index("/assets/i18n.js") < source.index("/assets/app.js")
+    # all local resources are absolute: the page is served from /en, so "./" would 404
+    assert 'src="./' not in source and 'href="./' not in source
+    assert 'href="/site.webmanifest"' in source
+
+
+def test_english_page_has_no_classic_entry_and_no_view_switch():
+    source = read("en/index.html")
+    assert "data-radar-view-target" not in source
+    assert "classic" not in source.lower()
+    assert 'class="view-switch"' not in source
+
+
+def test_english_page_declares_hreflang_canonical_and_rss():
+    source = read("en/index.html")
+    assert '<link rel="canonical" href="https://news.learnprompt.pro/en" />' in source
+    assert 'hreflang="zh-CN" href="https://news.learnprompt.pro/"' in source
+    assert 'hreflang="en" href="https://news.learnprompt.pro/en"' in source
+    assert 'hreflang="x-default" href="https://news.learnprompt.pro/"' in source
+    assert 'type="application/rss+xml" title="AI News Radar" href="/en/feed.xml"' in source
+
+
+def test_english_page_keeps_the_same_section_layout_as_zh():
+    from bs4 import BeautifulSoup
+
+    zh_sections = [s.get("id") for s in BeautifulSoup(read("index.html"), "html.parser").select("main > section")]
+    en_soup = BeautifulSoup(read("en/index.html"), "html.parser")
+    assert [s.get("id") for s in en_soup.select("main > section")] == zh_sections
+    # same element ids as the zh page, so app.js works unchanged (the view switch is the only deliberate gap)
+    zh_ids = {el.get("id") for el in BeautifulSoup(read("index.html"), "html.parser").select("[id]")}
+    en_ids = {el.get("id") for el in en_soup.select("[id]")}
+    assert zh_ids == en_ids
+    assert html.escape(EN["page.todayProjectsTitle"], quote=False) in read("en/index.html")
+    assert f'id="todayProjectsTitle">{EN["page.todayProjectsTitle"]}' in read("en/index.html")
+    assert f">{html.escape(EN['page.githubLink'], quote=False)}</a>" in read("en/index.html")
+
+
+def test_view_router_skips_classic_when_rooted_at_en():
+    source = read("assets/view-mode.js")
+    assert "const classicAvailable = !/^\\/en\\/?$/.test(rootHint)" in source
+    assert "classicAvailable ? (preference || deviceDefault) : deviceDefault" in source
+    assert "!classicAvailable" in source
+
+
+def test_data_urls_resolve_from_site_root_on_the_english_page():
+    source = read("assets/app.js")
+    assert 'document.documentElement?.dataset?.root' in source
+    assert 'startsWith("/")' in source
+    # a ?data= / localStorage override still wins and only keeps the file name
+    assert 'return `${base}/${file}`' in source
+
+
+def test_sitemap_robots_and_feed_rewrite_exist():
+    assert "https://news.learnprompt.pro/en" in read("sitemap.xml")
+    assert "Sitemap: https://news.learnprompt.pro/sitemap.xml" in read("robots.txt")
+    config = json.loads(read("vercel.json"))
+    assert {"source": "/en/feed.xml", "destination": "/data/feed-en.xml"} in config["rewrites"]
+    assert config["headers"][0]["source"] == "/data/(.*)"

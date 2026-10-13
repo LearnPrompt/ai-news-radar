@@ -221,6 +221,8 @@ AI News Radar学习了现代新闻学的技术，不是简单堆信息源，一�
 - `data/source-status.json`：来源抓取状态、成功率、站点覆盖和源健康
 - `data/stories-merged.json`：故事合并后的完整事件集合
 - `data/merge-log.json`：故事合并过程和命中记录，方便调试与审计
+- `data/feed-en.xml`：英文 RSS，线上地址 `/en/feed.xml`；`data/en-cache.json`：英文字段的翻译缓存（21 天修剪）
+- 条目上的 `en` 字段：`{title, summary, reason}`，只在配置了 DeepSeek key 时生成，英文页 `/en` 读它，中文页不读；`title_en` 仍是中文页的英文副标题，含义不变
 
 如果 `daily-brief.json` 暂时不存在，页面会回退到候选信号列表；如果 `stories-merged.json` 存在，页面会用完整故事池补齐后续故事线，避免只有少量精选故事被接入。
 
