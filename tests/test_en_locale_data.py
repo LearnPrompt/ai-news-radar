@@ -245,6 +245,47 @@ def test_add_en_fields_translates_title_summary_reason_and_caches():
     assert it["summary"] in reason_msg
 
 
+def _checkpoint_items(n: int) -> list[dict]:
+    return [item(i, title=f"谷歌发布第{i}号模型", title_original=f"谷歌发布第{i}号模型") for i in range(1, n + 1)]
+
+
+def test_add_en_fields_checkpoint_every_20_calls():
+    items = _checkpoint_items(45)
+    snapshots: list[list[str]] = []
+    cb = MagicMock(side_effect=lambda cache: snapshots.append(list(cache)))
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(EN_TITLE)
+    ) as post:
+        _, cache, used = add_en_fields(items, {}, 100, NOW, checkpoint_every=20, checkpoint=cb)
+    assert used == 45 and post.call_count == 45
+    assert cb.call_count == 2  # after call 20 and 40, not after the trailing 5
+    assert [len(s) for s in snapshots] == [20, 40]
+    first_20 = [en_cache_key("title", f"https://example.com/n/{i}", f"谷歌发布第{i}号模型") for i in range(1, 21)]
+    assert snapshots[0] == first_20  # checkpoint holds exactly the first 20 entries
+    assert len(cache) == 45
+
+
+def test_add_en_fields_checkpoint_off_by_default_and_with_zero():
+    items = _checkpoint_items(25)
+    cb = MagicMock()
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(EN_TITLE)
+    ):
+        add_en_fields(items, {}, 100, NOW, checkpoint_every=0, checkpoint=cb)
+        add_en_fields(items, {}, 100, NOW)
+    cb.assert_not_called()
+
+
+def test_add_en_fields_checkpoint_error_is_swallowed():
+    items = _checkpoint_items(3)
+    cb = MagicMock(side_effect=OSError("disk full"))
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(EN_TITLE)
+    ):
+        _, cache, used = add_en_fields(items, {}, 100, NOW, checkpoint_every=1, checkpoint=cb)
+    assert used == 3 and cb.call_count == 3 and len(cache) == 3
+
+
 def test_add_en_fields_title_only_when_cjk_and_summary_only_when_cjk():
     it = item(
         title="OpenAI ships a thing", title_original="OpenAI ships a thing", title_en="OpenAI ships a thing",
@@ -662,3 +703,51 @@ def test_backfill_max_new_caps_calls(tmp_path):
     ) as post, patch("scripts.backfill_en.recommend_project_en", return_value=None):
         backfill_en.main(["--data-dir", str(d), "--max-new", "2"])
     assert post.call_count == 2
+
+
+def test_backfill_checkpoints_cache_every_20_calls_and_saves_once_at_end(tmp_path):
+    d = tmp_path / "data"
+    d.mkdir()
+    items = _checkpoint_items(45)
+    (d / "latest-24h.json").write_text(
+        json.dumps({"generated_at": "x", "items": items}, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    saves: list[int] = []
+
+    def spy_save(path, cache, now):
+        saves.append(len(cache))
+        save_en_cache(path, cache, now)
+
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(EN_TITLE)
+    ), patch("scripts.backfill_en.save_en_cache", side_effect=spy_save):
+        assert backfill_en.main(["--data-dir", str(d), "--max-new", "100"]) == 0
+    assert saves == [20, 40, 45]  # two checkpoints, then the single final save
+    assert len(load_en_cache(d / "en-cache.json")) == 45
+
+
+def test_backfill_cancelled_run_keeps_checkpointed_cache(tmp_path):
+    d = tmp_path / "data"
+    d.mkdir()
+    (d / "latest-24h.json").write_text(
+        json.dumps({"generated_at": "x", "items": _checkpoint_items(45)}, ensure_ascii=False), encoding="utf-8"
+    )
+    calls = {"n": 0}
+
+    def dying_post(url, headers=None, json=None, timeout=None):
+        calls["n"] += 1
+        if calls["n"] > 25:
+            raise KeyboardInterrupt  # runner cancel: bypasses add_en_fields' own handling
+        return ds_response(EN_TITLE)
+
+    real_save = save_en_cache
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", side_effect=dying_post
+    ), patch("scripts.backfill_en.save_en_cache") as spy:
+        # simulate a hard kill: the finally-save never reaches disk, only the checkpoint does
+        spy.side_effect = lambda path, cache, now: (
+            real_save(path, cache, now) if len(cache) == 20 else None
+        )
+        with pytest.raises(KeyboardInterrupt):
+            backfill_en.main(["--data-dir", str(d), "--max-new", "100"])
+    assert len(load_en_cache(d / "en-cache.json")) == 20

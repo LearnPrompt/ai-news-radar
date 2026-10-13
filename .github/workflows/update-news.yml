@@ -35,7 +35,7 @@ permissions:
 
 jobs:
   update:
-    timeout-minutes: 40
+    timeout-minutes: ${{ github.event.inputs.backfill_en == 'true' && 75 || 40 }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -138,6 +138,7 @@ jobs:
 
       - name: Backfill English fields (manual, one-off)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill_en == 'true'
+        timeout-minutes: 40
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_API_BASE_URL: ${{ vars.DEEPSEEK_API_BASE_URL }}

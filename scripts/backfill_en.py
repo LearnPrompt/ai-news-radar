@@ -52,6 +52,8 @@ except ModuleNotFoundError:  # direct execution: python scripts/backfill_en.py
 
 import requests
 
+EN_CACHE_CHECKPOINT_EVERY = 20
+
 DATA_FILES = (
     "latest-24h.json",
     "latest-24h-all.json",
@@ -178,12 +180,20 @@ def main(argv: list[str] | None = None) -> int:
     title_cache = load_title_zh_cache(title_cache_path)
     title_cache_dirty = False
 
+    def checkpoint_cache(cache: dict[str, dict[str, str]]) -> None:
+        # 每 20 次新调用落一次缓存（与收尾同样的剪枝）；数据文件仍只在最后写，
+        # 但 job 超时被取消时已译的内容留在 en-cache.json，下次重跑直接命中
+        save_en_cache(en_cache_path, cache, now)
+
     try:
         for name, (original_text, payload) in loaded.items():
             if name == "today-projects.json":
                 continue
             refs = collect_item_refs(name, payload)
-            new_items, en_cache, used = add_en_fields(refs, en_cache, budget - used_total, now)
+            new_items, en_cache, used = add_en_fields(
+                refs, en_cache, budget - used_total, now,
+                checkpoint_every=EN_CACHE_CHECKPOINT_EVERY, checkpoint=checkpoint_cache,
+            )
             used_total += used
             for orig, new in zip(refs, new_items):
                 if "en" in new:

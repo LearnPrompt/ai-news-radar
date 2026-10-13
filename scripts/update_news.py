@@ -6375,6 +6375,14 @@ def _en_resolve(
     state["used"] += 1
     result = call()
     cache[key] = {"text": result or "", "at": iso(now) or ""}
+    every = int(state.get("checkpoint_every") or 0)
+    checkpoint = state.get("checkpoint")
+    if every > 0 and checkpoint is not None and state["used"] % every == 0:
+        # 每累计 every 次新调用把当前缓存交给调用方落盘，被取消的长跑不会丢译文
+        try:
+            checkpoint(cache)
+        except Exception as exc:  # 落盘失败不应拖垮翻译本身
+            print(f"en cache checkpoint failed: {exc}")
     return result
 
 
@@ -6422,6 +6430,8 @@ def add_en_fields(
     cache: dict[str, dict[str, str]],
     max_new: int,
     now: datetime,
+    checkpoint_every: int = 0,
+    checkpoint: Any = None,
 ) -> tuple[list[dict[str, Any]], dict[str, dict[str, str]], int]:
     """Attach `item["en"] = {"title", "summary", "reason"}` (each str | None) for the
     English edition. Returns (items, cache, new_calls_used) so callers can share one
@@ -6433,11 +6443,19 @@ def add_en_fields(
     - reason: English rewrite of `recommend_reason_zh` when present;
     - creator items (CREATOR_SITE_IDS) are skipped entirely (no `en` key);
     - at most `max_new` DeepSeek calls per invocation; cache hits are free;
+    - optional incremental persistence: when `checkpoint_every` > 0 and `checkpoint`
+      is given, `checkpoint(cache)` is called after every `checkpoint_every`-th new
+      call of this invocation (counted per invocation, cache already holding that
+      call's result) so the caller can write the cache to disk; exceptions raised by
+      the callback are printed and swallowed. Default 0 = off;
     - whole feature is a no-op (no `en` key at all) when DEEPSEEK_API_KEY is unset.
     """
     if not str(os.environ.get("DEEPSEEK_API_KEY") or "").strip():
         return items, cache, 0
-    state: dict[str, Any] = {"used": 0, "max": max(0, int(max_new)), "dry": False, "counts": {}}
+    state: dict[str, Any] = {
+        "used": 0, "max": max(0, int(max_new)), "dry": False, "counts": {},
+        "checkpoint_every": max(0, int(checkpoint_every or 0)), "checkpoint": checkpoint,
+    }
     out: list[dict[str, Any]] = []
     for item in items:
         new_item = dict(item)
