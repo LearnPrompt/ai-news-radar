@@ -32,6 +32,8 @@ from scripts.update_news import (
     prune_en_cache,
     save_en_cache,
     story_item_link,
+    strip_meta_opener,
+    title_for_en,
     translate_to_en_deepseek,
 )
 
@@ -41,7 +43,7 @@ ZH_TITLE = "谷歌发布全新 Gemini 模型"
 EN_TITLE = "Google releases a new Gemini model"
 ZH_REASON = "这篇文章介绍了 Gemini 新模型的发布细节与基准测试结果，值得一读。"
 EN_REASON = (
-    "The article details the new Gemini release and its benchmark results, "
+    "Google's new Gemini release posts higher benchmark results, "
     "showing how the model compares with earlier versions on reasoning and coding tasks."
 )
 
@@ -693,7 +695,8 @@ def test_backfill_fills_files_in_place_with_pipeline_formatting(tmp_path):
     assert any(k.startswith("project-recommend-en::") for k in title_cache)
 
     cache = load_en_cache(d / "en-cache.json")
-    assert len(cache) == 4 and all(k.startswith("en1|") for k in cache)
+    assert len(cache) == 4
+    assert all(k.startswith("en2|reason|" if "|reason|" in k else "en1|") for k in cache)
 
 
 def test_backfill_max_new_caps_calls(tmp_path):
@@ -751,3 +754,117 @@ def test_backfill_cancelled_run_keeps_checkpointed_cache(tmp_path):
         with pytest.raises(KeyboardInterrupt):
             backfill_en.main(["--data-dir", str(d), "--max-new", "100"])
     assert len(load_en_cache(d / "en-cache.json")) == 20
+
+
+# ------------------------------------------------ meta-opener repair / long titles / cache version
+
+
+@pytest.mark.parametrize(
+    "raw,fixed",
+    [
+        ("This article details Amazon's roughly $7 billion plan to acquire 2023-founded Decart, a real-time video model startup.",
+         "Amazon's roughly $7 billion plan to acquire 2023-founded Decart, a real-time video model startup."),
+        ("This piece examines settlement talks with old shareholder Recurrent.ai, which could reshape the startup's cap table.",
+         "Settlement talks with old shareholder Recurrent.ai, which could reshape the startup's cap table."),
+        ("This piece profiles Santa Monica bootstrapped startup Blueprints AI, which reached profitability without outside funding.",
+         "Santa Monica bootstrapped startup Blueprints AI, which reached profitability without outside funding."),
+        ("This article explains how GitHub enterprise admins can use telemetry.capture.identity to attribute Copilot usage to users.",
+         "GitHub enterprise admins can use telemetry.capture.identity to attribute Copilot usage to users."),
+    ],
+)
+def test_strip_meta_opener_repairs_real_samples(raw, fixed):
+    assert strip_meta_opener(raw) == fixed
+
+
+def test_strip_meta_opener_leaves_normal_and_short_remainder():
+    normal = "Meta released Muse Wonder and Muse Wonder Full, two open image models with strong benchmark scores."
+    assert strip_meta_opener(normal) == normal
+    short = "This article details a short remainder here."
+    assert strip_meta_opener(short) == short
+
+
+def test_en_reason_prompt_forbids_meta_openers_and_repairs_output():
+    out = "This article details Amazon's roughly $7 billion plan to acquire Decart, a real-time video model startup founded in 2023."
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(out)
+    ) as post:
+        got = generate_recommend_reason_deepseek("Amazon Decart", "Body", lang="en")
+    assert got.startswith("Amazon's roughly $7 billion plan")
+    assert "Start with the fact itself; never begin with" in post.call_args.kwargs["json"]["messages"][0]["content"]
+
+
+def test_reason_cache_key_uses_en2_prefix_title_summary_stay_en1():
+    assert en_cache_key("reason", "https://e.com/1", "x").startswith("en2|reason|")
+    assert en_cache_key("title", "https://e.com/1", "x").startswith("en1|title|")
+    assert en_cache_key("summary", "https://e.com/1", "x").startswith("en1|summary|")
+
+
+def test_old_en1_reason_entry_is_ignored_and_regenerated():
+    it = item(recommend_reason_zh=ZH_REASON)
+    old_key = "en1|reason|" + en_cache_key("reason", it["url"], ZH_REASON).split("|")[-1]
+    cache = {old_key: {"text": "This article details something old.", "at": NOW.isoformat()}}
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", return_value=ds_response(EN_REASON)
+    ):
+        out, cache2, used = add_en_fields([it], cache, 10, NOW)
+    assert used >= 1 and out[0]["en"]["reason"] == EN_REASON
+    assert old_key in cache2  # harmless, pruned later by age
+
+
+LONG_X_TITLE = "谷歌今天发布了全新的模型。" + "后面是很长的推文正文内容。" * 50
+
+
+def test_title_for_en_x_post_cuts_to_first_sentence():
+    x_item = item(url="https://x.com/someone/status/1", title=LONG_X_TITLE)
+    assert len(LONG_X_TITLE) > 600
+    assert title_for_en(x_item, LONG_X_TITLE) == "谷歌今天发布了全新的模型。"
+    by_site = item(site_id="socialdata_x", url="https://example.com/p")
+    assert title_for_en(by_site, LONG_X_TITLE) == "谷歌今天发布了全新的模型。"
+
+
+def test_title_for_en_hard_cap_and_short_non_x_untouched():
+    plain = item(url="https://example.com/a")
+    long_no_punct = "测" * 300
+    out = title_for_en(plain, long_no_punct)
+    assert out == "测" * 200 + "…"
+    eng = "word " * 100  # 500 chars of English, no sentence end
+    out2 = title_for_en(plain, eng.strip())
+    assert out2.endswith("…") and len(out2) <= 201 and not out2[:-1].endswith("wor")
+    short = "测试" * 75  # 150 chars, non-X: translated whole even with a sentence break
+    assert title_for_en(plain, short + "。后半句") == short + "。后半句"
+
+
+def test_add_en_fields_x_post_translates_first_sentence_only():
+    x_item = item(url="https://x.com/someone/status/1", title=LONG_X_TITLE, title_original=LONG_X_TITLE)
+    sent = []
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        sent.append(json["messages"][1]["content"])
+        return ds_response("Google released a brand new model today")
+
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", side_effect=fake_post
+    ):
+        out, cache, used = add_en_fields([x_item], {}, 10, NOW)
+    assert sent == ["谷歌今天发布了全新的模型。"]
+    assert out[0]["en"]["title"] == "Google released a brand new model today"
+    assert en_cache_key("title", x_item["url"], "谷歌今天发布了全新的模型。") in cache
+
+
+def test_add_en_fields_short_non_x_title_translated_whole_and_english_x_is_none():
+    zh150 = "测试" * 75
+    plain = item(title=zh150, title_original=zh150)
+    en_x = item(2, url="https://x.com/a/status/2", title="Plain English post", title_original="Plain English post")
+    sent = []
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        sent.append(json["messages"][1]["content"])
+        return ds_response("A reasonably long English translation of the test title text. " * 3)
+
+    with patch.dict("os.environ", KEY_ENV, clear=True), patch(
+        "scripts.update_news.requests.post", side_effect=fake_post
+    ):
+        out, _, _ = add_en_fields([plain, en_x], {}, 10, NOW)
+    assert sent == [zh150]
+    assert out[0]["en"]["title"] is not None
+    assert out[1]["en"]["title"] is None
