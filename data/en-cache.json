@@ -879,6 +879,10 @@
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "When the public sphere erases your physical existence, AI becomes the most profitable invisible ATM: a deep dive into how the \"gold-digger guru\" makes millions a year with a wrapper app\n\nBy conventional business logic, a controversial influencer who has been banned across the entire internet, fined 7.5 million for tax evasion, and had her public accounts and search entries completely wiped out should have had her commercial life declared dead long ago.\n\nBut reality has slapped everyone hard across the face:\n\nIn half a year, a vertical AI chat app surpassed 210,000 downloads on iOS alone, raking in over $540,000 (about 3.62 million yuan) in revenue. In May and June just past, monthly revenue topped 1 million yuan each.\n\nShe doesn't even need to show her face — relying only on a virtual avatar powered by a large language model, she has set up an automatic money-printing machine in private traffic.\n\nWhile most people are still debating whether LLMs will replace programmers, the real money-making sharks have long treated AI as an infinite avatar that bypasses regulation and physical limits.\n\nToday we lay it all bare: who this person is, what pipeline she used to pull in millions after being banned, and where the data trail is.\n\nThe protagonist quietly getting rich in the AI space is none other than the one who sent shockwaves through the Chinese internet a few years ago..."
   },
+  "en1|summary|48b11392ae3e324035669e49b73cde97f1f9edd6": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Jensen Huang laid all his cards on the table right on stage, not even bothering with a fig leaf: Nvidia can't produce a single chip without AI now!\n\nHis exact words cut to the bone: late at night when humans clock off, Nvidia's AI is working through the night exploring vast design spaces the human brain simply cannot reach; brute-forcing every option with humans would send costs through the roof, and the designs AI comes up with not only use less power but deliver even more explosive performance; software is exactly the same — all code is written by AI, and even the bug database is AI automatically catching errors, automatically identifying who wrote the offending code and telling them to go fix it! Huang's ambition is even more extreme: he wants every department to embrace AI to the fullest, turning the entire company into one giant AI machine.\n\nHere's a set of terrifying numbers to put it in perspective: the latest Blackwell chip packs a full 208 billion transistors, and Huang has taken semiconductors..."
+  },
   "en1|summary|4ab1a5e409a4311e2cde5a40e0c656b03ee850a5": {
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "NVIDIA's RTX video effects model lands in ComfyUI as custom nodes, distributed with the nodes and running locally on RTX GPUs."
@@ -899,6 +903,10 @@
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "In just one week, REA picked up 130,000 GitHub stars. What drove its rise goes beyond lowering the barrier to reverse engineering—it also carries an excellent engineering approach to tackling AI hallucinations. Instead of constraining the LLM through prompts, it builds multiple trust mechanisms at the tool layer: graded fact labeling, hash verification in transit, mandatory flagging of unknown information, and outright interception of contradictory conclusions. If environment validation fails, it stops working rather than fabricating content. This architecture can be carried over to MCP tool development, offering a practical reference model for building trustworthy AI systems in high-rigor fields like healthcare and law."
   },
+  "en1|summary|5a49a92524137896f0b9cec1abea60823f264ae0": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Frame-by-frame takeaways from the Alan-Sun interview video:\nAlan-Sun mentioned \"why is it that the more information you feed a large model, the smarter it gets?\" He said the large model's answer to him was that it doesn't know either, that it's a black box. But I asked an AI, and the answer wasn't like that (which also shows how prompts and AI models influence the answer). Here's the answer I got:\n\nWhy does a large model get smarter the more you \"feed\" it? This actually gets at the most fundamental question in AI: why can accumulated data turn into intelligence?\nThe key is that through training, large models extract patterns from massive amounts of information and apply those patterns to solve new problems.\nI think this can be understood on three levels.\n1. From memorizing information to discovering patterns\nSuppose you show the model 1 million math problems.\nAt first, it may only learn some simple numerical relationships. As training data grows, it gradually masters algebraic operations, mathematical proofs, and different kinds of questions…\nFrame-by-frame takeaways from the Alan-Sun interview video:\nAlan-Sun mentioned \"why is it that the more information you feed a large model, the smarter it gets?\" He said the large model's answer to him was that it doesn't know either, that it's a black box. But I asked an AI, and the answer wasn't like that (which also shows how prompts and AI models influence the answer). Here's the answer I got:\n\nWhy does a large model get smarter the more you \"feed\" it? This actually gets at the most fundamental question in AI: why can accumulated data turn into intelligence?\nThe key is that through training, large models extract patterns from massive amounts of information and apply those patterns to"
+  },
   "en1|summary|5adb8b0e9375b86b367e56903f658ba3ea4b7899": {
     "at": "2026-10-13T12:43:00.489839Z",
     "text": ""
@@ -906,6 +914,14 @@
   "en1|summary|60abd382f9d37f77f4d7d6cb384bf98dea462b19": {
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "Claude Code, Cursor, and Codex can do the same job and still pick completely different tools.\n\nWord count: 3,079 words | Reading time: about 10 minutes\n\nAI's influence has pushed attention from search engine optimization (SEO) to answer engine optimization (AEO) — optimizing content so it can be served up as an answer generated by an Agent. One step beyond that is generative engine optimization (GEO), where brands try to shape what LLMs say.\n\nIs software tooling itself about to get reshuffled too, with coding assistants like Claude Code, Codex, and Cursor leaning toward one particular debugging suite, pentesting tool, migration tool, package manager, database (or any other core piece of the stack you can think of)?\n\nArmature, a growth services firm for developer tools, says the answer is yes.\n\nArmature clearly has a very direct stake in this game. Last week, the company detailed a study aimed at figuring out how coding Agents make tool choices, and how vendors can raise the odds that their product gets picked. It ran an experimental analysis to understand how coding Agents view tool…"
+  },
+  "en1|summary|61e1138cdd1b15175fb6513056ccc2c9d52b54ed": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "What's the biggest pain point in AI Agent coding? It isn't that it can't write code — it's that it confidently declares \"task fixed\" every time, only for a run to reveal hidden bugs everywhere. Now, AI agents can finally learn to close the loop and verify their own work.\n\nDeveloper Oskar has officially launched the new /create-verification-skill. The core idea behind this extension skill is clear: make your Coding Agent verify its own work before handing over code, using E2E (end-to-end tests) as a verification layer that gives you hard runtime Evidence. Built on @poteto's skills spec, the approach aims to solve the lack of real-environment feedback after AI agents write code.\n\nIn the past, AI…"
+  },
+  "en1|summary|62a71964dff8378c5cc23e31a45a9ff12a0f1d90": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": ""
   },
   "en1|summary|67a65036f4b928eb63aacadd5c039b2cfac52d0a": {
     "at": "2026-10-13T05:38:02.120457Z",
@@ -919,9 +935,17 @@
     "at": "2026-10-13T05:38:02.120457Z",
     "text": "Cursor is being folded into The X Subscription; existing Cursor subscribers can keep their current plan or switch to the new subscription."
   },
+  "en1|summary|6b1ce18d0974c5d81c3c0eaec93211d503915b31": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Johann Rehberger discloses a remote code execution vulnerability, CVE-2026-103572, in Visual Studio Copilot and SQL Server Management Studio. The root cause is a path validation bypass via a trailing dot appended to a filename, allowing writes to protected configuration files such as .mcp. or settings.VisualStudio. and leading to arbitrary command execution."
+  },
   "en1|summary|6c5aa502b35b6ccfe46a7420e26c2823e0dc1094": {
     "at": "2026-10-13T07:47:04.151222Z",
     "text": "This is for people who don't write code — domain experts, managers, and everyday professionals who want to put AI to work. Nothing mentioned here requires programming skills to use.\n\nLast week someone asked me: what counts as knowing how to use AI?\n\nHe answered his own question first: \"Knowing what skills are and how to install them, knowing how to switch between experts, knowing MCP can connect to things — that should be enough, right?\"\n\nI've heard this more than once, and it usually comes from people who just installed a few plugins or connected MCP once or twice and now feel like they've cracked it. So it deserves a serious reply: that's a halfway point that looks a lot like the finish line.\n\nNewcomers are astonishingly enthusiastic about tools. One lap through the skills marketplace and this one is a must, that one too — a week later they've installed twenty or thirty.\n\nThen real work arrives, and their heads are empty.\n\nAt first I thought it was a memory problem. It wasn't — the order was reversed. A skill's value is that it's the cure for one of your repetitive tasks, but most people look at the medicine first and then go hunting for the disease. In the store, everything looks good; meanwhile the same daily annoyances persist, because the medicine doesn't match the ailment.\n\nPeople who actually know how to use these tools work the other way around: first comes \"this"
+  },
+  "en1|summary|6d48b4d1665773fde5263c12364790c89aa03544": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Gemini 4 Argon became fully available on October 13. Pro members can use it in the Gemini app, while Antigravity requires the $100 Ultra membership. In the author's hands-on testing, it was strong at knowledge-heavy professional tasks, ranked first overall on Vals Index (68.9) at only $15.68 per run, but placed second-to-last on CUA-bench at just 4.83%. Its front-end results trail GPT-6 Astra, it burns through quota quickly, and its Chinese writing has a strong AI flavor. The overall experience is poor, and subscribing to Ultra is not recommended."
   },
   "en1|summary|712af42cf1306d7ae6bf7f7c8083926d9ee6502c": {
     "at": "2026-10-13T16:04:18.199987Z",
@@ -999,6 +1023,10 @@
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "Meta releases the Muse Wonder model series, claiming SOTA performance on personal and professional agent tasks. Muse Wonder is available through the Meta Model API and Muse Code, with Muse Wonder Full offered to Muse Code subscribers and coming to Muse later."
   },
+  "en1|summary|c1ba6b8b656ab64b202c5a97c12927b6bbe73ab2": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "October 14 Global Markets Morning Brief: Energy and AI investment fuel inflation fears; US stocks close slightly lower, Japan and South Korea rebound in early trading; China and US CPI and ASML earnings are today's focus\n\nKey takeaways:\nToday, watch how inflation data shifts rate-hike expectations, whether energy risks affect actual supply, and whether AI investment can continue to convert into orders and profits.\n\nToday's main themes\nTheme 1: China and US inflation data are today's core variable. China's September CPI and US September CPI will be released in succession. Whether price pressures from energy and AI investment ease will affect rate expectations and asset pricing.\nTheme 2: Energy supply and demand expectations are shifting at the same time. Shipping risks in the Strait of Hormuz, energy facility security, and partial US production suspensions are coinciding with OPEC's downward revision to its 2026 demand growth forecast. Watch the IEA report.\nTheme 3: Performance across the AI supply chain is diverging. Storage stocks fell overnight..."
+  },
   "en1|summary|c25b86f48456f7f525b12bc8cae045ff52a73dac": {
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "On October 13, Qwen launched three new products — the AI glasses N1 and N1 Pro, and AI clip-on earbuds — bringing the Personal Agent into everyday life to proactively serve users. All three went on sale the same day; with national subsidies and limited-time discounts applied, the glasses start at 2,218 yuan and the earbuds at 1,099 yuan.\n\n1,055 words | About 3 minutes to read\n\nQwen launches the N1/N1 Pro glasses and Bose co-branded AI clip-on earbuds, extending Personal Agent capabilities to wearables for the first time, with environmental perception, real-time vital-sign monitoring and proactive interaction. The N1 Pro is the industry's first AI glasses to support continuous heart rate, blood oxygen and skin temperature monitoring, and also integrates eye-tracking interaction and iris-verified payments. All three products went on sale the day of launch, with the glasses starting at 2,218 yuan and the earbuds at 1,099 yuan.\n\nSupports all-day multimodal perception and voice-driven tasks; the first AI glasses with vital-sign monitoring plus visualized health insights; iris verification with a false-acceptance rate below one in a million, enabling seamless payments.\n\nSuited to AI hardware product managers, embedded AI engineers and healthcare IoT architects.\n\nOctober 13 — Qwen launched AI"
@@ -1011,9 +1039,17 @@
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Qwen launches three new hardware products: AI glasses N1, N1 Pro, and AI clip-on earbuds, available now on Taobao, Tmall, JD.com, Douyin and other platforms, with glasses starting at 2,218 yuan and earbuds at 1,099 yuan."
   },
+  "en1|summary|c5f5a1d1000869875152a7eda8be4acab78371e9": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "After all this waiting, Gemini 4 is finally here!\n\nGemini 4 Argon has already appeared in the Gemini App, labeled \"4 Argon · New\" in the model list with \"complex tasks\" listed as its purpose. It sits alongside 3.5 Flash-Lite, 3.8 Flash, and 3.1 Pro, and you can switch over to it directly.\n\nIt's the first model in the Gemini 4 series Google released last night, and it's already live worldwide:\n\n· Built for coding, scientific reasoning, cybersecurity, and multi-step complex tasks in areas like law and finance\n· Output capped at 1 million tokens per response, so it can produce long documents and large projects in one go\n· Available to Pro and Ultra users in the Gemini App, and Ultra subscribers can also..."
+  },
   "en1|summary|c98f117d399ddaf89fc45d36803d30c820a6d3d7": {
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "The XBOW team, with help from OpenAI's GPT-5.6 Sol, built a full-chain Chrome exploit in six days using $40,000 in compute, earning a $250,000 bounty from Google. This is Google's second bounty for a full-chain Chrome exploit and the first under new 2026 rules. Chrome on Windows is affected; the authors say similar exploits used to take about six months to build, and they remind users to restart Chrome promptly when the Update button appears."
+  },
+  "en1|summary|ca58561d60f2c26a4e5afe6e4416d80e2429653e": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "On October 14, Google made Gemini 4 Argon fully available; after hands-on testing, the author believes it will struggle to challenge the standing of Claude Opus 5.5 and GPT-6 Astra."
   },
   "en1|summary|d167c9e38956c751874d043bcbc4726e6929aaef": {
     "at": "2026-10-13T16:04:18.199987Z",
@@ -1039,8 +1075,16 @@
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Plenty of people build AI Agents. They run, sure—but they always fall short of being genuinely useful.\n\nLangChain's official Agents From Scratch series redoes the whole thing from an engineering angle.\n\n① A clear path from basic Agents all the way to advanced capabilities\n② A hands-on Gmail smart assistant, with email classification and auto-replies\n③ Evaluate with LLM instead of tuning your Agent by feel\n④ Add human-in-the-loop, so critical actions need the user's go-ahead\n⑤ Implement memory, so the Agent picks up your habits the more you use it\n⑥ Finally, hook up the Gmail API and run it in real scenarios\n\nIt also comes with a testing plan and a complete environment, so you build and verify as you go—not just watch a tutorial.\n\nIf you want to really understand how an Agent goes from demo to production-ready, this series is worth following along..."
   },
+  "en1|summary|e1ae94bd5cd98561b2d875dde93132101fcf6859": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Over 8 billion people worldwide, but only a few thousand may have truly witnessed top-tier AI capabilities!\n\nOpenAI co-founder and renowned AI researcher Andrej Karpathy issued a warning: the global gap in understanding AI capabilities is widening dramatically, and the world seems to be divided into four tiers.\n\nTier 1: 6 billion people (about 75%)\nHave had almost no real exposure to large language models and lack an intuitive sense of what AI can do.\n\nTier 2: 1 to 2 billion people (about 20%)\nOccasionally use the free version of ChatGPT for looking up information, writing emails, or translating articles, and see AI as little more than an upgraded search engine—or even as not very useful at all.\n\nTier 3: about 20 million people (0.2%)\nMainly professionals such as programmers and mathematicians. They have seen with their own eyes that software projects which once took weeks or even months can now be completed by an AI agent from a single instruction...\n\nOver 8 billion people worldwide, but only a few thousand may have truly witnessed top-tier AI capabilities!\n\nOpenAI co-founder and renowned AI researcher Andrej Karpathy issued a warning: the global gap in understanding AI capabilities is widening dramatically, and the world seems to be divided into four tiers.\n\nTier 1: 6 billion people (about 75%)\nHave had almost no real exposure to large language models and lack an intuitive sense of what AI can do.\n\nTier 2: 1 to 2 billion people (about 20%)\nOccasionally use the free version of ChatGPT for looking up information, writing emails, or translating articles."
+  },
   "en1|summary|e574bdeed671e4c93d05d618f081be20b6a41698": {
     "at": "2026-10-13T07:47:04.151222Z",
+    "text": ""
+  },
+  "en1|summary|e8a9d25fab9023990921b490518b1b60ea148602": {
+    "at": "2026-10-14T01:54:43.746905Z",
     "text": ""
   },
   "en1|summary|eb8bba019d1f55d8828a9854f9c8e55ecc9c6002": {
@@ -1078,6 +1122,14 @@
   "en1|summary|fd5f0a23b44c056b5d75644f61fd6e22d518af91": {
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Embodied AI has spent the better part of a year fixated on bipedal walking and grippers moving boxes, but someone has finally turned their attention to high-DOF dexterous hands.\n\nStartup Nature Will has just released Natura-1, a general-purpose foundation model for the physical world. The model uses a 50B-parameter MoE architecture, and its most distinctive feature is its pretraining approach: instead of grinding away at costly real-robot data collection, it was pretrained directly on over 1 million hours of egocentric human labor video, then fine-tuned and aligned with a small amount of real-robot data.\n\nIt connects a visual world model with action generation to directly control a 20-DOF dexterous robotic hand, with the end-to-end control loop compressed to under 100 milliseconds. In demos, it can not only understand ad-hoc instructions zero-shot (such as having the robot open an unseen notebook and press the space bar, or perform synchronized two-handed grasping), ..."
+  },
+  "en1|title|00e6674532380d610717a5dfc1b84c6a344118e2": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Apple website leak: Full-size HomePod may light up with Siri AI halo"
+  },
+  "en1|title|014ea91013aa7bceb581d1d8d14b9e14d856ddd5": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "October 14 Global Markets Morning Brief: Energy and AI investment fuel inflation concerns, US stocks close slightly lower, Japanese and Korean markets rebound in early trading, US-China CPI and ASML earnings in focus today\n\nKey takeaways: Today's focus is on how inflation data shifts rate expectations, whether energy risks affect actual supply, and whether AI investment can continue to convert into orders and profits."
   },
   "en1|title|0165c9fec91709aca8435d5ead1581b8c5be310d": {
     "at": "2026-10-13T06:04:54.269142Z",
@@ -1203,6 +1255,10 @@
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Plenty of people have built AI Agents that run just fine — but they always fall short of being genuinely useful."
   },
+  "en1|title|28a34c40538009847459f094a089846ad980dee4": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Google opens its Argon model to developers worldwide, with input Token pricing starting at $2"
+  },
   "en1|title|292567ad651328298bae6c193b5abaae1a1d54dc": {
     "at": "2026-10-13T07:47:04.151222Z",
     "text": ""
@@ -1299,6 +1355,10 @@
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "🔥🔥🔥 UniKey Industry Tracking Weekly | Agent Economy Weekly Update 👀 As AI moves from model competition to intelligent collaboration, the agent economy is entering a phase of infrastructure restructuring. This week, the AI industry continued to evolve around AI gateways, agent governance, compute supply, and value settlement. 💥 AI is moving from \"capability competition\" to \"competition in organization, allocation, and settlement.\" 🤔 📌 This issue focuses on: ⭐ AI Gateway accelerating into the enterprise intelligent entry point ⭐ Agent governance systems moving from concept to implementation ⭐ Multi-model ecosystem development driving growth in unified scheduling demand ⭐ Expanding compute investment, intelligent resource allocation and value settlement…"
   },
+  "en1|title|44543d1146f5083a7eaa4842867bfd6009a752fa": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Of the world’s more than 8 billion people, perhaps only a few thousand have truly seen top-tier AI capabilities."
+  },
   "en1|title|46a9df4c97df56802371155770ac0383f43ce258": {
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Banned across all platforms and fined 7.5 million, the controversial emotional blogger is back with a new identity powered by AI: iOS revenue alone exceeded 3.62 million yuan in just six months!"
@@ -1359,6 +1419,10 @@
     "at": "2026-10-13T06:39:42.459703Z",
     "text": "QGIS bans AI-assisted contributions"
   },
+  "en1|title|5e51c8164529ebb6c4521e1b976285d897412255": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Jensen Huang splashes $2B in Europe: woos four French companies, says Europe must get in the game."
+  },
   "en1|title|621e0fe4ea1ff45aa7c678d86458033533c2d4e2": {
     "at": "2026-10-13T06:14:21.785367Z",
     "text": "The Android Compose version of the AI component library is here."
@@ -1391,6 +1455,10 @@
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Pay with a glance? Qwen's new AI glasses and earbuds make a high-profile debut, ushering in a new era of proactive AI"
   },
+  "en1|title|693c692465cb91358fb966bea0ed42972ad885f8": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Apple trade secrets lawsuit against OpenAI sees breakthrough: court grants access to recruitment materials, signaling hardware battle"
+  },
   "en1|title|6a5525a748bffa6aefcbacda6e771396ed31a613": {
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "1/6 🧵 Hook (first tweet)\nIf you tell an AI, “Help me find the security vulnerabilities on this server,” can it call the right specialized tools, run the whole workflow on its own, and write you a report?\nI recently came across a pretty interesting open-source security project: HexStrike AI.\nSimply put, it’s like giving an LLM a full hacker toolkit, turning AI into a cybersecurity copilot that can actually operate autonomously. 👇\n\n2/6 The pain point: Why does traditional penetration testing have such a high barrier to entry?\nIn the past, the biggest pain point in vulnerability scanning or cybersecurity audits was:\nSevere tool fragmentation…"
@@ -1406,6 +1474,10 @@
   "en1|title|6b5e59eb9ba64afdc793d327731762c26846cc7e": {
     "at": "2026-10-13T05:38:02.120457Z",
     "text": "Meta launches Muse Wonder to take on Anthropic and OpenAI, as Zuckerberg teases a \"big watermelon\" while grilling"
+  },
+  "en1|title|6bcae48f3b82ccd74ed99b659675491fce360045": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "💥 Open source is about to blow up!"
   },
   "en1|title|6bf9a4a3b099562627eab416d1e3b14bba3b65b1": {
     "at": "2026-10-13T06:04:54.269142Z",
@@ -1435,9 +1507,17 @@
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "Anthropic sounds the alarm: small AI models could learn to self-replicate within months, and you won't be able to shut them down"
   },
+  "en1|title|80dcf592806edd5a398257aec5b5913affb8e6e9": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Google Play opens up \"personal apps\": Android apps built with AI Studio can now be installed on your own phone without a developer registration. On October 13, Google announced an update that's very friendly to ordinary users: Android apps you have AI write in Google AI Studio can now be installed and run on your own phone directly through Google Play."
+  },
   "en1|title|81009ddb72d6599a2d04e30e992c5e6c677220d8": {
     "at": "2026-10-13T21:51:45.032259Z",
     "text": "Janas runs large language models larger than memory by streaming expert data from SSD"
+  },
+  "en1|title|81b4ad821812990495cf27309ca633b4daa6cddd": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Siri AI moves into the smart home across the board: Apple launches four major new products, ushering in a new era for the living room ecosystem"
   },
   "en1|title|81ff55d03426859b9ebfbd81b2215b267e345cbe": {
     "at": "2026-10-13T06:04:54.269142Z",
@@ -1462,6 +1542,14 @@
   "en1|title|857dfa732bee36d899ec1335827f501f0e1ecd7e": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "New in ryOS: Dictionary + Fitness — learn new words, pronunciation, kanji. Plan workouts, track your body and food with AI. Made with @bot @cursor_ai https://t.co/BXEp6UzL3H"
+  },
+  "en1|title|87f9513676189706090935067dd57cfc4c70d074": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "What is the biggest pain point in AI Agent programming?"
+  },
+  "en1|title|8a36d375c9738a51a65a443b183a03f3410232c6": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Gemini 4 Argon is now fully rolled out, but after hands-on testing the author doubts it can unseat Claude Opus 5.5 and GPT-6 Astra."
   },
   "en1|title|8b058e6f7794adbaad9308d7bd3a7f40f603eb4a": {
     "at": "2026-10-13T06:04:54.269142Z",
@@ -1495,6 +1583,10 @@
     "at": "2026-10-13T06:39:42.459703Z",
     "text": "3 major AI meltdowns in 7 days over National Day: before you even get fleeced, the code crashes first"
   },
+  "en1|title|9ad6072b4b0a06c31898bd46d90301b4ab06f051": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "OpenAI Saudi engineer arrested for hiding recording device to secretly record executive meeting, faces up to 5 years"
+  },
   "en1|title|9c207a6117fb95efe29d1945dd4d87c20bca73d1": {
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "Gemini 4 robot uses argon gas"
@@ -1519,6 +1611,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "💰 The person earning $100k a month just publicized his Claude Code workflow @benyuls breaks it down in 10 minutes: no Agent framework needed — just Claude Code plus an Obsidian vault to build \"autonomous agents\" that genuinely do the work for him."
   },
+  "en1|title|a099b20ec1cdfb892dfc5fd22ae4227ff14ed825": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Takeaways from watching the Allen-Sun Ge interview video frame by frame: Sun Ge raised the question, \"Why do large models get smarter the more information you feed them?\" He said the LLM's answer was that it doesn't know either — it's a black box. But when I asked an AI, the answer wasn't like that (which itself shows how prompts and AI models shape the response). Here's the answer I got: why do large models get smarter the more you \"feed\" them?"
+  },
   "en1|title|a5ac32fbfbb812051434bdd9d9108a9deb3009c7": {
     "at": "2026-10-13T06:14:21.785367Z",
     "text": "GPT-6 Astra helped me jailbreak my Kindle"
@@ -1526,6 +1622,10 @@
   "en1|title|a63ee502699ee86a46b4df76d55b86229c635c75": {
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "AI didn't take programmers' jobs? US entry-level developer employment actually fell 20%, experts worry about a talent gap in a decade."
+  },
+  "en1|title|a79ce4f3b2775b6a8e43683e633b1e74ec813bbf": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Views stuck at 30K?"
   },
   "en1|title|a7f0da831858b1e2881e52fde2a1d49129f62341": {
     "at": "2026-10-13T20:15:31.680790Z",
@@ -1555,6 +1655,10 @@
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "🚨Breaking!"
   },
+  "en1|title|aef569cf1643280483a5bf8898e7c91301272ef0": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Jensen Huang laid all his cards on the table right on stage, not even bothering to keep up appearances: Nvidia can no longer build even a single chip without AI!"
+  },
   "en1|title|af668dfa51733d3cf5fececaa9217333b4c6f68d": {
     "at": "2026-10-13T05:38:02.120457Z",
     "text": "Meta unveils Muse Wonder to take on GPT-6 and Claude, internally codenamed \"Watermelon,\" teased during a barbecue livestream"
@@ -1583,6 +1687,10 @@
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Meta's new model vaults back into AI's top tier, as Alexandr Wang reveals the inside story of Muse's 7-month turnaround"
   },
+  "en1|title|b6c689109cbe3dbec609dff24752f6387fc38dfa": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Smartphone AI moves from Q&A to task execution as OPPO teams up with Manus to push agent deployment"
+  },
   "en1|title|b93da79ab34fe2a8fb4d2f1e2dcbef58c14a3269": {
     "at": "2026-10-13T06:39:42.459703Z",
     "text": "Why we need Agent evals"
@@ -1590,6 +1698,10 @@
   "en1|title|bc3ee9c92cda255a17d24fbce67484b2eaef7fe6": {
     "at": "2026-10-13T06:39:42.459703Z",
     "text": "AI Is Not a Tool\" — by Rich Hickey"
+  },
+  "en1|title|bc50b872002e963aee3313fb1828c6594d72e076": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Deloitte survey: More than half of large UK firms to deploy AI to replace workers within a year, as youth unemployment hits highest level in over a decade"
   },
   "en1|title|bc59281bb8918e2e984cc540610bd1987a8622ab": {
     "at": "2026-10-13T05:38:02.120457Z",
@@ -1603,6 +1715,10 @@
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "From Agent to Loop: How Is AI Reshaping Software Engineering? | QCon Shanghai 2026 Kicks Off Soon"
   },
+  "en1|title|bf89de95f53226cf26d15738c0e24f01a6f371c5": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Some friends who've already reached financial freedom are asking whether there's a way to work at a frontier lab for no salary."
+  },
   "en1|title|c04999988e5631486ccb96723e3893c762daa775": {
     "at": "2026-10-13T06:04:54.269142Z",
     "text": "OpenAI gives GPT-6.1 Sol a context boost: default jumps from 272k to 500k, with long context now free"
@@ -1614,6 +1730,10 @@
   "en1|title|c0f6cc9caf82346f8779eecb8fe4e5caad9c4f61": {
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Playing Cute for Fans, an Endgame Showdown: Meta and OpenAI's AI Agent Calculus"
+  },
+  "en1|title|c263674b9c4c19b58a2bbf4b8a895c4f88265806": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "After all this waiting, Gemini 4 is finally here!"
   },
   "en1|title|c3308097b2810b59c50a1e515e917fcea622c1a0": {
     "at": "2026-10-13T07:47:04.151222Z",
@@ -1687,6 +1807,14 @@
     "at": "2026-10-13T05:38:02.120457Z",
     "text": ""
   },
+  "en1|title|dc045d1c44614e4a467d8647aca45ce839600263": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "10-Minute AI Long Videos Are Here: GPT-6 Astra Takes Over Higgsfield, Ending Character and Scene Mix-Ups"
+  },
+  "en1|title|de2e0c182dc2b231bc06546b37a7c9758992c697": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": ""
+  },
   "en1|title|df7791ac3948ede00cda47894f76d12cf8fc62f9": {
     "at": "2026-10-13T05:38:02.120457Z",
     "text": "Amazon looks to acquire Decart for about $7 billion after acquisition talks with two major giants both previously fell through."
@@ -1742,6 +1870,10 @@
   "en1|title|ecdb97a40dd03f53ad5c14825afd5b32c297994f": {
     "at": "2026-10-13T06:39:42.459703Z",
     "text": "Three steps to strip the AI flavor from your writing, plus copy-paste prompts to do it"
+  },
+  "en1|title|ece2273e51dae0d4b07ecec35b33c59a10f2f23f": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Judge orders OpenAI to hand over hiring records and interview materials by deadline in Apple trade secrets case"
   },
   "en1|title|ecfbf7170a8068279d6a91578316ff93a51f96b0": {
     "at": "2026-10-13T16:04:18.199987Z",
@@ -1887,6 +2019,10 @@
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "Epic Games has pushed its unannounced Disney shooter to AI-first development, with Claude writing code and a fully AI art pipeline leaving humans as advisers and reviewers; Bloomberg reports the title, originally set for March 2027, is indefinitely delayed."
   },
+  "en2|reason|11249526010bdc060a4f8ff4b9d93164bb8219ed": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Science Corporation has implanted its PRIMA vision-restoring chip in the first Stargardt disease patient, and former Neuralink president and co-founder Max Hodak told TechCrunch Disrupt the work is part of a path toward a novel brain-computer interface."
+  },
   "en2|reason|122a602f7a5665bf22dc16aae6a458f110b09f3e": {
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "Google's Gemini 4 Argon is now generally available in GitHub Copilot for complex coding, agentic and reasoning tasks; early testing showed it solved more tasks than prior Gemini models on every coding benchmark, biggest gains in Copilot CLI."
@@ -1923,6 +2059,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Meta AI Research announced Muse Wonder and Muse Wonder Full, claiming state-of-the-art results on personal and professional agentic tasks, though a Cloudflare 403 block leaves the full page unreadable."
   },
+  "en2|reason|17b5a0685644a95e1a2bec3c6b99f91edddb4d9f": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": ""
+  },
   "en2|reason|180b2ce3947341e48e9ae63021e203ee4d5df6d3": {
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Epic Games has told developers on an unannounced Disney shooter to adopt AI-first tools like Claude for code and art, with a supervisor saying code is no longer handwritten and the title delayed from its March release window."
@@ -1938,6 +2078,10 @@
   "en2|reason|184d25aaab69270b81eef883a730e40e7805304a": {
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "Intel's CEO warns the AI hardware shortage could last two to three more years, with agents strengthening CPU demand, training shifting from 8 GPUs per CPU to 4:1, and data center AI revenue up 59% year on year."
+  },
+  "en2|reason|191b07ace2ec64b8317f05c42d66a0fbb1cb0864": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "At TechCrunch Disrupt, Cerebras CEO Andrew Feldman pushed back on AI doomsday warnings, arguing the industry's focus on risks is drowning out AI's potential benefits."
   },
   "en2|reason|193f03c3a4f0f0f54c7128b34093851438280c9a": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -1991,6 +2135,10 @@
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Bloomberg reports Epic Games wants its Disney co-developed shooter, blending Marvel and Star Wars IPs, to shift fully to AI development with Anthropic's Claude writing code while humans only supervise, pushing the planned March 2027 launch indefinitely."
   },
+  "en2|reason|1f9927b06e77c383caea35c949b47b4054033694": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Industrial Next aims to let factory robots switch tasks in minutes rather than weeks, helping manufacturers automate complex, delicate tasks that have traditionally required human labor."
+  },
   "en2|reason|21ca1bf5f346a2b8d39ee6c3566b693651e43bcd": {
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "QGIS's QEP428, submitted by nyalldawson and merged into the QGIS-Enhancement-Proposals repository on 7 October 2026, replaces its AI contribution policy with a strict NOT ALLOWED, while debate continues over whether issues, comments and pull requests fall under it."
@@ -1998,6 +2146,10 @@
   "en2|reason|22b102b2bf524fb3981ab3b7e519da83a3f051f8": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "An independent open-source project runs Claude Code, Codex, VSCode, Pi, OpenCode and six other harnesses free across terminal, app, IDE, phone and browser, offering 1.3B+ free tokens plus OpenClaw-like native multi-model browser sessions with voice support."
+  },
+  "en2|reason|22b9ff1d229db4d537c26fe2286c6782917901ff": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Meta's Muse Spark 1.3 (max) scores 48 on Artificial Analysis, beating MiMo-V2.6 Pro, Qwen 3.8 Max and GLM-5.3 at 45, raising whether open weights make it the strongest open model and increase pressure on GLM and Kimi."
   },
   "en2|reason|23f5274a13d0edda66edd6ec41584497d9b6d0e3": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -2102,6 +2254,10 @@
   "en2|reason|2d1d1411c208e73e04efcfcfb1e22880e252b994": {
     "at": "2026-10-13T07:47:04.151222Z",
     "text": "Building and equipping a 1GW AI data center in Abilene, Texas, could cost about $30 billion, with $17 billion for chips, $3 billion for power and $2.4 billion for construction, per Bloomberg's Lynn Doan."
+  },
+  "en2|reason|2d45fec46a98acd1d4d096d58ef6d6554d41dd1a": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Anthropic built Scion, its own Git alternative, after daily code merges surged from about 2,500 in May 2026 to over 30,000 by September, with a seven-person team completing the migration in five months."
   },
   "en2|reason|2dc8476c3ea20871cc36e0fa5e6aef57cf4b9128": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -2463,6 +2619,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Epic Games has delayed its Walt Disney video game collaboration and is urging developers to use more AI tools, per Bloomberg, sparking debate over whether AI will replace human programmers and artists."
   },
+  "en2|reason|67e3af6982e127691ed26738f3e6077ca64788ca": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "OpenAI engineer Abdulrahman Alfozan allegedly used a chatbot to plan hiding a recording device in toilet paper and plugging it into an executive meeting-room TV's USB port; it was found September 30, with a possible 5-year sentence."
+  },
   "en2|reason|68b4a1d5d8cb3c9d7fa8edd3a6153bbc05ce2e0c": {
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "Nature Will's Natura-1, a 50B-parameter MoE model, was pretrained on over 1 million hours of egocentric video and fine-tuned with limited real-robot data, controlling a 20-DoF dexterous hand end-to-end under 100 milliseconds, zero-shot opening an unseen notebook to press spacebar."
@@ -2515,6 +2675,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Epic Games' $1.5 billion Walt Disney collaboration has shifted to AI-first development, with Anthropic's Claude writing all code and generating art, indefinitely delaying the Marvel/Star Wars shooter once planned for March 2027."
   },
+  "en2|reason|7246f6697c6af809b1dce818c93b3f98de1117c3": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "The U.S. Department of Justice announced on the 13th that Saudi engineer at OpenAI Abdulrahman Alfozan hid a recorder in a toilet-paper roll and TV USB port, charged with unlawful interception, facing up to 5 years and a $250,000 fine."
+  },
   "en2|reason|72cc313230fa53dd76f93e3de56a3fb9503a722c": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Developers with Android, iOS or Flutter experience get a Unity cognitive map built on chessboard, dice and treasure-chest examples, splitting game work into world-building, rule-making, process driving, feedback expression and runtime assurance, with AI-assisted practice."
@@ -2543,6 +2707,14 @@
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "The X Subscription folds four business lines including Grok, Cursor and X Premium into one bundle, with an Ultra tier at $200 a month, while legacy plans keep their price and features but stop taking new users."
   },
+  "en2|reason|7674bccd9439044ab7f1c30b36cb9b092112474b": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "A Deloitte survey of 66 UK CFOs found 52% expect to use AI to cut jobs within a year, while 67% say AI delivered only a quarter of expectations as UK youth unemployment hits a decade-plus high."
+  },
+  "en2|reason|76a76bec3839d92ac66a5d864c8f852e3e6fe50d": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Federal judge Edward Davila ordered OpenAI to produce recruitment materials within five days, with 14 days to complete, and let Apple access LINE chats involving ex-Apple staff Liu Chang and Peng Ailisa in its hardware trade-secrets suit."
+  },
   "en2|reason|76aac541d7e7c3481a0e1d56a269ab3c2faca638": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "The Magnificent Seven now make up over 35% of the S&P 500, their market value up more than 50% in two years, and the IMF warns an AI share crash, amplified by debt and leverage, could threaten global financial stability."
@@ -2566,6 +2738,10 @@
   "en2|reason|7b978f570e277d8c71e8c0ff070b40df4fd89fc9": {
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Character.AI, the interactive chatbot platform launched just five years ago, has filed for bankruptcy and will sell some of its assets to Disney for $20 million."
+  },
+  "en2|reason|7c9c1eb720ad2b6c7f166ce4bd99062fc1f3b489": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Google's Gemini 4 Argon opened to all on October 14, but an author who paid $100 for Ultra access found it unable to unseat Claude Opus 5.5 or GPT-6 Astra, tracing Google's model delays and August 5 leadership shake-up."
   },
   "en2|reason|7d05c9ed033743eb10cf0f5c24befb0e2f6c0811": {
     "at": "2026-10-13T20:15:31.680790Z",
@@ -2619,9 +2795,17 @@
     "at": "2026-10-13T16:04:18.199987Z",
     "text": "TechCrunch Disrupt 2026's full Disrupt Stage lineup includes Max Hodak, Mark Wahlberg and Benchmark partners across three days of conversations, with doors opening Oct. 13 and a 50% discount to bring a guest."
   },
+  "en2|reason|8994b6127b2f454497e090dc5364a08ac40aed19": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Google's Gemini 4 Argon, the first Gemini 4 model, is globally live in the Gemini App for Pro and Ultra users, targeting coding, scientific reasoning, cybersecurity and multi-step legal or finance work with a 1-million-token output cap."
+  },
   "en2|reason|8a08738e3a2b0938e41017175b1ceda4dfe0efe2": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "nestd.ai serves only a \"Just a moment...\" page and a Performing security verification notice, because a CAPTCHA check blocks the real content until visitors prove they are not robots."
+  },
+  "en2|reason|8a2d3550364b4f1e46f082c491647711a1607c54": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "llm-gemini 0.35 adds support for Gemini 4 Argon, available today via the Gemini API and a $100/month subscription, with the high pelican SVG test costing 17.166 cents before pricing doubles on December 1."
   },
   "en2|reason|8a43353fa7ae29a7a10242badaf99e94d8246654": {
     "at": "2026-10-13T07:47:04.151222Z",
@@ -2731,6 +2915,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Microsoft's Maia 300 custom chip debut has Scott Guthrie on production-scale full-stack AI, Rani Borkar on efficient inference systems, Mustafa Suleyman on chip-model co-design for frontier superintelligence, and Jim Kleewein on Microsoft 365 AI experiences."
   },
+  "en2|reason|9ee8d6f1da0ed279b60459ccfac1fae65f1228e2": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": ""
+  },
   "en2|reason|9f0ae85ecceffbfb05da723877c0517260bd1327": {
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "Before its Hong Kong IPO, Moonshot (Kimi) is negotiating with Recurrent.ai, which alleges Yang Zhilin and CTO Zhang Yutao diverted technology resources and claims 10.5% of Kimi's initial shares, worth over $700 million, potentially derailing the listing."
@@ -2795,6 +2983,10 @@
     "at": "2026-10-13T06:54:00.872843Z",
     "text": "Unitree's Wang Xingxing says his biggest mistake over the past decade was not trusting AI enough; embodied intelligence's tipping point is robots completing 80% of tasks in 80% of unfamiliar scenes by voice alone, possibly in one to two years."
   },
+  "en2|reason|abde26870b62fd970b7825bd6a60ba9d6e07b577": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "China and US September CPI, ASML earnings and AI supply-chain divergence lead October 14 focus, as energy and AI investment lift inflation worries, US stocks dip slightly, Japan and South Korea rebound, and OPEC cuts 2026 demand growth."
+  },
   "en2|reason|ac0e5cb84e3362127769724681edbd4a6de9e392": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Silicon Valley startup WindBorne, which uses weather balloons and AI to forecast weather, has won a US Air Force contract worth nearly $50 million, an agreement covering how its balloon data supports US military weather forecasting."
@@ -2831,6 +3023,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "UK AI minister Kanishka Narayan says Britain's AI Security Institute will keep pre-release access to OpenAI and Anthropic frontier models, after two pilots using frontier AI surfaced more than 1,000 potential vulnerabilities."
   },
+  "en2|reason|b0777e7207193f31b6243696e87593d207ae115d": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Cerebras CEO Andrew Feldman predicts personal AI assistants will become as commonplace as household appliances, running partly on local devices and partly in the cloud, with every home eventually having one."
+  },
   "en2|reason|b0a3ee87266c8e0697b8af85c58eee244d7a38d4": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "JPMorgan and Goldman lead a $5B loan sale for AI startup Volta at roughly 11% yield but underwrote only $1.3B, a rare step to cap exposure and a window into bank risk controls in AI financing."
@@ -2838,6 +3034,10 @@
   "en2|reason|b0e74ccd11cfbd05c44d536848f275eb1a0009b3": {
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "Google is rolling out Gemini 4 Argon, a new frontier model in the Gemini app positioned to turn complex ideas into reality, alongside app updates meant to make every prompt more effective."
+  },
+  "en2|reason|b12cb86a5638fc806e93e43ed0b38a3a95b1a635": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Developer Oskar's /create-verification-skill forces Coding Agents to self-verify before delivering code, using E2E tests as an evidence layer built on @poteto's skills spec to catch hidden bugs."
   },
   "en2|reason|b18c69a15dd5c82c779d13974029f87129a59203": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -2851,6 +3051,10 @@
     "at": "2026-10-13T12:43:00.489839Z",
     "text": "Ambi raised $26 million led by Luminous Ventures with Huaqin participating, and former Plaud executive Peter Mo's iPhone, Mac and Apple Watch apps offer optional all-day listening plus proactive meeting suggestions from calendar, past meetings, knowledge bases and web data."
   },
+  "en2|reason|b2597295fc35189ee664c6b745370a73771c829b": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "NVIDIA's Jensen Huang announced an additional $2 billion for Europe, after $8 billion invested over the past year, met Macron, backed Doctolib, Pigment and Entalpic, and noted Mistral AI’s Le Chonk uses 4,000 Grace Blackwell chips."
+  },
   "en2|reason|b25e37912cc6b6b38a9c8190a5adf7a0a042a994": {
     "at": "2026-10-13T21:51:45.032259Z",
     "text": "OpenAI found a sophisticated recording device hidden inside one of its offices, used its own models to trace it to an employee who planted it days earlier, and referred the matter to the FBI."
@@ -2862,6 +3066,10 @@
   "en2|reason|b38a3ba67683f5f4c0e44e3cc41df45b744135b4": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "A former Plaud executive raised $26 million for Ambi, an AI app that listens continuously in the background to capture ambient context, with iPhone, Mac and Apple Watch versions planned."
+  },
+  "en2|reason|b5040a8ec615de98c86aae4c24870288af260685": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "A US judge ordered OpenAI to hand over recruitment records and interview materials in Apple's trade secrets case within 5 days, with 14 days to complete, including interview lists of former Apple staff, demo slides and LINE messages."
   },
   "en2|reason|b554e0872ebfaab7c137badad69fa2639d52839f": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -2879,6 +3087,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Janas streams experts from SSD so LLMs can run larger than RAM, while commenters say they built a gemma4 engine inspired by DwarfStar4 and Strata, and others argue 60 tok/s is too slow for agentic tasks with 16-60k input tokens."
   },
+  "en2|reason|b71ae806baeb0cfb0335afe0145e03167f25329e": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Apple's Welcome Home launch event introduced four products bringing Foundation Models-powered Siri AI into the home, including the first smart display Apple HomeView, a three-years-later HomePod mini refresh, an Apple TV 4K, and LG Electronics and Schneider Electric partnerships."
+  },
   "en2|reason|b77fb575c22fe7accb8a772e8ee66646f5640057": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Elon Musk calls designing a robot hand extremely difficult, as Tesla's Optimus works on driving self-tapping screws into wood while 1X's NEO hand offers 25 degrees of freedom and water resistance."
@@ -2886,6 +3098,10 @@
   "en2|reason|b85770dbedc73d359c0a31e5627359953a6253d7": {
     "at": "2026-10-13T07:47:04.151222Z",
     "text": "Google's Nano Banana 2.1 and ChatGPT were given identical image-generation prompts, and the gap between them proved small, with each showing distinct strengths and both repeating familiar AI mistakes."
+  },
+  "en2|reason|ba7fc51e799269ae2c6167fe58fb11031aa86093": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Apple's China website now describes the full-size HomePod's top lighting up with a multicolor halo for Siri AI, though HomePod mini 2 gets it first via a future software update; personal requests need an Apple Intelligence iPhone or iPad."
   },
   "en2|reason|bb75945b8584fd24c8d3c7e5513a937d9f03bc69": {
     "at": "2026-10-13T20:15:31.680790Z",
@@ -2910,6 +3126,10 @@
   "en2|reason|bd8a87f55f32081c8e42158dbe81df84f48ac24b": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "SolidCraft is a pure-Rust open-source parametric CAD running on desktop, in the browser and via MCP automation, and its Raspberry Pi 4 case auto-rebuilt when height went from 24 to 32 mm, with 75 of 76 reference parts passing validation."
+  },
+  "en2|reason|bdc8aaf0211be8c02ceddea4e7c7e391ab589732": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Sun Ge's claim in the Allen-Sun interview that feeding large models more information makes them smarter got only a black-box answer, while an AI's three-level explanation uses 1 million math problems to show moving from memorizing to algebraic rules."
   },
   "en2|reason|be5a3b1335c769b90fbb92324ac542449fc72dd7": {
     "at": "2026-10-13T07:19:14.084951Z",
@@ -2975,6 +3195,10 @@
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "AI agents now produce new code so quickly that code review has become the new bottleneck, with human reviewers unable to keep pace and slowing overall delivery."
   },
+  "en2|reason|cbf15479d8c54a0fb656924cf785522ed48d4895": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Johann Rehberger disclosed CVE-2026-103572, a remote code execution flaw in Visual Studio Copilot and SQL Server Management Studio where trailing dots in filenames bypass path validation and write .mcp.json or settings files, enabling arbitrary command execution via prompt injection."
+  },
   "en2|reason|cc6fbd86948e25032c04a509e9d0de7a7bb876a4": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "An AI agent refactored 300,000 lines of C code in three weeks across 726 files, lifting CodeScene Code Health from 5.6 to 10.0 for about $4,000 in tokens, raising the question of whether the code truly improved."
@@ -3030,6 +3254,14 @@
   "en2|reason|d36213d184c5f8c6ee483a8d2144eb9859b70e7d": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Kevin Kelly's 2016 AI predictions, split into 16 items, hit only about 8 of 16 if generous, while commenters debate whether by 2026 Google's main product will be AI not search and call a 50% hit rate a coin flip."
+  },
+  "en2|reason|d362b0d7d81be81cdde0ca29a19827616ace69cb": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "OpenAI and Higgsfield raised AI video length limits from 1 minute to 10, with GPT-6 Astra enabling creative agents to call external tools that keep characters and scenes consistent—already behind a 10-minute-plus tutorial on Higgsfield's nearly 500,000-subscriber YouTube channel."
+  },
+  "en2|reason|d36feaebc7d472f874914a3bb760df301422db75": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "GitHub shipped GitHub Apps improvements adding two fine-grained permissions, including repository_creation:write, so developers can move off classic PATs, create repositories with less privilege, and let repository admins attach repos to org-approved apps."
   },
   "en2|reason|d37e64d6da6afd5d681c7aeb77411f6e259823ec": {
     "at": "2026-10-13T07:47:04.151222Z",
@@ -3215,6 +3447,10 @@
     "at": "2026-10-13T20:15:31.680790Z",
     "text": "Anthropic's anti-distillation article explains its ban logic and warns newly registered users: avoid proxy IPs, resold accounts, repeatedly requesting chain-of-thought, and mixing domestic models with Claude in one Agent environment."
   },
+  "en2|reason|f5d2dc536746b9d27a33b9aad48452c99b98da71": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "Google's Argon is now open to developers and enterprises worldwide at $2 per million input tokens and $10 output, doubling in December but still undercutting OpenAI's GPT-6 Astra at $10/$50, with Koray Kavukcuoglu citing coding and Chrome uses."
+  },
   "en2|reason|f5e295d810f281ac4a53b6be6f8883f2ca14f27f": {
     "at": "2026-10-13T07:19:14.084951Z",
     "text": "Muse Wonder is now available on the Vercel AI Gateway, callable with the command fx --model meta/muse-wonder-1.0, alongside an invitation to check the latest updates and join the conversation."
@@ -3258,6 +3494,10 @@
   "en2|reason|fb672b44be348626dddbd241618f1f03f18e1993": {
     "at": "2026-10-13T07:47:04.151222Z",
     "text": "Files Magic AI File Rename & Organizer's page currently serves only a security verification screen, warning that CAPTCHA authorization is required to confirm visitors are not malicious bots, so no product details are accessible."
+  },
+  "en2|reason|fbd6fb5272d64a783e650e03b61d4315f588c8a8": {
+    "at": "2026-10-14T01:54:43.746905Z",
+    "text": "OPPO's collaboration with Manus brings agent capabilities into AI Mind Pilot, debuting on ColorOS 17-powered Find X10 phones to combine flights, hotels, restaurants and tickets into itineraries and turn local files and photos into slide decks."
   },
   "en2|reason|fcf785951d5ed0a6e3bb2668c1a2da8889157ec5": {
     "at": "2026-10-13T21:51:45.032259Z",
