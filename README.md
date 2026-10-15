@@ -1,6 +1,6 @@
 <div align="center">
 
-# AI News Radar
+# AI News Radar copy
 
 ## 24小时AI更新雷达｜三口味锐评
 
