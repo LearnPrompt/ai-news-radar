@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T16:05:10.222981Z",
+  "generated_at": "2026-10-15T20:51:42.633052Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_c422d5920185",
+      "title": "欢迎 Muse Spark Open：来自 Meta 的开放权重前沿多模态混合专家模型 / Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+      "url": "https://huggingface.co/blog/meta-muse-spark-open",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "开放权重不是开源，训练数据和代码藏着；'前沿'二字先拿榜单来换。"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "官方博客宣称开放权重，无论文、评测和代码链接，等第三方复现。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "权重已挂上 HF，今天就能下载自部署，多模态选型多一个开源对手。"
+        }
+      }
+    },
+    {
+      "story_id": "story_b99d97516c95",
+      "title": "Black Forest Labs 发布开源文生图模型 FLUX 3 Image Klein（5.6B） / FLUX 3 Image Klein",
+      "url": "https://bfl.ai/blog/flux-3-image-klein",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 68,
+          "review": "先别急着叫开源——BFL的权重历来分商用非商用两档，5.6B瘦身版效果还得等第三方复现。"
+        },
+        "paper-police": {
+          "score": 35,
+          "review": "仅官方博客一条，代码仓库和评测数字都没附上，'开源'先存疑。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "开源权重可下载，5.6B 本地能跑，文生图项目多一个底座选项。"
+        }
+      }
+    },
+    {
       "story_id": "story_f85fd99ece20",
       "title": "阶跃星辰开放 Step 5 Preview 权重 / Step 5 Preview is now open weights.",
       "url": "https://x.com/StepFun_ai/status/2110717330657616092",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 65,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 88,
           "review": "权重开放可直接下载部署，想省 API 账单的今天就能拉下来跑。"
-        }
-      }
-    },
-    {
-      "story_id": "story_e310e363f789",
-      "title": "代码扫描警报的 Agent 自动修复功能正式可用 / Agentic autofix for code scanning alerts general availability",
-      "url": "https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "加个 Agent 前缀，修的仍是 CodeQL 那几类警报，修复率还只有自家数据撑着。"
-        },
-        "paper-police": {
-          "score": 52,
-          "review": "官方功能上线属实，能上手实测，但无效果评测数据与第三方验证。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "用 GitHub 代码扫描的团队今天就能开，安全告警自动提修复 PR，省人工。"
-        }
-      }
-    },
-    {
-      "story_id": "story_0adb412c8d15",
-      "title": "欢迎 FLUX.3 Image Klein 加入 Diffusers / Welcome FLUX.3 Image Klein in Diffusers",
-      "url": "https://huggingface.co/blog/flux-3",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 57,
-          "review": "接进 Diffusers 算实事，但通篇零指标，Klein 省了多少显存一个字没提。"
-        },
-        "paper-police": {
-          "score": 66,
-          "review": "官方发布且已并入 Diffusers，权重能直接跑，但无评测数字，性能得自己测。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "Diffusers 里直接加载就能跑，小模型省显存，出图流水线今天可换。"
         }
       }
     }
