@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T07:22:38.837245Z",
+  "generated_at": "2026-10-18T09:45:56.513033Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,22 +17,22 @@
   ],
   "items": [
     {
-      "story_id": "story_fff8882dd7b5",
-      "title": "DeepSeek-v4.1-Flash-1017小版本更新：推理编码性能提升、成本降低",
-      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "story_id": "story_fafd6304ca6c",
+      "title": "DeepSeek 搜索和获取服务——每 1000 次成功请求 0.75 美元",
+      "url": "https://api-docs.deepseek.com/guides/search",
       "rank": 1,
       "reviews": {
         "cynic": {
           "score": 66,
-          "review": "版本号只+0.1就宣称性能提升、成本降低，基准表和价目单先亮出来再说。"
+          "review": "价格写得明明白白，按成功计费也算厚道；但检索质量一个数据没有，先跑个榜再说。"
         },
         "paper-police": {
-          "score": 45,
-          "review": "模型卡是在，但提升多少、如何测试都没给出数字，等 benchmark 或论文再定。"
+          "score": 58,
+          "review": "官方文档给了价格和接口细节，但无评测数据，检索质量与成功率无从验证。"
         },
         "pragmatic": {
-          "score": 88,
-          "review": "权重已放上HF，编码更强、单价更低，直接换API或本地拉下来跑基准就行。"
+          "score": 82,
+          "review": "搜索接口按成功计费，0.75美元一千次，比自建爬虫加清洗便宜，RAG 项目可直接接。"
         }
       }
     },
@@ -57,22 +57,22 @@
       }
     },
     {
-      "story_id": "story_9bb7cbf8fa55",
-      "title": "DeepSeek V4.1 Flash 1017上线，为首个CED架构MoE模型",
-      "url": "https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017",
+      "story_id": "story_a88e692df8b0",
+      "title": "akitaonrails/ai-memory — 为 agent 编程 CLI 提供长期记忆的解决方案，并方便在不同 agent 厂商之间交接 / akitaonrails/ai-memory — Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "url": "https://github.com/akitaonrails/ai-memory",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 52,
-          "review": "「首个CED架构」——CED是啥没人解释，OpenRouter挂个名就算发布了，评测呢？"
+          "score": 58,
+          "review": "长期记忆和厂商交接都是真痛点，但仓库名响亮、实测数据缺席，先看它能记住几轮对话。"
         },
         "paper-police": {
-          "score": 28,
-          "review": "只有上架页和论坛转帖，CED架构无论文无代码无跑分，无法验证。"
+          "score": 48,
+          "review": "仓库开源可查，但无论文无跑分，长期记忆效果拿什么证明？"
         },
         "pragmatic": {
-          "score": 76,
-          "review": "新模型已上 OpenRouter，今天就能调用试跑；但架构和价格没说明，先小流量对比再切。"
+          "score": 74,
+          "review": "可 clone 直接用，多 CLI 切换不再丢上下文；先看提交活跃度再进生产。"
         }
       }
     }
