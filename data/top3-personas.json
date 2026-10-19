@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T13:49:03.104332Z",
+  "generated_at": "2026-10-19T17:40:04.931630Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,22 +17,42 @@
   ],
   "items": [
     {
-      "story_id": "story_44f749f3afa5",
-      "title": "Show HN: WhatsApp MCP 在 Cloudflare 上免费运行",
-      "url": "https://github.com/finereli/whatsapp-mcp",
+      "story_id": "story_84e1775d2c48",
+      "title": "Inception 扩散模型 Mercury 3 上线 OpenRouter / Mercury 3 is live on OpenRouter!",
+      "url": "https://x.com/OpenRouter/status/2112225779782398131",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 56,
-          "review": "免费是踩在 Workers 与 Durable Objects 配额上限上，非官方协议还得自担封号风险。"
+          "score": 50,
+          "review": "上线模型路由就叫发布？速度、成本数据一个没给，先跑个分再来。"
         },
         "paper-police": {
-          "score": 67,
-          "review": "仓库公开可跑，但'免费运行'需自测验证，无论文无第三方评测。"
+          "score": 30,
+          "review": "仅一条推文宣布上线，无论文、无代码、无评测，模型卡和跑分先拿出来。"
         },
         "pragmatic": {
           "score": 85,
-          "review": "仓库直接 clone，Cloudflare 免费额度就能跑，想接 WhatsApp 的今天可上手。"
+          "review": "OpenRouter 上现可直调，扩散模型主打低延迟，做流式/实时场景的今天就能拿 key 试吞吐和单价。"
+        }
+      }
+    },
+    {
+      "story_id": "story_069e20b396ef",
+      "title": "蚂蚁 inclusionAI 开源 Ming-3.0-tts 语音合成模型 / inclusionAI/Ming-3.0-tts",
+      "url": "https://github.com/inclusionAI/Ming-3.0-tts",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 66,
+          "review": "代码权重真放出来了，比空喊开源强；但效果对比和训练数据没晒，先别封神。"
+        },
+        "paper-police": {
+          "score": 60,
+          "review": "有GitHub仓库，开源这一点可信，但无论文、无公开评测数字，等第三方跑分再定性。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "TTS 模型开源可 clone，有语音合成需求的可以直接拉下来跑 baseline。"
         }
       }
     },
@@ -40,7 +60,7 @@
       "story_id": "story_c1ed5d1d1d6c",
       "title": "headroomlabs-ai/headroom — Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
       "url": "https://github.com/headroomlabs-ai/headroom",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 66,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 82,
           "review": "开源可直接 clone，压缩工具输出省 20-95% token，接 MCP 或 proxy 就能降本，值得今天试。"
-        }
-      }
-    },
-    {
-      "story_id": "story_7e560b6785ec",
-      "title": "无需改模型权重！谷歌开源王牌框架 Harness²：让 AI 运行中自我修补，跑分全面暴涨",
-      "url": "https://www.aibase.com/news/31723",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 40,
-          "review": "不改权重靠外挂提示就“全面暴涨”，涨的是哪张榜、比谁高？先晒基线。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "标题称开源却无仓库链接，跑分无第三方复现，仅单篇新闻转述，先核实代码再谈暴涨。"
-        },
-        "pragmatic": {
-          "score": 74,
-          "review": "开源可 clone，不改权重就能提升现有模型表现，值得拿自己任务试跑一轮。"
         }
       }
     }
