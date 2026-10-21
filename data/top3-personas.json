@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T00:04:57.032868Z",
+  "generated_at": "2026-10-21T02:03:22.170361Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_98477f32324a",
+      "title": "OpenAI API 支持 12 小时 prompt 缓存，Codex 与 Work 用户缓存永久保留",
+      "url": "https://x.com/thsottiaux/status/2112712984644784534",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 64,
+          "review": "12 小时缓存是硬指标，但命中价和淘汰规则全没提，一条推文就算发布？"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "仅一条员工推文，官方文档、定价页、缓存命中实测数据全无，无法验证。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "长 system prompt 重复调用能省一大截账单，今天改个参数就能吃到。"
+        }
+      }
+    },
+    {
       "story_id": "story_a59ab3527808",
       "title": "为仓库批量将分支保护迁移至 rulesets / Bulk migrate branch protections to rulesets for a repository",
       "url": "https://github.blog/changelog/2026-10-20-bulk-migrate-branch-protections-to-rulesets-for-a-repository",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 74,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 82,
           "review": "Webhook/API 批量迁移开关，仓库多的团队可一键从旧分支保护转 rulesets，迁移前先备份配置。"
-        }
-      }
-    },
-    {
-      "story_id": "story_b4d45cb1791e",
-      "title": "GitHub 软件包防火墙进入公开预览 / GitHub package firewall in public preview",
-      "url": "https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 68,
-          "review": "供应链投毒是真痛点，防火墙也算实招，但\"公开预览\"加企业版专属，先别急着谢。"
-        },
-        "paper-police": {
-          "score": 48,
-          "review": "只是官方 changelog 宣布预览，无技术细节、无实测数据，等真实效果。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "供应链投毒防护，预览版就能开；先在小仓库试，盯住误报再全量。"
         }
       }
     }
