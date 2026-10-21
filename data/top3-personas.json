@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T12:19:30.515274Z",
+  "generated_at": "2026-10-21T16:09:59.984258Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_98477f32324a",
-      "title": "OpenAI API 支持 12 小时 prompt 缓存，Codex 与 Work 用户缓存永久保留",
-      "url": "https://x.com/thsottiaux/status/2112712984644784534",
+      "story_id": "story_9653c3ba2d7e",
+      "title": "Wiz 披露 LiteLLM PyPI 包供应链攻击，恶意版本 v1.107.0 窃取凭据 / LiteLLM Compromised, Steals Credentials",
+      "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 64,
-          "review": "12 小时缓存是硬指标，但命中价和淘汰规则全没提，一条推文就算发布？"
+          "score": 86,
+          "review": "版本号和窃取手法都摆得明明白白，可查可复现——这次挑不出刺，只剩你自己的 lock 文件。"
         },
         "paper-police": {
-          "score": 28,
-          "review": "仅一条员工推文，官方文档、定价页、缓存命中实测数据全无，无法验证。"
+          "score": 70,
+          "review": "有具体版本号和攻击链，Wiz技术报告可查证，但仅单源，等PyPI记录或CVE交叉印证。"
         },
         "pragmatic": {
-          "score": 86,
-          "review": "长 system prompt 重复调用能省一大截账单，今天改个参数就能吃到。"
+          "score": 87,
+          "review": "用 LiteLLM 的立刻查版本，撞上 v1.107.0 就换密钥；没装也记住锁死依赖版本。"
         }
       }
     },
     {
-      "story_id": "story_a59ab3527808",
-      "title": "为仓库批量将分支保护迁移至 rulesets / Bulk migrate branch protections to rulesets for a repository",
-      "url": "https://github.blog/changelog/2026-10-20-bulk-migrate-branch-protections-to-rulesets-for-a-repository",
+      "story_id": "story_6d959fe0df19",
+      "title": "Wiz Research 披露 PHP2Shell：AI 助攻 PHP 核心 RCE 漏洞，影响全球 70% 网站 / PHP2Shell: AI uncovers critical RCE vulnerabilities affecting 70% of the Internet",
+      "url": "https://www.wiz.io/blog/php2shell-php-rce",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 74,
-          "review": "批量迁移确实省了逐个手点，但 rulesets 覆盖不全的老规矩，文档一个字没提。"
+          "score": 58,
+          "review": "70%是PHP市占率，不是这漏洞的覆盖率，AI助攻先助攻一下算术。"
         },
         "paper-police": {
-          "score": 40,
-          "review": "官方变更日志，功能可自行验证；无论文无评测，属产品公告非技术实证。"
+          "score": 38,
+          "review": "仅厂商博客和'70%'这个吓人数字，无CVE号、PoC或补丁验证，等独立复现再说。"
         },
         "pragmatic": {
-          "score": 82,
-          "review": "Webhook/API 批量迁移开关，仓库多的团队可一键从旧分支保护转 rulesets，迁移前先备份配置。"
+          "score": 86,
+          "review": "跑 PHP 的现在就去查版本打补丁，别等 PoC 公开后再动手。"
         }
       }
     },
     {
-      "story_id": "story_b82f1e5cd9b2",
-      "title": "蚂蚁集团与 vLLM 社区开源量化推理内核库 Humming / Announcing Humming: Fast, Flexible Kernels for Quantized Inference",
-      "url": "https://vllm.ai/blog/2026-10-21-humming",
+      "story_id": "story_ed75b55f2e12",
+      "title": "Granite Speech 5.0：转写、翻译和说话人识别更准确、更快速 / Granite Speech 5.0: Transcribe, Translate, and Attribute more Accurately and Faster",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 74,
-          "review": "内核真开源了，但\"快\"字缺个基准表——和谁比、什么工况，先摆出来再吹。"
+          "score": 60,
+          "review": "两个“更”却没给基线和数字，先把准确率提升多少摆出来。"
         },
         "paper-police": {
-          "score": 45,
-          "review": "博客称开源却没贴仓库和基准数据，先找到代码跑通再谈。"
+          "score": 52,
+          "review": "官方博客给了数字，但缺论文和独立跑分；模型能下载不等于结果可复现。"
         },
         "pragmatic": {
           "score": 82,
-          "review": "量化推理内核已开源，跑 vLLM 的可以直接 clone 试，提吞吐不用等新模型。"
+          "review": "开源语音模型更新，转写翻译加说话人分离，有现成权重可直接跑，做会议记录的先试。"
         }
       }
     }

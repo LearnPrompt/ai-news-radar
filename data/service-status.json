@@ -1,16 +1,43 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-21T11:58:03.793193Z",
+  "generated_at": "2026-10-21T15:57:36.010238Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 2,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 2
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M5FHKHPQJMSHCE2B2WDPZW2N",
+      "provider": "OpenAI",
+      "title": "Elevated error rates for gpt-5.6-luna API requests",
+      "title_zh": "Elevated error rates for gpt-5.6-luna API requests",
+      "status": "monitoring",
+      "impact": "minor",
+      "started_at": "2026-10-21T15:34:47Z",
+      "updated_at": "2026-10-21T15:47:26Z",
+      "message": "We have applied the mitigation and are monitoring the recovery.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M5FHKHPQJMSHCE2B2WDPZW2N"
+    },
+    {
+      "id": "01M5FD63HHDRPQPM5YMQWJ5HTN",
+      "provider": "OpenAI",
+      "title": "Elevated FedRAMP API error rates for Astra and Sol",
+      "title_zh": "Elevated FedRAMP API error rates for Astra and Sol",
+      "status": "identified",
+      "impact": "minor",
+      "started_at": "2026-10-21T14:17:32Z",
+      "updated_at": "2026-10-21T14:17:32Z",
+      "message": "We have identified that users are experiencing elevated errors for the impacted services. We are working on implementing a mitigation.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M5FD63HHDRPQPM5YMQWJ5HTN"
+    }
+  ]
 }
