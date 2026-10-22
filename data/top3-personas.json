@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T12:20:41.691333Z",
+  "generated_at": "2026-10-22T16:03:51.545952Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_6d959fe0df19",
-      "title": "Wiz Research 披露 PHP2Shell：AI 助攻 PHP 核心 RCE 漏洞，影响全球 70% 网站 / PHP2Shell: AI uncovers critical RCE vulnerabilities affecting 70% of the Internet",
-      "url": "https://www.wiz.io/blog/php2shell-php-rce",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "70%是PHP市占率，不是这漏洞的覆盖率，AI助攻先助攻一下算术。"
-        },
-        "paper-police": {
-          "score": 38,
-          "review": "仅厂商博客和'70%'这个吓人数字，无CVE号、PoC或补丁验证，等独立复现再说。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "跑 PHP 的现在就去查版本打补丁，别等 PoC 公开后再动手。"
-        }
-      }
-    },
-    {
       "story_id": "story_30ae19eb5cdf",
       "title": "使用 IBM Granite 时间序列模型进行集合预测 / Ensemble forecasting with IBM Granite time-series models",
       "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -60,7 +40,7 @@
       "story_id": "story_6c097e2f9e18",
       "title": "Kling 4.0 上线 OpenArt，支持首中尾帧引导与最多 10 张参考图 / Hold on to your hat. #KlingAI #Kling4",
       "url": "https://x.com/Kling_ai/status/2113156632134005040",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 60,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 80,
           "review": "首中尾帧加10张参考图，做分镜和角色一致性的一条prompt就能试，OpenArt上直接可用。"
+        }
+      }
+    },
+    {
+      "story_id": "story_8e28cf075f3e",
+      "title": "在实际应用中，如何通过专门化 SLM 词表把推理成本降低 77% / How Specializing the Vocabulary of SLMs Can Cut Inference Cost by 77% in Real Applications",
+      "url": "https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "77%靠特定领域词表和负载，换场景就未必；泛化代价没晒。"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "博客给了77%数字和做法，但无论文无开源代码，跑不了就还是宣称。"
+        },
+        "pragmatic": {
+          "score": 78,
+          "review": "词表裁剪省77%推理费，思路可照着抄；先测自家领域数据能否撑住。"
         }
       }
     }
