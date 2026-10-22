@@ -1,16 +1,43 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T15:52:45.064709Z",
+  "generated_at": "2026-10-22T20:34:12.908934Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 2,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 2
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M5JHVJVC8WAXB4WRYFMKG6HP",
+      "provider": "OpenAI",
+      "title": "New Ad Accounts failing to provision admins",
+      "title_zh": "New Ad Accounts failing to provision admins",
+      "status": "identified",
+      "impact": "minor",
+      "started_at": "2026-10-22T19:36:53Z",
+      "updated_at": "2026-10-22T19:36:53Z",
+      "message": "We have identified that new ad accounts are failing to assign their creator admin. We are investigating the issue.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M5JHVJVC8WAXB4WRYFMKG6HP"
+    },
+    {
+      "id": "01M5JF8DR3EGQJNTXPZ24AKX2G",
+      "provider": "OpenAI",
+      "title": "Degraded Performance of Dots on Enterprise",
+      "title_zh": "Degraded Performance of Dots on Enterprise",
+      "status": "identified",
+      "impact": "minor",
+      "started_at": "2026-10-22T18:51:28Z",
+      "updated_at": "2026-10-22T18:59:18Z",
+      "message": "Our teams have identified the issue and are actively implementing a mitigation. At this time the majority of impact is affecting enterprise customers.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M5JF8DR3EGQJNTXPZ24AKX2G"
+    }
+  ]
 }

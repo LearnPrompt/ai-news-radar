@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T16:03:51.545952Z",
+  "generated_at": "2026-10-22T20:51:24.599848Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_59aa6c306989",
+      "title": "OpenAI 正式发布 Decisions API，面向低延迟低成本小决策 / Build more responsive apps with the Decisions API",
+      "url": "https://openai.com/index/decisions-api",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 52,
+          "review": "低延迟、低成本，两个形容词撑起一篇发布稿，P99 和每千次报价呢？"
+        },
+        "paper-police": {
+          "score": 35,
+          "review": "官方博客只有产品公告，延迟和成本的数字、评测一概没有，拿文档实测再说。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "小决策专用低延迟API，分类、路由、审核这类场景今天就能接。"
+        }
+      }
+    },
+    {
+      "story_id": "story_b096e4b4df6f",
+      "title": "OlmoEarth v1.3：覆盖全球的最先进 embeddings / OlmoEarth v1.3: State-of-the-art embeddings for the whole planet",
+      "url": "https://huggingface.co/blog/allenai/olmoearth-v1-3",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "版本号从 v1.x 挪了 0.1 就敢叫「全星球最强」，跨大洲基准分数先贴出来再聊。"
+        },
+        "paper-police": {
+          "score": 48,
+          "review": "SOTA是自家博客宣称，权重和评测脚本未见，无法复现较真。"
+        },
+        "pragmatic": {
+          "score": 84,
+          "review": "开源遥感 embedding，做地球观测下游任务的今天就能拉权重接上。"
+        }
+      }
+    },
+    {
       "story_id": "story_30ae19eb5cdf",
       "title": "使用 IBM Granite 时间序列模型进行集合预测 / Ensemble forecasting with IBM Granite time-series models",
       "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 80,
           "review": "时序基础模型可直接从 HF 拉下来跑集成，做预测任务的今天就能试，注意先对齐版本。"
-        }
-      }
-    },
-    {
-      "story_id": "story_6c097e2f9e18",
-      "title": "Kling 4.0 上线 OpenArt，支持首中尾帧引导与最多 10 张参考图 / Hold on to your hat. #KlingAI #Kling4",
-      "url": "https://x.com/Kling_ai/status/2113156632134005040",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 60,
-          "review": "首中尾帧和10张参考图都是实打实的功能，但一条推文配句\"扶好帽子\"就算发布？"
-        },
-        "paper-police": {
-          "score": 28,
-          "review": "只有官方推文宣告功能上线，无论文、无开源、无第三方评测，首中尾帧效果无从验证。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "首中尾帧加10张参考图，做分镜和角色一致性的一条prompt就能试，OpenArt上直接可用。"
-        }
-      }
-    },
-    {
-      "story_id": "story_8e28cf075f3e",
-      "title": "在实际应用中，如何通过专门化 SLM 词表把推理成本降低 77% / How Specializing the Vocabulary of SLMs Can Cut Inference Cost by 77% in Real Applications",
-      "url": "https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 62,
-          "review": "77%靠特定领域词表和负载，换场景就未必；泛化代价没晒。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "博客给了77%数字和做法，但无论文无开源代码，跑不了就还是宣称。"
-        },
-        "pragmatic": {
-          "score": 78,
-          "review": "词表裁剪省77%推理费，思路可照着抄；先测自家领域数据能否撑住。"
         }
       }
     }
