@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T06:33:22.814982Z",
+  "generated_at": "2026-10-23T10:30:47.835634Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_f69abee1ba70",
-      "title": "MiniMax 开放 M3.1 Flash 权重：428B 总参数、每 token 激活 23B / MiniMax M3.1 Flash weights are now public. 428B parameters total, 23B activated per token.",
-      "url": "https://x.com/MiniMax_AI/status/2113436864904610008",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 75,
-          "review": "权重确实放出来了，但许可证、评测、训练数据全没提，开源只开了半扇门。"
-        },
-        "paper-police": {
-          "score": 48,
-          "review": "官方号给了参数量，权重号称开放却无仓库链接、无论文和跑分，先等实测。"
-        },
-        "pragmatic": {
-          "score": 85,
-          "review": "权重能直接下，428B MoE 每 token 只激活 23B，先算显存再决定自部署还是走 API。"
-        }
-      }
-    },
-    {
       "story_id": "story_b096e4b4df6f",
       "title": "OlmoEarth v1.3：覆盖全球的最先进 embeddings / OlmoEarth v1.3: State-of-the-art embeddings for the whole planet",
       "url": "https://huggingface.co/blog/allenai/olmoearth-v1-3",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 84,
           "review": "开源遥感 embedding，做地球观测下游任务的今天就能拉权重接上。"
+        }
+      }
+    },
+    {
+      "story_id": "story_9a1340c7e8eb",
+      "title": "MiniMax 开源 M3.1 Flash，总参数 428B，上线 72 小时处理 Token 超 100 万亿",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzE5MTA3NzcxMQ%3D%3D&mid=2247489204&idx=1&sn=bc21e172929a366edfe02c720bef9208",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "开源权重算干货，但\"100 万亿 Token\"是自家计数器，每秒近 4 亿，这账谁核过？"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "开源是加分项，但论文和跑分都缺，官方自报的百亿亿级 Token 用量无人可验。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "开源权重可下载，428B 总参数配 Flash 定位，本地部署或换 API 前先跑 benchmark 看实际成本。"
         }
       }
     }
