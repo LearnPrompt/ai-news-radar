@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T00:15:36.080433Z",
+  "generated_at": "2026-10-23T01:47:36.586848Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_adde96b2c7b9",
+      "title": "MiniMax开源M3.1 Flash：总参数428B、激活参数23B，72小时处理Token超100万亿",
+      "url": "https://www.aibase.com/news/31816",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "开源权重是实的，但100万亿token只是全网调用总量，别当成模型能力。"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "开源是唯一可查证据，无论文无benchmark，单一二手源，待权重与跑分核实。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "权重可直接下载，23B激活推理成本低，批量或长文本任务今天就能拉下来压测。"
+        }
+      }
+    },
+    {
       "story_id": "story_b096e4b4df6f",
       "title": "OlmoEarth v1.3：覆盖全球的最先进 embeddings / OlmoEarth v1.3: State-of-the-art embeddings for the whole planet",
       "url": "https://huggingface.co/blog/allenai/olmoearth-v1-3",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 84,
           "review": "开源遥感 embedding，做地球观测下游任务的今天就能拉权重接上。"
-        }
-      }
-    },
-    {
-      "story_id": "story_30ae19eb5cdf",
-      "title": "使用 IBM Granite 时间序列模型进行集合预测 / Ensemble forecasting with IBM Granite time-series models",
-      "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "集成不是新招，好在权重和代码都摆出来了；只是基线挑得多漂亮，还得自己跑一遍才算数。"
-        },
-        "paper-police": {
-          "score": 62,
-          "review": "IBM Granite 时序模型开源可查，但这篇集合预测只是博客自述结果，缺第三方复现。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "时序基础模型可直接从 HF 拉下来跑集成，做预测任务的今天就能试，注意先对齐版本。"
         }
       }
     }
