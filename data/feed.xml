@@ -5,7 +5,7 @@
 <link>https://news.learnprompt.pro</link>
 <description>24 小时 AI 更新雷达的策展精选：官方发布、模型上新、高信号讨论。</description>
 <language>zh-cn</language>
-<lastBuildDate>Sat, 24 Oct 2026 09:32:29 +0000</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 12:40:05 +0000</lastBuildDate>
 <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="https://news.learnprompt.pro/data/feed.xml"/>
 <item>
 <title>LitPivot：在文献全景中通过动态情境化形成研究思路 / LitPivot: Developing research ideas through dynamic contextualization within the literature landscape</title>
@@ -14,14 +14,6 @@
 <description>文献调研辅助原型，没提开源或API，先看着，等能跑起来再说。（Hugging Face Blog）</description>
 <category>官方更新</category>
 <pubDate>Fri, 23 Oct 2026 16:15:50 +0000</pubDate>
-</item>
-<item>
-<title>OpenAI 详解前沿模型训练环境的安全加固与红队测试 / Securing our frontier model training environment</title>
-<link>https://openai.com/index/securing-our-frontier-model-training-environment</link>
-<guid isPermaLink="true">https://openai.com/index/securing-our-frontier-model-training-environment</guid>
-<description>讲自家训练环境怎么加固，普通人抄不动；管合规的可以扫一眼。（OpenAI News）</description>
-<category>官方更新</category>
-<pubDate>Sat, 24 Oct 2026 06:38:45 +0000</pubDate>
 </item>
 <item>
 <title>在 Teams 中用 GitHub Copilot 把通知变成代码 / Turn notifications into code with GitHub Copilot in Teams</title>
@@ -38,6 +30,14 @@
 <description>存储架构复盘，做大规模基础设施的能借鉴，普通开发者读完用不上。（OpenAI News）</description>
 <category>官方更新</category>
 <pubDate>Fri, 23 Oct 2026 17:00:00 +0000</pubDate>
+</item>
+<item>
+<title>OpenAI 智能体在隔离测试中借 CPU 缓存隐蔽通信 / OpenAI's isolated AI agents found ways to talk to each other through CPU cache</title>
+<link>https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache</link>
+<guid isPermaLink="true">https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache</guid>
+<description>跑多智能体沙箱的该警惕隔离漏风，普通业务开发暂时不用改代码。（The Decoder：AI News（RSS））</description>
+<category>行业动态</category>
+<pubDate>Sat, 24 Oct 2026 11:12:36 +0000</pubDate>
 </item>
 <item>
 <title>用量指标 API 新增对 OpenCode 等工具用量的统计 / Usage metrics API adds usage from tools like OpenCode</title>
@@ -96,22 +96,6 @@
 <pubDate>Fri, 23 Oct 2026 18:58:15 +0000</pubDate>
 </item>
 <item>
-<title>OpenAI 下调估值目标至 1.25 万亿美元，拟融资至多 300 亿美元 / OpenAI lowers valuation target, raises up to $30 billion</title>
-<link>https://the-decoder.com/openai-lowers-valuation-target-raises-up-to-30-billion</link>
-<guid isPermaLink="true">https://the-decoder.com/openai-lowers-valuation-target-raises-up-to-30-billion</guid>
-<description>融资和估值跟写代码没关系，等模型降价或新接口出来再看。（The Decoder：AI News（RSS））</description>
-<category>行业动态</category>
-<pubDate>Fri, 23 Oct 2026 09:49:38 +0000</pubDate>
-</item>
-<item>
-<title>Kling 4.0 在 fal 上线并向所有客户开放 API 访问 / Kling 4.0 is now publicly available on fal, with API access open to all customers.</title>
-<link>https://x.com/fal/status/2113646807997620396</link>
-<guid isPermaLink="true">https://x.com/fal/status/2113646807997620396</guid>
-<description>视频生成 API 直接开放，今天就能接进产品试用，按量付费先跑起来。（X：fal (@fal)）</description>
-<category>行业动态</category>
-<pubDate>Fri, 23 Oct 2026 15:00:43 +0000</pubDate>
-</item>
-<item>
 <title>Public monitoring 新增分诊、有效性校验、API 和 webhooks / Public monitoring adds triage, validity, API, and webhooks</title>
 <link>https://github.blog/changelog/2026-10-23-public-monitoring-adds-triage-validity-api-and-webhooks</link>
 <guid isPermaLink="true">https://github.blog/changelog/2026-10-23-public-monitoring-adds-triage-validity-api-and-webhooks</guid>
@@ -128,12 +112,36 @@
 <pubDate>Fri, 23 Oct 2026 15:03:30 +0000</pubDate>
 </item>
 <item>
-<title>MOVO AI — 全球首个面向移动端的长视频 Agent / MOVO AI — The world's first long-form video agent for mobile</title>
-<link>https://www.producthunt.com/products/movo-ai</link>
-<guid isPermaLink="true">https://www.producthunt.com/products/movo-ai</guid>
-<description>能在手机上试，但"全球首个"是营销词，先看成品质量再决定要不要花时间。（Product Hunt）</description>
+<title>Nutlope/hallmark — 面向 Claude Code、Cursor 和 Codex 的反AI套路化设计技能。 / Nutlope/hallmark — Anti-AI-slop design skill for Claude Code, Cursor, and Codex.</title>
+<link>https://github.com/Nutlope/hallmark</link>
+<guid isPermaLink="true">https://github.com/Nutlope/hallmark</guid>
+<description>clone 就能给 Cursor/Claude Code 加个反模板化审美的 prompt，前端出图党可试，别期待质变。（GitHub Trending）</description>
 <category>值得关注</category>
-<pubDate>Sat, 24 Oct 2026 09:28:06 +0000</pubDate>
+<pubDate>Sat, 24 Oct 2026 12:40:41 +0000</pubDate>
+</item>
+<item>
+<title>zCAD AI：不只是外观形状，AI 3D 能直接做出真实零件 / zCAD AI — AI 3D that creates real parts, not just shapes</title>
+<link>https://www.producthunt.com/products/zcad-ai</link>
+<guid isPermaLink="true">https://www.producthunt.com/products/zcad-ai</guid>
+<description>做机械件的值得去试，它出的是可加工实体不是网格壳子；精度和导出格式先自己验一遍。（Product Hunt）</description>
+<category>值得关注</category>
+<pubDate>Sat, 24 Oct 2026 12:40:41 +0000</pubDate>
+</item>
+<item>
+<title>google-gemini/gemini-cli — 一个开源 AI Agent，把 Gemini 的能力直接带进你的终端。 / google-gemini/gemini-cli — An open-source AI agent that brings the power of Gemini directly into your terminal.</title>
+<link>https://github.com/google-gemini/gemini-cli</link>
+<guid isPermaLink="true">https://github.com/google-gemini/gemini-cli</guid>
+<description>开源可直接 clone，终端里就能跑 Gemini agent，今天装就能用。（GitHub Trending）</description>
+<category>值得关注</category>
+<pubDate>Sat, 24 Oct 2026 12:40:41 +0000</pubDate>
+</item>
+<item>
+<title>1Password for Agents——让AI agent替你登录，无需看到你的密码 / 1Password for Agents — Let AI agents sign in for you without seeing your passwords</title>
+<link>https://www.producthunt.com/products/1password</link>
+<guid isPermaLink="true">https://www.producthunt.com/products/1password</guid>
+<description>给 agent 托管凭证算刚需，但先确认它支持你的框架、要不要企业版报价。（Product Hunt）</description>
+<category>值得关注</category>
+<pubDate>Sat, 24 Oct 2026 12:40:41 +0000</pubDate>
 </item>
 <item>
 <title>黑客对三星电视进行逆向工程，发现内置AI正在监听，OpenAI账号被暂停</title>
@@ -144,28 +152,20 @@
 <pubDate>Sat, 24 Oct 2026 09:16:58 +0000</pubDate>
 </item>
 <item>
-<title>SnailSploit/Claude-Red — claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a specific attack surface — from SQLi to shellcode, EDR evasion to exploit development.</title>
-<link>https://github.com/SnailSploit/Claude-Red</link>
-<guid isPermaLink="true">https://github.com/SnailSploit/Claude-Red</guid>
-<description>能直接 clone 塞进 Claude skills，做渗透测试的省了写提示词；不做安全就不用看。（GitHub Trending）</description>
+<title>一篇关于 Z-Library 的 AI 辅助论文，引用了一篇根本不存在的 TorrentFreak 文章 / AI-Assisted Paper on Z-Library Cites a TorrentFreak Article That Doesn't Exist</title>
+<link>https://torrentfreak.com/ai-assisted-paper-on-z-library-cites-a-torrentfreak-article-that-doesnt-exist</link>
+<guid isPermaLink="true">https://torrentfreak.com/ai-assisted-paper-on-z-library-cites-a-torrentfreak-article-that-doesnt-exist</guid>
+<description>LLM 生成的引用必须逐条核实，别让不存在的文献出现在你的稿子里。（Hacker News (黑客新闻)）</description>
 <category>值得关注</category>
-<pubDate>Fri, 23 Oct 2026 11:46:07 +0000</pubDate>
+<pubDate>Sat, 24 Oct 2026 11:18:54 +0000</pubDate>
 </item>
 <item>
-<title>瑞典政府机构将禁止使用ChatGPT和Claude</title>
-<link>https://www.sverigesradio.se/artikel/chat-gpt-och-claude-forbjuder-regeringskansliet</link>
-<guid isPermaLink="true">https://www.sverigesradio.se/artikel/chat-gpt-och-claude-forbjuder-regeringskansliet</guid>
-<description>公共部门合规风向标，做政府客户的要留意数据落地要求，其他开发者不用管。（www.sverigesradio.se）</description>
-<category>多源热议</category>
-<pubDate>Fri, 23 Oct 2026 16:26:53 +0000</pubDate>
-</item>
-<item>
-<title>Kimi K3.1 在“人工分析”中得分为 55，位于帕累托线上</title>
-<link>https://artificialanalysis.ai/models/kimi-k3-1-pro</link>
-<guid isPermaLink="true">https://artificialanalysis.ai/models/kimi-k3-1-pro</guid>
-<description>选型表里多一个性价比选项，帕累托线上说明便宜够用，建议小流量实测再换主力。（artificialanalysis.ai）</description>
+<title>pollen-robotics/microduck — 一台小巧的双足鸭子机器人 🦆 / pollen-robotics/microduck — A Tiny biped duck robot 🦆</title>
+<link>https://github.com/pollen-robotics/microduck</link>
+<guid isPermaLink="true">https://github.com/pollen-robotics/microduck</guid>
+<description>开源硬件图纸能 clone，但受众只有机器人玩家，写软件的看看就好。（GitHub Trending）</description>
 <category>值得关注</category>
-<pubDate>Fri, 23 Oct 2026 20:38:45 +0000</pubDate>
+<pubDate>Sat, 24 Oct 2026 12:40:41 +0000</pubDate>
 </item>
 </channel>
 </rss>
