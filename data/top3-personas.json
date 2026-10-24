@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T19:37:32.925542Z",
+  "generated_at": "2026-10-24T23:24:42.362091Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -57,22 +57,22 @@
       }
     },
     {
-      "story_id": "story_91d09a1a5262",
-      "title": "OpenAI 红队测试发现 Brotli 未认证远程代码执行漏洞并已披露 / During this red-teaming exercise, we also found a vulnerability that allows for unauthenticated remote code execution in Brotli, a widely...",
-      "url": "https://x.com/OpenAI/status/2113766354386084338",
+      "story_id": "story_84a11f0b50ca",
+      "title": "用量指标 API 新增对 OpenCode 等工具用量的统计 / Usage metrics API adds usage from tools like OpenCode",
+      "url": "https://github.blog/changelog/2026-10-23-usage-metrics-api-adds-usage-from-tools-like-opencode",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 80,
-          "review": "红队顺手挖出 Brotli 未认证 RCE，比发十篇博客实在；只求补丁版本别藏在 PR 稿里。"
+          "score": 70,
+          "review": "计量口径扩到第三方工具是实事，但只报用量不给成本明细，账还是算不清。"
         },
         "paper-police": {
-          "score": 35,
-          "review": "仅有一条官方推文，无 CVE 编号、补丁链接或复现细节，等披露报告再评。"
+          "score": 58,
+          "review": "官方 changelog 说明 API 有新增字段，能调用验证，但无示例数据也无第三方复现。"
         },
         "pragmatic": {
-          "score": 78,
-          "review": "Brotli 到处都在用，先去查依赖版本打补丁，别等 PoC 公开。"
+          "score": 70,
+          "review": "需要统计团队 AI 编码工具用量、做成本分摊或采纳度报表的，现在可以直接从 API 拉数据了。"
         }
       }
     }
