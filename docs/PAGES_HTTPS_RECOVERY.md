@@ -13,6 +13,12 @@
 
 静态页面、采集代码或 `CNAME` 文本变更不能直接给 GitHub Pages 续签证书。合并本分支本身不等于线上修复。数据更新 Actions 成功也不等于站点可访问。
 
+## 本次恢复结果
+
+2026-10-25 已将 `news` 单条 CNAME 改为 DNS only，目标仍为 `learnprompt.github.io`；读取全部 18 条 DNS 记录，确认其余 17 条未变。重新绑定同一 Pages 域名后，证书状态变为 `approved`，直连源站的正常 TLS 校验通过，新证书到期时间为 **2027-01-23 07:13:26 UTC**。首页、robots、sitemap、latest 数据和新鲜 Pages 证书元数据五项检查均通过。
+
+Pages 的 Enforce HTTPS 已保存为启用。保持新闻子域 DNS only，使请求直接由 Pages 的有效证书服务；未修改其他子域和全域 SSL 安全级别。此次线上恢复来自域名与证书配置处理，本分支保留排错与验收工具供后续复用。
+
 ## 处理步骤
 
 1. 在有权限的 Cloudflare 账户中确认真实 `learnprompt.pro` zone，读取并备份 **仅 `news.learnprompt.pro`** 的 DNS 类型、目标、TTL、代理状态及相关规则。保留根域、`www`、`v1` 和其他记录。
