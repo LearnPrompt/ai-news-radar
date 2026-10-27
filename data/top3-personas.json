@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T16:53:11.468984Z",
+  "generated_at": "2026-10-27T21:40:54.734489Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,22 +17,42 @@
   ],
   "items": [
     {
-      "story_id": "story_f8d229a3f617",
-      "title": "GPT-6.1 Terra in GitHub Copilot",
-      "url": "https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot",
+      "story_id": "story_dcfc8da3dcc9",
+      "title": "用 LFM3 构建专用多模态模型 / Build specialized multimodal models with LFM3",
+      "url": "https://huggingface.co/blog/LiquidAI/lfm3",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 60,
-          "review": "模型上线是真，但除了版本号，跑分、上下文长度、限流额度一个没给。"
+          "score": 70,
+          "review": "教程认真能跑通，但“专用”赢在哪？少一张对照通用模型的实测表。"
         },
         "paper-police": {
-          "score": 42,
-          "review": "仅一条官方 changelog，能上手试用但无基准数字，等实测或第三方跑分再定。"
+          "score": 52,
+          "review": "官方博客讲了构建方法，但无评测数据与第三方复现，等权重和跑分。"
         },
         "pragmatic": {
-          "score": 88,
-          "review": "Copilot 里换新模型了，写代码前先拿它跑一遍老任务比对比对。"
+          "score": 82,
+          "review": "权重已放 HF，可直接下载微调；做垂直多模态场景的先拿小模型试水比堆大模型划算。"
+        }
+      }
+    },
+    {
+      "story_id": "story_9a537d6a9ade",
+      "title": "LangChain 解析自研设计 agent Content Studio 并开源其 harness / How We Built Our Design Agent",
+      "url": "https://www.langchain.com/blog/design-agent",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 67,
+          "review": "开源 harness 算实在，可效果全靠自家博客自证，第三方复现呢？"
+        },
+        "paper-police": {
+          "score": 55,
+          "review": "官方博客加开源 harness 算有料，但没 benchmark、没第三方复现，仍是自说自话。"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "设计 agent 的 harness 已开源，想搭多智能体流水线的可以直接扒架构。"
         }
       }
     },
@@ -40,7 +60,7 @@
       "story_id": "story_f280b6805186",
       "title": "GitHub Copilot 辅助权限功能正式开放使用 / GitHub Copilot assisted permissions generally available",
       "url": "https://github.blog/changelog/2026-10-26-github-copilot-assisted-permissions-generally-available",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 68,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 76,
           "review": "Copilot 现在能帮忙配权限，团队用 GitHub 的可以试试，但先看清默认授权范围再开。"
-        }
-      }
-    },
-    {
-      "story_id": "story_08edd409f737",
-      "title": "Replit Cloud Agents 开放企业代码库贡献，非技术人员可直接提交经测试的 PR / Anyone can now bring their ideas into the company codebase",
-      "url": "https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 46,
-          "review": "非技术人员提交“经测试”的 PR，测试口径和评审负担却只字未提，工程师背锅。"
-        },
-        "paper-police": {
-          "score": 32,
-          "review": "厂商自述功能，无第三方评测或公开基准，安全与测试效果无从复现，证据不足。"
-        },
-        "pragmatic": {
-          "score": 70,
-          "review": "非技术同事能直接提 PR 这点值得试，但企业库权限和审阅流程先摸清。"
         }
       }
     }
