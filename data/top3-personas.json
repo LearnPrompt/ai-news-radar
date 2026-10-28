@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T14:16:43.247484Z",
+  "generated_at": "2026-10-28T19:47:56.037818Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_dcfc8da3dcc9",
-      "title": "用 LFM3 构建专用多模态模型 / Build specialized multimodal models with LFM3",
-      "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+      "story_id": "story_bd644657309a",
+      "title": "Google DeepMind 发布 Gemini 4 Carbon 前沿模型 / Gemini 4 Carbon: Our next frontier model",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 70,
-          "review": "教程认真能跑通，但“专用”赢在哪？少一张对照通用模型的实测表。"
+          "score": 62,
+          "review": "叫'前沿'没问题，但benchmark曲线又挑着画，第三方复现呢？"
         },
         "paper-police": {
-          "score": 52,
-          "review": "官方博客讲了构建方法，但无评测数据与第三方复现，等权重和跑分。"
+          "score": 32,
+          "review": "只有一篇官方博客公告，无论文、无代码、无跑分，单源发布不足以服人。"
         },
         "pragmatic": {
-          "score": 82,
-          "review": "权重已放 HF，可直接下载微调；做垂直多模态场景的先拿小模型试水比堆大模型划算。"
+          "score": 88,
+          "review": "新前沿模型已放出，先拿自己评测集跑一遍，别急着全量迁移。"
         }
       }
     },
     {
-      "story_id": "story_96589410c307",
-      "title": "面壁智能发布并开源 MiniCPM-OCR 系列：1.3B 解析模型与 2B 判别模型",
-      "url": "https://mp.weixin.qq.com/s?__biz=Mzg3Mzg2MTg2NQ%3D%3D&mid=2247499654&idx=1&sn=9bcbf9492c492a5d5e611af41670425f",
+      "story_id": "story_f713f4e4a699",
+      "title": "NVIDIA Nemotron 3.5 Transcribe 与 Granary v2：智能多语言转录，支持提示词调控与灵活适配 / NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
       "rank": 2,
       "reviews": {
         "cynic": {
           "score": 73,
-          "review": "开源是真开源，但跑分只登在自家公众号，等第三方复现了再吹不迟。"
+          "review": "3.5 这个版本号等于自曝只是小修小补，把提示词调控当新卖点，好在权重确实放出来了。"
         },
         "paper-police": {
-          "score": 38,
-          "review": "公众号单篇宣称开源，未见权重仓库、论文与可复现评测，先等证据。"
+          "score": 60,
+          "review": "HF 博客发布模型，权重可下，但无论文和独立评测，跑分待复现。"
         },
         "pragmatic": {
           "score": 82,
-          "review": "开源可 clone，1.3B 做 OCR 解析显存友好，文档流水线能直接换模型试。"
+          "review": "权重已放Hugging Face，提示词调控多语言转录，做会议记录和字幕的今天就能下载试。"
         }
       }
     },
     {
-      "story_id": "story_533d85c923c9",
-      "title": "GitHub Copilot 支持服务器到服务器认证 / GitHub Copilot supports server-to-server authentication",
-      "url": "https://github.blog/changelog/2026-10-27-github-copilot-supports-server-to-server-authentication",
+      "story_id": "story_a4f85859c631",
+      "title": "使用 GitHub Copilot Fusion 路由和编排模型 / Route and orchestrate models with GitHub Copilot Fusion",
+      "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 74,
-          "review": "总算不用把用户 token 当传家宝了，企业采购的合规表好填一格；但这就是条管道，别当里程碑。"
+          "score": 58,
+          "review": "路由和编排听着高级，可切换依据、延迟开销、失败回退一个没给，先别急着叫 Fusion。"
         },
         "paper-police": {
-          "score": 48,
-          "review": "官方 changelog 可查，但无实测或复现步骤，仅算官方声明。"
+          "score": 32,
+          "review": "官方更新只讲路由功能，没有评测基准和可复现数据，三件套缺齐。"
         },
         "pragmatic": {
-          "score": 72,
-          "review": "后端服务和 CI 现在能用机器凭据直接调 Copilot，不必再塞用户 token，集成项目可以改。"
+          "score": 82,
+          "review": "Copilot 能按任务自动路由多模型，复杂活省心；先小范围试，别急着把关键流程押上。"
         }
       }
     }
