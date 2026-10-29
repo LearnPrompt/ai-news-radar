@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T21:49:50.270254Z",
+  "generated_at": "2026-10-29T02:55:28.745701Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_f713f4e4a699",
+      "title": "Nvidia Nemotron 3.5 Transcribe：支持 40 种语言的开源语音识别（ASR） / NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 74,
+          "review": "权重和数据都开出来了，值得称赞；可四十种语言里，榜单恐怕只列了英语和几个大语种，小语种的 WER 呢？"
+        },
+        "paper-police": {
+          "score": 74,
+          "review": "官方博客称开源并支持40语种，权重可在Hub查；但缺第三方独立复现WER，先跑一遍再定论。"
+        },
+        "pragmatic": {
+          "score": 88,
+          "review": "开源权重+40语言+可prompt，今天就能拉下来替掉付费ASR，多语种转写省一笔。"
+        }
+      }
+    },
+    {
       "story_id": "story_bd644657309a",
       "title": "Google DeepMind 发布 Gemini 4 Carbon 前沿模型 / Gemini 4 Carbon: Our next frontier model",
       "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 62,
@@ -33,26 +53,6 @@
         "pragmatic": {
           "score": 88,
           "review": "新前沿模型已放出，先拿自己评测集跑一遍，别急着全量迁移。"
-        }
-      }
-    },
-    {
-      "story_id": "story_f713f4e4a699",
-      "title": "NVIDIA Nemotron 3.5 Transcribe 与 Granary v2：智能多语言转录，支持提示词调控与灵活适配 / NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt",
-      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 73,
-          "review": "3.5 这个版本号等于自曝只是小修小补，把提示词调控当新卖点，好在权重确实放出来了。"
-        },
-        "paper-police": {
-          "score": 60,
-          "review": "HF 博客发布模型，权重可下，但无论文和独立评测，跑分待复现。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "权重已放Hugging Face，提示词调控多语言转录，做会议记录和字幕的今天就能下载试。"
         }
       }
     },
