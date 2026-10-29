@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T14:49:01.397251Z",
+  "generated_at": "2026-10-29T20:02:40.865400Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_f713f4e4a699",
-      "title": "Nvidia Nemotron 3.5 Transcribe：支持 40 种语言的开源语音识别（ASR） / NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt",
-      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+      "story_id": "story_90039c49e70a",
+      "title": "Mistral Large 4（Le Chonk）登陆 Hugging Face：1T 参数 MoE 多模态开源权重模型 / Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+      "url": "https://huggingface.co/blog/mistral-large4",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 74,
-          "review": "权重和数据都开出来了，值得称赞；可四十种语言里，榜单恐怕只列了英语和几个大语种，小语种的 WER 呢？"
+          "score": 76,
+          "review": "权重真放出来了，但1T参数跑得动的人，比读得懂许可证的人还少。"
         },
         "paper-police": {
-          "score": 74,
-          "review": "官方博客称开源并支持40语种，权重可在Hub查；但缺第三方独立复现WER，先跑一遍再定论。"
+          "score": 22,
+          "review": "只有一条博客链接，无评测数字无复现路径，1T 开源权重更需硬证据。"
         },
         "pragmatic": {
-          "score": 88,
-          "review": "开源权重+40语言+可prompt，今天就能拉下来替掉付费ASR，多语种转写省一笔。"
+          "score": 84,
+          "review": "权重能直接下，但1T MoE 自建基本不现实，先看托管推理报价再决定。"
         }
       }
     },
     {
-      "story_id": "story_bd644657309a",
-      "title": "Google DeepMind 发布 Gemini 4 Carbon 前沿模型 / Gemini 4 Carbon: Our next frontier model",
-      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model",
+      "story_id": "story_46b030e91541",
+      "title": "Granite Switch 4.1.1 — 像更新软件一样更新模型 / Granite Switch 4.1.1 — Update models like you update software",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 62,
-          "review": "叫'前沿'没问题，但benchmark曲线又挑着画，第三方复现呢？"
+          "score": 48,
+          "review": "版本号只挪了个小数点，口号却喊成范式革命，先把 4.1.0 的坑列出来看看。"
         },
         "paper-police": {
-          "score": 32,
-          "review": "只有一篇官方博客公告，无论文、无代码、无跑分，单源发布不足以服人。"
+          "score": 66,
+          "review": "博客发布且HF权重可下载，能跑但缺独立评测与论文，证据半角。"
         },
         "pragmatic": {
-          "score": 88,
-          "review": "新前沿模型已放出，先拿自己评测集跑一遍，别急着全量迁移。"
+          "score": 72,
+          "review": "模型热更新工具，部署侧能少一次重启；不是新模型，别指望能力提升。"
         }
       }
     },
     {
-      "story_id": "story_90039c49e70a",
-      "title": "欢迎 Le Chonk：Mistral Large 4 上线 Hugging Face / Welcome Le Chonk: Mistral Large 4 on Hugging Face",
-      "url": "https://huggingface.co/blog/mistral-large4",
+      "story_id": "story_14c5a77fa731",
+      "title": "AI删文件终于可以不用再问了！Claude Code上线全新环境变量，赋予开发者绝对放行权限",
+      "url": "https://www.aibase.com/news/31963",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 44,
-          "review": "名字叫 Le Chonk，参数、benchmark、许可证全藏着；在HF上线只是挂个门牌，不等于开源。"
+          "score": 65,
+          "review": "把安全确认做成环境变量，图省事是真，可删错文件时也别指望有人拦。"
         },
         "paper-police": {
-          "score": 67,
-          "review": "模型卡和权重在 HF 可查，但缺论文与第三方复跑，benchmark 数字待独立验证。"
+          "score": 32,
+          "review": "单一资讯站转述，未附官方文档或changelog链接，环境变量名和默认行为都无从核实。"
         },
         "pragmatic": {
-          "score": 87,
-          "review": "新模型已上 HF，能直接拉下来试；换基座前先跑自己的 benchmark 再定。"
+          "score": 72,
+          "review": "常被权限弹窗打断的话，设个环境变量就少点确认，但删文件放行风险自负。"
         }
       }
     }
