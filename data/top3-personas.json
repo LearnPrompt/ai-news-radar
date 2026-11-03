@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T13:01:09.535006Z",
+  "generated_at": "2026-11-03T16:31:33.428508Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_e38bf6a68f79",
-      "title": "pull_request_target 自12月2日起默认被阻止 / pull_request_target blocked by default December 2",
-      "url": "https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 82,
-          "review": "pwn request 被利用五年了才想起默认关，迟到总比不来强。"
-        },
-        "paper-police": {
-          "score": 74,
-          "review": "官方 changelog 是一手证据，但仅此一源，未见迁移文档与示例，细节仍待补。"
-        },
-        "pragmatic": {
-          "score": 84,
-          "review": "用 pull_request_target 的 workflow 会失效，12月2日前排查改配置，别等 CI 挂了才发现"
-        }
-      }
-    },
-    {
       "story_id": "story_3fe4e225a6ff",
       "title": "8GB显存也能玩转128K超长上下文！开源本地大模型工具Strata 0.2. 10 发布",
       "url": "https://www.aibase.com/news/32047",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 48,
@@ -53,6 +33,26 @@
         "pragmatic": {
           "score": 76,
           "review": "8G 卡就能跑 128K 上下文，值得 clone 试跑；来源单一，先看仓库 issue 再上项目。"
+        }
+      }
+    },
+    {
+      "story_id": "story_6f142f0f742c",
+      "title": "用 GitHub REST API 查询资源所属的成本中心 / Look up a resource’s cost center with the GitHub REST API",
+      "url": "https://github.blog/changelog/2026-11-03-look-up-a-resources-cost-center-with-the-github-rest-api",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "接口确实能用，但一个查询字段也单独发条 changelog，成果也就这点体量。"
+        },
+        "paper-police": {
+          "score": 70,
+          "review": "官方changelog给了REST端点，文档可查、调用即验；但仅一则更新，无示例与第三方复现。"
+        },
+        "pragmatic": {
+          "score": 74,
+          "review": "企业账单分摊能直接接进自动化脚本了；不涉及企业计费的话可以先跳过。"
         }
       }
     },
