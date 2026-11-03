@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T16:31:33.428508Z",
+  "generated_at": "2026-11-03T20:52:57.769823Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_3fe4e225a6ff",
-      "title": "8GB显存也能玩转128K超长上下文！开源本地大模型工具Strata 0.2. 10 发布",
-      "url": "https://www.aibase.com/news/32047",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 48,
-          "review": "128K 的 KV cache 自己就不止 8GB，敢不敢公布实际每 token 延迟？"
-        },
-        "paper-police": {
-          "score": 35,
-          "review": "标题称开源和8GB跑128K，却无仓库链接与可复现跑分，证据不足。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "8G 卡就能跑 128K 上下文，值得 clone 试跑；来源单一，先看仓库 issue 再上项目。"
-        }
-      }
-    },
-    {
       "story_id": "story_6f142f0f742c",
       "title": "用 GitHub REST API 查询资源所属的成本中心 / Look up a resource’s cost center with the GitHub REST API",
       "url": "https://github.blog/changelog/2026-11-03-look-up-a-resources-cost-center-with-the-github-rest-api",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -60,7 +40,7 @@
       "story_id": "story_5d294462667a",
       "title": "Transformers 模型集成合同 / Transformers Model Integration Contracts",
       "url": "https://huggingface.co/blog/transformers-mic",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 74,
           "review": "给自定义模型接入定了标准接口，写过 modeling_xxx.py 的人能少踩坑。"
+        }
+      }
+    },
+    {
+      "story_id": "story_4408f5c55929",
+      "title": "同一个模型，不同的框架：CUGA、Hermes 与 Deep Agents，何时该选 CUGA？ / Same Model, Different Harness: CUGA, Hermes, and Deep Agents — When to Pick CUGA?",
+      "url": "https://huggingface.co/blog/ibm-research/cuga-harness",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 70,
+          "review": "框架同台对比是好事，但裁判是 CUGA 自家，先看基线公不公平。"
+        },
+        "paper-police": {
+          "score": 52,
+          "review": "IBM 研究博客有对比细节，但无论文、无开源、无第三方复现，只能算有迹可循。"
+        },
+        "pragmatic": {
+          "score": 70,
+          "review": "选型对比文，同模型跑不同框架的差异有参考价值，做Agent架构时可拿来对照。"
         }
       }
     }
