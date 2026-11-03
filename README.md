@@ -11,6 +11,7 @@
 [![Actions](https://img.shields.io/github/actions/workflow/status/LearnPrompt/ai-news-radar/update-news.yml?branch=master&label=update&style=flat-square)](https://github.com/LearnPrompt/ai-news-radar/actions/workflows/update-news.yml)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-ai--radar%20%2B%20%E4%BC%AF%E4%B9%90-blueviolet?style=flat-square)](skills/radar/README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
+[![AtomGitStars](https://atomgit.com/LearnPrompt/ai-news-radar/star/new_badge.svg)](https://atomgit.com/LearnPrompt/ai-news-radar)
 
 ```bash
 npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
