@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T16:36:11.021596Z",
+  "generated_at": "2026-11-04T21:18:36.651402Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_bf5abd3d9223",
+      "title": "GitHub Copilot 现已登陆 Xcode 编程助手 / GitHub Copilot is now available in Xcode’s coding assistant",
+      "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "登录 Xcode 是接入点而非能力，集成公告里一行性能数据都没有。"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "官方变更日志只说了上线，没有版本号、功能边界和实测数据，装个 Xcode 能验证真假但验证不了好坏。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "Xcode 里能直接用 Copilot 了，iOS 开发今天就能装上试，省得切窗口。"
+        }
+      }
+    },
+    {
+      "story_id": "story_a1cac76551fa",
+      "title": "Dharma Field Extractor：任意文档输入，结构化字段以 JSON 输出 / Dharma Field Extractor: Any Document In, Structured Fields in JSON Out",
+      "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 48,
+          "review": "“任意文档”四个字很勇敢；扫描件、手写、跨页表格的失败率敢不敢晒？"
+        },
+        "paper-police": {
+          "score": 30,
+          "review": "只有一篇 HF 博客，代码仓库和评测数字都没影，JSON 抽取准不准拿什么验证？"
+        },
+        "pragmatic": {
+          "score": 74,
+          "review": "文档抽取到 JSON 有现成模型可试，先拿真实票据验准确率，再决定要不要替换自研管线。"
+        }
+      }
+    },
+    {
       "story_id": "story_e2a9defc33ad",
       "title": "Copilot 使用情况 API 支持 BYOK 和企业自定义模型 / BYOK and enterprise custom models in the Copilot usage API",
       "url": "https://github.blog/changelog/2026-11-03-byok-and-enterprise-custom-models-in-the-copilot-usage-api",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 72,
           "review": "用量 API 能按自带 Key 和企业自定义模型拆分统计，做成本归因和计费的今天就能接。"
-        }
-      }
-    },
-    {
-      "story_id": "story_05cba21c67c5",
-      "title": "Dependabot 版本更新支持 Agent Package Manager / Dependabot version updates support Agent Package Manager",
-      "url": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 62,
-          "review": "功能是真的，可这只是让依赖机器人多认一个包管理器，配不上“高重要”三个字。"
-        },
-        "paper-police": {
-          "score": 50,
-          "review": "官方更新只能说明功能已上线，但缺少技术细节和第三方验证，能试用却无法评出好坏。"
-        },
-        "pragmatic": {
-          "score": 70,
-          "review": "用 Agent Package Manager 管依赖的，开个开关就能自动升版本；不用的直接跳过。"
-        }
-      }
-    },
-    {
-      "story_id": "story_b15c6d459b33",
-      "title": "Palette：教小模型用你的设计语言做演示文稿 / Palette: teaching a small model to build decks in your design language",
-      "url": "https://huggingface.co/blog/ibm-research/palette-deck-building",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 74,
-          "review": "小模型省算力是真的，但“设计语言”全靠几张精修样张撑着，失败案例先放出来再谈。"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "HF博客讲了方法，但模型权重和可复现评测是否公开不明，先当技术报告看。"
-        },
-        "pragmatic": {
-          "score": 68,
-          "review": "做PPT生成Agent的可以抄它的微调套路和设计约束，其他人先收藏。"
         }
       }
     }
