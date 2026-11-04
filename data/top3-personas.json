@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T13:18:15.314131Z",
+  "generated_at": "2026-11-04T16:36:11.021596Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_6f142f0f742c",
-      "title": "用 GitHub REST API 查询资源所属的成本中心 / Look up a resource’s cost center with the GitHub REST API",
-      "url": "https://github.blog/changelog/2026-11-03-look-up-a-resources-cost-center-with-the-github-rest-api",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 72,
-          "review": "接口确实能用，但一个查询字段也单独发条 changelog，成果也就这点体量。"
-        },
-        "paper-police": {
-          "score": 70,
-          "review": "官方changelog给了REST端点，文档可查、调用即验；但仅一则更新，无示例与第三方复现。"
-        },
-        "pragmatic": {
-          "score": 74,
-          "review": "企业账单分摊能直接接进自动化脚本了；不涉及企业计费的话可以先跳过。"
-        }
-      }
-    },
-    {
       "story_id": "story_e2a9defc33ad",
       "title": "Copilot 使用情况 API 支持 BYOK 和企业自定义模型 / BYOK and enterprise custom models in the Copilot usage API",
       "url": "https://github.blog/changelog/2026-11-03-byok-and-enterprise-custom-models-in-the-copilot-usage-api",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -57,22 +37,42 @@
       }
     },
     {
-      "story_id": "story_4408f5c55929",
-      "title": "同一个模型，不同的框架：CUGA、Hermes 与 Deep Agents，何时该选 CUGA？ / Same Model, Different Harness: CUGA, Hermes, and Deep Agents — When to Pick CUGA?",
-      "url": "https://huggingface.co/blog/ibm-research/cuga-harness",
-      "rank": 3,
+      "story_id": "story_05cba21c67c5",
+      "title": "Dependabot 版本更新支持 Agent Package Manager / Dependabot version updates support Agent Package Manager",
+      "url": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager",
+      "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 70,
-          "review": "框架同台对比是好事，但裁判是 CUGA 自家，先看基线公不公平。"
+          "score": 62,
+          "review": "功能是真的，可这只是让依赖机器人多认一个包管理器，配不上“高重要”三个字。"
         },
         "paper-police": {
-          "score": 52,
-          "review": "IBM 研究博客有对比细节，但无论文、无开源、无第三方复现，只能算有迹可循。"
+          "score": 50,
+          "review": "官方更新只能说明功能已上线，但缺少技术细节和第三方验证，能试用却无法评出好坏。"
         },
         "pragmatic": {
           "score": 70,
-          "review": "选型对比文，同模型跑不同框架的差异有参考价值，做Agent架构时可拿来对照。"
+          "review": "用 Agent Package Manager 管依赖的，开个开关就能自动升版本；不用的直接跳过。"
+        }
+      }
+    },
+    {
+      "story_id": "story_b15c6d459b33",
+      "title": "Palette：教小模型用你的设计语言做演示文稿 / Palette: teaching a small model to build decks in your design language",
+      "url": "https://huggingface.co/blog/ibm-research/palette-deck-building",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 74,
+          "review": "小模型省算力是真的，但“设计语言”全靠几张精修样张撑着，失败案例先放出来再谈。"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "HF博客讲了方法，但模型权重和可复现评测是否公开不明，先当技术报告看。"
+        },
+        "pragmatic": {
+          "score": 68,
+          "review": "做PPT生成Agent的可以抄它的微调套路和设计约束，其他人先收藏。"
         }
       }
     }
