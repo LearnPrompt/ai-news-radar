@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T23:03:23.239450Z",
+  "generated_at": "2026-11-06T03:38:39.950428Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_e4f862191cfe",
-      "title": "深入了解 Phonon TTS\n推出高质量端侧语音，登顶基准测试 / A Closer Look at Phonon TTS. Launching High-Quality On-Device Speech That Tops the Benchmarks.",
-      "url": "https://huggingface.co/blog/phonon-tts",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 66,
-          "review": "端侧模型确实放出来了，但“登顶”的是哪张榜、延迟和内存多少，一并晒晒？"
-        },
-        "paper-police": {
-          "score": 45,
-          "review": "博客自称登顶基准，却未见论文、代码或第三方复现，数字暂不可信。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "端侧TTS能省API账单、离线可跑，模型在HF上就直接拉下来试效果。"
-        }
-      }
-    },
-    {
       "story_id": "story_3ce30504df16",
       "title": "NVIDIA 推出 Cosmos 3 开放模型，用于交互式世界模拟 / New NVIDIA Cosmos 3 Open Models for Interactive World Simulation",
       "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 66,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 72,
           "review": "模型权重已挂在 HF 上，做机器人和合成数据的可以直接下载试用；普通应用开发暂时用不上。"
+        }
+      }
+    },
+    {
+      "story_id": "story_ed0675af196e",
+      "title": "Usage metrics API 新增代码审查详情与已处理率 / Usage metrics API adds code review details and addressed rate",
+      "url": "https://github.blog/changelog/2026-11-05-usage-metrics-api-adds-code-review-details-and-addressed-rate",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "多两个字段是真更新，但\"已处理率\"的分母怎么算没讲，先别急着拿它当KPI。"
+        },
+        "paper-police": {
+          "score": 55,
+          "review": "官方 API 变更属实，但“已处理率”的判定口径还得翻文档，也没有第三方复现验证。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "给 Copilot 度量看板加字段就行，终于能量化审查建议被采纳多少了。"
         }
       }
     }
