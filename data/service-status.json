@@ -1,16 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T15:58:14.335252Z",
+  "generated_at": "2026-11-06T20:27:07.277184Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 1,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 1
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M6S2FV5TZWQ753NHRB7BF5K7",
+      "provider": "OpenAI",
+      "title": "Elevated error rates with Brex Cards and U.S. business Mastercards",
+      "title_zh": "Elevated error rates with Brex Cards and U.S. business Mastercards",
+      "status": "identified",
+      "impact": "none",
+      "started_at": "2026-11-06T18:38:43Z",
+      "updated_at": "2026-11-06T18:50:47Z",
+      "message": "Investigating — We’re seeing payment declines on some U.S. business Mastercards, including some Brex cards. For API customers, this can prevent automatic recharges and one-time credit purchases. If your prepaid balance runs out, your API requests may fail. If you use one of these cards, we recommend adding a card from a different issuer before your next payment, even if you haven’t seen a decline. If an API credit purchase has already failed, use the new card to retry the purchase. We’re working with our payment partners and will share updates here.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M6S2FV5TZWQ753NHRB7BF5K7"
+    }
+  ]
 }
