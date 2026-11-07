@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T11:56:38.410738Z",
+  "generated_at": "2026-11-07T18:59:23.201805Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_d600757765e9",
+      "title": "Show HN：我们把 31B 的视频+音频扩散模型压缩到 14B，仅需 6 步，INT8 / Show HN: We compressed a 31B video+audio diffusion model to 14B, 6 steps, INT8",
+      "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 55,
+          "review": "参数量和步数晒了，画质、音画同步和显存账单呢？"
+        },
+        "paper-police": {
+          "score": 66,
+          "review": "GitHub 仓库地址已提供，代码路径可查；但无论文与公开 benchmark，压缩率和 6 步生成效果仍需自行复现验证"
+        },
+        "pragmatic": {
+          "score": 80,
+          "review": "仓库能直接 clone，6 步加 INT8 意味着单卡可试视频生成，先看显存要求。"
+        }
+      }
+    },
+    {
       "story_id": "story_e1651628c642",
       "title": "@GitHub 在 Slack 和 Teams 中正式可用，还有更多 / @GitHub in Slack and Teams is generally available and more",
       "url": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 62,
@@ -40,7 +60,7 @@
       "story_id": "story_255b7fbabd28",
       "title": "Copilot 代码审查：API 管理与审查概览更新 / Copilot code review: API management and review overview updates",
       "url": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 63,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 72,
           "review": "用 Copilot 代码评审的团队可看新 API 批量管策略，不用的就别点开了。"
-        }
-      }
-    },
-    {
-      "story_id": "story_1b4ade85b2b5",
-      "title": "Firecracker VM 逃脱：PwnEscape 第二部分",
-      "url": "https://pwn.ai/blog/firecracker-escape",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 76,
-          "review": "逃逸细节别只写第二篇，受影响版本、补丁和复现步骤交出来。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "漏洞博客写了细节，但利用代码和复现步骤未公开，只能等第三方验证。"
-        },
-        "pragmatic": {
-          "score": 68,
-          "review": "跑多租户 Firecracker 的先查版本打补丁；纯业务开发不用管。"
         }
       }
     }
