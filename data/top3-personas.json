@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T12:06:38.570939Z",
+  "generated_at": "2026-11-08T19:08:58.843814Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,22 +17,42 @@
   ],
   "items": [
     {
-      "story_id": "story_d600757765e9",
-      "title": "Show HN：我们把 31B 的视频+音频扩散模型压缩到 14B，仅需 6 步，INT8 / Show HN: We compressed a 31B video+audio diffusion model to 14B, 6 steps, INT8",
-      "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+      "story_id": "story_553c073cf47e",
+      "title": "Llama-modchip：64GB 内存跑 284B DeepSeek，无需 GPU / Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+      "url": "https://github.com/synchopate/llama-modchip",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 55,
-          "review": "参数量和步数晒了，画质、音画同步和显存账单呢？"
+          "score": 58,
+          "review": "284B 塞进 64GB，代价是几个 token 每秒？不提速度的'能跑'等于没说。"
         },
         "paper-police": {
-          "score": 66,
-          "review": "GitHub 仓库地址已提供，代码路径可查；但无论文与公开 benchmark，压缩率和 6 步生成效果仍需自行复现验证"
+          "score": 58,
+          "review": "GitHub 有代码，但无论文和第三方复现，64GB 跑 284B 先看实测。"
         },
         "pragmatic": {
-          "score": 80,
-          "review": "仓库能直接 clone，6 步加 INT8 意味着单卡可试视频生成，先看显存要求。"
+          "score": 76,
+          "review": "开源可克隆，无显卡也能跑大 MoE，但速度别抱期待，适合离线实验。"
+        }
+      }
+    },
+    {
+      "story_id": "story_1aa565e216d9",
+      "title": "anthropics/claude-quickstarts — 一组项目合集，帮开发者快速上手，用 Claude API 构建可部署的应用 / anthropics/claude-quickstarts — A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
+      "url": "https://github.com/anthropics/claude-quickstarts",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "样板代码是真能跑，但'可部署'三个字里藏着的鉴权、限流和账单，还得自己补。"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "仓库代码开源可跑，但仅示例合集，无论文无benchmark，验证不了任何性能说法。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "官方示例仓库，clone 下来照着改最快，省去从零搭 Claude 接入的时间。"
         }
       }
     },
@@ -40,7 +60,7 @@
       "story_id": "story_928495a51ded",
       "title": "克劳德·科德（Claude Code）的“Don't Ask Again”在1,122个公开的GitHub文件中泄露了密码",
       "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 68,
           "review": "用 Claude Code 的赶紧查 allowlist 和历史提交，别让 agent 顺手把密钥推上 GitHub。"
-        }
-      }
-    },
-    {
-      "story_id": "story_e678eeaacb4b",
-      "title": "MaxxBench – “DeepSWE 得分不错。但这是真的吗？”",
-      "url": "https://maxxbench.unlap.ai/research/why-maxxbench",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 55,
-          "review": "质疑别人分数的榜单，自己的评测脚本和校准数据在哪？先晒出来。"
-        },
-        "paper-police": {
-          "score": 50,
-          "review": "有基准研究页和方法数字，但无论文无开源代码，等第三方跑出复现再说。"
-        },
-        "pragmatic": {
-          "score": 52,
-          "review": "挑模型前先看这篇：DeepSWE 分数可能被刷高，别直接拿榜单当选型依据。"
         }
       }
     }
