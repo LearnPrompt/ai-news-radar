@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T19:08:58.843814Z",
+  "generated_at": "2026-11-08T21:28:14.219493Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_553c073cf47e",
-      "title": "Llama-modchip：64GB 内存跑 284B DeepSeek，无需 GPU / Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
-      "url": "https://github.com/synchopate/llama-modchip",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "284B 塞进 64GB，代价是几个 token 每秒？不提速度的'能跑'等于没说。"
-        },
-        "paper-police": {
-          "score": 58,
-          "review": "GitHub 有代码，但无论文和第三方复现，64GB 跑 284B 先看实测。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "开源可克隆，无显卡也能跑大 MoE，但速度别抱期待，适合离线实验。"
-        }
-      }
-    },
-    {
       "story_id": "story_1aa565e216d9",
       "title": "anthropics/claude-quickstarts — 一组项目合集，帮开发者快速上手，用 Claude API 构建可部署的应用 / anthropics/claude-quickstarts — A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
       "url": "https://github.com/anthropics/claude-quickstarts",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -57,22 +37,42 @@
       }
     },
     {
-      "story_id": "story_928495a51ded",
-      "title": "克劳德·科德（Claude Code）的“Don't Ask Again”在1,122个公开的GitHub文件中泄露了密码",
-      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "story_id": "story_553c073cf47e",
+      "title": "Llama-modchip：搭载 284B DeepSeek 芯片，配备 64GB 内存，无 GPU",
+      "url": "https://github.com/synchopate/llama-modchip",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 48,
+          "review": "标题把模型参数量和'芯片'缝在一起就成卖点了，token/s 和内存带宽敢不敢先贴？"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "仓库代码可查，但无GPU跑284B的吞吐和精度都未见benchmark，等复现。"
+        },
+        "pragmatic": {
+          "score": 62,
+          "review": "纯 CPU 内存跑大模型的折腾方案，能 clone 试，但别指望实用性能，看清是实验品。"
+        }
+      }
+    },
+    {
+      "story_id": "story_daac9443a692",
+      "title": "再见Claude，你好Pi / Goodbye Claude, hello Pi",
+      "url": "https://caleb.software/posts/claude-to-pi.html",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "1,122 个文件数字够具体，但把泄露全归给一个按钮，样本条件还没说清。"
+          "score": 50,
+          "review": "一人份的迁移日记：样本量 n=1，换工具的痛快劲儿，别人复制不了。"
         },
         "paper-police": {
-          "score": 48,
-          "review": "厂商博客给了1,122这个数字，方法和样本未公开，HN热议不等于复现，等第三方验证。"
+          "score": 26,
+          "review": "个人博客的换用体验，无论文、代码、benchmark，只有主观感受，不能作数。"
         },
         "pragmatic": {
-          "score": 68,
-          "review": "用 Claude Code 的赶紧查 allowlist 和历史提交，别让 agent 顺手把密钥推上 GitHub。"
+          "score": 45,
+          "review": "个人换工具心得，非新版本或降价；想找Claude Code平替的可扫一眼，其余人跳过。"
         }
       }
     }
