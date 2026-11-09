@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T19:07:30.776649Z",
+  "generated_at": "2026-11-09T23:40:24.852313Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,50 @@
   ],
   "items": [
     {
+      "story_id": "story_545a875aa516",
+      "title": "Secret scanning 现可检测 GitHub Actions 工作流日志中的密钥 / Secret scanning detects secrets in GitHub Actions workflow logs",
+      "url": "https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 82,
+          "review": "日志里漏密钥确实是老毛病，这次补得实在，可惜只扫自家平台还赶不上事后。忽"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "官方更新可开关实测，但无第三方评测与基准，属产品公告而非研究成果。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "CI 日志里误打印的密钥终于能被扫出来，仓库安全设置开一下即可生效。"
+        }
+      }
+    },
+    {
+      "story_id": "story_2b2aad2325b1",
+      "title": "GitHub Copilot 中的Claude寓言 5.2 / Claude Fable 5.2 in GitHub Copilot",
+      "url": "https://github.blog/changelog/2026-11-09-claude-fable-5-2-in-github-copilot",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 58,
+          "review": "换个版本号就发条 changelog，跑分、限流、价格一样没提，先看疗效。"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "更新日志只宣布上线，无论文无跑分无第三方复现，\"Fable\"这个型号名也无来源可查。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "Copilot 模型下拉框多一个选项，切过去跑两个真实任务对比再决定换不换。"
+        }
+      }
+    },
+    {
       "story_id": "story_a1b7baa37fd3",
       "title": "火山引擎发布Seedream5.5:像素级可控编辑，百轮修改不崩坏",
       "url": "https://www.aibase.com/news/32185",
-      "rank": 1,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 52,
@@ -33,46 +73,6 @@
         "pragmatic": {
           "score": 78,
           "review": "做图像编辑产品的可以去试接口，长链路反复改图不崩是当前真痛点。"
-        }
-      }
-    },
-    {
-      "story_id": "story_9a636bf906b5",
-      "title": "字节 Seedream 5.5 发布：支持 100 轮连续编辑与原生透明输出，全面刷新 AI 图像创作天花板",
-      "url": "https://www.aibase.com/news/32186",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "“天花板”是自己刷的，百轮编辑的实测数据呢？透明通道倒是真功能。"
-        },
-        "paper-police": {
-          "score": 28,
-          "review": "仅单条新闻源，无论文、代码与第三方评测，刷天花板只是宣传语。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "透明通道输出能直接进设计流水线，等 API 上线拿老图连编测一遍再换。"
-        }
-      }
-    },
-    {
-      "story_id": "story_53022cf20de4",
-      "title": "homeassistant-ai/ha-mcp — 用 Claude、ChatGPT 等 AI 助手配置并自动化 Home Assistant。 / homeassistant-ai/ha-mcp — Configure and automate Home Assistant with Claude, ChatGPT, and other AI assistants.",
-      "url": "https://github.com/homeassistant-ai/ha-mcp",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "让大模型直接改家居配置，权限边界和改坏了怎么回滚？README没写。"
-        },
-        "paper-police": {
-          "score": 70,
-          "review": "代码开源可直接跑，但无评测数字证明配置准确率，宣称待实测。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "开源能直接 clone，家里跑 HA 的今天就能接上 AI 助手改自动化，也就这一小撮人用得上。"
         }
       }
     }
