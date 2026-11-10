@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T08:45:17.352590Z",
+  "generated_at": "2026-11-10T13:41:39.290272Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_545a875aa516",
-      "title": "Secret scanning 现可检测 GitHub Actions 工作流日志中的密钥 / Secret scanning detects secrets in GitHub Actions workflow logs",
-      "url": "https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 82,
-          "review": "日志里漏密钥确实是老毛病，这次补得实在，可惜只扫自家平台还赶不上事后。忽"
-        },
-        "paper-police": {
-          "score": 58,
-          "review": "官方更新可开关实测，但无第三方评测与基准，属产品公告而非研究成果。"
-        },
-        "pragmatic": {
-          "score": 86,
-          "review": "CI 日志里误打印的密钥终于能被扫出来，仓库安全设置开一下即可生效。"
-        }
-      }
-    },
-    {
       "story_id": "story_2b2aad2325b1",
       "title": "Claude Fable 5.2 现已登陆 GitHub Copilot / Claude Fable 5.2 in GitHub Copilot",
       "url": "https://github.blog/changelog/2026-11-09-claude-fable-5-2-in-github-copilot",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -60,7 +40,7 @@
       "story_id": "story_314909b45180",
       "title": "Meta 推出轻量主力 Muse Ember：性能持平 Claude 5.5，单次任务成本大降至三分之一",
       "url": "https://www.aibase.com/news/32194",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 32,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 76,
           "review": "成本砍到三分之一确实诱人，但先确认 API 真开放、跑分能复现，再谈迁移。"
+        }
+      }
+    },
+    {
+      "story_id": "story_c3edcb8060b0",
+      "title": "Anthropic 发布全新 Claude Fable 和 Mythos 5.2 模型 / Anthropic launches new Claude Fable and Mythos 5.2 models",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1030005/anthropic-claude-fable-mythos-5-2",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 40,
+          "review": "Fable 和 Mythos 这两个名字听着有诗意，跑分、上下文、价格却一个字没提，发布会只剩命名艺术了。"
+        },
+        "paper-police": {
+          "score": 28,
+          "review": "两家媒体转述发布消息，无论文、无仓库、无跑分，命名也可疑。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "新模型上线先跑自家 eval 对比再迁移，别急着改生产默认。"
         }
       }
     }
