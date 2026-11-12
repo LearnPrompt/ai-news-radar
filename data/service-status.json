@@ -1,16 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T17:37:38.593049Z",
+  "generated_at": "2026-11-12T21:28:09.547238Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 1,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 1
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M78GAT3AK9P9W8Z230KHFVE8",
+      "provider": "OpenAI",
+      "title": "Elevated errors affecting the Microsoft 365 connector",
+      "title_zh": "the Microsoft 365 connector 错误率升高",
+      "status": "investigating",
+      "impact": "minor",
+      "started_at": "2026-11-12T18:29:14Z",
+      "updated_at": "2026-11-12T18:29:14Z",
+      "message": "We’re investigating an issue with Microsoft connectors where new connections may be broken and tools are not working as expected. We’ll share an update when we know more.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M78GAT3AK9P9W8Z230KHFVE8"
+    }
+  ]
 }
