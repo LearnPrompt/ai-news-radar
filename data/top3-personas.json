@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T13:21:14.941057Z",
+  "generated_at": "2026-11-13T16:41:51.165842Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,10 +37,30 @@
       }
     },
     {
+      "story_id": "story_9113026e72af",
+      "title": "llama.cpp v1.0.0：为本地 AI 生态打下更坚实的基础 / llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
+      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 76,
+          "review": "三年迭代换来一个 1.0 标签，代码是真的，但“更坚实的基础”这句话其实什么也没说明。"
+        },
+        "paper-police": {
+          "score": 78,
+          "review": "官方博客加开源仓库，代码在可自查；但发布文里若只讲架构不给跑分，性能仍待自测。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "本地推理主力框架终于出 1.0，接口稳定了，可以放心把它写进部署脚本。"
+        }
+      }
+    },
+    {
       "story_id": "story_83023b0bea9d",
       "title": "使用 REST API 管理代码仓库的 AI Scan / Manage AI Scan for repositories using the REST API",
       "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 62,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 78,
           "review": "现在可以用脚本批量开关仓库的 AI 扫描，管理员和平台组当天就能接入 CI；普通开发者暂时用不上。"
-        }
-      }
-    },
-    {
-      "story_id": "story_3d96b04a0c3a",
-      "title": "ChromeDevTools/chrome-devtools-mcp — 为编码 Agent 打造的 Chrome DevTools / ChromeDevTools/chrome-devtools-mcp — Chrome DevTools for coding agents",
-      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 78,
-          "review": "官方团队把 CDP 包了层 MCP 壳，能用是真能用，惊喜也是真没有。"
-        },
-        "paper-police": {
-          "score": 66,
-          "review": "代码开源可查是真证据，但无论文无 benchmark，宣称的效果还得自己复现验证。"
-        },
-        "pragmatic": {
-          "score": 78,
-          "review": "官方 MCP 让 Agent 直接读控制台和网络请求，调前端 bug 的今天就能装来试。"
         }
       }
     }
