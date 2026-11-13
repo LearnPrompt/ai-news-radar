@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T16:29:50.057332Z",
+  "generated_at": "2026-11-13T20:54:06.780785Z",
   "ok": true,
   "active_count": 2,
   "providers": [
@@ -14,6 +14,19 @@
   ],
   "incidents": [
     {
+      "id": "01M7ATRS6BMZ61E4JDHJGM79Y0",
+      "provider": "OpenAI",
+      "title": "Delayed Costs Data in the Compliance API",
+      "title_zh": "Delayed Costs Data in the Compliance API",
+      "status": "monitoring",
+      "impact": "minor",
+      "started_at": "2026-11-13T16:10:07Z",
+      "updated_at": "2026-11-13T18:56:45Z",
+      "message": "We’ve applied a mitigation and are monitoring the affected services to confirm recovery. Delays in cost data are still expected.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M7ATRS6BMZ61E4JDHJGM79Y0"
+    },
+    {
       "id": "01M78GAT3AK9P9W8Z230KHFVE8",
       "provider": "OpenAI",
       "title": "Elevated errors affecting the Microsoft 365 connector",
@@ -25,19 +38,6 @@
       "message": "We’re seeing signs of recovery for the Microsoft 365 connector and are continuing to monitor the affected services to confirm recovery.",
       "affected_components": [],
       "url": "https://status.openai.com/incidents/01M78GAT3AK9P9W8Z230KHFVE8"
-    },
-    {
-      "id": "01M7ATRS6BMZ61E4JDHJGM79Y0",
-      "provider": "OpenAI",
-      "title": "Delayed Costs Data in the Compliance API",
-      "title_zh": "Delayed Costs Data in the Compliance API",
-      "status": "identified",
-      "impact": "minor",
-      "started_at": "2026-11-13T16:10:07Z",
-      "updated_at": "2026-11-13T16:10:07Z",
-      "message": "We have identified an issue causing delays in publishing Organization cost data through the Costs API. API and ChatGPT usage are not affected. We are working to restore normal data freshness.",
-      "affected_components": [],
-      "url": "https://status.openai.com/incidents/01M7ATRS6BMZ61E4JDHJGM79Y0"
     }
   ]
 }
