@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T03:37:20.667177Z",
+  "generated_at": "2026-11-13T08:18:17.482174Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_089defa8f927",
-      "title": "ElevenLabs发布Scribe v3系列，支持102种语言及实时语音转写",
-      "url": "https://www.aibase.com/news/32303",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 66,
-          "review": "102种语言和实时都说了，各语种准确率和价格却缺席。"
-        },
-        "paper-police": {
-          "score": 22,
-          "review": "来源为新闻转载，没有论文、代码和基准测试；102种语言的准确率或WER数据呢？没有就只是宣传。"
-        },
-        "pragmatic": {
-          "score": 80,
-          "review": "做转写、字幕的直接接 API 实测，重点比准确率和实时延迟。"
-        }
-      }
-    },
-    {
       "story_id": "story_378895404be5",
       "title": "机密扫描可检测 Cloudflare 服务令牌 / Secret scanning detects Cloudflare service tokens",
       "url": "https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 76,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 74,
           "review": "已上线自动生效，Cloudflare token 泄露会立刻告警，顺手查下自家仓库有没有踩过。"
+        }
+      }
+    },
+    {
+      "story_id": "story_b9fa2a337927",
+      "title": "LLMON：一种 LLM 原生标记语言，现已集成到 Granite 4.1 3B 和 8B 中 / LLMON: An LLM-Native Markup Language, now in Granite 4.1 3B and 8B",
+      "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 65,
+          "review": "模型是真发了，可这门新标记语言比 JSON 强在哪，没见独立数据。"
+        },
+        "paper-police": {
+          "score": 52,
+          "review": "博客有集成细节，但缺论文、代码与独立评测，复现性待验证。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "模型能直接下载试，但新标记语言得等生态跟进，现在改代码为时过早。"
         }
       }
     }
