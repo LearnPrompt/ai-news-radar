@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T12:22:56.068607Z",
+  "generated_at": "2026-11-14T19:20:02.951390Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_e0ce3fdbb288",
-      "title": "Gemini 4 Hydrogen in GitHub Copilot",
-      "url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+      "story_id": "story_e1cd227ad611",
+      "title": "Anthropic 升级 Claude Code 的 Projects 功能：无需人工干预，可并行运行多个 AI 工作单元 / Anthropic Upgrades Claude Code Projects to Run Parallel AI Workers Hands-Free",
+      "url": "https://alphasignal.ai/news/anthropic-upgrades-claude-code-projects-to-run-parallel-ai-workers-hands-free",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "更新日志只报了型号和上线日期，性能数据只字未提，好在不是画饼，能直接调用。"
+          "score": 58,
+          "review": "并行代理听着爽，冲突合并、Token 账单和权限边界却只字未提。"
         },
         "paper-police": {
-          "score": 35,
-          "review": "官方 changelog 只说模型上架 Copilot，无论文、无跑分、无复现路径，算集成公告不算技术证据。"
+          "score": 30,
+          "review": "产品功能更新仅由聚合站转述，无文档链接、无并行效果评测，没法验证。"
         },
         "pragmatic": {
-          "score": 87,
-          "review": "Copilot 里就能切到新模型，先拿几个真实仓库试试补全和改 bug 的手感，再决定要不要换默认。"
+          "score": 76,
+          "review": "Claude Code 用户可挂多个并行 agent 跑任务，建议先拿小任务试水，防它们改同一文件打架。"
         }
       }
     },
     {
-      "story_id": "story_9113026e72af",
-      "title": "llama.cpp v1.0.0：为本地 AI 生态打下更坚实的基础 / llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
-      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+      "story_id": "story_c6f5f334f60e",
+      "title": "Unsloth Qwen 3.8-27B 量化——Dynamic v3.1 更新",
+      "url": "https://unsloth.ai/docs/models/qwen3.8",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 76,
-          "review": "三年迭代换来一个 1.0 标签，代码是真的，但“更坚实的基础”这句话其实什么也没说明。"
+          "score": 66,
+          "review": "量化配方敢公开、能复现，算实在；但版本号叠成谜语，v3.1 比 v3 快多少、掉点多少，表格呢？"
         },
         "paper-police": {
-          "score": 78,
-          "review": "官方博客加开源仓库，代码在可自查；但发布文里若只讲架构不给跑分，性能仍待自测。"
+          "score": 55,
+          "review": "官方文档给了量化和数字，代码开源，但缺独立复现的精度评测。"
         },
         "pragmatic": {
-          "score": 82,
-          "review": "本地推理主力框架终于出 1.0，接口稳定了，可以放心把它写进部署脚本。"
+          "score": 76,
+          "review": "显存紧的可以直接换 v3.1 动态量化，同尺寸掉点更少，clone 下来就能跑。"
         }
       }
     },
     {
-      "story_id": "story_83023b0bea9d",
-      "title": "使用 REST API 管理代码仓库的 AI Scan / Manage AI Scan for repositories using the REST API",
-      "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+      "story_id": "story_6462d932fa5b",
+      "title": "GitHub Copilot 部分模型将于 12 月停用 / Upcoming deprecation of selected GitHub Copilot models in December",
+      "url": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 62,
-          "review": "只是新增了几个管理接口，扫描的准确性、误报率一个字没提，接口先弄出来了。"
+          "score": 76,
+          "review": "难得一份不吹牛的公告，但「部分模型」这四个字，对用户来说是工作流要重搭。"
         },
         "paper-police": {
-          "score": 58,
-          "review": "API 端点公开可调，但 AI Scan 检出效果无评测数据，功能宣称仍需实测验证。"
+          "score": 72,
+          "review": "官方公告列明停用名单和日期，来源可查；但无替代模型评测对比，属通知非技术证据。"
         },
         "pragmatic": {
-          "score": 78,
-          "review": "现在可以用脚本批量开关仓库的 AI 扫描，管理员和平台组当天就能接入 CI；普通开发者暂时用不上。"
+          "score": 72,
+          "review": "有在用 Copilot 的话现在就去查哪几个模型要走，提前在配置里换好，免得断更。"
         }
       }
     }
