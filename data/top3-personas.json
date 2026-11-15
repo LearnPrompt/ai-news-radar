@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T12:55:28.610520Z",
+  "generated_at": "2026-11-15T19:55:08.890627Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,42 +17,42 @@
   ],
   "items": [
     {
-      "story_id": "story_3ff6db276ba5",
-      "title": "Show HN: DeepSeek V3，约200行纯Jax代码",
-      "url": "https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax",
+      "story_id": "story_985a2766aaa2",
+      "title": "Show HN: db-branch – 借助 ZFS，几秒内为 AI Agent 和 CI 创建数据库分支 / Show HN: db-branch – database branches in seconds for AI agents and CI, via ZFS",
+      "url": "https://github.com/db-branch/db-branch",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 55,
-          "review": "两百行搭个结构架子还行，671B权重加载和MoE并行一个字没提。"
+          "score": 72,
+          "review": "ZFS 快照做分支思路正，但秒级只在 CoW 文件系统上成立，跨平台用户先别急。"
         },
         "paper-police": {
-          "score": 58,
-          "review": "代码开源可跑，但没给评测数字证明还原了V3，复现结果存疑。"
+          "score": 60,
+          "review": "代码开了源这点算数，但\"几秒建分支\"的性能宣称还缺可复现的 benchmark，跑一遍再说。"
         },
         "pragmatic": {
-          "score": 72,
-          "review": "两百行能跑通就是好教材，想学 JAX 或移植推理的直接 clone。"
+          "score": 76,
+          "review": "开源能直接 clone，ZFS 环境下给 CI 和 Agent 秒级造库副本挺实用，先确认你的机器支持 ZFS。"
         }
       }
     },
     {
-      "story_id": "story_f7d3b237183e",
-      "title": "通过两台配备vLLM的Nvidia DGX工作站，以607.8 tok/s的速度处理GLM-5.3",
-      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm",
+      "story_id": "story_a48b81e8f653",
+      "title": "elementalsouls/Claude-BugHunter — A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices.",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter",
       "rank": 2,
       "reviews": {
         "cynic": {
-          "score": 62,
-          "review": "607.8 tok/s 精确到小数点后一位，两台 DGX 的价钱却一个字不提。"
+          "score": 58,
+          "review": "82 个技能、681 条模式数得清，可没有一条证据说明它比裸 Claude 多挖出一个洞。"
         },
         "paper-police": {
-          "score": 55,
-          "review": "官方博客给了硬件配置和吞吐数字，vLLM虽开源但未附复现脚本，等第三方实测。"
+          "score": 45,
+          "review": "仓库代码可查,但681条模式和24类覆盖无评测无复现,只是自报数据。"
         },
         "pragmatic": {
           "score": 72,
-          "review": "跨节点 vLLM 配置有参考价值，但两台 DGX 的门槛劝退大多数人，先收藏再说。"
+          "review": "开源可直接 clone 的技能包，做安全测试的今天就能试，682 条报告模式是现成弹药。"
         }
       }
     },
