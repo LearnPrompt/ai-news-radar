@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T21:42:33.391282Z",
+  "generated_at": "2026-11-15T02:46:30.929471Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,50 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_e1cd227ad611",
-      "title": "Anthropic 升级 Claude Code 的 Projects 功能：无需人工干预，可并行运行多个 AI 工作单元 / Anthropic Upgrades Claude Code Projects to Run Parallel AI Workers Hands-Free",
-      "url": "https://alphasignal.ai/news/anthropic-upgrades-claude-code-projects-to-run-parallel-ai-workers-hands-free",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "并行代理听着爽，冲突合并、Token 账单和权限边界却只字未提。"
-        },
-        "paper-police": {
-          "score": 30,
-          "review": "产品功能更新仅由聚合站转述，无文档链接、无并行效果评测，没法验证。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "Claude Code 用户可挂多个并行 agent 跑任务，建议先拿小任务试水，防它们改同一文件打架。"
-        }
-      }
-    },
-    {
-      "story_id": "story_c6f5f334f60e",
-      "title": "Unsloth Qwen 3.8-27B 量化——Dynamic v3.1 更新",
-      "url": "https://unsloth.ai/docs/models/qwen3.8",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 66,
-          "review": "量化配方敢公开、能复现，算实在；但版本号叠成谜语，v3.1 比 v3 快多少、掉点多少，表格呢？"
-        },
-        "paper-police": {
-          "score": 55,
-          "review": "官方文档给了量化和数字，代码开源，但缺独立复现的精度评测。"
-        },
-        "pragmatic": {
-          "score": 76,
-          "review": "显存紧的可以直接换 v3.1 动态量化，同尺寸掉点更少，clone 下来就能跑。"
-        }
-      }
-    },
-    {
       "story_id": "story_2525de7ac64b",
       "title": "Keep Opus 5.5 as your coding default in Claude Code. On 52 coding tasks in Claude Code 2.1.322, Fable 5.2 solved about as many (82.7% vs 84.6%) but cost 2.80x as much per solved task. Opus already solves most of these...",
       "url": "https://x.com/garrytan/status/2121464508225053153",
-      "rank": 3,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -73,6 +33,46 @@
         "pragmatic": {
           "score": 72,
           "review": "选型参考：跑分只差 2 个点，单价贵 2.8 倍，默认继续用 Opus，别急着换。"
+        }
+      }
+    },
+    {
+      "story_id": "story_3ff6db276ba5",
+      "title": "Show HN: DeepSeek V3，约200行纯Jax代码",
+      "url": "https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 55,
+          "review": "两百行搭个结构架子还行，671B权重加载和MoE并行一个字没提。"
+        },
+        "paper-police": {
+          "score": 58,
+          "review": "代码开源可跑，但没给评测数字证明还原了V3，复现结果存疑。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "两百行能跑通就是好教材，想学 JAX 或移植推理的直接 clone。"
+        }
+      }
+    },
+    {
+      "story_id": "story_f7d3b237183e",
+      "title": "通过两台配备vLLM的Nvidia DGX工作站，以607.8 tok/s的速度处理GLM-5.3",
+      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "607.8 tok/s 精确到小数点后一位，两台 DGX 的价钱却一个字不提。"
+        },
+        "paper-police": {
+          "score": 55,
+          "review": "官方博客给了硬件配置和吞吐数字，vLLM虽开源但未附复现脚本，等第三方实测。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "跨节点 vLLM 配置有参考价值，但两台 DGX 的门槛劝退大多数人，先收藏再说。"
         }
       }
     }
