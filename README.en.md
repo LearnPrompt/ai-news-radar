@@ -48,6 +48,8 @@ The three lanes are one road: let your agent read the brief → read the site yo
 
 The radar does the tracking; there is a station on each side. Start at [**AI MAP**](https://aimap.carlwow.com), a knowledge graph of who has been heating up over the last 7 days (refreshed every 12 hours), then come back here to dig into the sources. When a trend makes you want to build, [**GoodCase**](https://goodcase.carlwow.com) has ready-to-copy viral cases and prompts. Discover → track → use, one road.
 
+Viral AI prompts, rerun on a second model, results published either way: cases and side-by-side reruns are in [awesome-seedance](https://github.com/LearnPrompt/awesome-seedance?utm_source=ai-news-radar&utm_medium=github&utm_campaign=readme-en&utm_content=goodcase-pointer), the full site is [goodcase.ai](https://goodcase.ai/?utm_source=ai-news-radar&utm_medium=github&utm_campaign=readme-en&utm_content=goodcase-pointer).
+
 ---
 
 ## What is this?
