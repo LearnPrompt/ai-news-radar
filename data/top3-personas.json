@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T22:13:46.498206Z",
+  "generated_at": "2026-11-18T23:38:06.826644Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_a2f60c2240b8",
+      "title": "Gemini 4 Neon in GitHub Copilot",
+      "url": "https://github.blog/changelog/2026-11-18-gemini-4-neon-in-github-copilot",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 52,
+          "review": "换模型塞进下拉菜单也能发changelog？上下文长度、定价、限流一个字没提。"
+        },
+        "paper-police": {
+          "score": 42,
+          "review": "官方更新只宣布可用性，缺少评测数字与方法，等第三方跑分再定论。"
+        },
+        "pragmatic": {
+          "score": 86,
+          "review": "Copilot 里今天就能切到新模型，先拿它跑一遍日常补全和重构，看是否值得换默认。"
+        }
+      }
+    },
+    {
       "story_id": "story_e0cc6809540e",
       "title": "Gemini 4 Neon 正式发布 / Introducing Gemini 4 Neon",
       "url": "https://deepmind.google/blog/introducing-gemini-4-neon",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 55,
@@ -40,7 +60,7 @@
       "story_id": "story_b6cf053fc04a",
       "title": "180B 参数、32GB 内存：用 Transformers 把 MoE 推理推到极限 / 180B Parameters, 32GB of RAM: Pushing MoE Inference to the Limit with Transformers",
       "url": "https://huggingface.co/blog/moe-expert-streaming",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 72,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 84,
           "review": "32GB 内存跑 180B MoE，实现路径已公开，小机器部署大模型可直接照着抄。"
-        }
-      }
-    },
-    {
-      "story_id": "story_913b1679e631",
-      "title": "DaisyRose-27B：把后训练效率推向新高度 / DaisyRose-27B: Pushing the Frontier of Post-Training Efficiency",
-      "url": "https://huggingface.co/blog/RadixArk/daisyrose-27b-pushing-the-frontier-of-post-trainin",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 42,
-          "review": "效率自称新高，却没见基线、成本或复现细节，先晒数据再谈高度。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "只有官方博客单源，论文、代码、benchmark 三件套一个没见，等可复现评测再算。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "27B 权重和后训练配方都放出来了，想压训练成本的可以直接照抄流程。"
         }
       }
     }
