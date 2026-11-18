@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T14:12:12.056293Z",
+  "generated_at": "2026-11-18T18:24:10.521354Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_67ad34c820c2",
-      "title": "GPT‑6.2 Astra 和 Sol / Introducing GPT-6.2 Astra and Sol",
-      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 44,
-          "review": "6.2 就敢叫新一代，Astra 和 Sol 两个代号先把场面撑满，评测数据倒是一字没提。"
-        },
-        "paper-police": {
-          "score": 28,
-          "review": "官方发布页加 HN 讨论，无论文无代码无跑分，先拿 benchmark 再说。"
-        },
-        "pragmatic": {
-          "score": 88,
-          "review": "新模型已上线，先拿真实任务跑一轮，重点看价格和限流。"
-        }
-      }
-    },
-    {
       "story_id": "story_cfb0a416a80c",
       "title": "OpenAI的GPT-6.2 Astra和GPT-6.2 Sol现已发布 / OpenAI’s GPT-6.2 Astra and GPT-6.2 Sol now available",
       "url": "https://github.blog/changelog/2026-11-17-openais-gpt-6-2-astra-and-gpt-6-2-sol-now-available",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 45,
@@ -57,22 +37,42 @@
       }
     },
     {
-      "story_id": "story_9c01c6018d4d",
-      "title": "MAI Code 2 和 MAI Code 2 Flash 现已登陆 GitHub Copilot / MAI Code 2 and MAI Code 2 Flash in GitHub Copilot",
-      "url": "https://github.blog/changelog/2026-11-17-mai-code-2-and-mai-code-2-flash-in-github-copilot",
+      "story_id": "story_b6cf053fc04a",
+      "title": "180B 参数、32GB 内存：用 Transformers 把 MoE 推理推到极限 / 180B Parameters, 32GB of RAM: Pushing MoE Inference to the Limit with Transformers",
+      "url": "https://huggingface.co/blog/moe-expert-streaming",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 72,
+          "review": "32GB 跑 180B 确实能跑，代价是速度——每秒几个 token 就没写进标题里。"
+        },
+        "paper-police": {
+          "score": 52,
+          "review": "HF博客给了实现细节和内存数字，但无独立复现与第三方跑分，先打问号。"
+        },
+        "pragmatic": {
+          "score": 84,
+          "review": "32GB 内存跑 180B MoE，实现路径已公开，小机器部署大模型可直接照着抄。"
+        }
+      }
+    },
+    {
+      "story_id": "story_3a3e9fb28354",
+      "title": "Rumble-2-Flash：一个面向40多种语言的开源0.5B语音模型 / Rumble-2-Flash: an open 0.5B speech model for 40+ languages",
+      "url": "https://huggingface.co/blog/rumble-2-flash",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "上架公告就算大新闻？参数、价格、基准全无，Flash 是快是省全靠猜。"
+          "score": 63,
+          "review": "0.5B塞进40多种语言，每种能分几小时语料？权重开源值得肯定，但别只报平均分。"
         },
         "paper-police": {
-          "score": 35,
-          "review": "官方 changelog 只说明模型已上线并可用，但没有评测数字、没有论文、没有可复现的 benchmark。"
+          "score": 66,
+          "review": "权重挂在 HF，算有一角证据；但无论文无第三方复现，40语种效果待独立跑分。"
         },
         "pragmatic": {
-          "score": 85,
-          "review": "Copilot 模型选择器里今天就能切，Flash 版适合高频补全，先拿它跑日常改代码试试。"
+          "score": 82,
+          "review": "0.5B 就能跑 40 多语言语音，权重已开源，本地语音应用可直接 clone 试。"
         }
       }
     }
