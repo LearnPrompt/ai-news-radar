@@ -47,6 +47,8 @@ npx skills add LearnPrompt/ai-news-radar -s ai-radar -g
 
 雷达管跟踪，上下游各有一站。先去 [**AI MAP** 热点图谱](https://aimap.carlwow.com) 一张图看最近 7 天谁在升温（每 12 小时刷新），锁定目标后回雷达深挖信源；看到想上手的热点，去 [**GoodCase** 用例库](https://goodcase.carlwow.com) 直接查现成案例和 Prompt。发现 → 跟踪 → 使用，三站一条路。
 
+爆款 AI 提示语换个模型重跑，结果好坏都公开：案例和对照在 [awesome-seedance](https://github.com/LearnPrompt/awesome-seedance?utm_source=ai-news-radar&utm_medium=github&utm_campaign=readme-zh&utm_content=goodcase-pointer)，完整站点在 [goodcase.ai](https://goodcase.ai/?utm_source=ai-news-radar&utm_medium=github&utm_campaign=readme-zh&utm_content=goodcase-pointer)。
+
 ---
 
 ## 这是什么
