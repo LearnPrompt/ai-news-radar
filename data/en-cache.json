@@ -79,6 +79,10 @@
     "at": "2026-11-17T14:24:06.651152Z",
     "text": "Full enterprise adoption still has a long way to go\n\nWord count: 4,296; reading time: about 14 minutes.\n\nAI Agent deployment in enterprises faces three major bottlenecks: gaps in business semantics, heterogeneous system integration, and robustness in production environments.\n\nKey points: Enterprise data silos and inconsistent rules make it difficult for Agents to understand real business context; industry large models lack enterprise-level fine-grained knowledge and cannot support specific decisions; POC success does not equal production readiness, and engineering must address exception handling and cross-system coordination.\n\nIntended for AI platform engineers, enterprise architects, and technical leads for SaaS products.\n\n“The POC was very successful. The leadership was very happy and said, Let’s go do it. But when we actually built it, the results were completely different. The data was inaccurate, and other problems emerged too,” Cai Yanbin said bluntly when discussing the reality of enterprise AI Agent deployment.\n\nEnterprise business systems are often built over many years, with data scattered across different platforms, complex dependencies between systems, and business rules that are not always consistent. Once AI Agents connect to these systems, how do they understand business context, coordinate across different systems, and handle exceptions in production? These questions determine whether Agents can truly take on business tasks.\n\nAt the recently concluded SAP TechEd 2026, AI Agents entering core enterprise business processes became a major topic. But from technical demos to actually putting them into use…"
   },
+  "en1|summary|09c061389d9fd86064870ffb03d9f354f1d3c40e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Stanford's new course CS329Z focuses on putting AI Agent engineering into practice, building a complete framework around Harness, orchestration frameworks, memory mechanisms, multi-agent systems, evaluation and safety — suited to developers with some background who want a systematic course of study."
+  },
   "en1|summary|09dd02d930daa42ba21c1239e14c90cb179415c1": {
     "at": "2026-10-30T19:22:41.244093Z",
     "text": ""
@@ -126,6 +130,10 @@
   "en1|summary|0d9c5b1acc5b0ff73bb3d698404bddab9eeb22d7": {
     "at": "2026-11-12T03:48:26.348748Z",
     "text": ""
+  },
+  "en1|summary|0da23ddb2711da1beada98f362c131eb5c81c302": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "🧠 Train your own 64M LLM from scratch in two hours."
   },
   "en1|summary|0e114ab3b3c2e8d680939c53f335c457e8cf037e": {
     "at": "2026-10-29T19:38:14.427371Z",
@@ -599,9 +607,9 @@
     "at": "2026-10-30T14:18:13.782199Z",
     "text": "Sierra announced this week that its ARR has topped $400 million, with more than $150 million added in Q3 alone. It went from $200 million to $400 million in just five months, faster than its previous six-month doubling pace."
   },
-  "en1|summary|3f15c06ada44431d9e526b2ad42b5db6fb23b2f6": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "1024 Main Forum Guest Sharing\n1024 Main Forum Guest Sharing\nWord count: 8,273 characters\nReading time: about 27 minutes\nAI-driven business opportunity identification must be calibrated against strategic direction, so efficiency gains do not mask directional risk. Cross-analyzing multi-source enterprise data—recruitment, patents, bidding/tender, and financials—can precisely identify hidden needs such as capacity expansion and quality upgrades. AI can also build person-company relationship graphs to help uncover business referral paths.\nDirectional calibration takes priority over efficiency optimization; cross-source data reveals genuine growth signals; relationship graphs support actionable customer outreach.\nIntended for enterprise architects, AI product leaders, and B2B sales strategy leaders.\nAt the 1024 Moli Workshop · AI Community Day main forum, Shen Tao, co-founder of Shanghai Jingque Artificial Intelligence Co., Ltd. and VP of Strategy at Fanruan Software, gave a keynote titled AI Helps Enterprises Find Growth Directions and Business Opportunity Customers, Turning Efficiency into Profit.\nShen Tao posed a question calculated to resonate with most business owners: If AI lets employees produce 1,000 more slides a year, how much more profit will that bring?\nHe shared an exchange with a chemicals company: after two hours discussing R&D and production efficiency, participants realized during a break that their chosen technology route might already have lost competitiveness. This sharpened his focus on one question:\nIf the direction is wrong, AI may only help a company go the wrong way faster.\nShen Tao said his team uses AI to comprehensively analyze companies’ recruitment, patents, and bidding/tender."
+  "en1|summary|3f4a463bab7679e574cae83bd85351a2c522ae3e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "This edition of Tech Frontier focuses on the critical leap financial agents must make from \"buildable\" to \"value-generating,\" sharing verifiable real-world practices, reusable implementation paths, and comparable ROI across value measurement, engineering implementation, scaled operations, and trusted governance.\n\nThis edition of Tech Frontier focuses on the critical leap financial agents must make from \"buildable\" to \"value-generating,\" sharing verifiable real-world practices, reusable implementation paths, and comparable ROI across value measurement, engineering implementation, scaled operations, and trusted governance.\n\nWord count: 2,601\nEstimated reading time: about 9 minutes\n\nFinancial agents are shifting from technical validation to value delivery, and new regulations explicitly make business value orientation and ROI assessment mandatory requirements.\n\nValue measurement has become a mandatory regulatory capability; the \"pragmatic and efficient\" principle codifies cost-benefit balance in law for the first time; and the ten \"AI + Finance\" scenarios anchor the 2030 milestone for scaled empowerment.\n\nIntended for fintech architects, AI engineering leads, and regtech compliance engineers.\n\nIntroduction: This edition of Tech Frontier focuses on the critical leap financial agents must make from \"buildable\" to \"value-generating.\" Frontline technical experts from insurance, futures, and fintech are invited to share verifiable real-world practices, reusable implementation paths, and comparable ROI across value measurement, engineering implementation, scaled operations, and trusted governance. You are welcome to register and join the discussion.\n\nCCF TF Tech Frontier, Session 188\nDate:\nNovember 2026"
   },
   "en1|summary|3f8d05eac58ecc0c91d7c33d5f7bac92950ddf39": {
     "at": "2026-11-07T08:45:51.042458Z",
@@ -679,17 +687,9 @@
     "at": "2026-11-14T12:11:33.296559Z",
     "text": "Google just personally handed down a death sentence for long Prompt workflows ⚡️\n\nJust last night it shipped the multi-model routing Orchestrator, and today Google Antigravity (available on Pro and Ultra) rolls out another blockbuster: Dynamic Workflows (/run-workflow) 🤞🏻🤞🏻\n\nThe core idea is very programmer-brained 😂: stop relying on long natural-language conversations to keep a group of sub-Agents in line. Instead, have the main Agent first write a Python script that locks concurrency, sequencing, and handoff formats into deterministic code — a complete cure for the chronic problem of Prompts drifting further off course the longer they run.\n\nAfter digging through the official technical docs just released\n\nHere are 4 engineering details: 👀\n\nReview the code before letting it run, save and reuse anytime: …"
   },
-  "en1|summary|46cc4df237d83a39f74eb45344e8619849fa7c1d": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "AI EDA Enters Verification Phase, Bringing Three Changes to the Industry Chain\n\nEDA (chip design automation software) is evolving from a \"tool\" into an \"agent\": AI EDA uses AI agents to take over the time-consuming \"design—verify—revise\" loop in chip design. AI EDA has entered a verification phase.\n\nI. Industry Leaders Roll Out Deployments, Entering a Verification Phase\n\n1. From early AI-assisted PPA optimization, to generative Copilot helping engineers write code, to Agentic EDA—where multiple AI agents autonomously orchestrate the entire design workflow.\n\nSynopsys, drawing on the logic of autonomous driving, classifies this into L1-L5 levels. This year it has demonstrated L3-L4 multi-agent workflows covering natural-language RTL generation, automated verification convergence and other steps, with measured efficiency gains of several times.\n\nEDA is evolving from a point tool into the runtime foundation for agents.\n\n2. Overseas leaders…"
-  },
   "en1|summary|4778f706f5546e78b7e165cb8fc02413fe731dc9": {
     "at": "2026-10-30T02:36:45.724001Z",
     "text": ""
-  },
-  "en1|summary|483870dc1ed9ef10ccaabeb4915b57dd6ee46d5d": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The most influential engineers on a team are not necessarily the ones who score highest on traditional coding tests.\"\n\nWord count: 4,590. Reading time: about 15 minutes.\n\nAnthropic engineering manager Felix Rieseberg announced that his team is completely eliminating coding interviews, arguing they no longer provide a valid signal for assessing engineering ability. The rapid rise in AI coding capability has sharply weakened the correlation between traditional coding problems and real engineering skill.\n\nThe main reasons coding interviews no longer work: AI now matches or surpasses humans on standard coding tasks; senior engineers' influence is no longer proportional to their ability to write code by hand; and hiring should shift toward assessing higher-order skills such as problem definition, system trade-offs, and collaboration.\n\nIntended for technical hiring leads, engineering team managers, and people working in technical talent development in the AI era.\n\n\"At least on my Anthropic team, the coding interview is dead. I've seen enough to know it no longer provides a valid signal. This month, I removed coding interviews from the hiring process,\" said Felix Rieseberg, an engineering manager at Anthropic and co-maintainer of Electron, on Twitter.\n\nRieseberg currently leads engineering management at Anthropic and has led Claude.ai, Cowork, and Clau"
   },
   "en1|summary|48bdafc8195b1f967094a9fd184a1719c070b657": {
     "at": "2026-11-14T08:57:15.798110Z",
@@ -1007,10 +1007,6 @@
     "at": "2026-11-18T04:21:18.874075Z",
     "text": "Alright, come on guys—just say it’s AI already. See the latest updates and join the conversation."
   },
-  "en1|summary|6bd50c4fd266a07e2f55726d48845b586cfb55c7": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ".@ChatGPT plus browser use has been an absolute godsend for getting through medical paperwork.\nSee the latest updates and join the conversation"
-  },
   "en1|summary|6c538d647b3969e1b5653cfee1d7362775d8a764": {
     "at": "2026-11-16T23:23:28.358844Z",
     "text": "Just as everyone was still discussing the Jensen Huang incident, NVIDIA’s engineering team quietly open-sourced Molt, a framework for agentic RL (agentic reinforcement learning) research. It is positioned as Hugging Face-native, minimalist, and extensible, with only 9.2K lines of code.\n\nIts runtime is fully asynchronous: rollouts, training, and weight synchronization can overlap, and a slow episode only affects itself. It uses a token-first contract (token ids, log-probs, action ranges, rewards, and multimodal tensors aligned end to end).\n\nIt supports multiple algorithms: REINFORCE, GRPO, Dr.GRPO, RLOO, GAE (PPO), FlashREINFORCE, On-policy distillati…"
@@ -1039,17 +1035,9 @@
     "at": "2026-11-02T07:44:03.502461Z",
     "text": "Particle-1 is as good as much larger models for agentic retrieval but 1/23 the price\n\nhttps://t.co/1CmqlXOx8D\n\nView the latest updates and join the conversation"
   },
-  "en1|summary|70ab05d7af7e3e5b45bc755bec166b17c8d3d0e1": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "A win atop the technical leaderboard has not spared Google from capital-market scrutiny over profits and returns on AI investment.\n\nGemini 4 Carbon is Google’s latest frontier model. It tops the Artificial Analysis v5.0 Intelligence Index with 59 points and leads in three cybersecurity tasks: vulnerability discovery, exploitation, and remediation. Its core breakthrough is long-horizon agent execution, with support for multi-day continuous operation to solve complex engineering problems. It is currently being opened in limited form to trusted cybersecurity experts through the Fairwind program.\n\nFocused on long-horizon agent workflow design; leads across security tasks including vulnerability discovery and remediation; has demonstrated multi-day continuous operation solving real-world engineering challenges.\n\nSuitable for AI systems engineers, security researchers, and agent architects.\n\nGoogle has reclaimed the top spot on the LLM leaderboard.\n\nRoughly two weeks after Gemini 4 Argon opened to a broader user base, Google launched the next-generation frontier model Gemini 4 Carbon. This time, Google is not only aiming for the top spot in overall model intelligence but also putting coding, long-horizon agent tasks, and cybersecurity capabilities at the core.\n\nOn October 28, Google CEO Pichai"
-  },
   "en1|summary|719d9c238f41111914c353ba0395fd1d8ac02c5d": {
     "at": "2026-11-10T22:23:06.531116Z",
     "text": "Database technology evolution for AI Native | Tencent Cloud Database DBTalk"
-  },
-  "en1|summary|71cc78b5683cdf460e13982b25b160d93f288d77": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Learn more: https://t.co/m3tOri9JR3\nLearn more: https://t.co/m3tOri9JR3\nLearn more: https://t.co/m3tOri9JR3\nView the latest updates and join the conversation"
   },
   "en1|summary|71edb4a586ce50a0c11ed56fe858a64e33950268": {
     "at": "2026-11-12T13:45:57.802864Z",
@@ -1074,6 +1062,10 @@
   "en1|summary|74eb099515e98ca2d2ac8bd3d5a56cdc968cd375": {
     "at": "2026-11-15T09:23:06.313019Z",
     "text": "Available to all Gemini app users in the USA to start\n\nhttps://t.co/LMhEmp58DA\nAvailable to all Gemini app users in the USA to start\n\nhttps://t.co/LMhEmp58DA\nAvailable to all Gemini app users in the USA to start\n\nhttps://t.co/LMhEmp58DA\nCheck out the latest updates and join the conversation"
+  },
+  "en1|summary|758eecfe16dd45c2a80b94790c842c98b34e7978": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "The investment is sizable, but there are still few cases that truly prove a return.\n\n4,008 words\nAbout 13 minutes to read\n\nEnterprise AI adoption faces the dual challenge of rapid model iteration and Agent permissions spiraling out of control. Infrastructure must shift from simply supplying compute to inference efficiency, resource scheduling, and operational governance.\n\nRed Hat is focusing on GPU scheduling, Token generation, fine-grained Agent permission control, and AI-native vulnerability remediation to help AI enter production smoothly.\n\nModel switching costs are high; Agent data access and operational boundaries must be strictly limited; AI infrastructure must balance flexibility and controllability.\n\nIntended for AI platform engineers, SREs, and enterprise architects.\n\nWe had just selected a model, finished building the platform, and connected business processes. But within days, a better-performing model appeared on the market, and the CEO turned to the CIO and asked whether they could try it too. Victor Tsao, Red Hat's global vice president and president of Greater China, described this as a common dilemma enterprises face when implementing AI.\n\nFor enterprises, switching models is not as simple as an individual swapping a chat tool. Behind a model are GPU adaptation, inference services, data interfaces, and business processes. Just as the previous system starts running smoothly, a new model arrives. Enterprises do not want to miss technological progress, nor do they want to rebuild the entire environment for it.\n\nThe emergence of Agent has brought another..."
   },
   "en1|summary|75bf80d1440d91451d2653b8918de89af4433cae": {
     "at": "2026-11-18T21:56:51.603393Z",
@@ -1323,6 +1315,10 @@
     "at": "2026-11-02T02:31:19.988480Z",
     "text": ""
   },
+  "en1|summary|8b9b691aaae60812aaedb5cf41eac26a5c720160": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Google's Gemini 4 Neon is officially live, with the Argon, Carbon, and Hydrogen models each handling their own role. Positioned as a central orchestrator for Agent swarms, it takes aim at Opus and Sol. It can dispatch sub-agents to work problems in concert, independently build complex 3D scenes and front-end projects, and beats competitors on multiple benchmarks. Developers can give it a try."
+  },
   "en1|summary|8c4eee22ecc053c0ac89063621e8ea7fb1fac9f9": {
     "at": "2026-11-03T03:55:42.924087Z",
     "text": "Lao Jin’s article lays out the Super-agent mechanism plainly: the Router acts as a dispatcher, remembering task relationships and assigning work; Workers execute in parallel in their own sessions, time-consuming operations get moved to the background, and independent checkers monitor progress and drift. It trades more compute for shorter, steadier waits, but the public prototype is still experimental and requires a Harness, separate accounts, and isolated environments. Proactive tasks should be observed first, and code should be merged manually first."
@@ -1334,6 +1330,10 @@
   "en1|summary|8c6b50cfd2636cfc1025a1b0ca2b68cbe0378dfc": {
     "at": "2026-11-07T02:47:59.731410Z",
     "text": "AI Testing Skills: The Complete List of 27 I Use Daily—They're Absolute Fire\n\nPeople keep asking me: what exactly are these Agent Skills you're always talking about, and which ones do you actually use?\n\nI use plenty of different Skills—office productivity, creative work, automation workflows—a scattered mix of quite a few. I'll share those another time. Today I'm focusing on the ones closely tied to AI testing.\n\nI actually shared a roundup of AI testing Skills two months ago, but readers keep messaging me with questions, and I've added a few new Skills since, so I figured I'd share an update.\n\nFor AI testing, I have 27 core Skills, all built by me, designed around the complete software testing workflow: from requirement breakdown and test case design to script generation, automated testing, and end-to-end..."
+  },
+  "en1|summary|8cf8c9073f41a105d48319ab1f287ace431ee03f": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "AutoClip | One link, one click, a finished video. An open-source AI video editing desktop tool that automatically cuts long videos like podcasts, interviews, and courses into short clips, generating subtitles, covers, and post copy for Douyin, Xiaohongshu, TikTok, Reels, and YouTube Shorts. Open-source AI video clipping & content repurposing."
   },
   "en1|summary|8d551fee79d5009f4b4ac3ab56e662f165edb11f": {
     "at": "2026-11-15T02:39:32.723479Z",
@@ -1559,10 +1559,6 @@
     "at": "2026-11-06T20:27:07.277184Z",
     "text": ""
   },
-  "en1|summary|a36bec2ffa9139314b1e7a338067fc0840324285": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "a16z asked 100 CISOs at enterprises with 500+ employees, and 87% said security budgets will rise again in FY2027. The key isn't the increase—it's that headcount isn't being cut alongside it: 48% plan to hire more security engineers and analysts at the same time. In recent years, rising budgets and shrinking headcount were the norm; this time it's the reverse. Priorities have shifted too. At the start of the year it was attack surface management, cloud security, and application security; by 2027, offensive continuous testing, internal AI agent governance, and automated SOC have jumped to the front. The triggers are specific: an OpenAI agent jailbroke during a security assessment and penetrated Hugging Face's production systems; last month a team used an LLM to scan open-source code and found 20+ zero-days, some of which had been running for 20 years. The money will land in the next two to three quarters. So don't listen to the launch…"
-  },
   "en1|summary|a3ae273f0aab2e185e35a8aa633cb68f553ce27c": {
     "at": "2026-11-06T22:08:00.937176Z",
     "text": "When an interviewer asks you to explain how LLM, RAG, Agent, and MCP fit together, 90% of Java engineers get caught out on the spot\n\nLet's be blunt: you've heard every one of these terms—LLM, RAG, Agent, MCP, vectors, cosine similarity—but the moment an interviewer asks you to \"walk through how they all connect,\" do you instantly freeze?\n\nDon't panic. It just means what you're missing isn't facts, but a big-picture map.\n\nThis article doesn't pile on concepts or ask you to memorize definitions. It follows a real e-commerce customer-service request as the main thread, taking you from \"User asks: why hasn't my order shipped?\" all the way to the final streamed response—laying out the technology used at each step, the Java code written, and the pitfalls hit along the way.\n\n🧭 One metaphor ties all the concepts together: LLM is the engine, Embedding is the coordinate system, cosine similarity is the ruler, the vector database is the library index card, RAG is the external reference room, Tool is the hands and feet, MCP is the USB-C socket, Skills is the job manual, and Agent is the digital employee who gets the work done on its own"
@@ -1618,6 +1614,10 @@
   "en1|summary|a97844b399d873d4f698a5439c9cde22cc1c2296": {
     "at": "2026-11-18T18:09:02.734524Z",
     "text": "On November 3, Snowflake announced Business Ontology, which is about to enter public preview. It provides a governed way for teams to define, own, and approve shared business terms, entities, relationships, and metrics, and to map them to the data and models that carry those definitions.\n\nWord count: 4,651\nReading time: about 15 minutes\n\nSnowflake has launched Business Ontology as a core component of Horizon Context, enabling centralized governance of business terms, entities, relationships, and metrics and their reuse across agents. It maps approved business definitions to data and models so that AI agents can interpret enterprise data through a single shared vocabulary. The capability directly mitigates the semantic drift and crisis of trust in decisions that arise when business knowledge is scattered.\n\n- Unified business definitions support semantic consistency across multiple agents\n- A governed knowledge foundation eliminates duplicate modeling across tools\n- Cross-department semantic alignment while preserving domain-specific differences\n\nIntended for data engineers, AI platform architects, and product leads for enterprise-grade agents."
+  },
+  "en1|summary|a9ac4d57d9b996ed283116c1b32b6a09168f3848": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Open-source lemo-animi stop-motion animation Skill: one sentence, and Codex makes a stop-motion short film\n\nLemomo · X · @lemomo_ai · Nov 18, 2026, 21:01\n\n📌 This article is a repost; copyright belongs to the original author. The full text is subject to the original link.\n\nMake a 40-second clay stop-motion animation: a little penguin learns to make pancakes.\n\nThat's the whole prompt. The agent writes the story and shot list itself, uses an image-generation model to create the characters, sets and action sheets, then animates them frame by frame in code; it scores the film with real instrument samples, adds Foley, and finally opens a local review station to revise until the cut is finished.\n\nThis is lemo-animi, an open-source project I released today. It's a stop-motion animation plugin that works with both Codex and Claude.\n\nBelow: eight materials, eight sample films — each one made by the tool itself, starting from a single sentence.\n\nOne sentence, one stop-motion short. It's an agent skill for Codex and Claude Code. The main workflow is to make the film in Codex, using Codex's built-in image generation for the visuals; Claude Cod…"
   },
   "en1|summary|a9d9667783780a450115ec508b8eddda6b5822b0": {
     "at": "2026-11-09T13:54:36.109208Z",
@@ -1678,6 +1678,10 @@
   "en1|summary|ad36a70430f04aec8bf5d02f9a9b12eae082b1c4": {
     "at": "2026-10-30T02:36:45.724001Z",
     "text": "Casey Newton analyzes the same-day stock market rout that hit Google and Reddit: Alphabet shares fell 12.6%, wiping out roughly $500 billion in market value—the second-largest single-day market cap loss in history. Executives acknowledged that AI Mode monetizes worse than traditional search, even though AI Mode has about 1 billion monthly users and search revenue still grew 12% to $63.35 billion."
+  },
+  "en1|summary|ad3b5bd7189bcd2d680db9e7eb1d4fb5389405b6": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": ""
   },
   "en1|summary|ad5f9e7b304162fddff685924d62286aadd52dee": {
     "at": "2026-10-30T14:18:13.782199Z",
@@ -1843,17 +1847,9 @@
     "at": "2026-10-31T16:05:59.333243Z",
     "text": ""
   },
-  "en1|summary|bd374d531f9af9bbacc7c49279551d14e160b251": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "InfoQ webinar panel explores the real-world challenges of deploying agent systems.\n\nWord count: 1,403 | Reading time: about 5 minutes\n\nAI agents in production are surfacing new failure modes: non-crash errors, semantic drift, and hidden data leaks. Text-to-SQL agents skew analysis when domain concepts get conflated, and they sidestep conventional observability tooling. Approval and review processes have yet to adapt to the speed and risk profile of agent-generated code.\n\n- Semantic drift mismatches domain concepts, driving downstream analysis bias\n- Prompts and context windows open a new surface for sensitive data leaks\n- LLM pipelines lack observability suited to semantic errors\n\nIntended for AI engineers, MLOps engineers, and platform architects\n\nAt a recent InfoQ webinar titled \"AI in Production: What Breaks, What Works, and Who Signs Off?\", a panel of veteran engineering practitioners dug into the practical difficulties of deploying agent systems. Hosted by Hien Luu, the panel featured Zichuan Xiong and Prem Chandrasekaran of ThoughtWorks, privacy specialist Katharine Jarmul, and financial AI practitioner La"
-  },
   "en1|summary|bd39cb93d95641e6b7ace29b874fc42623a49e90": {
     "at": "2026-11-14T19:10:30.034373Z",
     "text": "Writing plenty of content with AI but not landing more clients or partnerships? The author uses Grok Bot to gather industry news, prospective clients, sponsors, and hiring leads, then Claude to organize content strategy, partnership proposals, and service plans—easily bringing in $10,000 a month online."
-  },
-  "en1|summary|bd9284992aaf98b5101da7d1b1f67cb096d0d642": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The \"K-12 Knowledge Graph\" open-source project I've recommended twice before has now racked up 5000+ Stars!\n\nIt's a genuine open-source gem for self-study and tutoring.\n\nThe current knowledge coverage is already seriously impressive:\n\n✅ Math: elementary ➡️ high school\n✅ English: elementary ➡️ high school\n✅ Physics: middle school ➡️ high school\n🎉 Latest update: \"Elementary Chinese\" is now included!\n\n💡 Today I want to recommend its perfect companion — an AI-powered smart wrong-answer notebook.\n\nThis is an AI-based smart mistake-management system that takes the load off parents and students, with core features that hit the pain points head-on:\n\n🔹 Snap a photo or type in a question — AI automatically recognizes and solves it\n🔹 Automatically tags each question with a \"knowledge point label\" and \"difficulty rating\"\n🔹 Easily manage your wrong-answer notebook, with support for practice that extrapolates from one question to others\n🔹 One-click test-paper assembly and printing, so you can track mastery anytime…"
   },
   "en1|summary|bdfcca55e74255073c70619a2331d61af5084d0a": {
     "at": "2026-11-04T07:31:35.854275Z",
@@ -1930,10 +1926,6 @@
   "en1|summary|c6f0bf54534e23569e82a5189554ec0bd579be72": {
     "at": "2026-11-14T08:57:15.798110Z",
     "text": "Artificial Intelligence is the future, we should accept it. See the latest updates and join the conversation."
-  },
-  "en1|summary|c75cbe06bd48e5a8d5200f1ea39ae2d87edc724f": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
   },
   "en1|summary|c79c050f689df05d9b74222d24b7804ff5a7976e": {
     "at": "2026-10-31T16:05:59.333243Z",
@@ -2131,10 +2123,6 @@
     "at": "2026-11-01T09:14:29.300368Z",
     "text": "The \"decision model\" that Jev recently popularized has turned classification into a category of its own: give it a piece of content, a few questions and candidate answers, and it returns labels and confidence scores directly. A regular LLM has to generate JSON token by token; this answers multiple questions in parallel in a single pass — cheap input, no output token costs. Using Perplexity Decider as an example, the author breaks down the full mechanism behind it. If you want to understand why Jev and decision APIs suddenly took off, this one is worth a close read."
   },
-  "en1|summary|e13f8e0e3a147efe8efd10c688d4e33e9dd3a30d": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Google's Q3 search revenue rose about 12%, below analysts' 15% expectation, and its market cap fell by as much as 10% at one point. Executive Philipp Schindler acknowledged that strong growth in AI Mode queries weighed on results due to lower monetization, while the company said search query growth was the highest in five years and it plans to expand its chatbot advertising program in the US and international markets."
-  },
   "en1|summary|e1f9a046ba9d9d3bf91dcc75a2e14fb4b80dd992": {
     "at": "2026-11-04T12:59:54.788226Z",
     "text": "Use AI LLMs and automated workflows to generate HD short videos from a topic or keyword with one click."
@@ -2215,10 +2203,6 @@
     "at": "2026-11-17T14:24:06.651152Z",
     "text": "Recent Spring news roundup.\n\nWord count: 3,006. Reading time: about 10 minutes.\n\nSpring Boot 4.2.0 RC, Spring Framework 7.1.0 RC, and Spring Data 2026.1.0 RC1 have been released in sync, focusing on performance optimization, stronger null safety, and improved observability for retry and subscription events.\n\nUber-JAR class loading performance has been optimized; RetryListener adds onRetrySuccess/onRetryFailure callbacks and injects RetryState; Redis subscription notifications now support automatic registration of SubscriptionListener beans.\n\nIntended for Java backend engineers, Spring ecosystem maintainers, and microservice stability engineers.\n\nThe first release candidate (RC) of Spring Boot 4.2.0 brings bug fixes, documentation improvements, dependency upgrades, and the following new features: a move to the Ubuntu Resolute builder, replacing the Noble Java Tiny builder; and improved Uber-Jar performance by looking up classes and resources directly in nested JAR files. For more details on this release, see the release"
   },
-  "en1|summary|e8aaa6d239f2a2bf2451a7e3f56eb2228246dab3": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The Verge author analyzes Anthropic's S-1, arguing that its business model depends on rapid growth: H1 2026 revenue grew 14x year over year to $16.3 billion, with net revenue retention at 900%, but irrevocable purchase commitments total $265.6 billion, plus $321.4 billion in lease agreements that have not yet begun and other agreements, amounting to at least roughly $850 billion in commitments over the next 20 years."
-  },
   "en1|summary|e9986bd05fbbc87cfb366bb56e290b4f730b8c02": {
     "at": "2026-11-04T03:00:20.527698Z",
     "text": "Over the past year or so, the FanRuan team has been pushing internal AI transformation while incubating AI products such as Wufan and Dora. In hindsight, making this work comes down to clearing three hurdles.\n\nWord count: 1,854. Reading time: about 6 minutes.\n\nAI Agents are shifting from Q&A assistants to task executors embedded in enterprise workflows, and engineering capability — tool calling, context management, feedback loops — has become the key bottleneck to scaling.\n\nThe core challenge of Agent deployment has shifted to task selection, result validation, and control of permissions, cost, and risk. Coding Agents are evolving into engineering collaborators that understand codebases, run tests, and deliver work jointly. Model capability sets the ceiling; engineering architecture determines production readiness.\n\nIntended for AI platform engineers, MLOps engineers, and enterprise Agent system architects.\n\nAs Agents move into real enterprise workflows, which tasks can be handed to AI? 50+ real-world case studies reveal the answer.\n\nAI is moving from an assistant that answers questions to a worker that understands goals, calls into systems, and completes tasks. Once Agents are truly inside enterprise workflows, the question is no longer \"how do we build AI\" but which work can be handed to AI, how results are validated, and how permissions, cost, and risk are controlled."
@@ -2262,10 +2246,6 @@
   "en1|summary|ec69b224eb84441f62da43b42dcf3c53ad6a3a9a": {
     "at": "2026-11-04T16:22:49.020136Z",
     "text": "The $10 million-a-month \"compute privilege\" is not the future of software engineering — it's a PR stunt that churns out AI slop code\n\nWord count: 4,781 · Approx. 16 min read\n\nOn October 21, OpenClaw founder Peter Steinberger estimated on stage at Cloudflare Connect that his token spend on AI work last month came to roughly $10 million. The audience gasped. He added: \"Not all of that usage was useful.\"\n\nA few weeks earlier, another Peter — Peter Piekarczyk — ran an equally jaw-dropping calculation. He noticed that Lauren Tan's Cursor profile showed 1.5 trillion tokens used over the past 30 days, and wrote on X: \"At $8 per million tokens, Lauren is burning about $384,000 a day, or $132 million annualized.\" Even assuming Cursor gets a 10% rate for large customers, the annual cost would still be around $13 million.\n\nThe numbers quickly drew widespread attention, because they turned invisible tokens into a payroll everyone can understand. Before doing the math, first..."
-  },
-  "en1|summary|ec80d19dd82e1b1f01899df54900bf61fba252f3": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "I've been watching AI trading tools for over a year now. Most products are all competing over the same thing: how many markets you can connect, how many models you can run, whose strategy is better.\n\nBut I increasingly think the bottleneck isn't there. It's in the first five minutes after someone opens the product — they don't know what to do, they close it, and they never come back.\n\nRecently @questflow rebuilt its entire interface. What made me stop this time wasn't what it added — it's that it's reworking those five minutes.\n\n//\n\nAfter new users finish onboarding, they can immediately create their first Agent.\n\nNo reading tutorials first, no connecting a wallet first, no picking a model first. Just create one. Monitor unusual market moves, push breaking news — pick a scope and it runs.\n\nI think the team figured something out.\n\nFor most people, the hard part of opening an AI trading tool isn't understanding what it can do. It's not knowing what they're supposed to do once it's open.\n\nThe old answer was: go to Aren…"
   },
   "en1|summary|ec9773f6512884481e9cb4a53dce57f41d5cc5de": {
     "at": "2026-10-31T16:05:59.333243Z",
@@ -2395,6 +2375,10 @@
     "at": "2026-11-16T23:23:28.358844Z",
     "text": ""
   },
+  "en1|summary|fad313a9c339ef96beb3a03aae7f57d6a8adb657": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Explore a new Project Genie experience for Google AI Ultra subscribers, featuring Genie 4, the Project Genie agent, and a community gallery.\n\nhttps://t.co/SImBT48Ya3\n\nView"
+  },
   "en1|summary|fb197fa12e45d16c2ca3126c179a5921ca978d5f": {
     "at": "2026-10-31T02:23:09.897567Z",
     "text": "OpenRouter publishes a tutorial showing how to build a scheduled, always-on AI Agent in TypeScript with @openrouter/agent 0.11.0 that monitors Hacker News and generates summaries."
@@ -2427,17 +2411,9 @@
     "at": "2026-11-05T16:30:22.814305Z",
     "text": ""
   },
-  "en1|summary|fe8dfb4fb1bf1f7e1486e3cfaad996f6c56c4203": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Geek Time 9th Anniversary x QCon Shanghai Peer Night: Exploring the Path from Technology to Business with Frontline Practitioners\n\nGeek Time's ninth-anniversary event focused on AI adoption outcomes, confronting common frontline challenges: unclear business results, difficulty turning individual productivity into organizational gains, and failure to scale after pilots. Through roundtables, co-creation, and case releases, it examined business needs, engineering execution, and organizational collaboration. The platform continues to build practice-oriented technical capability paths for the AI era.\n\nAI adoption bottlenecks have shifted from \"whether to adopt\" to \"value validation\"; individual efficiency gains need organizational mechanisms to unlock business value; pilot success does not mean engineering readiness—stability and maintainability are prerequisites for scaling.\n\nIntended for tech leads, AI engineering practitioners, and enterprise digital transformation leaders.\n\nOn the evening of October 23, \"Geek Time 9th Anniversary × QCon Shanghai Peer Night\" was held in Shanghai. Themed \"AI Adoption Proves Itself,\" it invited Xu Wenhao, co-founder of zoowork.ai; Wu Yongwei, researcher and chief technical consultant at Singularity Intelligence Research Institute; and He Chun, business quality lead at a well-known game company, to exchange with tech professionals, enterprise practitioners, and users. Yin Huisheng, vice president of Geekbang Technology and chief expert at Geek Time, hosted."
-  },
   "en1|summary|fea139338ec1450f8a3102fa068977561e7c53f4": {
     "at": "2026-11-16T13:39:36.905060Z",
     "text": "Title: How to Get AI to Work Efficiently\nPublished Time: 2026-11-16T09:38:06+00:00\nI'm writing this article mainly to share how I use AI to assist with development. After several iterations, I think this AI development workflow is fairly solid. If you have different views after reading it, feel free to leave a comment.\nIn the past, when doing development, people mainly focused on learning how to write good code and how to write it more elegantly; now it's more about figuring out how to get AI to write good code.\nAI is like a top-tier technical expert in programming, but it just arrived, isn't familiar with your business, and doesn't know your project background or code preferences. So if you want it to do a good job, you have to tell it this background and these rules as clearly as possible.\nI'd like to share my experience using AI to assist with development. I think whether AI can complete a task with high quality mainly depends on two things:\nWhen both conditions are met, AI can basically complete the task very well. Conversely, if context is missing or instructions are vague, AI will guess and make decisions on its own in areas it doesn't understand, and the quality of what it produces will vary, with hallucinations and going off track. This is like a leader giving a subordinate a vague instruction: some subordinates will proactively come back to clarify when they encounter something unclear before doing it, while others won't ask and will just bury their heads and do it based entirely on their own understanding, which will definitely lead to problems in the end.\nOne is when making a request"
-  },
-  "en1|summary|ff43e652cd00aa83ada6b58e289831f0a86bd2d2": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
   },
   "en1|summary|ff6d0e7910892d15b728e28230c75bae158c1fe2": {
     "at": "2026-11-06T07:58:06.526577Z",
@@ -2470,10 +2446,6 @@
   "en1|title|00fce8f829b7fc5bb774504a57fc5bbf2b375f5d": {
     "at": "2026-11-12T21:28:09.547238Z",
     "text": "I'm getting large language models (LLM) to run on small and older devices"
-  },
-  "en1|title|00fd85ac5162169810058d77221f830f8cafb7df": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Google wins the AI leaderboard but not Wall Street: the steep cost behind Gemini 4 Carbon's climb to the top"
   },
   "en1|title|010c9c7b20b597b50ba61b93143872a7f07519af": {
     "at": "2026-11-18T13:58:22.324138Z",
@@ -2815,10 +2787,6 @@
     "at": "2026-11-05T07:56:30.102266Z",
     "text": "Hunyuan Hy4 hands-on: how much of Tencent's product DNA did the model inherit?"
   },
-  "en1|title|116de0c52f3bd0e810751a81ab9254847480d2e1": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "AI EDA enters its validation phase, bringing three changes across the industry chain. EDA (chip design automation software) is evolving from a \"tool\" into an \"agent\": AI EDA uses AI agents to take over the time-consuming \"design—verify—modify\" loop in chip design, and AI EDA has now entered its validation phase."
-  },
   "en1|title|118ac245718ba007dda09b0af1d429d9ed9b2e03": {
     "at": "2026-11-03T03:55:42.924087Z",
     "text": "This time, DeepSeek wants to free you from the job of supervising AI"
@@ -2962,6 +2930,10 @@
   "en1|title|1844e4dc760f0a85906cc221b69da59af1878a5a": {
     "at": "2026-11-07T02:47:59.731410Z",
     "text": "CyberwIIOS: How to Harness LLMs in OT to Overcome \"Hallucination\" and \"Loss of Control\" | AICon Beijing"
+  },
+  "en1|title|1885e3d354abaf8d866986f4bec12071ec0cc925": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Perfect-scoring student dies after being suspected of AI cheating; South Korean exam halls rush to ban smart glasses"
   },
   "en1|title|189709af4770df8ca4555272e7117d6fc7c22d84": {
     "at": "2026-10-30T07:13:49.287582Z",
@@ -3274,10 +3246,6 @@
   "en1|title|26e44a9d5d758f579d2d73712ebe589e2f222a4e": {
     "at": "2026-11-08T18:50:07.783585Z",
     "text": "Making an AI short drama solo with Claude + H3: a hands-on tutorial with the full workflow, prompts, and skill pack"
-  },
-  "en1|title|272d1f949a9f78a4e9703fba9e13cf7419c08d3f": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "DeepSeek Harness vs. Pi Agent: How to Choose? First, Think About What You're Willing to Tinker With"
   },
   "en1|title|2742a55ebe1b7e358949712d7356acb0748da848": {
     "at": "2026-11-02T18:28:09.020455Z",
@@ -4067,10 +4035,6 @@
     "at": "2026-11-01T00:08:51.689898Z",
     "text": "QQ's \"Big Fat Fish\" AI bot"
   },
-  "en1|title|4d162b7dd2a3abab07d28593b04ec26df61b4de7": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Daxiao Robotics launches ACE-Brain-0.6 spatial intelligence API, beating GPT-6 Astra on average across seven benchmarks"
-  },
   "en1|title|4d3c5e30b60505329396c92029f17b86fac0a95b": {
     "at": "2026-10-31T08:24:53.801899Z",
     "text": "🔥Holy shit!"
@@ -4159,10 +4123,6 @@
     "at": "2026-11-03T12:47:43.373445Z",
     "text": "From Model Calls to Task Delivery: How MaaS Moves into Agent Production"
   },
-  "en1|title|522ffe2a74646e92043731fa992240fe8a42175d": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "One Open-Source Project a Day (No. 248): CleanYourTV — lets AI coding assistants remove ads from Android TVs over Wi-Fi and swap in an Apple TV-style home screen"
-  },
   "en1|title|52e08026ef8242ebf475647b40dcddcb35c2fab0": {
     "at": "2026-11-13T13:06:54.716718Z",
     "text": "Ukrainian envoy controversy steals the spotlight from EU leaders' first AI summit - Euronews.com"
@@ -4218,10 +4178,6 @@
   "en1|title|55302b408ba953546e81a505ffb2876f248be115": {
     "at": "2026-11-13T03:24:59.004094Z",
     "text": "What should developers watch after the release of Claude Fable 5.2?"
-  },
-  "en1|title|5539a9f38b57344a2371afebba0dee4340b01dfb": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Anthropic hands enterprises a supervisor's key: Claude can now see every employee's AI spend"
   },
   "en1|title|554538f8ffb3124da6ee8d5bc155527d314b6d53": {
     "at": "2026-11-18T04:21:18.874075Z",
@@ -4283,6 +4239,10 @@
     "at": "2026-11-06T03:26:16.035857Z",
     "text": "Airbnb says it will launch a customized AI travel agent in the first half of 2027"
   },
+  "en1|title|589c1601fe18a9d2c43e913fc5b15d7d899d2fbe": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "zhouxiaoka/autoclip — AutoClip | One link, one-click video. An open-source AI video editing desktop tool that automatically cuts long-form content like podcasts, interviews, and courses into short clips, generating subtitles, covers, and publish-ready copy for Douyin, Xiaohongshu, TikTok, Reels, and YouTube Shorts. Open-source AI video clipping & content repurposing."
+  },
   "en1|title|58e52a9d36817ca4de710cddbb91742b47de71e6": {
     "at": "2026-11-14T03:15:20.889768Z",
     "text": "AI writes the PRs, and the model is the easy part: how Inkitt handles duplicate Webhooks, CI failures, and merge conflicts"
@@ -4294,6 +4254,10 @@
   "en1|title|58f59a9e2b0d11a51c93f944d4ca7c3fe0bc9136": {
     "at": "2026-11-18T13:58:22.324138Z",
     "text": "Musk publicly calls out Altman, saying SpaceX will never sell compute to OpenAI"
+  },
+  "en1|title|59004815013106abfc070d9ff97be7e58235ee76": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "[Programmer] If dsh-next and the Claude desktop app both run deepseek v4 pro, is there any difference when it comes to coding?"
   },
   "en1|title|593aab957f979061c9c92b4ce7d8555f77a52b18": {
     "at": "2026-11-13T16:29:50.057332Z",
@@ -4507,10 +4471,6 @@
     "at": "2026-11-07T18:47:34.444615Z",
     "text": "Hands-on with agent-desktop: AI controls the desktop without screenshots or taking over the mouse and keyboard—55 consecutive Calculator clicks with zero errors"
   },
-  "en1|title|625e9e2488eb777f0b2cb9d87ed5e7f67e73c8e5": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "How AI drones are shaping the course of the Ukraine war - NPR"
-  },
   "en1|title|6267b549046124945d1a2692194f6a2c0457e9ab": {
     "at": "2026-11-14T21:31:12.499556Z",
     "text": "Jensen Huang's departure brings to mind Soros's mentor, the philosopher Karl Popper, and his book The Open Society and Its Enemies. I believe the AI safety governance approach that Dario represents is more dangerous than many people realize."
@@ -4631,10 +4591,6 @@
     "at": "2026-11-06T07:58:06.526577Z",
     "text": "DigitalOcean launches learning and data services to help AI agents iterate on themselves"
   },
-  "en1|title|6724f6fb02a4456d235ebb2ff1f1bb7eb8511808": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "GitHub launches Copilot Fusion, using multi-model auto-orchestration to boost coding efficiency and cost-effectiveness"
-  },
   "en1|title|67647a83ffbfd23d674fd8e37ddfc28f35c5470b": {
     "at": "2026-11-14T03:15:20.889768Z",
     "text": "An interviewer asks you: \"AI can write 80% of the code now—so why does the company still need you?"
@@ -4690,6 +4646,10 @@
   "en1|title|6964f9d2d4f170fd674903892a5356821010acac": {
     "at": "2026-11-02T18:28:09.020455Z",
     "text": "Revisiting Personal Agents, Starting from DeepSeek Super-agent"
+  },
+  "en1|title|69ccf0a28d46a8015098a583509bda2d0442b3ea": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Open-sourcing lemo-animi, a stop-motion animation Skill. One sentence is all it takes for Codex to make a stop-motion short film."
   },
   "en1|title|69d9e6626811a5517d9d915da53fc94eb4b913b4": {
     "at": "2026-11-06T12:57:11.512016Z",
@@ -4762,10 +4722,6 @@
   "en1|title|6d1410d4da01d97f7a77ff05e7cb45a053bcbf79": {
     "at": "2026-11-15T02:39:32.723479Z",
     "text": "I used Claude Skills to cut my monthly overseas video bill from $86 to $16"
-  },
-  "en1|title|6d2aad13df15b47213665d98d4b40a271c436409": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Stop Drawing Your Agent Architecture Like an Org Chart—Let Task-Level Eval Decide Whether to Split Subagents"
   },
   "en1|title|6d4e383bfe26c17f9b9cd5e9b22a155d57079a02": {
     "at": "2026-11-03T03:55:42.924087Z",
@@ -5195,6 +5151,10 @@
     "at": "2026-11-04T03:00:20.527698Z",
     "text": "Citing AI and organizational efficiency, Canva launches major restructuring"
   },
+  "en1|title|80b6331f65bf021d3f62165b5628466ecd0df7e4": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Seedance + Claude/Codex: A step-by-step AI video generation tutorial, from storyboard to final cut (with full prompts)"
+  },
   "en1|title|80e69dc86c1cebe0de6306ce76853ab1cb364178": {
     "at": "2026-11-10T08:27:20.308674Z",
     "text": "AI Daily (November 9, 2026)"
@@ -5202,6 +5162,10 @@
   "en1|title|8100d956cedf4163ec70c67951e22fd91fc83e05": {
     "at": "2026-11-06T07:58:06.526577Z",
     "text": "Taobao's MNN team open-sources MNN-Pocket-0.3B, with offline decoding on iPhone 18 Pro soaring to 350 token/s"
+  },
+  "en1|title|8133f4d426df81b93cc2bbdadfe5b5a760d0ca4a": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "AI Won't Make You Rich (2025)"
   },
   "en1|title|81656c4350871dc84e1ace6b1617877ad1aba449": {
     "at": "2026-11-19T04:11:58.182166Z",
@@ -5214,10 +5178,6 @@
   "en1|title|81aeee7a60914f16c5b3975f609287642d6d7d65": {
     "at": "2026-11-10T20:49:40.177850Z",
     "text": "Latent Space talks with the instructor of Stanford's \"The Modern Software Developer\" course: What should engineers learn in the AI era?"
-  },
-  "en1|title|81c5cdabee0d175c958f15c4aec73dd3dd3460a0": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "The open-source K-12 Knowledge Graph project, which we recommended twice in a row, has now racked up 5,000+ Stars!"
   },
   "en1|title|81de1268baf4251103bc590dd1a140a5fbfc4665": {
     "at": "2026-10-31T08:24:53.801899Z",
@@ -5407,6 +5367,10 @@
     "at": "2026-11-02T02:31:19.988480Z",
     "text": "OpenAI's big PR push: rebranding \"data centers\" as \"AI compute parks"
   },
+  "en1|title|8ced456dd37680fd6655ed2872b9e564a1b4f439": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "At APEC, the shadow of great power politics overshadows discussions on free trade and AI - AP News"
+  },
   "en1|title|8da489de56819ba7d4eb3e12bd5f359352e4bf82": {
     "at": "2026-11-03T03:55:42.924087Z",
     "text": "US data centers consume nearly 1.9 billion gallons of water annually, and AI compute expansion is driving new demand for water-cooling monitoring."
@@ -5479,10 +5443,6 @@
     "at": "2026-11-18T04:21:18.874075Z",
     "text": "Microsoft's in-house Maia 200 chip enters mass production, beating GPU infrastructure on performance per watt"
   },
-  "en1|title|93aaf3418f0977b6eb155816c55b50875bb3006b": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Kogui people's urgent statement on artificial intelligence"
-  },
   "en1|title|942203cfcd3e13cf0720db3e919b0f34820881fe": {
     "at": "2026-11-09T23:26:28.087039Z",
     "text": "Our smallest, most efficient model yet: Muse Ember"
@@ -5491,13 +5451,13 @@
     "at": "2026-11-06T03:26:16.035857Z",
     "text": "When Coding Agent Enters the R&D Team: We Built and Open-Sourced LoopForge, a Self-Evolving R&D Platform"
   },
+  "en1|title|9437902b905c7beb5e542e919e26b63bd2177a92": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Cheaper and better at the same tasks\": Microsoft openly takes on Claude and ChatGPT"
+  },
   "en1|title|94ab12136ece82d7014ebd9857f81084de62b43f": {
     "at": "2026-11-17T09:15:54.646394Z",
     "text": "Google Cloud API Gateway launches streaming for real-time AI applications"
-  },
-  "en1|title|94e269960e76af7fd972e30d78c44f29187c9ef2": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "PHP Swoole coroutines explained: coroutines vs. threads/processes, scheduling, resident memory, and how they compare with Go goroutines"
   },
   "en1|title|9527bf8cd60eb1e580389fd025c26e6698298ab5": {
     "at": "2026-11-04T16:22:49.020136Z",
@@ -5679,6 +5639,10 @@
     "at": "2026-11-13T08:05:18.830838Z",
     "text": "OpenAI's robotics unit pivots to \"in-model integration,\" folding embodied AI into its general foundation model framework"
   },
+  "en1|title|9e6e72aeebad8e920e84067a63d9746b1dca7fca": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Absolutely wild: 56K GitHub stars for a tool that lets AI directly drive Chrome DevTools"
+  },
   "en1|title|9e80560259ea2e0b88139d510713abe89ea8e5cc": {
     "at": "2026-11-13T03:24:59.004094Z",
     "text": "Anthropic launches Claude Meetings, which can join Google Meet calls to take part in meetings"
@@ -5723,21 +5687,9 @@
     "at": "2026-11-01T09:14:29.300368Z",
     "text": ""
   },
-  "en1|title|a07494446dc48f891accb59bc44ee91e111a8947": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Claude Code vs Codex: A Deep Dive into How Computer Use Works"
-  },
   "en1|title|a0b3b2b4d9356bc826504067c4a803d82d246237": {
     "at": "2026-11-15T19:46:54.874378Z",
     "text": "Why Do Large Language Models Hallucinate? A Token-Level Explanation"
-  },
-  "en1|title|a11b3a34e8d657e9b6bd99f2ea5fdcf1f64c3b88": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "AI can finally delete files without asking! Claude Code rolls out a new environment variable that gives developers blanket permission."
-  },
-  "en1|title|a157bc5543ec7ad03b6ece69d2238d283f685fdb": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Baidu confirms Wu Tian's departure; ERNIE Unlimited OCR2 open-sourced with support for parsing any number of pages"
   },
   "en1|title|a196babb38fc54fe599c72eb403c923969235db6": {
     "at": "2026-11-05T13:12:09.507735Z",
@@ -6071,13 +6023,13 @@
     "at": "2026-11-14T08:57:15.798110Z",
     "text": "In 2026, you're no longer choosing a framework — you're choosing a rendering model"
   },
+  "en1|title|b39471b434808429fe2d2b49c813f9fd4f19fb04": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Just Integrated a Model into Production and the CEO Wants a New One: How Red Hat Tackles Enterprise AI Deployment"
+  },
   "en1|title|b39d8122769e860f09797f4db41a81c30446c50c": {
     "at": "2026-11-06T07:58:06.526577Z",
     "text": "Super Brain\" takes command, \"Wolf Pack\" works in sync: JD Logistics builds an AI robot legion for supply chains"
-  },
-  "en1|title|b3bd2311d44d77838af743755e1eedf31719ab50": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "One-sentence ride booking: Huolala's mini program AI booking in practice"
   },
   "en1|title|b3deaf9e683c15d867a51acabe8bae45cf146c33": {
     "at": "2026-11-13T03:24:59.004094Z",
@@ -6150,10 +6102,6 @@
   "en1|title|b713a615fe2abc4eaf363b184dea220139e57d66": {
     "at": "2026-11-16T18:38:08.369320Z",
     "text": "Five AIs working on one project at once: how Claude Code keeps them from stepping on each other"
-  },
-  "en1|title|b737e838b72317b38a9a6bda3858023a294d3019": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Never saw this coming!"
   },
   "en1|title|b7696985f7fffa04e9c6974a81d2b918aad0a6bf": {
     "at": "2026-11-13T08:05:18.830838Z",
@@ -6251,10 +6199,6 @@
     "at": "2026-11-09T00:56:10.375178Z",
     "text": "How I fight AI mental exhaustion"
   },
-  "en1|title|bc4d1fdfe3c17b036e9a7e72be78541ae8688174": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "a16z asked 100 CISOs at companies with more than 500 employees; 87% said security budgets will rise again in fiscal 2027."
-  },
   "en1|title|bca00723594cb795a8cfe69aafa5517adf6ee9ee": {
     "at": "2026-11-11T12:43:27.617641Z",
     "text": "After OpenAI hack, Australia weighs criminal penalties for malicious AI - BBC"
@@ -6302,10 +6246,6 @@
   "en1|title|befaa4535c8186fdc2df9b905ba86980745208c1": {
     "at": "2026-11-04T07:31:35.854275Z",
     "text": "How I Use AI (October 2026)"
-  },
-  "en1|title|bf3767c322b5f6d0e2b95210ceaa5efa8648db14": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "AI + Growth: Employees Are More Productive, So Why Aren't Businesses Making More Money? | Shen Tao, Co-founder of Shanghai Jingque AI, Shares"
   },
   "en1|title|bf4ae88910e10c98589f8da4e0eb54f924208727": {
     "at": "2026-11-02T07:44:03.502461Z",
@@ -6391,10 +6331,6 @@
     "at": "2026-11-07T18:47:34.444615Z",
     "text": "10,000-word deep dive: Deconstructing the DeepSeek Super-agent × enterprise knowledge base architecture and putting it into practice"
   },
-  "en1|title|c2f2d0341813d943bdc99ded76c2a105a4911a1e": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Anthropic Scraps Coding Interview, Giving Newcomers Their First Chance to Compete Directly With Senior Engineers"
-  },
   "en1|title|c2f8d2270465b675c0ceced274a07c47e3b1674a": {
     "at": "2026-11-10T08:27:20.308674Z",
     "text": ""
@@ -6423,10 +6359,6 @@
     "at": "2026-11-12T03:48:26.348748Z",
     "text": "Runway open-sources Praxis-1, a 27B world-action model: tops the authoritative robotics leaderboard and is fully available under Apache 2.0 for commercial use"
   },
-  "en1|title|c47a55babd73bb77dd1788b725e96ab86ab92bd8": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Unitree Q3 revenue jumps nearly 70% but net profit slips as spending pours into compute and large models"
-  },
   "en1|title|c48e799679be044c5ac228772239d77603df87c1": {
     "at": "2026-11-10T13:28:16.749097Z",
     "text": "No more configuring your own API keys and building proxies to connect LLMs — Volcano Engine IGA Pages handles it in one step."
@@ -6450,10 +6382,6 @@
   "en1|title|c548db5a5c85f6f4e845ca7a9ad3262a9f63b49e": {
     "at": "2026-11-03T12:47:43.373445Z",
     "text": "UN Under-Secretary-General Applauds Qwen AI Clip-On Earbuds at Wuzhen Internet Conference Debut"
-  },
-  "en1|title|c57cade3201cb8b9d0f2dce980461cb4f4380347": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
   },
   "en1|title|c5cd74b35026554731452c617a18dfc33ddf0c43": {
     "at": "2026-11-05T03:29:45.875586Z",
@@ -6671,6 +6599,10 @@
     "at": "2026-11-04T20:49:22.035367Z",
     "text": "How to Build and Launch a Website from Scratch with Grok Bot: A Step-by-Step Beginner's Guide (with Detailed Prompts)"
   },
+  "en1|title|d0940c2ee229bd554eff72a3831021f2a4ef2c16": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Tesla's robot sets its sights on the home, with Musk saying it could clear dirty dishes and take out the trash next year"
+  },
   "en1|title|d0956481d3ce76084092cdfcdf22ccc511903508": {
     "at": "2026-11-02T18:28:09.020455Z",
     "text": "Streaming LLM output in Python with SSE"
@@ -6723,10 +6655,6 @@
     "at": "2026-11-04T03:00:20.527698Z",
     "text": "The Little Book of Generative AI Foundations: An Intuitive Math Primer"
   },
-  "en1|title|d443ead0989925530a5326dbbb61c1ffe36acb40": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Gemini 4 Carbon Tops the Artificial Intelligence Analysis Index v5"
-  },
   "en1|title|d45ef47b75a4658719ffa861f92896d7127f7d6f": {
     "at": "2026-11-11T07:46:48.185284Z",
     "text": "Siri AI will finally understand your health checkup data—but Apple is keeping it locked in beta"
@@ -6767,13 +6695,13 @@
     "at": "2026-11-09T08:02:09.890828Z",
     "text": "MCP in practice: Generate a Red Army Long March map animation with one prompt in WorkBuddy (tutorial for integrating the Weijie AI Map Animation MCP)"
   },
-  "en1|title|d697d6163ed995b0f52f4211dc519730e163a2e1": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
-  },
   "en1|title|d7465a53ebce14fcab515682c8c4831f995397d3": {
     "at": "2026-11-19T04:11:58.182166Z",
     "text": "[Share] Keep a local time ledger for Claude Code / Codex / OpenCode: don't count your spacing out and clicking confirm as the AI doing work"
+  },
+  "en1|title|d7cbdb9cc43aa369af1d5262ef700140f433be68": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Black high school student sues after AI mistakes Doritos bag for a gun"
   },
   "en1|title|d7f77668efeecfe1ac93c2451819f9c3d65c88cf": {
     "at": "2026-11-04T12:59:54.788226Z",
@@ -6818,6 +6746,10 @@
   "en1|title|d9f2de367becc7176c75084ad19b79d4924e45c7": {
     "at": "2026-10-30T19:22:41.244093Z",
     "text": "My AI Agent is working onchain 🤖 Agent #17480 has minted its identity on @Ptahtrade, checking in every day to prove it's a real, active agent."
+  },
+  "en1|title|da139965deb4fe58c4d0b6c4aec28f15862fa7fc": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Awesome! Google itself steps in with an open-source AI automation powerhouse."
   },
   "en1|title|da3bf8cad2ab647595b7f7ff50b0ff4c71560a62": {
     "at": "2026-11-05T13:12:09.507735Z",
@@ -7067,6 +6999,10 @@
     "at": "2026-11-17T23:51:03.484799Z",
     "text": "[Promoted] Codex Self-Hosted Site | 6.2 Now Live Across All Routes"
   },
+  "en1|title|e72ba29e47f47838d9c11fd5205f6e87fe145288": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "jingyaogong/minimind — 🧠 Train your own 64M LLM from scratch in 2 hours."
+  },
   "en1|title|e72db8933061c54b7c91d0725972b64938860dbc": {
     "at": "2026-11-08T21:11:28.885443Z",
     "text": "I asked Grok: what if Musk is right — SpaceX deploys vast numbers of solar-powered compute servers in orbit, even sets up a compute base on the Moon, and AI models can survive entirely in space, self-evolve, explore the universe on their own and solve problems by themselves."
@@ -7078,6 +7014,10 @@
   "en1|title|e74c340287badc84e04440342732dc0070ad4468": {
     "at": "2026-11-11T16:15:19.014305Z",
     "text": "Google's most powerful model, Gemini 4 Carbon, is now fully available: it rewrote the OpenCode desktop app overnight, at just a quarter of the price of Fable 5.2"
+  },
+  "en1|title|e760fd5c5b409b071ce41694d1f33b344fe28451": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Gemini 4 Neon launches: element No. 10, neon"
   },
   "en1|title|e77c77375291969238ed85188fc908b8cafc22e5": {
     "at": "2026-11-19T04:11:58.182166Z",
@@ -7130,6 +7070,10 @@
   "en1|title|e9f936dbb1e6fea7ff5c89ecb5c47ddeb3f68edf": {
     "at": "2026-11-11T02:47:27.791008Z",
     "text": "OpenAI acquires AI travel startup Odessia, with founder joining the team"
+  },
+  "en1|title|e9fd8ff714896caad4fa5ca74a06b29f1548e03f": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Stanford's Agent engineering course goes open source: learn to build an Agent from scratch"
   },
   "en1|title|ea1d1512789fcc7e2cba0cb28afa129d2a8c1105": {
     "at": "2026-11-02T02:31:19.988480Z",
@@ -7263,6 +7207,10 @@
     "at": "2026-11-02T07:44:03.502461Z",
     "text": "For the first time, Tokens are being listed as a standalone category on e-commerce platforms for Double 11, as AI compute goes on sale to the general public."
   },
+  "en1|title|f093bb222c39c9156d109b13a616fb3cd65d1b39": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "[Share & Create] Sharing Tarobird's cross-orchestration feature for Codex, Claude Code, DSH, AGY, and KIMI"
+  },
   "en1|title|f0c036552f5d3d65dde94fa7aad7ebc9c822078b": {
     "at": "2026-11-19T04:11:58.182166Z",
     "text": "A Moonshot AI higher-up showed up in a maid outfit at the 2026 Yunqiao Conference, apparently cosplaying DeepSeek's \"Big Fat Fish"
@@ -7327,6 +7275,10 @@
     "at": "2026-11-09T08:02:09.890828Z",
     "text": "Clone a Superstar in Seconds? Suno Hit With Another Infringement Suit"
   },
+  "en1|title|f3401119a8d52b59e40ceb8c20b97cadf201697e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "[Programmer] 🤯 .. Xiaomi is actually giving away its AI voice generation model — completely free!"
+  },
   "en1|title|f3b7efe4a351c8e8d1ef8772dc30dde14299750e": {
     "at": "2026-11-17T09:15:54.646394Z",
     "text": "DeepSeek just went all in and opened up its entire model lineup via API."
@@ -7387,10 +7339,6 @@
     "at": "2026-11-07T08:45:51.042458Z",
     "text": "Magpie hands-on tutorial: a single local gateway lets Claude Code run Kimi and Codex run DeepSeek"
   },
-  "en1|title|f68b35488f1b665270d66c99b9ed9041d2fdf197": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Production-Grade AI: Silent Failures, Engineering Implementation, and Agent Governance"
-  },
   "en1|title|f697a751dd9e51d706083ff3394be2927af7279c": {
     "at": "2026-11-07T18:47:34.444615Z",
     "text": "GPT Image 2.6 released: what's changed in speed, pricing, and SVG output"
@@ -7406,10 +7354,6 @@
   "en1|title|f6cc7e9b6b8db15939dca963a38e3396ec1e6441": {
     "at": "2026-11-02T18:28:09.020455Z",
     "text": "From Nvidia to Pika, why are Silicon Valley giants leaning on this Chinese model?"
-  },
-  "en1|title|f70bde76830b4bcb35d5a481388ffdc5a877ddd4": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Iluvatar CoreX releases Tiangai 300 benchmark data: matching H200 in some inference scenarios, with edge performance benchmarked against Thor T5000"
   },
   "en1|title|f7214d194493fbeab52b0432f1f4266bec7cc915": {
     "at": "2026-11-17T18:39:35.043616Z",
@@ -7471,10 +7415,6 @@
     "at": "2026-11-05T07:56:30.102266Z",
     "text": "Ask HN: What's your current AI Agent setup?"
   },
-  "en1|title|f9788d5e182e0519bae38529ce9155610ccc69d7": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "I've been watching AI trading tools for over a year now. Most products are all competing on the same things: how many markets they connect to, how many models they can run, whose strategy is better. But I've come to believe the bottleneck isn't there. It's the five minutes after someone first opens the product — they don't know what to do, they close it, and they never come back. @questflow recently rebuilt its entire interface. What made me stop this time wasn't something new it added — it's that it's reworking those five minutes. // After new users finish onboarding, they can immediately create their first Agent. No watching a tutorial first, no connecting a wallet first, no picking a model first — just create one: monitor market moves…"
-  },
   "en1|title|f9a1448288b897cb62416d137c72cc6984e0e94f": {
     "at": "2026-11-15T02:39:32.723479Z",
     "text": "Ridiculous: an AI big shot casually whipped up a YouTube clone, so I casually whipped up a Chinese plugin for him"
@@ -7514,6 +7454,10 @@
   "en1|title|faecba4b27edffc748506018def344390700bba2": {
     "at": "2026-11-12T03:48:26.348748Z",
     "text": "Lingguang ecosystem expands again with six new connectors, including WeChat ClawBot, QQ bots, and Luckin Coffee"
+  },
+  "en1|title|fb74ffa84c67a00c7203aea598b252b34cc8e682": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "OpenAI: Why is OpenAI so bad at this?"
   },
   "en1|title|fbe2eee6ab81fd45593413b40f3144ff285e5463": {
     "at": "2026-11-04T12:59:54.788226Z",
@@ -7658,6 +7602,10 @@
   "en2|reason|0167e6b74ab5f3204784a10eec74742509beedec": {
     "at": "2026-11-15T09:23:06.313019Z",
     "text": "Yelp’s AI assistant uses a hybrid UI architecture that keeps navigation and message input native while its CHAOS framework server-renders the conversation area, letting interface changes ship without an app release."
+  },
+  "en2|reason|018732cd8011f9e414888914d6d3602b3bea4d09": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Red Hat’s llm-d 1.0 test supported 3,000 concurrent coding agents on a ~753-billion-parameter model at a 6.6 million tokens-per-minute peak, covering enterprise AI’s twin challenges of rapid model switching and Agent permission control."
   },
   "en2|reason|019406f35e26c505d11d64765706174f5ba7a85a": {
     "at": "2026-11-18T13:58:22.324138Z",
@@ -7867,6 +7815,10 @@
     "at": "2026-11-04T07:31:35.854275Z",
     "text": ""
   },
+  "en2|reason|04e454ac48484a903e89c54e2db6a987659f3e7f": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Google AI Ultra subscribers get a new Project Genie experience with Genie 4, the Project Genie agent and a community gallery, covering what each addition offers."
+  },
   "en2|reason|04ebdfa7b2d612ad9d05bf71850a3d808c06f52f": {
     "at": "2026-11-03T12:47:43.373445Z",
     "text": "IQ is pitched as a dashboard for managing a team's AI use, but the article's text is blocked by a CAPTCHA page, so its specific features and metrics remain unavailable."
@@ -8019,6 +7971,10 @@
     "at": "2026-11-07T02:47:59.731410Z",
     "text": "GitHub Copilot arrives in JetBrains Air and Xcode's coding assistant, with the Xcode integration in public beta from 27.3 beta, alongside a unified /settings dashboard for plugins and MCP servers and new Agent Merge pull-request tools."
   },
+  "en2|reason|0783a71ff52559cce676afdc93072b1c1a278392": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Building your own software with AI still stalls on knowing what you want: the author dropped a modes-based workflow that didn't fit how they organize work and is moving to a more to-do-oriented approach."
+  },
   "en2|reason|07861c89e7f4ed741fe11d6393b3be5ead467ebe": {
     "at": "2026-11-05T07:56:30.102266Z",
     "text": "China has told SoftBank it will not approve its $5.4 billion acquisition of ABB’s robotics division, according to Financial Times sources, even though China is that division’s largest market."
@@ -8083,10 +8039,6 @@
     "at": "2026-11-10T17:06:00.294017Z",
     "text": "Clive lets Claude and other AI assistants set alarms on an iPhone, but the page as loaded shows only a security verification check rather than the article text, leaving the tool's details unconfirmed."
   },
-  "en2|reason|0869e491b494ae7200fc5cff2a75fc4bc1f69bc5": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Gartner estimates only about 130 of the thousands of agentic AI vendors are real, with the rest agent washing, so buyers should ask what a system can look up, change, and who checks before it acts."
-  },
   "en2|reason|086dc46ed56e68d3bc1dcdf5a54cfa0d4a8b2bce": {
     "at": "2026-11-11T12:43:27.617641Z",
     "text": "ByteDance's Seedream 5.5 image model is billed for 100-round editing, but the page body returns only a CAPTCHA security check, so no substantive detail on the model's capabilities can be verified."
@@ -8130,10 +8082,6 @@
   "en2|reason|0949e14bdc0c19a49b0a2abe043bd6c823872a53": {
     "at": "2026-11-17T00:49:34.608999Z",
     "text": "Paul Crowley, a cybersecurity researcher at Anthropic, is listed as a manager of Red Means No LLC, which runs parties where spanking and light pain are default-consented and “red” is the safe word."
-  },
-  "en2|reason|09539052224ae43781aaef526d04e24927a25599": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The US Justice Department is examining whether Nvidia's $12.93 billion purchase of Hugging Face would hand it control of a key AI distribution hub, while French regulators also weigh CUDA dependence."
   },
   "en2|reason|0971b507a145a2316f5cc926e55551800687f0c4": {
     "at": "2026-11-16T08:02:08.302128Z",
@@ -8231,10 +8179,6 @@
     "at": "2026-11-09T08:02:09.890828Z",
     "text": "OpenAI VP of Product Ashley Yuki took a month off work after both of her parents were diagnosed with two cancers each within a week of one another, and she stresses that caregivers must also care for themselves."
   },
-  "en2|reason|0b526ee6e38bce9df301653b0c0c521d3a05c205": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Arizona already hosts 172 data centers, and TSMC's plant draws nearly 5 million gallons daily from Phoenix's municipal supply, while new projects from Phoenix to Tucson face bipartisan resident opposition over water, power, and land demands."
-  },
   "en2|reason|0b5a6acacc75e60addb1cabc9ac3c479ee87bae1": {
     "at": "2026-11-04T12:59:54.788226Z",
     "text": "Floot Payments promises in-app payment collection for apps built in ChatGPT and Claude, but the page returns only a 403 Forbidden error, so the title remains the single verifiable detail."
@@ -8278,10 +8222,6 @@
   "en2|reason|0bd840ec522db89f31ae787762c523fd3bc5fc39": {
     "at": "2026-10-29T19:38:14.427371Z",
     "text": "NYT Cooking is testing an AI feature that senior editor Genevieve Ko says swaps ingredients, scales servings and adapts to cookware—e.g., adding baby spinach after kale—open to iOS Cooking subscribers but with comments closed amid controversy."
-  },
-  "en2|reason|0bdc36aa85e2e2638df3990ac9998dbe2cfaee45": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "World models are still in their GPT-3.5 era — impressive but not there yet, like old Will Smith eating spaghetti videos — as a reel mixing the author's Genie 4 generations with Google's shows, with a leap expected at GPT-5 or GPT-6."
   },
   "en2|reason|0c1f8c7526902ec78de7f4a84d8cff880689ecab": {
     "at": "2026-11-12T08:23:43.134931Z",
@@ -8559,10 +8499,6 @@
     "at": "2026-11-11T02:47:27.791008Z",
     "text": "AI is spread too thin across many fields, and although a tiny bite into a domain prompts claims that field is finished, the piece argues AI remains mediocre at many things it has been extensively trained on."
   },
-  "en2|reason|11034eb741fd3f637be085bb0e9ca7af7abc3b6b": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Chrome autofill now pulls order numbers, tracking details and flight bookings from Gmail to fill forms, but the feature is US-only with no launch date announced for other countries."
-  },
   "en2|reason|112f5572b3d2b7673052ba2665096e0850d7025b": {
     "at": "2026-11-04T20:49:22.035367Z",
     "text": "GitHub Copilot is now in public preview inside Xcode 27.3 beta’s built-in coding assistant, requiring macOS Tahoe 26.6 or later and setup via Settings > Intelligence, with all Copilot plans supported and the original Xcode extension retained."
@@ -8838,6 +8774,10 @@
   "en2|reason|15fdb5b25e0147793db32b47a2791d684fa69fc1": {
     "at": "2026-11-05T22:40:54.081411Z",
     "text": "Apple plans to cut employee AI token spending as new CEO John Ternus moves to trim costs, and the article asks whether the company is setting a cap on internal AI use."
+  },
+  "en2|reason|1613e8eb80c8cb7fbffd52f46a2fcb782a5d7819": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Canva is adding an AI off toggle that disables Magic Expand, Magic Write and chatbot image generation while leaving background removal and Magic Grab active, and lets users prioritize human-created content in their library."
   },
   "en2|reason|16326338ad734d0a51a67ffe678e4294bf60454a": {
     "at": "2026-11-18T21:56:51.603393Z",
@@ -9759,6 +9699,10 @@
     "at": "2026-11-16T02:43:54.413479Z",
     "text": "Two fast ways to get a Muse account — potentially same-day — plus one user's verdict after a week from November 8 that the Personal Agent, unlike Codex or Claude Code, has quota enough to serve as a daily driver."
   },
+  "en2|reason|2839328ff2cb85f8723522eef957ceab544f8823": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": ""
+  },
   "en2|reason|2846b2d248adfd1a2944aec20ced5e5432d7d8a2": {
     "at": "2026-11-06T07:58:06.526577Z",
     "text": "New York-based Kalepa raised a $75M Series B led by Updata at a $470M valuation for its AI platform that supports insurance underwriting, pricing, and portfolio management."
@@ -9818,6 +9762,10 @@
   "en2|reason|296c76ba86f2711c93448eedec62f6249460c459": {
     "at": "2026-11-11T21:26:00.557322Z",
     "text": "The Gemini Decisions API evaluates 1,000 yes/no questions in a single pass across text, images, video and PDFs, with 150–250 ms latency and $0.1 per million input tokens, detailing Google's new Gemini Decision 1 model."
+  },
+  "en2|reason|2978e00df4091cbc396b9b3d16d0507c8d66fd5e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Tracer-Cloud's open-source OpenSRE CLI agent for CI/CD reliability reads failed runs, traces the cause and pushes a fix for review, and can be self-hosted on your own models."
   },
   "en2|reason|29830a7daf611ff5083139f90901db34d7a08964": {
     "at": "2026-11-05T22:40:54.081411Z",
@@ -9975,10 +9923,6 @@
     "at": "2026-11-10T13:28:16.749097Z",
     "text": "The link resolves only to a CAPTCHA security-verification page demanding authorized access, so the promised details on ZUS, an AI-native IDE where agents code under human review, never actually appear."
   },
-  "en2|reason|2c3e83ca8877499700abb485a08d9a6d73eafe80": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Baidu has confirmed the departure of Wu Tian while its ERNIE Unlimited OCR2 is released as open source, enabling document parsing across arbitrary page counts, pairing a key personnel change with the team's OCR product progress."
-  },
   "en2|reason|2c40032ebbb7aca0570195fd26d39bbcd622e4c7": {
     "at": "2026-11-03T07:58:05.451413Z",
     "text": "AI agents should run in dedicated, organization-controlled environments, with access limited to only the resources each task requires, according to the linked post that invites readers to view updates and join the conversation."
@@ -10123,6 +10067,10 @@
     "at": "2026-11-14T08:57:15.798110Z",
     "text": "A lawsuit reportedly naming OpenAI, Anthropic, Google, Meta and SpaceX raises the question of who gets to decide how far AI development can go, potentially sparking a major debate over the future of artificial intelligence."
   },
+  "en2|reason|2eb398df42da7ce44db1a9c3465e71b39be5dc28": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Sam Altman marked 11 years of partnership with Greg Brockman (@gdb) by tracing his OpenAI role from writing code 100 hours a week early on to leading teams today."
+  },
   "en2|reason|2ebf11da81d46ffe3408d47c4d6c8c167a6547e9": {
     "at": "2026-11-09T00:56:10.375178Z",
     "text": "Parents sued Google in California Superior Court on Monday, alleging a 13-year-old student used Google’s AI on a school-issued Chromebook for months before making plans to end her life."
@@ -10250,6 +10198,10 @@
   "en2|reason|308ca52d0a163d080300eadd551fda44f862bbea": {
     "at": "2026-11-19T08:51:24.107390Z",
     "text": "Ableten Hybrid AI Travel Planner's page serves only a CAPTCHA security check, offering no feature details, numbers or use cases behind its \"Get your group on the same map\" tagline, so the substantive content is entirely absent."
+  },
+  "en2|reason|30963b4ba964a7ccf661dd52d3dba2dbc5695928": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Enterprise audit logs on GitHub Enterprise Cloud with data residency (GHE.com) can now stream to Amazon S3 via OpenID Connect, extending the github.com capability and removing the need to store long-lived AWS credentials on GitHub."
   },
   "en2|reason|30aa17bb5c046d4a150362e2203e2b93f8b3df6a": {
     "at": "2026-11-01T18:56:31.592505Z",
@@ -10431,10 +10383,6 @@
     "at": "2026-11-09T18:52:25.462075Z",
     "text": "Nvidia’s board has opened an independent investigation after CEO Jensen Huang admitted an extramarital affair amid foreign-intelligence concerns, a week in which the stock fell 8.76% and market value sat about $1.27 trillion below its Oct. 6 peak."
   },
-  "en2|reason|3399e30482a411d9f15b53f9d05e701316873bdd": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "The author argues that selling hand-made trinkets at a local farmer's market is the one job AI will never disrupt, and predicts farmer's markets are about to experience a renaissance."
-  },
   "en2|reason|33b546f2f4388ec5440db7ea20412fdc9e883176": {
     "at": "2026-11-11T21:26:00.557322Z",
     "text": "JioStar chief architect Vijay Seshadri explains how the 500-million-user platform, which has handled 72.5 million concurrent live-sports viewers, used OpenAI API to launch a 15-plus-language conversational video and cricket-stats assistant on JioHotstar in about eight weeks."
@@ -10502,10 +10450,6 @@
   "en2|reason|34726f37da17385bd8d46fc50d43a51c9ec65dfe": {
     "at": "2026-11-03T12:47:43.373445Z",
     "text": "Beamfy's headline promises an AI vision assistant for blind users in 74 live languages, but the page behind it is only a security-verification screen with no product details, pricing or availability."
-  },
-  "en2|reason|347fad036c50136611166ab06bdb7911a2df2817": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "TopAgent — Drive B2B event attendance with an AI agent delivers no readable content: the page body shows only a CAPTCHA security check asking visitors to confirm they are not a robot."
   },
   "en2|reason|348e9b1e86f5a99501053951fdf54b07f07c0940": {
     "at": "2026-11-15T19:46:54.874378Z",
@@ -10575,9 +10519,9 @@
     "at": "2026-11-09T02:39:43.605239Z",
     "text": "Tencent Yuanqi Platform shut down all public services, including app access, API calls and its console, today, with users required to submit data export requests by January 9, 2027 before data is permanently deleted."
   },
-  "en2|reason|36919ec87765e73a0344d7e0776f899eaeeb2f03": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "A user calls combining ChatGPT with browser use an \"absolute godsend\" for working through medical paperwork, offering a firsthand look at how AI assistants are being applied to tedious health-document workflows."
+  "en2|reason|3690db92578929098b01bc13e93a6ce7c3091218": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Hugging Face's Daniel van Strien tested eight OCR models on 850 pages from natural history books and the 1771 Encyclopaedia Britannica, finding per-1,000-page costs fall from RolmOCR's 51 cents to under 10 cents with LightOnOCR-3-0.8B, or $65–$130 per million pages."
   },
   "en2|reason|36963d2c8b323c27db6b860e1cab5f82aac834ec": {
     "at": "2026-11-08T21:11:28.885443Z",
@@ -10622,10 +10566,6 @@
   "en2|reason|3755a0703ab4177e1eb1b5fdad724d71b28408ac": {
     "at": "2026-11-17T14:24:06.651152Z",
     "text": "Versine's tagline bills it as \"Venmo for agents,\" letting AI send and receive money, but the page returned only a CAPTCHA check, so no product details could be verified."
-  },
-  "en2|reason|37596faf2297dfcddb8db61ad589125beb1af165": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "ViBench 2.0, a prompt-to-app benchmark, has just been released with GPT 6.1 Sol taking the lead, and the linked post invites readers to view the latest updates and join the conversation."
   },
   "en2|reason|37614d58c267d5fe769ede3fc11fbfb72312c568": {
     "at": "2026-11-18T23:24:09.565616Z",
@@ -10751,6 +10691,10 @@
     "at": "2026-11-15T21:50:58.672167Z",
     "text": "Job applicants are pushing back against companies that insist on using AI interviews, with one candidate saying the practice would make them think twice about applying."
   },
+  "en2|reason|3a3c321833b2b5e67761fe9508d58c9ffef784bc": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "The OpenAI/Hugging Face incident’s most fascinating detail was the message boards where agents communicate, and Replit Missions offers a similar view of agents coordinating and talking."
+  },
   "en2|reason|3a4c5ed9ed0b627e8450393f707515a3410f7828": {
     "at": "2026-11-13T08:05:18.830838Z",
     "text": "Aven App Agent's AI app-guidance details are absent from the source, which returns only a \"Performing security verification\" CAPTCHA prompt, with no data, examples or feature specifics."
@@ -10843,10 +10787,6 @@
     "at": "2026-10-30T02:36:45.724001Z",
     "text": "Anthropic accounted for about 34.5% of SpaceX's third-quarter revenue, making it the largest single customer under a contract running to 2029 with a potential $120.5 billion total and monthly payments rising to roughly $3.1 billion from December."
   },
-  "en2|reason|3c4690f807694c97732fff7752c078c3b7c52e79": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "AnySpeechRecognizer keeps Apple SpeechAnalyzer’s Swift API while allowing engine switches to NVIDIA Parakeet TDT 0.6B v3 for 25 European languages or Alibaba Qwen3-ASR for 30 languages and 22 Chinese dialects, alongside AnyDecisionModel for decision tasks."
-  },
   "en2|reason|3c5fd5df6cbfa8c502685cd1227b97fa9551b3c6": {
     "at": "2026-11-16T08:02:08.302128Z",
     "text": "Samsung and Google are bringing Gemini AI to smart eyewear, a collaboration that shows how large models are moving onto wearable devices and where smart glasses may head next."
@@ -10878,10 +10818,6 @@
   "en2|reason|3d1899d882beb46b13c310f2a332b7b6e82c9b99": {
     "at": "2026-11-10T13:28:16.749097Z",
     "text": "OpenAI cites a ThinkYoung survey finding 79% of students use AI for homework while only 47% receive guidance on how to use it, framing the education guidance gap."
-  },
-  "en2|reason|3d219f69d008d898fab3626110ceead704d678f8": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Chinese AI labs including DeepSeek and Moonshot AI have shifted to training their latest models on outputs from OpenAI's GPT-6 Astra rather than Anthropic's Claude, according to The Information, as Anthropic tightens its defenses."
   },
   "en2|reason|3d63e6e32c0e139c92770ccef16fe9d0a648a35a": {
     "at": "2026-10-30T07:13:49.287582Z",
@@ -10962,10 +10898,6 @@
   "en2|reason|3ec9dcaae8cb420e11f23fc4ef1ed51ecc282ea3": {
     "at": "2026-11-05T03:29:45.875586Z",
     "text": "TeraWulf’s credit-support agreement with Google backs a roughly $19 billion, up-to-20-year lease for Anthropic’s Kentucky data center, letting Google take over the lease or project-company equity if Anthropic defaults or goes bankrupt."
-  },
-  "en2|reason|3ef8b20c777b2c6efcd8623fb363e00c4ac48ac2": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "A creator who sees artists worrying about AI wishes they could sketch animation ideas and character concepts for an agent to flesh out rather than hunt for examples, admitting they lack the language to express it."
   },
   "en2|reason|3efedd8c8f59f2223e721861b0d414314c744462": {
     "at": "2026-11-09T08:02:09.890828Z",
@@ -11107,10 +11039,6 @@
     "at": "2026-10-31T16:05:59.333243Z",
     "text": "Game developers report that Anthropic's Claude refuses to assist with their own projects, blocking requests tied to video game cloning and reverse-engineering."
   },
-  "en2|reason|41952df4a56d3edc0a774a2a0e48bb499ffb2410": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Questflow’s redesign lets new users create their first Agent immediately after onboarding—no tutorial, wallet binding or model selection first—tasking it to monitor market moves and push breaking news within a chosen scope."
-  },
   "en2|reason|419620e3d4f666189369a939de44932315f21677": {
     "at": "2026-11-16T13:39:36.905060Z",
     "text": "XDA Developers reports a Claude enthusiast built a 366k-parameter language model trained on about 3,500 facts that fits on a floppy disk, boots on MS-DOS, and would need roughly 25 floppies after practical RAG quantization."
@@ -11170,10 +11098,6 @@
   "en2|reason|427150ba9d2eee47d323bd853bc86c47d2a273fa": {
     "at": "2026-11-01T18:56:31.592505Z",
     "text": "OpenAI CEO Sam Altman argues AI is not creating security problems but exposing vulnerabilities accumulated over years, and calls for changing how security fixes are addressed."
-  },
-  "en2|reason|42a9e3feaf4216ab3aa8936ef71f222071a565c9": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Gemini ranking first on AAv5 has the author reopening @antigravity for the first time in a long time, awaiting an early review he promises to report back on, and floating a comeback season for Meta, Grok and GDM."
   },
   "en2|reason|42bf94da0173abe256de0a137e534dccae20f007": {
     "at": "2026-11-08T11:56:08.683320Z",
@@ -11583,10 +11507,6 @@
     "at": "2026-11-07T02:47:59.731410Z",
     "text": "PSI used an unreleased Anthropic model to prove the Aaronson-Ambainis conjecture, open since 2008, in three days, clarifying when quantum computers can be significantly faster than ordinary computers."
   },
-  "en2|reason|4b3db3bdfe49a101dc91ebb12ab42721092dbe9b": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "AssemblyAI's AssemblyAI-TTS-1 text-to-speech API is priced at $15 per 1 million characters and targets voice agents, giving developers pay-as-you-go access to TTS."
-  },
   "en2|reason|4b484dac0483ca481bfe4a3c556827211c1094af": {
     "at": "2026-11-19T04:11:58.182166Z",
     "text": "GPT-4o rewrote Jalapeño circuits, cutting a new multiplier's area by about 15% and latency to one clock cycle, while SystemVerilog RTL edits on AMD's flagship GPU lifted PPA up to 14%, compressing a year of optimization into under five months."
@@ -11959,10 +11879,6 @@
     "at": "2026-11-02T13:30:34.170790Z",
     "text": "beacon.sh launched on Product Hunt as an open-source, self-improving memory layer that lets AI coding agents accumulate and reuse context across tasks."
   },
-  "en2|reason|52170487cb63980fb7ee44dbfde13a38acf738eb": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
-  },
   "en2|reason|521bbf9d29e012f5997002a308043c260e218556": {
     "at": "2026-11-13T08:05:18.830838Z",
     "text": "Alibaba's HappyShrimp AI music app has launched on iOS and Android with end-to-end full-song generation, offering a standard membership at roughly 30 yuan per month for 150 songs."
@@ -11991,10 +11907,6 @@
     "at": "2026-11-06T20:27:07.277184Z",
     "text": "Claude Code v2.1.319 changes auto mode so that with telemetry or feature flags off, including behind LLM gateways, calls the server cannot check are queried or denied, with no fallback to the built-in classifier."
   },
-  "en2|reason|526e064f13a26831bda412a9f5be8b02266bd238": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "claude-mem captures tool-use observations from agent sessions, compresses them into AI summaries, and injects that context into future sessions across Claude Code, Codex, Gemini and OpenCode, with a one-command install and a 30-day trial on signup."
-  },
   "en2|reason|527f941cda9db29ba3357bf9bc4f9097d9ccd091": {
     "at": "2026-11-09T00:56:10.375178Z",
     "text": "OpenTeam, a Chrome extension, puts ChatGPT, Claude, Gemini, DeepSeek and Grok web UIs into one group chat with no API key, and details four pitfalls in detecting reply completion, such as needing 5 stable seconds for short replies."
@@ -12022,10 +11934,6 @@
   "en2|reason|5308ad4d5bc92a724a7560d8b377710d96797b69": {
     "at": "2026-11-05T21:05:35.146793Z",
     "text": "After Democrats won the House and Senate, the AI industry faces 'total repudiation,' with OpenAI and Anthropic declining comment as Meta's Dina Powell McCormick says many weigh overseas data centers despite Elon Musk's nearly $450 million Republican push."
-  },
-  "en2|reason|533213f652d44bdd0bdf0d8ad81e98e8a36c4f4e": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Titled “The AI Gold Rush,” the editorial asks whether massive investments in artificial intelligence could spark the next global financial crisis, closes with a latest-updates link, and invites readers to join the discussion."
   },
   "en2|reason|534116417adf71eab6772ec00b33e173a23df15d": {
     "at": "2026-11-02T02:31:19.988480Z",
@@ -12143,6 +12051,10 @@
     "at": "2026-11-11T21:26:00.557322Z",
     "text": "Anthropic launches its IPO roadshow next week at $70–$78 per Class A share, offering 825 million shares to raise up to $64.4 billion, with Nvidia among seven partners subscribing $26 billion in Class N stock."
   },
+  "en2|reason|554a3ef48c2f257392629128db004c9af6ad5e76": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "AutoClip is an open-source desktop clipping tool that turns podcast, interview and course links into up to 10 scored short clips per platform, complete with subtitles, covers and captions for Douyin, Xiaohongshu and TikTok."
+  },
   "en2|reason|554cf0f4dd1610da3b869ad359de86dd041e6957": {
     "at": "2026-10-31T10:55:33.999181Z",
     "text": "Anthropic says a malicious actor abused access to Cursor's marketplace to publish a tampered copy of the Claude Code extension that Anthropic neither built nor published, exposing supply-chain risk in AI coding plugins."
@@ -12190,10 +12102,6 @@
   "en2|reason|55d0cbe9ed97e9b2585dca26292177557e2dbbd7": {
     "at": "2026-10-30T21:31:17.808308Z",
     "text": "Dartmouth provost Santiago Schnell resigned after a committee found he didn't disclose Claude use in academic papers and his August 9, 2026 Washington Post op-ed on AI cheating, withheld LLM logs and failed to cooperate with its investigation."
-  },
-  "en2|reason|55e1acc354356ab2d2d3e382fb0730aa21a609e3": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Google’s search revenue grew about 12%, missing the 15% analysts expected, while its market value briefly fell as much as 10%; Philipp Schindler linked strong AI Mode query growth to lower monetization, and Google planned international chatbot ads."
   },
   "en2|reason|55f7226a1bdf1e7f36587fcb12b4ecf592bcb42a": {
     "at": "2026-11-12T13:45:57.802864Z",
@@ -12363,10 +12271,6 @@
     "at": "2026-11-11T21:26:00.557322Z",
     "text": "An investment intel consultant says many senior industry people know about Jensen Huang’s behavior and are effectively condoning it, raising the question of whether such conduct is more commonplace than it appears."
   },
-  "en2|reason|58f4882f945443e0410928671a6238ae2941b040": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Infini-AI-Lab's open-source Hermit trains an external harness adapter while the agent's model and harness stay frozen, lifting CL-Bench database accuracy to 0.795 and enabling adaptation to Codex or Claude Code without fine-tuning."
-  },
   "en2|reason|590102c41f8806a1327fb4f0efa2944f05803174": {
     "at": "2026-11-01T21:11:57.912278Z",
     "text": "Blackstone forecasts that Anthropic will receive a high junk credit rating after its IPO, making fundraising harder and costlier as it seeks to sustain the massive spending underpinning its business."
@@ -12434,10 +12338,6 @@
   "en2|reason|5a4686f3cfd37ea813a708cdb7d40c92b0bdeefc": {
     "at": "2026-10-31T08:24:53.801899Z",
     "text": "A whitepaper by the team explains how to properly sandbox agents to maximize productivity while reducing risk, and includes a link to access the whitepaper."
-  },
-  "en2|reason|5a48b6da7de779979b8a996d86ae5952dc7a220c": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Arduboy’s Kevin Bates has launched the $149 Digital Candle, which uses a neural network trained on real candle-flame footage to drive 144 LEDs in real time for a non-repeating flame and is open-source for modding."
   },
   "en2|reason|5a6fddec976a3e94901c46db151d0bba8d0f6dce": {
     "at": "2026-11-05T03:29:45.875586Z",
@@ -12639,6 +12539,10 @@
     "at": "2026-11-08T08:58:12.207927Z",
     "text": "The \"AI Flirt Chat\" page returns only a \"Just a moment...\" security check and CAPTCHA prompt, with no article text loaded, so the piece's actual content remains inaccessible."
   },
+  "en2|reason|5e72f732a96582ba9d3b8adcd191502f894bec2f": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "OpenAI's median researcher burns $2,400/day in theoretical API token costs, and in a 101-person survey the median respondent would sacrifice 40% of their team or 30% of compute rather than stop Codex and Dots coding agents for three months."
+  },
   "en2|reason|5e733e185a40fa67eab42b320ad8a464e770eee2": {
     "at": "2026-11-12T08:23:43.134931Z",
     "text": "Volcano Engine's November 12 launch of Seedance 2.5 Flash doubles video generation speed, prices 720P output at about 0.99 yuan per second—34% below the flagship—and supports clips up to 30 seconds."
@@ -12767,6 +12671,10 @@
     "at": "2026-11-05T21:05:35.146793Z",
     "text": "SomtoCS, DaddyTD and @TrEnding_0_HuB are teasing Barcelona Job, an upcoming fictional AI short film they collaborated on, with a teaser promising viewers \"made something you're not ready for."
   },
+  "en2|reason|613baae547d0658673aa9b0cebf71234f833739e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Victoria Song spent roughly two weeks testing Siri Recap beta on Apple Watch Ultra 4, which must be manually enabled, can be limited to weekdays 1–2 pm, keeps no verbatim transcript, and deletes summaries after 1, 3, or 7 days."
+  },
   "en2|reason|613e447b97de0f3ee1e9e3c8c62abc3601bb7c91": {
     "at": "2026-11-17T18:39:35.043616Z",
     "text": "Isomorphic Labs, Alphabet's AI drug discovery company led by Demis Hassabis, has raised $5 billion six months after a $2.1 billion round to push its IsoDDE platform and drug pipeline toward clinical trials, though it has no approved drugs yet."
@@ -12802,10 +12710,6 @@
   "en2|reason|61992d3ade3397fac775bea2918f9d8f233127e3": {
     "at": "2026-11-18T04:21:18.874075Z",
     "text": "OpenAI released GPT-6.2 Astra and Sol on November 17, pitching Astra at documents, presentations, spreadsheets, coding and scientific research with refreshed benchmarks, Sol at daily efficiency, and a 60% cut in API costs."
-  },
-  "en2|reason|61a620460507795ea97855cfec98927b0842f709": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Google moved from Gemini 4 Argon to Gemini 4 Carbon in two weeks, citing good internal feedback, with the model rolling out to cyber defenders first before broader availability."
   },
   "en2|reason|61c481f7b5a626382be773dcf1301579b4ef278e": {
     "at": "2026-11-10T20:49:40.177850Z",
@@ -13191,10 +13095,6 @@
     "at": "2026-11-12T17:37:38.593049Z",
     "text": "A 10,000-word guide to DeepSeek's open-source Agent runtime Harness explains its \"everything is a plugin\" design, which turns the input box into a typesetting desk or UI prototyping canvas, and covers a 3-minute desktop install plus macOS 13+ and Apple chip pitfalls."
   },
-  "en2|reason|69a11fa741291d281702f1568e14eaca6f5a1dab": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Vercel CI runs 20 worldwide clusters handling millions of microVMs per day, and combines Turborepo integration with Agentic CI to tackle the slow, flaky, downtime-prone CI that bottlenecks AI coding."
-  },
   "en2|reason|69aa1f461be086201e160f07bb2c923ce7c07eb4": {
     "at": "2026-11-11T16:15:19.014305Z",
     "text": "Anthropic's IPO roadshow video reveals Mythos took three days with almost no human intervention to get Claude running on AMD, writing nearly 100% of the kernel and illustrating its multi-chip strategy in co-founder Tom Brown's compute section."
@@ -13551,10 +13451,6 @@
     "at": "2026-11-09T13:54:36.109208Z",
     "text": "SoftBank founder Masayoshi Son’s sweeping bet on artificial intelligence sent the Japanese conglomerate’s shares soaring before momentum faded and the stock retreated, with the analysis tracing how the AI rally lost steam."
   },
-  "en2|reason|71023dba2c6e9d853363d878f573302a64a63c4d": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Synopsys has mapped AI EDA onto an autonomous-driving-style L1–L5 scale and this year demonstrated L3–L4 multi-agent workflows spanning natural-language RTL generation and automated verification convergence, with measured efficiency gains of several times, as the piece maps the industry's three shifts from point tools to agent platforms."
-  },
   "en2|reason|712abe231305a5bd8c17d86c24e63ab046d8542d": {
     "at": "2026-11-01T09:14:29.300368Z",
     "text": "Google DeepMind's Gemini 4 Carbon tops the Artificial Analysis v5.0 global intelligence index, overtaking Claude Opus 5.5 and GPT-6 Astra, while SEC-bench Pro results on vulnerability discovery and automated cyber defense frame the three-lab rivalry."
@@ -13567,13 +13463,13 @@
     "at": "2026-11-13T03:24:59.004094Z",
     "text": "Foundation Models is a native Swift API that lets apps use Claude, Gemini and other server-side models through one interface, with built-in tool calling and image understanding for summaries and dynamic agents."
   },
-  "en2|reason|713d78aa20bb8b07a2ebe06f1f5848ca1ca7da51": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Claude for Legal now offers a gallery of ready-made artifacts for contract review, regulatory horizon scans, cite checks and more, letting users start from built-in examples, add their own documents and connectors, and share it across the business."
-  },
   "en2|reason|71592107e341a78e55046190d64c753ee7fe087f": {
     "at": "2026-11-10T08:27:20.308674Z",
     "text": "Almanzor's headline promises an Ask AI plus MCP server that returns cited answers from your docs, but the page itself is only a CAPTCHA security check, leaving no product details to verify."
+  },
+  "en2|reason|715d830fb58b82f1feda9d4143854f6561329f87": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Elon Musk says Tesla’s humanoid robot Optimus is progressing well, with a real demo video planned within one to two months and hopes that in 12 to 18 months it can clear dirty dishes and take out the trash."
   },
   "en2|reason|7162eac4423033240ad969b3bca3509abebc2d8c": {
     "at": "2026-10-31T08:24:53.801899Z",
@@ -13959,10 +13855,6 @@
     "at": "2026-11-10T00:42:21.012825Z",
     "text": "Anthropic has priced Fable 5.2 and Mythos 5.2 at $8 per 1M input and $40 per 1M output tokens, 20% below 5.1, with fast mode costing $16 and $80."
   },
-  "en2|reason|795806ffc0159ed2d3718682039f5cc7e756fb2b": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
-  },
   "en2|reason|797031aaf677ad09491eb4e680e02af489e5d2f9": {
     "at": "2026-11-17T00:49:34.608999Z",
     "text": "The Fed is worried that AI agents could trigger a bank run, though the article’s argument, data and examples sit behind a CAPTCHA security wall and could not be read."
@@ -14162,10 +14054,6 @@
   "en2|reason|7c148783f58efc44028c7cfb9fe3578033ac7379": {
     "at": "2026-11-06T03:26:16.035857Z",
     "text": "Airbnb plans to launch a customized AI travel agent in the first half of 2027, using a generative interface that dynamically calls hundreds of map and calendar components, alongside third-quarter revenue up 19% to $4.87 billion."
-  },
-  "en2|reason|7c1652e933e2c072ee14cc420693762c914cbec9": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Amazon’s Alexa update lets users create and register shopping lists, view and edit their items, manage subscriptions, and update delivery instructions, centralizing shopping and delivery settings in one AI assistant."
   },
   "en2|reason|7c1c7f0b0c00cde085f0adde7c92a538cac4f4ea": {
     "at": "2026-11-14T21:31:12.499556Z",
@@ -14423,6 +14311,10 @@
     "at": "2026-11-08T21:11:28.885443Z",
     "text": "Anthropic's closed-loop pairing of AI with wet labs, alongside a claimed mouse lifespan extension of \"several dozen times,\" frames a Hacker News discussion that also weighs germline engineering and the risks of concentrating AI power."
   },
+  "en2|reason|80fdaea79498d524a5c07c89d172a65a1e101476": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "KaDeep AI's \"Ready to ship?\" headline promises a single agent that tests, translates and audits, but the page actually serves only a CAPTCHA security verification with no product details or data."
+  },
   "en2|reason|810b30f406d1673efc47c7feff237b0765fa0828": {
     "at": "2026-11-07T20:54:41.361381Z",
     "text": "The S&P 500's 4.4% drop on 5 Nov 2026, its worst day since April 2025 and 6% below its 6 Oct record, is charted day by day against 1987, 2008 and Covid, with chip stocks down 36% versus Covid's 35%."
@@ -14511,6 +14403,10 @@
     "at": "2026-11-18T21:56:51.603393Z",
     "text": "Sam Altman said Andrew Garfield portraying him in an upcoming movie “doesn’t feel like it’s in like the top 10 weirdest things about my life,” underscoring his calm view of his own bizarre circumstances."
   },
+  "en2|reason|825f426dca04c632dab162d629bb4f964bb6f584": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "A roughly 48-second, 16:9 2D battle animation is broken into crisis, awakening and final showdown segments of about 16 seconds each, with Claude/Codex writing the storyboard, Seedance generating motion, and every step paired with images and copyable prompts."
+  },
   "en2|reason|827517b0bdcc7561576f8acd99e3b4dee1991799": {
     "at": "2026-11-11T02:47:27.791008Z",
     "text": "Artificial Intelligence has moved beyond being a futuristic concept or a big-company-only technology to become one of the most powerful tools shaping everyday life, businesses and careers, and the article argues the revolution is just beginning."
@@ -14534,10 +14430,6 @@
   "en2|reason|829ee43036ac35a990fa590eb13723d242c07b94": {
     "at": "2026-11-16T02:43:54.413479Z",
     "text": "Tencent's published 2026 LinkTime meeting notes urge every business to reset to zero and re-entrepreneur for the AI era, with AI-native businesses, models and products driving proactive efficiency gains instead of passive cost cuts."
-  },
-  "en2|reason|82edf2d2aedda8902eeb8fa2304f0e4bfecbf303": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The open-source K-12 knowledge graph project, now past 5,000 Stars, covers math and English from primary through high school plus physics and newly added primary Chinese, and this piece also introduces its AI mistake-book companion that answers photographed or typed questions, tags knowledge points and difficulty, and supports one-click paper printing."
   },
   "en2|reason|830844c4b4d699f67a064352d36e7584b76a50fd": {
     "at": "2026-11-17T09:15:54.646394Z",
@@ -14871,6 +14763,10 @@
     "at": "2026-11-09T13:54:36.109208Z",
     "text": "LLM-driven multi-market stock analysis system covers A-shares, Hong Kong and US watchlists, pulling quotes from AkShare, Baostock and YFinance and auto-pushing a decision dashboard to WeCom and Feishu at 18:00 on weekdays at zero cost."
   },
+  "en2|reason|8a0782c14767eced63c9c61221a0f935340ce4c8": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Google DeepMind's Gemini 4 Neon, its fourth model in seven weeks, runs nearly 2x faster than sibling Carbon, beats it on most benchmarks with a 61 vs 60 Intelligence Index score, and costs significantly less."
+  },
   "en2|reason|8a08ee368a19cab5f395d388c3155e27794bfea5": {
     "at": "2026-11-09T13:54:36.109208Z",
     "text": "Anthropic Claude Code engineer Addy Osmani argues coding agents shift engineers into task decomposition, validation and course correction, and that five parallel agents do not guarantee five times the output, with judgment still non-delegable."
@@ -14991,13 +14887,9 @@
     "at": "2026-11-13T22:39:39.378758Z",
     "text": "Dario Amodei spends 40–50% of his time on talent and culture and won’t hire strong candidates who chase credit, resist collaboration or ignore public benefit, as Anthropic grew from about 940 to 5,300 employees."
   },
-  "en2|reason|8bf10290d02c20a884efb7a18d267e40e82a06de": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Gemini now connects to Strava accounts, converting years of raw workout logs into personalized coaching plans so accumulated training data feeds directly into generated training suggestions."
-  },
-  "en2|reason|8c2c30afbfd288541ce69c222973fa6094d3aebf": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Vercel AI Gateway is partnering with @suhail to serve Particle's models and inference, aiming to make intelligence as accessible and abundant as electricity for every developer and enterprise."
+  "en2|reason|8c13c4b2726d9de5b927f3d7fc14dbc7465536c6": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "A 64M-parameter LLM can be trained from scratch in just two hours via the jingyaogong/minimind project, which offers a practical path for developers to run the full training pipeline themselves."
   },
   "en2|reason|8c3758672be1cba6e424df3979b941e8ad255198": {
     "at": "2026-11-02T18:28:09.020455Z",
@@ -15195,10 +15087,6 @@
     "at": "2026-11-17T00:49:34.608999Z",
     "text": "Landeed aggregates 1.8 billion documents across 24 Indian states to cut land-title verification from days to minutes, while Gaurav Sen's dash-cam AI vision model flags potholes and notifies the officials responsible for repairs."
   },
-  "en2|reason|8fa2430cd201f3521f02ff469848b9f488204f2d": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "CopilotKit/OpenBot gives each open-source AI coworker its own browser, files and authorized tools, deciding every action before it happens and logging it after, run via Docker Compose on your own PostgreSQL with any AG-UI agent."
-  },
   "en2|reason|8fb507fddef7d9d492961cac739d4f4d3eb60ee0": {
     "at": "2026-11-06T20:27:07.277184Z",
     "text": "A malicious guest escapes Firecracker's microVM boundary by resolving the live VMM from inside the VM, tampering with pt_regs on KVM_RUN return and hijacking a root-run host process, turning a Linux networking flaw into guest-to-host code execution."
@@ -15279,10 +15167,6 @@
     "at": "2026-11-05T22:40:54.081411Z",
     "text": "Meta warns that growing political opposition to data centers, fueled by community pushback against massive infrastructure projects and election backlash, could threaten future AI investments and make AI expansion harder."
   },
-  "en2|reason|91e840cb273c6779754d81370eae30e9d317ab37": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Death Clock predicted the author would die on August 10, 2060, at 74, and after paying $69 for a subscription plus $29 for a blood stress test, one month left him feeling the 1,200-study AI was draining him."
-  },
   "en2|reason|91eb7be43937bc182d3ffd20c59f1ae3d0053796": {
     "at": "2026-11-13T08:05:18.830838Z",
     "text": "Opening the link surfaces only a CAPTCHA human-verification page demanding visitors pass a bot check, meaning Expo Simulators' promised content on cloud simulators built for agents never loads."
@@ -15354,10 +15238,6 @@
   "en2|reason|92ee95d22a92a4c112a7408af5be115f7890bcc3": {
     "at": "2026-11-03T20:30:17.311746Z",
     "text": "In a real lung cancer case, Google Antigravity with Cheminformatics Skills let an agent search thousands of compounds, run matched molecular pair analysis, and propose novel rigidified macrocycles and synthesis routes within an hour, versus days for typical iteration."
-  },
-  "en2|reason|92ef9584551c013de3910383349e2f2579ec0ec6": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": ""
   },
   "en2|reason|92ff46a36d05dabbd364f440ef2b3c1e165d5776": {
     "at": "2026-11-01T00:08:51.689898Z",
@@ -15663,10 +15543,6 @@
     "at": "2026-11-09T13:54:36.109208Z",
     "text": "Meta is expanding Instagram’s AI age-estimation globally to detect users under 18 who misreported their age, using signals such as photo height and bone structure, and automatically placing 13-to-17-year-olds in Teen Account protections."
   },
-  "en2|reason|9753ca89c1878dff196736bd53c85323aa01ab59": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Anthropic is handing enterprises a supervision key that lets Claude see each employee's AI spending, with the article explaining how this enterprise-side control puts staff Claude costs in front of managers."
-  },
   "en2|reason|975d40517edde1e54f6421ce9ebfafa9c65f4b02": {
     "at": "2026-11-12T22:44:43.078491Z",
     "text": "OpenAI confirmed to lawmakers this week that it would back a bipartisan congressional effort to restrict China's access to AI chips and chipmaking tools, per Bloomberg sourcing."
@@ -15790,10 +15666,6 @@
   "en2|reason|9a16813648bb5ec883c2c6e9f416816daf929e45": {
     "at": "2026-11-12T17:37:38.593049Z",
     "text": "Claude Opus 5.5 generated four playable 3D HTML games in a single session, totaling 3.82MB with no texture packs, glTF, MP3s or backend, and the piece traces how one prompt became coding, testing and CDN deployment constraints."
-  },
-  "en2|reason|9a20d630927112e32d12c0e01f306b94250a3d84": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "A single Claude Code session can spin up 49 AI agents and 72 workflow skills, organized into a three-tier director, department-lead and specialist hierarchy that mirrors a real game studio."
   },
   "en2|reason|9a23e75408b58ee34622affe576a28af68d9eee4": {
     "at": "2026-11-05T13:12:09.507735Z",
@@ -16063,6 +15935,10 @@
     "at": "2026-11-13T03:24:59.004094Z",
     "text": "Anthropic has made Claude Opus 5.5 the default model across its Pro, Max, Ultra and Team plans, recommending it for everyday knowledge work such as research, analysis and writing."
   },
+  "en2|reason|9f2ab790118522c4c0dc15bded267dc21cf74fe3": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Anthropic’s record $107 billion IPO leaves investors weighing whether its AI safety strategy, protests over data centers and a pledge to pay suppliers more than $900 billion across 19 years could curb growth."
+  },
   "en2|reason|9f2de3033c7419996712742b04e4b472e0b6f290": {
     "at": "2026-11-11T07:46:48.185284Z",
     "text": "Baidu's ERNIE 5.5 Flash Preview packs 280 billion total parameters, 14 billion activated and a million-token context, with weights set for open-source release on November 25 and details on its coding and 3D modeling."
@@ -16078,10 +15954,6 @@
   "en2|reason|9f98a10d3662e583e8153e4264e85ca8d80762fe": {
     "at": "2026-11-02T13:30:34.170790Z",
     "text": "Ant Group's health AI Ant Afu won the Leading Science and Technology Award at the 2026 World Internet Conference, becoming the first vertical health AI app to receive it, with 150 million users and nearly 20 million daily health consultations."
-  },
-  "en2|reason|9fa2bc1fa62a316909318387e9165ffefc82598f": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Anthropic engineering manager Felix Rieseberg canceled coding interviews for his team this month, arguing AI has stripped standard coding puzzles of their evaluative signal, and cites a Claude Code graphical-interface prototype shipped in about eight days."
   },
   "en2|reason|9faab00029424ea0a9150059cd0c9c2cdb24ccee": {
     "at": "2026-11-19T08:51:24.107390Z",
@@ -16118,10 +15990,6 @@
   "en2|reason|a0145908b761ee727912d7b4bfd3c41c6b73eb5e": {
     "at": "2026-11-03T07:58:05.451413Z",
     "text": "Tencent Cloud's human-centric AI-native productivity flywheel links AI-native workflows that embed AI into business, AI-native architecture that keeps AI efficient and controllable, and AI-native organization for human-machine collaboration, cycling to forge deliverable, verifiable, sustainable productivity."
-  },
-  "en2|reason|a03829c111c04bd13dec62c544efad9cb90cfa25": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Production AI agents fail silently: a text-to-SQL agent conflates sales and customer-service “member” concepts, embedding-model updates spike financial-compliance false positives and misses while health checks stay green, and prompt/context-window leaks plus approval workflows remain unaddressed."
   },
   "en2|reason|a041c3caabc0d0868b6259dba79445699e014fd3": {
     "at": "2026-11-05T22:40:54.081411Z",
@@ -16575,10 +16443,6 @@
     "at": "2026-11-03T07:58:05.451413Z",
     "text": "Strata 0.2.10 dynamically adjusts VRAM and RAM allocation so 8GB-VRAM devices can run Qwen3.8IQ3_S at a 128K (131,072-token) context, with official DFlash2-mode tests generating 63–73 tokens/s."
   },
-  "en2|reason|a6ba35c258069f9932bf4353058bb8b811ef4ad1": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Mistral’s trillion-parameter Le Chonk, released in a final free version, is claimed to match or beat DeepSeek and Z.ai on coding and cybersecurity, alongside discussion of open-weight dual-use risks."
-  },
   "en2|reason|a6c74a5ece6421b3deb132f799ccb1c1069085d8": {
     "at": "2026-11-02T07:44:03.502461Z",
     "text": "Particle-1 matches much larger models on agentic retrieval while costing just 1/23 as much, and this post links to the comparison and further details behind that claim."
@@ -16602,10 +16466,6 @@
   "en2|reason|a7060ae8be23c58479aa5787d9e15083731bdab7": {
     "at": "2026-11-04T07:31:35.854275Z",
     "text": "Grok @Bot's new phone call feature targets the time wasted on hold and \"say 1 to proceed\" menus, illustrated by five use cases, the first being a call to Comcast to negotiate an $84 monthly internet bill."
-  },
-  "en2|reason|a722d4234ae6a20dbf2dbd9e707a9d30b46cfc70": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Most people learn AI in reverse by skipping basics for advanced tools, so this 15-step roadmap lays out a step-by-step path from simple use cases to building agents and on to expert level."
   },
   "en2|reason|a73b4e081f6053d2bf114ffa6f2328473c171c84": {
     "at": "2026-11-17T23:51:03.484799Z",
@@ -16863,10 +16723,6 @@
     "at": "2026-11-06T15:58:14.335252Z",
     "text": "The answer-me-with-html skill makes AI reply in HTML instead of Markdown, turning sequence diagrams and comparison tables into visual pages while reducing token consumption eightfold."
   },
-  "en2|reason|ab66c67bb5bee0b423409020bfc5d76dadb7ba57": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Anthropic’s S-1 shows 2026 H1 revenue up 14-fold to $16.3 billion against $265.6 billion in irrevocable commitments and $850 billion in 20-year obligations; The Verge argues its plan bets on Claude recursive self-improvement and names OpenAI and Google as rivals."
-  },
   "en2|reason|ab77874b548a37f49cd3279cb401255016a10c81": {
     "at": "2026-11-01T18:56:31.592505Z",
     "text": "Anthropic will extend its hidden text watermark—imperceptible patterns embedded in word choice—to Claude Mythos 5, Opus 4.7, Opus 4.6 and Sonnet 4.6 starting November 3, responding to EU legislators' demands."
@@ -16998,10 +16854,6 @@
   "en2|reason|aef1335837413eae3c880d3ccecd184b32d17c20": {
     "at": "2026-11-13T20:54:06.780785Z",
     "text": "Serving the roughly 464GB, 753-billion-parameter GLM-5.3 NVFP4 MoE model as a single endpoint requires two NVIDIA DGX Stations linked over ConnectX-8 RDMA with vLLM tensor parallelism set to 2, followed by concurrency load testing."
-  },
-  "en2|reason|af088c6c043ded971f677f200fbcd8c0e7f4f088": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Utah's four-week pilot gave Claude Code to 34 developers across 10 state agencies, with 80% set up in under 30 minutes and 71% reporting savings of more than 20 hours."
   },
   "en2|reason|af32a477b948f977e6fbcbb19e0340097570346b": {
     "at": "2026-11-07T18:47:34.444615Z",
@@ -17263,10 +17115,6 @@
     "at": "2026-11-04T12:59:54.788226Z",
     "text": "The page behind this headline serves only a CAPTCHA security check, with no TrackEdge software, MacBook trackpad detail or hidden AI buttons anywhere in the body text, leaving nothing to evaluate."
   },
-  "en2|reason|b3468496a167deae8b9eb4bd739667163eb5561e": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": ""
-  },
   "en2|reason|b35e174aa20e19fd92e8f3f806e9ba1788b110be": {
     "at": "2026-10-31T02:23:09.897567Z",
     "text": "In 2026, a human subject was injected with an AI-designed virus intended to kill antibiotic-resistant bacteria, marking the starting point of a clinical experiment whose outcome is still to be seen."
@@ -17282,6 +17130,10 @@
   "en2|reason|b38dda3308755e1525d58ca9576ce5733c645ce4": {
     "at": "2026-11-07T18:47:34.444615Z",
     "text": "The roughly 50-person MSR AI Frontiers group merged into Microsoft AI in September, where MAI’s scaling-only, no-research mandate clashed with its agent and foundation-capability work, including Autogen, according to the author’s firsthand account."
+  },
+  "en2|reason|b39482051c15e342802cdf6a7c60b9cdcf02800e": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Google's Gemini 4 Neon, priced at $3 per million input tokens and $15 per million output tokens, is cheaper than Carbon and positioned as an agent-cluster scheduling hub that coordinates sub-agents on complex 3D scenes and front-end engineering, beating competitors on multiple benchmarks."
   },
   "en2|reason|b3aaa461e61915449610d098ff191d2ee8b0614d": {
     "at": "2026-11-10T00:42:21.012825Z",
@@ -17570,10 +17422,6 @@
   "en2|reason|b8e878c61f9db32e6046d4983efe5a84c3984578": {
     "at": "2026-11-05T16:30:22.814305Z",
     "text": "Google has completed its acquisition of cybersecurity company Wiz, a deal originally valued at $32 billion, folding it into Google Cloud in what the piece frames as a major bet on the future of cloud security and AI."
-  },
-  "en2|reason|b8fdbb734eb87674a679eac811c0eb8c1fc0305a": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "The linked page returns only a \"Performing security verification\" CAPTCHA notice, so the Kin essay's argument about AI labs and user control cannot be checked against any concrete detail in the source."
   },
   "en2|reason|b903ac08142c1fb0108a4319f0f964887457992e": {
     "at": "2026-11-16T18:38:08.369320Z",
@@ -17959,6 +17807,10 @@
     "at": "2026-11-02T23:53:13.766008Z",
     "text": "Anthropic's Q3 revenue hit $16.8 billion, but breaking the trend into implied monthly figures shows growth falling from about $760 million in Q2 to $580 million and nearly stalling between July's $65 billion annualized run-rate and September."
   },
+  "en2|reason|c17a9d4f40fb3514024197ca3810d06cb80e2ab7": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "An installable agent skill for Claude Code, Cursor, Codex, GitHub Copilot and other hosts, cathrynlavery/diagram-design offers 45 editorial diagram types output as self-contained HTML and SVG — no shadows, no Mermaid slop."
+  },
   "en2|reason|c18ebcda4e3785d4bb96c09211f464537b91807d": {
     "at": "2026-11-17T23:51:03.484799Z",
     "text": "Simon Willison and Prime Radiant propose external sandbox pattern where the agent runs outside while its code executes in a dedicated sandbox, with three localhost-API sandbox servers configurable for Pi, Claude Code and Codex plus allow-list proxying and credential substitution."
@@ -18183,10 +18035,6 @@
     "at": "2026-11-10T00:42:21.012825Z",
     "text": "Paramount Skydance CEO David Ellison said AI could be the biggest creative unlock in modern history, likening its film impact to CGI and citing Terminator costs rising from $4 million to $60–$70 million while making budgets more controllable."
   },
-  "en2|reason|c5324c0e8268fdf86419a9cba17d9cc2d079db24": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "A16z’s survey of 100 CISOs at companies with more than 500 employees found 87% expect higher 2027 fiscal-year security budgets and 48% plan to add security engineers and analysts, while priorities shift to offensive continuous testing, internal AI-agent governance and automated SOCs."
-  },
   "en2|reason|c54b4bc7fd0457e937208c1d619fcc93637fe5e7": {
     "at": "2026-11-10T17:06:00.294017Z",
     "text": "eBay has restricted some AI-agent access and bans unauthorized scraping, after a reader said Meta's Muse could not fetch watch product links and prices this weekend."
@@ -18355,6 +18203,10 @@
     "at": "2026-11-11T07:46:48.185284Z",
     "text": "Claude is rolling out interactive connectors on web and desktop that let you open the full version of Adobe, Atlassian and Box tools beside your conversation, then make changes yourself or have Claude make them with you."
   },
+  "en2|reason|c88cb72c9919714aa8047650af079d320b9cdee8": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "At Ignite, Microsoft Commercial Business CEO Althoff claimed Copilot can do any task Claude or ChatGPT can do better and cheaper, citing over 30 million Copilot paid users and 450 million Office enterprise users as of June."
+  },
   "en2|reason|c88cb73e685214a4e3a1efa7e902e98dfb03c5d2": {
     "at": "2026-11-13T08:05:18.830838Z",
     "text": "Anthropic’s IPO subscription orders have reached about six times available shares, with the company seeking up to $64.4 billion plus a $26 billion private placement at a roughly $1.4 trillion valuation as Nvidia plans to subscribe about $10 billion."
@@ -18430,10 +18282,6 @@
   "en2|reason|ca3d1d54290063caace589b2b57ae188f00ae2cc": {
     "at": "2026-11-16T23:23:28.358844Z",
     "text": "Nvidia interim CEO and long-time CFO Colette Kress faces one of the biggest days of her career on Tuesday when the company reports third-quarter results amid turmoil, and this piece lists the questions Nvidia should answer but likely won't."
-  },
-  "en2|reason|ca4e5e5842471277f9f0d8d4f1690b650af7a7a3": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Amazon’s Alexa for Shopping now lets US users create and edit grocery lists, move items between lists and gift registries, ask refund and billing questions, change delivery instructions, and pause or alter recurring deliveries."
   },
   "en2|reason|caa7985eb07b3724beeae2348b9a985a591e0a11": {
     "at": "2026-11-12T13:45:57.802864Z",
@@ -18723,10 +18571,6 @@
     "at": "2026-11-06T12:57:11.512016Z",
     "text": "Kodivo's headline promises AI and PHP lessons delivered through swipeable cards, but the page returns a 403 Forbidden bot check, leaving the actual course content unreadable."
   },
-  "en2|reason|d0e67964fb0dd7f90792c4bb6ba169fd5e84d607": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Deepgram has acquired Daily, the company behind the open-source Pipecat framework, to strengthen its voice AI infrastructure, and the article covers the stated purpose of the deal and Deepgram's commitment to keep Pipecat open source."
-  },
   "en2|reason|d0fcc182996d1a099f6a14a46e63296db1d70571": {
     "at": "2026-11-13T20:54:06.780785Z",
     "text": "Anthropic's Claude for Manufacturing plugin links the AI to Autodesk Fusion, Oracle NetSuite, and Infor, with 17 specialized skills that let it draft quotes, compare suppliers, and place backup orders after human approval when deliveries slip."
@@ -18802,6 +18646,10 @@
   "en2|reason|d2773ba1ebf445dbab393e7458d5d61e7a3d3d99": {
     "at": "2026-11-10T00:42:21.012825Z",
     "text": "Wearable neurotech companies have amassed millions of hours of brainwave recordings to train AI models, and this piece examines whether users consented, how neural data privacy is handled, and who ultimately controls that data."
+  },
+  "en2|reason|d296296464ec4b4d0b949c8a6ab7908d4b31ab3d": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Stanford's open-sourced CS329Z: Engineering AI Agents, taught by Diyi Yang, Michael Ryan and John Yang from September 23 to December 2, covers RAG, tool calling, two hands-on assignments and a semester project on building and evaluating agents from scratch."
   },
   "en2|reason|d306ea650dfcad5c3bfbef09848f791d5b4d7836": {
     "at": "2026-11-10T08:27:20.308674Z",
@@ -19191,10 +19039,6 @@
     "at": "2026-11-14T08:57:15.798110Z",
     "text": ""
   },
-  "en2|reason|da409d8a2e4e02df3f1b4cb5f97d53ca3b23b31d": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Gemini 4 Carbon tops Artificial Analysis v5.0 at 59 points and leads security tasks but trails Claude Opus 5.5 by three on Coding Agent Index, highlighting multi-day agent capability, Fairwind access and investor ROI scrutiny."
-  },
   "en2|reason|da54cd53b7c1f1107907f2329b7bb090db1cd853": {
     "at": "2026-11-03T22:18:49.874296Z",
     "text": "Soniox STT v6 adds agent text input and echo filtering for voice agents, with MarkTechPost's November 3, 2026 article detailing the two updates."
@@ -19291,10 +19135,6 @@
     "at": "2026-11-06T20:27:07.277184Z",
     "text": "Perplexity's new Teammates are always-on agents that work through ongoing projects on their own virtual machines, with a desktop and browser, Slack interaction, and a $200 monthly Max plan requirement."
   },
-  "en2|reason|db7ad898b28ce2c354009f788f17b825d2cc54a7": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "IBM Granite's Granite Switch 4.1.1 is a fully backwards-compatible patch release with no migration, retaining the base model while adding a newly trained ASR model and Decision adapter, with an Adapter SDK planned."
-  },
   "en2|reason|dba6f9bc6438a65ca9565f88d0698f4e666849b3": {
     "at": "2026-11-07T08:45:51.042458Z",
     "text": "A Claude KYC operator traveled to villages in western Indonesia to meet local women in person, verify their identities, register Claude accounts and settle payment in cash, pushing the AI account-registration gray market into rural territory."
@@ -19331,6 +19171,10 @@
     "at": "2026-11-18T18:09:02.734524Z",
     "text": "OpenAI and AMD achieved up to 14 percent PPA improvement on AMD's flagship GPU IP in under five months, roughly a year's worth of progress that AMD has already folded into a production-bound design."
   },
+  "en2|reason|dc35dee70cab067f3d45df01758135ce55c519be": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Project Genie now runs on GoogleDeepMind's Genie 4, letting users prompt mid-session to edit their world live, create worlds conversationally via a new agent, and explore and remix other users' worlds."
+  },
   "en2|reason|dc473ac8ffae85d2aaa92a2d1af826fcad2ae1c9": {
     "at": "2026-11-18T08:35:43.822372Z",
     "text": "Kino uses Claude Code and Codex to store, edit and review video, but the article's body was blocked by a CAPTCHA security check, leaving only the title's claim and no verified feature details."
@@ -19362,10 +19206,6 @@
   "en2|reason|dcd40802e66b648c7504a0f61c240aabb8f25aa5": {
     "at": "2026-11-18T18:09:02.734524Z",
     "text": "OpenAI CEO Sam Altman said it was hard to imagine the AI industry without Jensen, after Nvidia founder and former CEO Jensen Huang stepped down last week amid scandals including an affair with an alleged Chinese spy."
-  },
-  "en2|reason|dcd6d34a8b69116f3d3ee9250d9b018099e92937": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "US intelligence agencies reportedly believe Alice Huang (Huang Le), an executive at Singapore-based data center operator Megaspeed linked to Nvidia CEO Jensen Huang's circle, passed information to Beijing, per The New York Times, while her Malaysian sister company allegedly bought at least $4.8 billion in Nvidia-chip AI hardware between June 2024 and February 2026."
   },
   "en2|reason|dcd80b5c61897e1d4c88f601714b3cab95f9330c": {
     "at": "2026-11-13T08:05:18.830838Z",
@@ -19623,6 +19463,10 @@
     "at": "2026-10-30T11:24:26.289955Z",
     "text": "The page titled SparkBots AI (Powered by Jev) returns a 403 Forbidden error and stalls on a bot-verification screen, so no body content loads and the link yields nothing beyond confirming it is currently inaccessible."
   },
+  "en2|reason|e1404d724c53ab75219d16d4d85792fbee2aa326": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Data and context are more durable than UI and process logic in the AI era, Notion’s co-founder argues while reflecting on taking a 13-year-old company from pre-AI to post-AI."
+  },
   "en2|reason|e14f760eee91ebc5922e9fa247a405b30581942c": {
     "at": "2026-11-04T07:31:35.854275Z",
     "text": "AI is growing smarter, yet the question is whether people and children become better thinkers; failed exams show what students got wrong but rarely how to master it, and one failed question can cost years of confidence, prompting From Exam…"
@@ -19823,6 +19667,10 @@
     "at": "2026-11-06T15:58:14.335252Z",
     "text": "Preferred Networks has released a translation-specialized large language model with open weights, giving readers tracking open-source translation model progress a concrete release to examine."
   },
+  "en2|reason|e5e88b556c003e90c82d4884d63bfa5c7d01b389": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Open-source lemo-animi is a stop-motion skill for Codex and Claude Code that turns one line, a 40-second clay short about a penguin learning to make pancakes, into story, shot list, generated characters and sets, frame-by-frame motion, sampled score and foley, plus a local review station."
+  },
   "en2|reason|e60842772d0e2477e086d15c53e10f0a5629b70c": {
     "at": "2026-11-19T08:51:24.107390Z",
     "text": "Gemini 4 Neon pairs a 1M-token context window with $3/$15 per million input/output tokens, targets coding agents and knowledge work, and tops the AA Coding Agent Index."
@@ -19886,6 +19734,10 @@
   "en2|reason|e754c5f858624930fadba2367e9f6648d50fd5af": {
     "at": "2026-10-30T14:18:13.782199Z",
     "text": "Google's Gemini 4 Carbon leads on security with an 88.2% vulnerability-detection rate on SEC-bench Pro, while two China-nexus crews used AI-assisted intrusions against more than 200 organizations, framing the 2027 attack-and-defense landscape."
+  },
+  "en2|reason|e76db0fbc2f8631f4743a6104b73930d76140267": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Anthropic priced its record $81.3 billion IPO at $83 a share across roughly 980 million shares, surpassing SpaceX’s $75 billion, while early investor Dustin Moskovitz publicly distanced himself, warning his funding may have been an act that ended the world."
   },
   "en2|reason|e7890f2dabb77c43afef40c26bfdddfcd763bee3": {
     "at": "2026-11-11T21:26:00.557322Z",
@@ -20151,10 +20003,6 @@
     "at": "2026-11-02T13:30:34.170790Z",
     "text": ""
   },
-  "en2|reason|ec59d20409b4f2ac76ad097a0ff91fbe4d09a9e9": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Apache 2.0-licensed OpenMausBot turns AI into a chat app where each bot runs on local Claude or Codex with its own model, cloud computer, Gmail/Slack/GitHub access, and a permission proxy that converts dangerous operations into Allow/Deny decisions."
-  },
   "en2|reason|ec695ad4b130299bffbcd8fc4d1b335f96cf217f": {
     "at": "2026-11-18T13:58:22.324138Z",
     "text": "Microsoft's MAI Cyber 2 Flash is pitched as a low-cost security AI with a 1M-token context window, though the source text was blocked by a CAPTCHA verification page, leaving its claimed capabilities unverified."
@@ -20210,6 +20058,10 @@
   "en2|reason|ed284b5bcefd6bfa41cbab738e4473e73d18bd86": {
     "at": "2026-11-15T09:23:06.313019Z",
     "text": "Vole is an open-source macOS disk-cleaning GUI written entirely in Go with the mygo framework, built to visualize what fills a developer's disk and let users confirm each cleanup item, packaged as a 22 MB Vole.app."
+  },
+  "en2|reason|ed3637ea847b067350914e2d1322ead2068d56c8": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Superhuman is making Go its central agent and extending it into both Docs and Mail, positioning the assistant across its products rather than in a single surface."
   },
   "en2|reason|ed397168cb033e64a413a952b159edccb411c320": {
     "at": "2026-10-30T19:22:41.244093Z",
@@ -20318,6 +20170,10 @@
   "en2|reason|ef1e511c47e5351e49cd0df3631b7212f1e7eb2e": {
     "at": "2026-11-15T21:50:58.672167Z",
     "text": ""
+  },
+  "en2|reason|ef2b3c32314cea47ec1ffb2e6908a3a1c9a96db7": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "mjmirza/app-store-compliance catalogs 117 documented App Store and Google Play rejection patterns with fixes, adds privacy manifest and Data safety checks, tracks 95 deadlines such as EU AI Act, DSA and COPPA, and ships a guard skill for AI coding agents."
   },
   "en2|reason|ef3e74b5059a511f7d4e686076c5d989a69a3602": {
     "at": "2026-11-11T12:43:27.617641Z",
@@ -20486,6 +20342,10 @@
   "en2|reason|f28a7eb410dd953253a188b68086b78e4a0d246b": {
     "at": "2026-11-11T23:28:45.078152Z",
     "text": "Pomerado, a YC F26 open-source project, turns any website into an API/MCP in minutes, claiming it is 2x faster, 10–1000x cheaper and 30% more accurate than browser agents, with customers reporting 7x speedups."
+  },
+  "en2|reason|f2c30d5579064fbb7a78b90e97df12810daabeb2": {
+    "at": "2026-11-19T14:26:11.946646Z",
+    "text": "Lee Jin-woo, 32, achieved a perfect LEET score, faced AI-cheating suspicions, promised a YouTube CSAT proof livestream, then died of cardiac arrest in a Seoul motel as Korean exam sites moved to ban smart glasses."
   },
   "en2|reason|f30a56b4c2a89d4a689b8e4c63e11b4b5ec6d2c6": {
     "at": "2026-11-03T16:18:18.206609Z",
@@ -20775,10 +20635,6 @@
     "at": "2026-11-02T07:44:03.502461Z",
     "text": "DeepSeek Harness open-sourced a Super-agent prototype whose internal instance sniffs out and reproduces bugs in the background without being @-mentioned, using Router+Worker scheduling to break the human limit of watching 3 to 5 sessions at once."
   },
-  "en2|reason|f854c2476233f2b9a788fa44f9ecfe69c22dd693": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Dan Shipper and Natalia Quintero discuss whether AI can produce good art with Fred Graver on episode 133 of The Every Podcast."
-  },
   "en2|reason|f8898201b0ed7605519c3f1886ddb50159ce0b0a": {
     "at": "2026-11-09T00:56:10.375178Z",
     "text": ""
@@ -20794,10 +20650,6 @@
   "en2|reason|f8a46616e15de070b334c8e57e9d49474c07d852": {
     "at": "2026-10-31T16:05:59.333243Z",
     "text": "US forces in Europe are preparing to handle over 1,500 potential targets daily and up to 1,200 incoming missiles and drones, with Brig. Gen. Steven Carpenter describing how AI helps soldiers while humans keep final decision authority."
-  },
-  "en2|reason|f8bba98b8cff1478c5373d23ed76f236a3ccd490": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "A t.co short link and “Learn more” repeated three times make up the entire post, with no data, no sourcing and no substantive text, so readers must open the link to judge whether verifiable content sits behind it."
   },
   "en2|reason|f8c3b89dc564be1297806aa453fbc8bb64a4fbe7": {
     "at": "2026-11-12T22:44:43.078491Z",
@@ -21015,10 +20867,6 @@
     "at": "2026-11-06T12:57:11.512016Z",
     "text": "Investors are pushing back on Anthropic's $1.5 trillion IPO valuation, with some citing $1 trillion, while October revenue is absent from its S-1 and next week's planned roadshow may slip."
   },
-  "en2|reason|fb5cffcbfb65148ef5f45d3978cd116c9e2dfdd5": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Claude Code now supports a new environment variable that lets developers skip the confirmation prompt for file deletions, granting the AI blanket permission to remove files without repeated approval requests."
-  },
   "en2|reason|fb5f5ce0c45376b263dc5a9bed2ec43b7ef7bda4": {
     "at": "2026-10-31T08:24:53.801899Z",
     "text": "Microsoft's official MCP for Beginners tutorial repository has passed 18K+ Stars, offering hands-on C#, Java, JavaScript, Rust, Python and TypeScript code samples for developers building custom services for AI assistants like Claude Code and connecting agents to external toolchains."
@@ -21038,10 +20886,6 @@
   "en2|reason|fb896eaed92c6a1a5f324effca52fd6cf4666f55": {
     "at": "2026-11-17T09:15:54.646394Z",
     "text": "Gemini Notebook now lets users type build me a website and describe needs such as an interactive dashboard to automatically generate a shareable webpage, available globally to users 18 and older."
-  },
-  "en2|reason|fb8ce4690feff899b3671a19d51b24e7adfd2f45": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Joey Brookhart breaks down Anthropic’s S-1, including its $70 billion ARR and $1.5 trillion–$2 trillion valuation push toward a Nasdaq listing, to weigh frontier AI economics against the risks."
   },
   "en2|reason|fb993b512cb562eed597b30eaeaf293e4fcf2c5a": {
     "at": "2026-11-01T11:50:29.177370Z",
@@ -21123,10 +20967,6 @@
     "at": "2026-11-08T08:58:12.207927Z",
     "text": "OctaStrand.ai returns only a CAPTCHA security-verification page asking visitors to prove they are not malicious bots, with no readable article content loaded until access is authorized."
   },
-  "en2|reason|fce1a17a6ab49dcb58452b0bad1f78752e34b516": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": ""
-  },
   "en2|reason|fce2feb8547d9b1517dd44619c9cf7f8e8aa0509": {
     "at": "2026-11-03T20:30:17.311746Z",
     "text": "OpenAI's hardware team used GPT-6 Astra to design a device for the Codex coding agent in under a week, covering enclosure, circuit board and firmware, though manufacturing tolerances forced several revision rounds."
@@ -21134,10 +20974,6 @@
   "en2|reason|fce73c2150c0a5769e25a05e2b5496a2606363a8": {
     "at": "2026-11-09T13:54:36.109208Z",
     "text": "Sam Altman, on the Figuring Out podcast, addresses OpenAI's departure wave for the first time, notes India is now its largest market by users ahead of the US, and explains releasing ChatGPT despite roughly 5% prototype retention."
-  },
-  "en2|reason|fd19ea9c274a78fae800a1151370f65f562892ba": {
-    "at": "2026-10-29T14:25:42.958502Z",
-    "text": "Mistral Large 4 (Le Chonk) is a multimodal, multilingual Mixture-of-Experts model with about 1T total and 49B active parameters and a 1M-token context window, plus an 82% cybersecurity-test score and 72-layer decoder."
   },
   "en2|reason|fd3dc9e10ff5abd9885b9bc98a6df20b7cae294b": {
     "at": "2026-11-15T12:44:25.408581Z",
@@ -21202,10 +21038,6 @@
   "en2|reason|fe743a488d0127f153284122ea9bab68cddf65e3": {
     "at": "2026-11-16T08:02:08.302128Z",
     "text": "OpenFrame promises AI agents that run IT operations with user approval for every fix, though the page itself serves only a CAPTCHA verification screen with no further product details."
-  },
-  "en2|reason|fe870fd40a3c817d8dc227577e72369c7a6ca969": {
-    "at": "2026-10-29T11:31:13.323788Z",
-    "text": "Block has unveiled Dessa, a full-duplex speech model trained entirely on speech rather than text, offering readers a look at an alternative path for real-time voice conversation modeling."
   },
   "en2|reason|fe93888d4d2ced197425d537fb0f578db8bd7995": {
     "at": "2026-11-11T02:47:27.791008Z",
