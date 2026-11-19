@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T23:38:06.826644Z",
+  "generated_at": "2026-11-19T04:42:25.906733Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -57,22 +57,22 @@
       }
     },
     {
-      "story_id": "story_b6cf053fc04a",
-      "title": "180B 参数、32GB 内存：用 Transformers 把 MoE 推理推到极限 / 180B Parameters, 32GB of RAM: Pushing MoE Inference to the Limit with Transformers",
-      "url": "https://huggingface.co/blog/moe-expert-streaming",
+      "story_id": "story_913b1679e631",
+      "title": "DaisyRose-27B：把后训练效率推向新高度 / DaisyRose-27B: Pushing the Frontier of Post-Training Efficiency",
+      "url": "https://huggingface.co/blog/RadixArk/daisyrose-27b-pushing-the-frontier-of-post-trainin",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 72,
-          "review": "32GB 跑 180B 确实能跑，代价是速度——每秒几个 token 就没写进标题里。"
+          "score": 42,
+          "review": "效率自称新高，却没见基线、成本或复现细节，先晒数据再谈高度。"
         },
         "paper-police": {
-          "score": 52,
-          "review": "HF博客给了实现细节和内存数字，但无独立复现与第三方跑分，先打问号。"
+          "score": 42,
+          "review": "只有官方博客单源，论文、代码、benchmark 三件套一个没见，等可复现评测再算。"
         },
         "pragmatic": {
-          "score": 84,
-          "review": "32GB 内存跑 180B MoE，实现路径已公开，小机器部署大模型可直接照着抄。"
+          "score": 82,
+          "review": "27B 权重和后训练配方都放出来了，想压训练成本的可以直接照抄流程。"
         }
       }
     }
