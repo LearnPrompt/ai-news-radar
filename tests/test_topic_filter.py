@@ -356,9 +356,9 @@ class TopicFilterTests(unittest.TestCase):
                 {
                     "id": "high",
                     "title": "高分条目",
-                    "title_en": "High score item",
-                    "url": "https://example.com/high",
-                    "source": "OpenAI Blog",
+                    "originalTitle": "High score item",
+                    "links": {"original": "https://example.com/high", "aihot": "https://aihot.news/items/high"},
+                    "source": {"name": "OpenAI Blog"},
                     "publishedAt": "2026-06-16T19:35:22.252Z",
                     "summary": "Worth reading",
                     "category": "ai-models",
@@ -368,8 +368,8 @@ class TopicFilterTests(unittest.TestCase):
                 {
                     "id": "low",
                     "title": "Low score item",
-                    "url": "https://example.com/low",
-                    "source": "Blog",
+                    "links": {"original": "https://example.com/low", "aihot": "https://aihot.news/items/low"},
+                    "source": {"name": "Blog"},
                     "publishedAt": "2026-06-16T18:00:00.000Z",
                     "score": 59,
                     "selected": True,
@@ -377,8 +377,8 @@ class TopicFilterTests(unittest.TestCase):
                 {
                     "id": "missing",
                     "title": "Missing score item",
-                    "url": "https://example.com/missing",
-                    "source": "Blog",
+                    "links": {"original": "https://example.com/missing", "aihot": "https://aihot.news/items/missing"},
+                    "source": {"name": "Blog"},
                     "publishedAt": "2026-06-16T18:00:00.000Z",
                     "score": None,
                     "selected": True,
@@ -440,8 +440,8 @@ class TopicFilterTests(unittest.TestCase):
                 {
                     "id": "page1",
                     "title": "Page one strong item",
-                    "url": "https://example.com/page-1",
-                    "source": "AI HOT Source",
+                    "links": {"original": "https://example.com/page-1", "aihot": "https://aihot.news/items/page-1"},
+                    "source": {"name": "AI HOT Source"},
                     "publishedAt": "2026-06-16T19:35:22.252Z",
                     "score": 88,
                     "selected": True,
@@ -449,30 +449,28 @@ class TopicFilterTests(unittest.TestCase):
                 {
                     "id": "page1-low",
                     "title": "Page one low item",
-                    "url": "https://example.com/page-1-low",
-                    "source": "AI HOT Source",
+                    "links": {"original": "https://example.com/page-1-low", "aihot": "https://aihot.news/items/page-1-low"},
+                    "source": {"name": "AI HOT Source"},
                     "publishedAt": "2026-06-16T19:35:22.252Z",
                     "score": 40,
                     "selected": True,
                 },
             ],
-            "hasNext": True,
-            "nextCursor": "cursor-2",
+            "page": {"hasMore": True, "nextCursor": "cursor-2"},
         }
         page_2 = {
             "items": [
                 {
                     "id": "page2",
                     "title": "Page two boundary item",
-                    "url": "https://example.com/page-2",
-                    "source": "AI HOT Source",
+                    "links": {"original": "https://example.com/page-2", "aihot": "https://aihot.news/items/page-2"},
+                    "source": {"name": "AI HOT Source"},
                     "publishedAt": "2026-06-16T19:36:22.252Z",
                     "score": 60,
                     "selected": True,
                 }
             ],
-            "hasNext": False,
-            "nextCursor": None,
+            "page": {"hasMore": False, "nextCursor": None},
         }
 
         class FakeResponse:
@@ -496,9 +494,9 @@ class TopicFilterTests(unittest.TestCase):
         session = FakeSession()
         items = fetch_aihot(session, now=datetime(2026, 6, 16, tzinfo=timezone.utc))
         self.assertEqual([item.title for item in items], ["Page one strong item", "Page two boundary item"])
-        self.assertEqual(session.calls[0][0], "https://aihot.virxact.com/api/public/items")
-        self.assertEqual(session.calls[0][1]["params"], {"mode": "selected", "take": 100})
-        self.assertEqual(session.calls[1][1]["params"], {"mode": "selected", "take": 100, "cursor": "cursor-2"})
+        self.assertEqual(session.calls[0][0], "https://aihot.news/api/v1/items")
+        self.assertEqual(session.calls[0][1]["params"], {"mode": "selected", "window": "24h", "limit": 100})
+        self.assertEqual(session.calls[1][1]["params"], {"mode": "selected", "window": "24h", "limit": 100, "cursor": "cursor-2"})
         self.assertIn("aihot-skill/0.2.0", session.calls[0][1]["headers"]["User-Agent"])
 
     def test_parse_curated_media_feed_applies_strict_title_filter_and_cap(self):
