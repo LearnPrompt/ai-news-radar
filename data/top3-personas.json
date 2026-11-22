@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T03:20:04.077692Z",
+  "generated_at": "2026-11-22T09:56:13.868435Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_37d59c42c05f",
+      "title": "Upload2Shell：Ghostscript CVE-2026-125396 漏洞可穿越沙箱执行命令",
+      "url": "https://pwn.ai/upload2shell",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 55,
+          "review": "沙箱逃逸不新鲜，起了名也掩不住：只有一篇博客加 HN 帖，补丁与影响面只字未提。"
+        },
+        "paper-police": {
+          "score": 44,
+          "review": "有CVE编号和两处来源，但缺PoC、补丁提交和厂商公告，复现前只能算线索。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "处理 PDF/PS 的服务赶紧查 Ghostscript 版本，打补丁或直接禁掉，别让上传口变 shell。"
+        }
+      }
+    },
+    {
       "story_id": "story_14377b8ad49f",
       "title": "AI Context Flow MCP — 由你掌控的记忆，同步至每个 Agent、工具和团队 / AI Context Flow MCP — Memory you control, synced to every agent, tool and team",
       "url": "https://www.producthunt.com/products/ai-context-flow",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 45,
@@ -40,7 +60,7 @@
       "story_id": "story_4ea94123d897",
       "title": "AlterContacts — 会提前思考、主动执行的 AI 客户关系助手 / AlterContacts — AI client relationship assistant that thinks and does ahead",
       "url": "https://www.producthunt.com/products/alter-contacts-ai-client-relationships",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 32,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 58,
           "review": "产品能注册试用，但CRM助手赛道很挤，卖点偏营销话术，除非做销售工具否则不用跟。"
-        }
-      }
-    },
-    {
-      "story_id": "story_b2d08d09cf5f",
-      "title": "Pandex——面向 AI Agent 的欧洲官方法律，通过 MCP 提供 / Pandex – Official European Law for AI Agents, over MCP",
-      "url": "https://www.pandex.io",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 42,
-          "review": "把 EUR-Lex 包一层 MCP 就自称“官方法律”，更新频率和覆盖率只字未提。"
-        },
-        "paper-police": {
-          "score": 30,
-          "review": "只有官网和 HN 讨论，法条来源、覆盖率、接口可测性都无第三方证据。"
-        },
-        "pragmatic": {
-          "score": 58,
-          "review": "做欧盟合规类 Agent 的可以接来试试，但法律准确性得自己兜底，别当权威源。"
         }
       }
     }
