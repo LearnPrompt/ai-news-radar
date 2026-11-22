@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T13:29:54.963762Z",
+  "generated_at": "2026-11-22T20:54:06.669310Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_37d59c42c05f",
-      "title": "Upload2Shell：Ghostscript CVE-2026-125396 漏洞可穿越沙箱执行命令",
-      "url": "https://pwn.ai/upload2shell",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 55,
-          "review": "沙箱逃逸不新鲜，起了名也掩不住：只有一篇博客加 HN 帖，补丁与影响面只字未提。"
-        },
-        "paper-police": {
-          "score": 44,
-          "review": "有CVE编号和两处来源，但缺PoC、补丁提交和厂商公告，复现前只能算线索。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "处理 PDF/PS 的服务赶紧查 Ghostscript 版本，打补丁或直接禁掉，别让上传口变 shell。"
-        }
-      }
-    },
-    {
       "story_id": "story_c8fc7f4bab1d",
       "title": "mjmirza/app-store-compliance — Avoid common App Store and Google Play rejections. Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents.",
       "url": "https://github.com/mjmirza/app-store-compliance",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 64,
@@ -57,22 +37,42 @@
       }
     },
     {
-      "story_id": "story_14377b8ad49f",
-      "title": "AI Context Flow MCP — 由你掌控的记忆，同步至每个 Agent、工具和团队 / AI Context Flow MCP — Memory you control, synced to every agent, tool and team",
-      "url": "https://www.producthunt.com/products/ai-context-flow",
+      "story_id": "story_1129c6bc014c",
+      "title": "Muru – 由 mod_WSGI 作者打造的 AI 辅助 Rust 服务器，用于运行 Python 应用 / Muru – AI-assisted Rust server for Python apps by mod_WSGI's creator",
+      "url": "https://simonwillison.net/2026/Nov/21/muru",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 60,
+          "review": "作者履历够硬，但把「AI 辅助」塞进标题，压测数字呢？Rust 重写服务器可不缺人。"
+        },
+        "paper-police": {
+          "score": 48,
+          "review": "博客简介有作者背景，但仓库链接和可复现跑分未见，先别当定论。"
+        },
+        "pragmatic": {
+          "score": 62,
+          "review": "mod_wsgi 作者的新 WSGI 服务器，可以 clone 下来跑个 benchmark，但别急着替换 gunico"
+        }
+      }
+    },
+    {
+      "story_id": "story_2f30e9bb3992",
+      "title": "推理提供商上的数据处理事件",
+      "url": "https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "记忆同步人人都在做，“由你掌控”四个字，先给份审计日志再谈。"
+          "score": 66,
+          "review": "敢在自家博客认账算少见；但哪家供应商、漏了什么、影响几个人，得摆到台面上。"
         },
         "paper-police": {
-          "score": 20,
-          "review": "两条源全是 Product Hunt 产品页，只有宣传文案，无论文无仓库无跑分可复现。"
+          "score": 50,
+          "review": "厂商自述的事故通告，细节与时间线未独立核实，等审计或第三方复盘。"
         },
         "pragmatic": {
-          "score": 66,
-          "review": "MCP 共享记忆能省下重复喂上下文的功夫，但 PH 新品质量未知，先看有没有开源仓库再试。"
+          "score": 52,
+          "review": "使用 OpenRouter 进行路由服务的团队需要检查这次事件是否涉及自己的数据，并核对第三方推理商的日志留存策略。"
         }
       }
     }
