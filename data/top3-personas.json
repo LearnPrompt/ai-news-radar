@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T05:40:19.889954Z",
+  "generated_at": "2026-11-25T10:06:01.126398Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_f5ca495d8da2",
+      "title": "腾讯混元开源 Hy4 flash GGUF 量化权重：224B 大模型塞进 64GB Mac mini，分数几乎没掉",
+      "url": "https://www.aibase.com/news/32527",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 58,
+          "review": "224B 压进 64GB，每个权重不到 2.5 比特；说分数没掉，先把评测榜单列全再看。"
+        },
+        "paper-police": {
+          "score": 42,
+          "review": "权重号称开源，但只有聚合站转述，无仓库链接与量化前后跑分明细，复现不了。"
+        },
+        "pragmatic": {
+          "score": 82,
+          "review": "消费级 Mac 能跑 224B 了，本地部署门槛骤降，值得今晚就 clone 试试。"
+        }
+      }
+    },
+    {
       "story_id": "story_c2e19fb7f5b4",
       "title": "Microduck 避障：基于 Isaac Lab 和 Newton 的 Sim2Real 工作流程 / Microduck Obstacle Avoidance: A Sim2Real Workflow with Isaac Lab and Newton",
       "url": "https://huggingface.co/blog/nvidia/microduck-obstacle-avoidance",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 66,
@@ -37,42 +57,22 @@
       }
     },
     {
-      "story_id": "story_4e89d6d5b258",
-      "title": "Anthropic 给 Claude Artifacts 加“安装为应用”：AI 生成的工具可装进 macOS 和 Windows 桌面",
-      "url": "https://www.aibase.com/news/32510",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "「安装为应用」听着像发平台，落地多半还是套壳网页；功能不假，但离生态还差着几条街。"
-        },
-        "paper-police": {
-          "score": 38,
-          "review": "单一聚合媒体转述产品功能，无官方文档链接也无实测，装上再验。"
-        },
-        "pragmatic": {
-          "score": 74,
-          "review": "Claude 生成的工具能直接装桌面，做内部小工具的可以先试，少搭一层壳。"
-        }
-      }
-    },
-    {
-      "story_id": "story_10e95f041dea",
-      "title": "关闭浏览器仍狂吃数百兆内存！Chrome隐藏的“AI内存刺客”被揪出，一招教你彻底释放资源",
-      "url": "https://www.aibase.com/news/32514",
+      "story_id": "story_6ecebcc0d01e",
+      "title": "PrismML 三值压缩 Bonsai 2.5 27B，九分之一体积留下 93.7% 编程能力",
+      "url": "https://www.aibase.com/news/32522",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 42,
-          "review": "后台常驻是Chrome十多年的老毛病，套个AI马甲就叫“刺客”，那一招多半只是关设置开关。"
+          "score": 68,
+          "review": "只看编程一项、基线未交代，那掉下去的 6.3% 是藏哪了？"
         },
         "paper-police": {
-          "score": 30,
-          "review": "仅一家网媒标题党，无代码、无第三方复测，几百兆从哪测来的？"
+          "score": 22,
+          "review": "单一来源转述厂商数字，无论文、无仓库、无评测集，93.7% 无法复现。"
         },
         "pragmatic": {
-          "score": 68,
-          "review": "后台常驻的 AI 模型确实吃内存，按文中方法关掉就能省几百兆，笔记本和 CI 机器顺手处理一下。"
+          "score": 74,
+          "review": "若权重真放出，27B 塞进单卡跑编程任务就现实了；先等仓库和实测，别急着换。"
         }
       }
     }
