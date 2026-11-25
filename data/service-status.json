@@ -1,16 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T09:53:58.482314Z",
+  "generated_at": "2026-11-25T20:28:22.656838Z",
   "ok": true,
-  "active_count": 0,
+  "active_count": 1,
   "providers": [
     {
       "id": "openai",
       "name": "OpenAI",
       "status_url": "https://status.openai.com/",
       "ok": true,
-      "active_count": 0
+      "active_count": 1
     }
   ],
-  "incidents": []
+  "incidents": [
+    {
+      "id": "01M89RGC3STKK2MT53TXHFMY4H",
+      "provider": "OpenAI",
+      "title": "Elevated errors with Codex GitHub reviews and pull request merges",
+      "title_zh": "Elevated errors with Codex GitHub reviews and pull request merges",
+      "status": "monitoring",
+      "impact": "minor",
+      "started_at": "2026-11-25T16:27:02Z",
+      "updated_at": "2026-11-25T16:58:51Z",
+      "message": "GitHub reports that the service disruption affecting pull requests and webhooks has been mitigated. We are monitoring Codex automated pull request reviews and merge operations to confirm recovery and stability.",
+      "affected_components": [],
+      "url": "https://status.openai.com/incidents/01M89RGC3STKK2MT53TXHFMY4H"
+    }
+  ]
 }

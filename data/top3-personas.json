@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T10:06:01.126398Z",
+  "generated_at": "2026-11-25T20:52:15.600101Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -37,30 +37,10 @@
       }
     },
     {
-      "story_id": "story_c2e19fb7f5b4",
-      "title": "Microduck 避障：基于 Isaac Lab 和 Newton 的 Sim2Real 工作流程 / Microduck Obstacle Avoidance: A Sim2Real Workflow with Isaac Lab and Newton",
-      "url": "https://huggingface.co/blog/nvidia/microduck-obstacle-avoidance",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 66,
-          "review": "工具链是真的，视频里鸭子走得也稳，就是没说摔过几次、换过几块场地。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "博客给了工作流细节，但没代码仓库和公开跑分，复现不了。"
-        },
-        "pragmatic": {
-          "score": 74,
-          "review": "Isaac Lab 加 Newton 的完整避障流程示范，做机器人 Sim2Real 的可以照着搭一遍，省试错。"
-        }
-      }
-    },
-    {
       "story_id": "story_6ecebcc0d01e",
       "title": "PrismML 三值压缩 Bonsai 2.5 27B，九分之一体积留下 93.7% 编程能力",
       "url": "https://www.aibase.com/news/32522",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 68,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 74,
           "review": "若权重真放出，27B 塞进单卡跑编程任务就现实了；先等仓库和实测，别急着换。"
+        }
+      }
+    },
+    {
+      "story_id": "story_66c207de1851",
+      "title": "在单块RTX PRO 6000上爬山优化Inkling 2 Mini推理 / Hill-climbing Inkling 2 Mini inference on one RTX PRO 6000",
+      "url": "https://huggingface.co/blog/inkling-2-mini-inference-hillclimb",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 74,
+          "review": "单卡爬山调优有实测就算干货，别把几个token/s的收益吹成推理革命。"
+        },
+        "paper-police": {
+          "score": 50,
+          "review": "单卡爬山优化有细节但无开源脚本与可复现基准，等代码放出再认可。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "单卡推理调优的实操路线，优化手法可迁移到自己部署的模型，值得抄。"
         }
       }
     }
