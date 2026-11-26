@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T01:14:29.954197Z",
+  "generated_at": "2026-11-26T05:21:48.191501Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,42 +17,22 @@
   ],
   "items": [
     {
-      "story_id": "story_f5ca495d8da2",
-      "title": "腾讯混元开源 Hy4 flash GGUF 量化权重：224B 大模型塞进 64GB Mac mini，分数几乎没掉",
-      "url": "https://www.aibase.com/news/32527",
+      "story_id": "story_804dd01923df",
+      "title": "SpaceX 下调 Blackwell 芯片租金最高 35%，Anthropic 退还的 H200 被低价转租",
+      "url": "https://www.aibase.com/news/32536",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 58,
-          "review": "224B 压进 64GB，每个权重不到 2.5 比特；说分数没掉，先把评测榜单列全再看。"
-        },
-        "paper-police": {
-          "score": 42,
-          "review": "权重号称开源，但只有聚合站转述，无仓库链接与量化前后跑分明细，复现不了。"
-        },
-        "pragmatic": {
-          "score": 82,
-          "review": "消费级 Mac 能跑 224B 了，本地部署门槛骤降，值得今晚就 clone 试试。"
-        }
-      }
-    },
-    {
-      "story_id": "story_6ecebcc0d01e",
-      "title": "PrismML 三值压缩 Bonsai 2.5 27B，九分之一体积留下 93.7% 编程能力",
-      "url": "https://www.aibase.com/news/32522",
-      "rank": 2,
-      "reviews": {
-        "cynic": {
-          "score": 68,
-          "review": "只看编程一项、基线未交代，那掉下去的 6.3% 是藏哪了？"
+          "score": 30,
+          "review": "SpaceX什么时候开始出租GPU了？请先把主体和35%的价目表对上。"
         },
         "paper-police": {
           "score": 22,
-          "review": "单一来源转述厂商数字，无论文、无仓库、无评测集，93.7% 无法复现。"
+          "review": "单一来源的转租传闻，无价目单、无当事方确认，35% 从哪儿算出来的？"
         },
         "pragmatic": {
-          "score": 74,
-          "review": "若权重真放出，27B 塞进单卡跑编程任务就现实了；先等仓库和实测，别急着换。"
+          "score": 83,
+          "review": "租卡报价降三成，近期要跑训练或推理的值得重新比价，先别签长约。"
         }
       }
     },
@@ -60,7 +40,7 @@
       "story_id": "story_5d02dfd2e5bb",
       "title": "Copilot 代码审查的计费将默认由组织承担 / Copilot code review billing will default to the organization",
       "url": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
-      "rank": 3,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 58,
@@ -73,6 +53,26 @@
         "pragmatic": {
           "score": 72,
           "review": "组织统一买单，个人不用掏钱但账单会集中到管理员头上，先盯紧用量和预算。"
+        }
+      }
+    },
+    {
+      "story_id": "story_a399fd27a4c8",
+      "title": "OpenAI 下调 GPT-6.2 使用额度：Astra 触发限流快 40%，Sol 快 25% / OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster",
+      "url": "https://twitter.com/thsottiaux/status/2125784147889393806",
+      "rank": 3,
+      "reviews": {
+        "cynic": {
+          "score": 45,
+          "review": "两个百分比连基准都不给：比哪个版本快、在什么负载下？两个来源其实只是同一条推被转两遍。"
+        },
+        "paper-police": {
+          "score": 12,
+          "review": "唯一证据是一条推文，两个来源都是 HN 转发；40%/25% 的测法未见，没有基准脚本就等于没有证据。"
+        },
+        "pragmatic": {
+          "score": 72,
+          "review": "额度缩水，同样任务更早撞限流；批量任务得分批跑或先测替代模型。"
         }
       }
     }
