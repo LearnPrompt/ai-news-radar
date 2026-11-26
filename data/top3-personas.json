@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T05:21:48.191501Z",
+  "generated_at": "2026-11-26T09:52:33.865932Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,62 +17,62 @@
   ],
   "items": [
     {
-      "story_id": "story_804dd01923df",
-      "title": "SpaceX 下调 Blackwell 芯片租金最高 35%，Anthropic 退还的 H200 被低价转租",
-      "url": "https://www.aibase.com/news/32536",
+      "story_id": "story_899fac7e23dc",
+      "title": "基于 Nemotron 3.5 Parse：开放数据、微调与更快的推理 / Building on Nemotron 3.5 Parse: Open Data, Fine-Tuning, and Faster Inference",
+      "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
       "rank": 1,
       "reviews": {
         "cynic": {
-          "score": 30,
-          "review": "SpaceX什么时候开始出租GPU了？请先把主体和35%的价目表对上。"
+          "score": 72,
+          "review": "开放数据、微调配方、推理加速三件套都摆出来了，就看\"开放\"开到哪一层。"
         },
         "paper-police": {
-          "score": 22,
-          "review": "单一来源的转租传闻，无价目单、无当事方确认，35% 从哪儿算出来的？"
+          "score": 62,
+          "review": "官方博客带开放数据和微调方案，主体可查，但缺公开复现的跑分数据。"
         },
         "pragmatic": {
-          "score": 83,
-          "review": "租卡报价降三成，近期要跑训练或推理的值得重新比价，先别签长约。"
+          "score": 82,
+          "review": "开放数据和微调配方都放出来了，做文档解析的可以直接 clone 试跑。"
         }
       }
     },
     {
-      "story_id": "story_5d02dfd2e5bb",
-      "title": "Copilot 代码审查的计费将默认由组织承担 / Copilot code review billing will default to the organization",
-      "url": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+      "story_id": "story_5fd0e2e1a6ae",
+      "title": "上海AI Lab开源Sage-Interaction，以1. 29 秒极致延迟重塑全双工交互新范式",
+      "url": "https://www.aibase.com/news/32551",
       "rank": 2,
       "reviews": {
         "cynic": {
           "score": 58,
-          "review": "功能没升级，账单先升级；默认组织买单，这更新倒是诚实。"
+          "review": "1.29秒就敢叫极致延迟，先晒对比基线和测试条件再说。"
         },
         "paper-police": {
-          "score": 72,
-          "review": "一手官方计费变更，来源可查，但无独立复核，等下月账单见真章。"
+          "score": 42,
+          "review": "仅一篇聚合稿，开源仓库与论文链接均缺失，1.29秒延迟无从复现。"
         },
         "pragmatic": {
-          "score": 72,
-          "review": "组织统一买单，个人不用掏钱但账单会集中到管理员头上，先盯紧用量和预算。"
+          "score": 80,
+          "review": "做语音Agent的可以直接clone试，1.29秒延迟省了自研，先看许可和显存要求。"
         }
       }
     },
     {
-      "story_id": "story_a399fd27a4c8",
-      "title": "OpenAI 下调 GPT-6.2 使用额度：Astra 触发限流快 40%，Sol 快 25% / OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster",
-      "url": "https://twitter.com/thsottiaux/status/2125784147889393806",
+      "story_id": "story_f056c8e011c8",
+      "title": "蚂蚁百灵开源 Ling-3.2-air，用 55 亿激活参数击穿复杂工作流落地瓶颈",
+      "url": "https://www.aibase.com/news/32550",
       "rank": 3,
       "reviews": {
         "cynic": {
-          "score": 45,
-          "review": "两个百分比连基准都不给：比哪个版本快、在什么负载下？两个来源其实只是同一条推被转两遍。"
+          "score": 58,
+          "review": "开源和5.5B激活是真的，可“击穿落地瓶颈”靠什么？测评表呢？"
         },
         "paper-police": {
-          "score": 12,
-          "review": "唯一证据是一条推文，两个来源都是 HN 转发；40%/25% 的测法未见，没有基准脚本就等于没有证据。"
+          "score": 34,
+          "review": "只有一家媒体转述；开源仓库与评测基准都未附，宣称的落地效果无从复现。"
         },
         "pragmatic": {
-          "score": 72,
-          "review": "额度缩水，同样任务更早撞限流；批量任务得分批跑或先测替代模型。"
+          "score": 78,
+          "review": "权重能直接拉下来跑，55亿激活对本地部署友好；先用自家工作流实测再决定换不换。"
         }
       }
     }
