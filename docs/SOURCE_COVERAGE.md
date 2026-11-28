@@ -118,8 +118,8 @@ baseline, then let the aggregator layer add breadth.
   dominating the default hot view.
 - **AI Breakfast**: reads the public Beehiiv archive through Jina Reader because
   the original Beehiiv feed can be blocked from GitHub Actions.
-- **AI HOT**: reads the public `https://aihot.virxact.com/api/public/items`
-  API in selected mode and keeps only items whose AI HOT card score is at least
+- **AI HOT**: reads the public `https://aihot.news/api/v1/items` API in
+  selected mode and keeps only items whose AI HOT card score is at least
   60. The parser preserves AI HOT's Chinese title, valid English original title,
   editorial summary, category, score, and canonical source URL. The RSS feed is
   intentionally not used for the default fetch path because it does not expose

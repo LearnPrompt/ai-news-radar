@@ -185,9 +185,10 @@ CURATED_AI_MEDIA_FEEDS: tuple[dict[str, Any], ...] = (
     },
 )
 AIBREAKFAST_JINA_URL = "https://r.jina.ai/https://aibreakfast.beehiiv.com/"
-AIHOT_ITEMS_API_URL = "https://aihot.virxact.com/api/public/items"
+AIHOT_ITEMS_API_URL = "https://aihot.news/api/v1/items"
 AIHOT_MIN_SCORE = 60
-AIHOT_API_TAKE = 100
+AIHOT_API_LIMIT = 100
+AIHOT_API_WINDOW = "24h"
 AIHOT_API_MAX_PAGES = 5
 AIHOT_API_UA = f"{BROWSER_UA} aihot-skill/0.2.0 AI-News-Radar/0.7"
 AIHOT_FEED_URL = "https://aihot.virxact.com/feed.xml"
@@ -2319,8 +2320,11 @@ def parse_aihot_api_items(payload: dict[str, Any], now: datetime | None = None) 
         if score < AIHOT_MIN_SCORE:
             continue
 
-        title = maybe_fix_mojibake(str(first_non_empty(entry.get("title"), entry.get("title_en")) or "").strip())
-        link = str(entry.get("url") or "").strip()
+        title = maybe_fix_mojibake(str(first_non_empty(entry.get("title"), entry.get("originalTitle")) or "").strip())
+        links = entry.get("links")
+        link = ""
+        if isinstance(links, dict):
+            link = str(first_non_empty(links.get("original"), links.get("aihot")) or "").strip()
         if not title or not link:
             continue
         normalized_url = normalize_url(link)
@@ -2329,7 +2333,10 @@ def parse_aihot_api_items(payload: dict[str, Any], now: datetime | None = None) 
         seen_urls.add(normalized_url)
 
         published = parse_iso(str(entry.get("publishedAt") or "")) or parse_date_any(entry.get("publishedAt"), now)
-        source = maybe_fix_mojibake(str(first_non_empty(entry.get("source"), site_name)))
+        source_field = entry.get("source")
+        if isinstance(source_field, dict):
+            source_field = source_field.get("name")
+        source = maybe_fix_mojibake(str(first_non_empty(source_field, site_name)))
         score_value: int | float = int(score) if score.is_integer() else score
         out.append(
             RawItem(
@@ -2346,7 +2353,7 @@ def parse_aihot_api_items(payload: dict[str, Any], now: datetime | None = None) 
                     "aihot_category": entry.get("category"),
                     "aihot_selected": bool(entry.get("selected")),
                     "provided_title_zh": entry.get("title"),
-                    "provided_title_en": entry.get("title_en"),
+                    "provided_title_en": entry.get("originalTitle"),
                     "summary": entry.get("summary"),
                 },
             )
@@ -2359,7 +2366,11 @@ def fetch_aihot(session: requests.Session, now: datetime) -> list[RawItem]:
     out: list[RawItem] = []
     cursor = ""
     for _ in range(AIHOT_API_MAX_PAGES):
-        params: dict[str, Any] = {"mode": "selected", "take": AIHOT_API_TAKE}
+        params: dict[str, Any] = {
+            "mode": "selected",
+            "window": AIHOT_API_WINDOW,
+            "limit": AIHOT_API_LIMIT,
+        }
         if cursor:
             params["cursor"] = cursor
         r = session.get(
@@ -2375,8 +2386,11 @@ def fetch_aihot(session: requests.Session, now: datetime) -> list[RawItem]:
         r.raise_for_status()
         payload = r.json()
         out.extend(parse_aihot_api_items(payload, now))
-        cursor = str(payload.get("nextCursor") or "")
-        if not payload.get("hasNext") or not cursor:
+        page = payload.get("page")
+        if not isinstance(page, dict):
+            break
+        cursor = str(page.get("nextCursor") or "")
+        if not page.get("hasMore") or not cursor:
             break
     return out
 
