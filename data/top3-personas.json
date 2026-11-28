@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T04:55:08.508204Z",
+  "generated_at": "2026-11-28T10:38:46.405573Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,30 +17,10 @@
   ],
   "items": [
     {
-      "story_id": "story_4cefc7ededb0",
-      "title": "30B 击败 120B！Sakana AI 发布 Namazu Small：以 3B 激活参数终结企业级 AI 的“算力焦虑”",
-      "url": "https://www.aibase.com/news/32579",
-      "rank": 1,
-      "reviews": {
-        "cynic": {
-          "score": 48,
-          "review": "'击败120B'没点名是哪个120B、哪套题，'终结算力焦虑'目前还只是形容词。"
-        },
-        "paper-police": {
-          "score": 22,
-          "review": "单一聚合站转述，无论文、无仓库、无公开跑分，30B胜120B的证据在哪？"
-        },
-        "pragmatic": {
-          "score": 70,
-          "review": "3B激活顶30B，若权重能下载，本地部署成本直降；先确认拿不拿得到。"
-        }
-      }
-    },
-    {
       "story_id": "story_b0a55c398948",
       "title": "Prospero：轻量不臃肿的原生 AI 编程框架，基于 ImGui / Prospero: Bloat-free, native AI coding harness with ImGui",
       "url": "https://github.com/skeeto/prospero",
-      "rank": 2,
+      "rank": 1,
       "reviews": {
         "cynic": {
           "score": 68,
@@ -57,22 +37,42 @@
       }
     },
     {
-      "story_id": "story_100780690ce0",
-      "title": "告别“拓扑地狱”与“贴图废片”！腾讯混元发布 Hy3D 3.6，原生 3D 生成直击专业管线痛点",
-      "url": "https://www.aibase.com/news/32569",
+      "story_id": "story_f9a1d0c00400",
+      "title": "Show HN：在单块 GB10 上用 vLLM 跑 Inkling 2 Mini，跑到 101 tok/s / Show HN: Getting 101 tok/s from Inkling 2 Mini in vLLM on one GB10",
+      "url": "https://runtimenotes.com/blog/getting-101-tok-s-from-inkling-2-mini-in-vllm-on-one-gb10",
+      "rank": 2,
+      "reviews": {
+        "cynic": {
+          "score": 62,
+          "review": "101 tok/s 报得响亮，可量化精度、并发数、上下文长度全没提，这速度是跑给谁看的？"
+        },
+        "paper-police": {
+          "score": 45,
+          "review": "博客给了101 tok/s具体数字，但没代码和复现脚本，单方数据只能算有迹可循。"
+        },
+        "pragmatic": {
+          "score": 68,
+          "review": "手里有 GB10 的可以照抄调优配置，省几天试错；没这硬件的扫一眼即可。"
+        }
+      }
+    },
+    {
+      "story_id": "story_f707740900a2",
+      "title": "Claude 能写代码也能审批合并了：Anthropic 拆开职责防“自审自批”，PR 合并量 3 个月翻倍",
+      "url": "https://www.aibase.com/news/32580",
       "rank": 3,
       "reviews": {
         "cynic": {
           "score": 58,
-          "review": "拓扑、贴图喊得响，可验收数据和网格指标一个没晒，先过美术总监那关。"
+          "review": "合并量翻倍听着热闹，可写码批码都在自家闭环里，翻倍的是产出还是自造的活？"
         },
         "paper-police": {
-          "score": 28,
-          "review": "只有发布稿和参数宣称，既无 arXiv 也无代码仓库，复现无从谈起，等实测跑分再说。"
+          "score": 22,
+          "review": "只有单一转述来源，'合并量翻倍'无数据集也无复现方法，等官方技术报告。"
         },
         "pragmatic": {
-          "score": 66,
-          "review": "做3D资产的可以实测拓扑和贴图质量，先确认权重或API是否已开放，别只看演示。"
+          "score": 60,
+          "review": "把写码和审码拆成两个 agent 这招可以马上抄，但没给具体配置，只能当经验帖看。"
         }
       }
     }
