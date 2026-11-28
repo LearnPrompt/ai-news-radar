@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T10:38:46.405573Z",
+  "generated_at": "2026-11-28T14:23:07.958558Z",
   "model": "deepseek-v4-flash",
   "personas": [
     {
@@ -17,10 +17,30 @@
   ],
   "items": [
     {
+      "story_id": "story_2fe9b77dee4d",
+      "title": "Hugging Face 上带有隐藏恶意软件的 GGUF LLM 模型已致 2400 人中招 / GGUF LLM Models with Hidden Malware on Hugging Face Reached 2400 Victims",
+      "url": "https://malspark.com/blog/malicious-gguf-models-hugging-face",
+      "rank": 1,
+      "reviews": {
+        "cynic": {
+          "score": 56,
+          "review": "两家信源其实都是同一个 HN，2400 人怎么统计的？GGUF 本是纯数据格式，执行路径都没说清。"
+        },
+        "paper-police": {
+          "score": 35,
+          "review": "厂商博客称有2400名受害者，但无法复现；HN两次转载不算独立信源，缺少样本哈希。"
+        },
+        "pragmatic": {
+          "score": 70,
+          "review": "下载 GGUF 前先查来源和哈希，冷门仓库别乱拉，顺手扫一遍本地模型。"
+        }
+      }
+    },
+    {
       "story_id": "story_b0a55c398948",
       "title": "Prospero：轻量不臃肿的原生 AI 编程框架，基于 ImGui / Prospero: Bloat-free, native AI coding harness with ImGui",
       "url": "https://github.com/skeeto/prospero",
-      "rank": 1,
+      "rank": 2,
       "reviews": {
         "cynic": {
           "score": 68,
@@ -40,7 +60,7 @@
       "story_id": "story_f9a1d0c00400",
       "title": "Show HN：在单块 GB10 上用 vLLM 跑 Inkling 2 Mini，跑到 101 tok/s / Show HN: Getting 101 tok/s from Inkling 2 Mini in vLLM on one GB10",
       "url": "https://runtimenotes.com/blog/getting-101-tok-s-from-inkling-2-mini-in-vllm-on-one-gb10",
-      "rank": 2,
+      "rank": 3,
       "reviews": {
         "cynic": {
           "score": 62,
@@ -53,26 +73,6 @@
         "pragmatic": {
           "score": 68,
           "review": "手里有 GB10 的可以照抄调优配置，省几天试错；没这硬件的扫一眼即可。"
-        }
-      }
-    },
-    {
-      "story_id": "story_f707740900a2",
-      "title": "Claude 能写代码也能审批合并了：Anthropic 拆开职责防“自审自批”，PR 合并量 3 个月翻倍",
-      "url": "https://www.aibase.com/news/32580",
-      "rank": 3,
-      "reviews": {
-        "cynic": {
-          "score": 58,
-          "review": "合并量翻倍听着热闹，可写码批码都在自家闭环里，翻倍的是产出还是自造的活？"
-        },
-        "paper-police": {
-          "score": 22,
-          "review": "只有单一转述来源，'合并量翻倍'无数据集也无复现方法，等官方技术报告。"
-        },
-        "pragmatic": {
-          "score": 60,
-          "review": "把写码和审码拆成两个 agent 这招可以马上抄，但没给具体配置，只能当经验帖看。"
         }
       }
     }
